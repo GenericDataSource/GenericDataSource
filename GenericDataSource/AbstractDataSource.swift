@@ -69,7 +69,7 @@ public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionV
         return tableCollectionView(tableView, cellForItemAtIndexPath: indexPath) as! UITableViewCell
     }
 
-    // MARK: - UICollectionViewDataSource
+    // MARK:- UICollectionViewDataSource
 
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfItems(inSection: section)
@@ -84,37 +84,79 @@ public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionV
             return tableCollectionView(collectionView, cellForItemAtIndexPath: indexPath) as! UICollectionViewCell
     }
 
-    // MARK: UITableViewDelegate
+    // MARK:- UITableViewDelegate
+    
+    // MARK: Selection
 
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return tableCollectionView(tableView, shouldHighlightItemAtIndexPath: indexPath)
     }
 
     public func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-        tableCollectionView(tableView, didHighlightItemAtIndexPath: indexPath)
+        return tableCollectionView(tableView, didHighlightItemAtIndexPath: indexPath)
+    }
+    
+    public func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        return tableCollectionView(tableView, didUnhighlightRowAtIndexPath: indexPath)
     }
 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableCollectionView(tableView, didSelectItemAtIndexPath: indexPath)
+        return tableCollectionView(tableView, didSelectItemAtIndexPath: indexPath)
     }
+    
+    public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return tableCollectionView(tableView, willSelectItemAtIndexPath: indexPath)
+    }
+    
+    public func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        return tableCollectionView(tableView, didDeselectItemAtIndexPath: indexPath)
+    }
+    
+    public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return tableCollectionView(tableView, willDeselectItemAtIndexPath: indexPath)
+    }
+    
+    // MARK: Size
 
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableCollectionView(tableView, sizeForItemAtIndexPath: indexPath).height
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK:- UICollectionViewDelegate
+    
+    // MARK: Selection
 
     public func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return tableCollectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
 
     public func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        tableCollectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
+        return tableCollectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
     }
 
-    public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        tableCollectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+    public func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        return tableCollectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
     }
+    
+    public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        return tableCollectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+    }
+    
+    public func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return tableCollectionView(collectionView, willSelectItemAtIndexPath: indexPath) != nil
+    }
+    
+    public func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        return tableCollectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
+    }
+    
+    public func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return tableCollectionView(collectionView, willDeselectItemAtIndexPath: indexPath) != nil
+    }
+    
+    
+    
+    // MARK: Size
 
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
