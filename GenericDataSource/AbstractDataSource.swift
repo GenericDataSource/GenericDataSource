@@ -14,13 +14,15 @@ extension AbstractDataSource: DataSource { }
 
 public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    public typealias SelectionHandler = (tableCollectionView: TableCollectionView, indexPath: NSIndexPath) -> Void
-
-    public var selectionHandler: SelectionHandler? = nil
-
     public var scrollViewDelegate: UIScrollViewDelegate? = nil
 
     public weak var reusableViewDelegate: DataSourceReusableViewDelegate? = nil
+    
+    override init() {
+        guard self.dynamicType != AbstractDataSource.self else {
+            fatalError("AbstractDataSource instances can not be created; create a subclass instance instead.")
+        }
+    }
 
     // MARK: respondsToSelector
 
@@ -51,53 +53,7 @@ public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionV
         return super.forwardingTargetForSelector(selector)
     }
 
-    // MARK: Items/IndexPath
-
-    public func itemAtIndexPath(indexPath: NSIndexPath) -> Any {
-        fatalError("Should be implemented by subclasses")
-    }
-
-    public func indexPathForItem<T : Equatable>(item: T) -> NSIndexPath? {
-        fatalError("Should be implemented by subclasses")
-    }
-
     // MARK:- DataSource
-
-    public func canHandleCellSize() -> Bool {
-        return false
-    }
-
-    public func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
-        // does nothing
-    }
-
-    public func numberOfSections() -> Int {
-        fatalError("Should be implemented by subclasses")
-    }
-
-    public func numberOfItems(inSection section: Int) -> Int {
-        fatalError("Should be implemented by subclasses")
-    }
-
-    public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
-        fatalError("\(self): Should be implemented by subclasses")
-    }
-
-    public func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        // does nothing
-    }
-
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        selectionHandler?(tableCollectionView: tableCollectionView, indexPath: indexPath)
-    }
-
-    public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        fatalError("Should be implemented by subclasses")
-    }
 
     // MARK: UITableViewDataSource
 

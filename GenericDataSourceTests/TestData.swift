@@ -78,7 +78,7 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
         reuseIdentifier = NSStringFromClass(CellType.self)
     }
 
-    override func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
+    func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
         tableCollectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
@@ -101,7 +101,7 @@ class ReportBasicBlockDataSource<CellType where CellType: ReportCell, CellType: 
         reuseIdentifier = NSStringFromClass(CellType.self)
     }
 
-    override func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
+    func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
         tableCollectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }

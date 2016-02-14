@@ -140,7 +140,7 @@ class BasicDataSourceTests: XCTestCase {
         tableView.dataSource = dataSource
 
         // register the cell
-        dataSource.registerReusableViewsInTableCollectionView(tableView)
+//        dataSource.registerReusableViewsInTableCollectionView(tableView)
 
         // execute the test
         tableView.queryingDataSource()

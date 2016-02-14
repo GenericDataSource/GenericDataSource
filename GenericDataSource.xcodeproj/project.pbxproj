@@ -22,6 +22,8 @@
 		549576391C6FBBC600E9C26C /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576351C6FBBC600E9C26C /* TestData.swift */; };
 		5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495763A1C6FC01600E9C26C /* DataSource.swift */; };
 		5495763D1C6FC0C900E9C26C /* TableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495763C1C6FC0C900E9C26C /* TableCollectionView.swift */; };
+		54E0ABD81C70E25E001C698E /* SelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* SelectionController.swift */; };
+		54E0ABDB1C70F33C001C698E /* AnySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		549576351C6FBBC600E9C26C /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		5495763A1C6FC01600E9C26C /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		5495763C1C6FC0C900E9C26C /* TableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCollectionView.swift; sourceTree = "<group>"; };
+		54E0ABD71C70E25E001C698E /* SelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionController.swift; sourceTree = "<group>"; };
+		54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnySelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,15 +118,8 @@
 		5495761E1C6FBACC00E9C26C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5495763A1C6FC01600E9C26C /* DataSource.swift */,
-				549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */,
-				549576231C6FBB7B00E9C26C /* BasicDataSource.swift */,
-				549576241C6FBB7B00E9C26C /* CompositionDataSource.swift */,
-				549576281C6FBB9100E9C26C /* MultiSectionDataSource.swift */,
-				549576291C6FBB9100E9C26C /* SingleSectionDataSource.swift */,
-				5495762A1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift */,
-				5495763C1C6FC0C900E9C26C /* TableCollectionView.swift */,
-				5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */,
+				54E0ABD51C70E198001C698E /* Selection */,
+				54E0ABD61C70E19E001C698E /* DataSources */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -152,6 +149,31 @@
 				549576351C6FBBC600E9C26C /* TestData.swift */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		54E0ABD51C70E198001C698E /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				54E0ABD71C70E25E001C698E /* SelectionController.swift */,
+				54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */,
+			);
+			name = Selection;
+			sourceTree = "<group>";
+		};
+		54E0ABD61C70E19E001C698E /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				5495763A1C6FC01600E9C26C /* DataSource.swift */,
+				549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */,
+				549576231C6FBB7B00E9C26C /* BasicDataSource.swift */,
+				549576241C6FBB7B00E9C26C /* CompositionDataSource.swift */,
+				549576281C6FBB9100E9C26C /* MultiSectionDataSource.swift */,
+				549576291C6FBB9100E9C26C /* SingleSectionDataSource.swift */,
+				5495762A1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift */,
+				5495763C1C6FC0C900E9C26C /* TableCollectionView.swift */,
+				5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */,
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,9 +286,11 @@
 			files = (
 				549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */,
 				549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */,
+				54E0ABD81C70E25E001C698E /* SelectionController.swift in Sources */,
 				5495762C1C6FBB9100E9C26C /* MultiSectionDataSource.swift in Sources */,
 				5495762E1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift in Sources */,
 				549576271C6FBB7B00E9C26C /* CompositionDataSource.swift in Sources */,
+				54E0ABDB1C70F33C001C698E /* AnySelectionController.swift in Sources */,
 				5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* TableCollectionView.swift in Sources */,
@@ -459,6 +483,7 @@
 				5495761A1C6FBA9400E9C26C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5495761B1C6FBA9400E9C26C /* Build configuration list for PBXNativeTarget "GenericDataSourceTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +492,7 @@
 				5495761D1C6FBA9400E9C26C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

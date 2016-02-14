@@ -134,8 +134,10 @@ public class CompositionDataSource: AbstractDataSource {
     }
 
     // MARK:- Data Source
+    
+    // MARK: Cell
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
         updateMappings()
 
@@ -145,11 +147,24 @@ public class CompositionDataSource: AbstractDataSource {
 
         return mapping.dataSource.tableCollectionView(tableCollectionWrapper, cellForItemAtIndexPath: localIndexPath)
     }
+    
+    // MARK: Size
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        updateMappings()
+        
+        let mapping = mappingForIndexPath(indexPath)
+        let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
+        let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: tableCollectionView)
+        
+        return mapping.dataSource.tableCollectionView(tableCollectionWrapper, sizeForItemAtIndexPath: localIndexPath)
+    }
+    
+    // MARK: Selection
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
 
         updateMappings()
-
 
         let mapping = mappingForIndexPath(indexPath)
         let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
@@ -158,7 +173,7 @@ public class CompositionDataSource: AbstractDataSource {
         mapping.dataSource.tableCollectionView(tableCollectionWrapper, didHighlightItemAtIndexPath: localIndexPath)
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 
         updateMappings()
 
@@ -169,40 +184,15 @@ public class CompositionDataSource: AbstractDataSource {
         return mapping.dataSource.tableCollectionView(tableCollectionWrapper, shouldHighlightItemAtIndexPath: localIndexPath)
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        // short circuit
-        guard selectionHandler == nil else {
-            super.tableCollectionView(tableCollectionView, didSelectItemAtIndexPath: indexPath)
-            return
-        }
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         updateMappings()
-
 
         let mapping = mappingForIndexPath(indexPath)
         let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
         let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: tableCollectionView)
 
         mapping.dataSource.tableCollectionView(tableCollectionWrapper, didSelectItemAtIndexPath: localIndexPath)
-    }
-
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        updateMappings()
-
-        let mapping = mappingForIndexPath(indexPath)
-        let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
-        let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: tableCollectionView)
-
-        return mapping.dataSource.tableCollectionView(tableCollectionWrapper, sizeForItemAtIndexPath: localIndexPath)
-    }
-
-    public override func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
-        super.registerReusableViewsInTableCollectionView(tableCollectionView)
-
-        for dataSource in dataSources {
-            dataSource.registerReusableViewsInTableCollectionView(tableCollectionView)
-        }
     }
 }
 
