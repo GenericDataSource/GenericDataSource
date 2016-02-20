@@ -50,13 +50,13 @@ public class MultiSectionDataSource: CompositionDataSource {
 
     // MARK:- Data Source
 
-    public func numberOfSections() -> Int {
+    public override func numberOfSections() -> Int {
         updateMappings()
 
         return sectionsCount
     }
 
-    public func numberOfItems(inSection section: Int) -> Int {
+    public override func numberOfItems(inSection section: Int) -> Int {
         updateMappings()
 
         let mapping = mappingForGlobalSection(section)

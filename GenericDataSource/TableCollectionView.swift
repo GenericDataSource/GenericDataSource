@@ -25,7 +25,7 @@ extension UICollectionView : DataSourceReusableViewDelegate { }
 
 public protocol TableCollectionView {
     
-    var innerScrollView: UIScrollView { get }
+    var scrollView: UIScrollView { get }
     
     func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath
     func globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath

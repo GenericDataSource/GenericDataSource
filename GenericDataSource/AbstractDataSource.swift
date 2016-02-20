@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath", "collectionView:layout:sizeForItemAtIndexPath"]
+internal let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath:", "collectionView:layout:sizeForItemAtIndexPath:"]
 
 extension AbstractDataSource: DataSource { }
 
@@ -153,13 +153,60 @@ public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionV
     public func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return tableCollectionView(collectionView, willDeselectItemAtIndexPath: indexPath) != nil
     }
-    
-    
-    
+
     // MARK: Size
 
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return tableCollectionView(collectionView, sizeForItemAtIndexPath: indexPath)
+    }
+
+    // MARK:- Data Source
+    
+    public func numberOfSections() -> Int {
+        fatalError("Should be implemented by subclasses")
+    }
+    
+    public func numberOfItems(inSection section: Int) -> Int {
+        fatalError("Should be implemented by subclasses")
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+        fatalError("\(self): Should be implemented by subclasses")
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        fatalError("Should be implemented by subclasses")
+    }
+    
+    public func canHandleCellSize() -> Bool {
+        return false
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        // does nothing
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        // does nothing
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return indexPath
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // does nothing
+    }
+    
+    public func tableCollectionView(tableCollectionView: TableCollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return indexPath
+    }
+    public func tableCollectionView(tableCollectionView: TableCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        // does nothing
     }
 }

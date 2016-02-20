@@ -39,15 +39,15 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
     
     // MARK: Cell
 
-    public func numberOfSections() -> Int {
+    public override func numberOfSections() -> Int {
         return 1
     }
 
-    public func numberOfItems(inSection section: Int) -> Int {
+    public override func numberOfItems(inSection section: Int) -> Int {
         return items.count
     }
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
         let cell = cellOfTableCollectionView(tableCollectionView, cellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
@@ -78,11 +78,11 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     // MARK: Size
 
-    public func canHandleCellSize() -> Bool {
+    public override func canHandleCellSize() -> Bool {
         return itemSize != nil
     }
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         guard let itemSize = itemSize else {
             fatalError("sizeForItemAtIndexPath requested with nil itemSize.")
         }
@@ -90,34 +90,34 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
     }
 
     // MARK: Selection
-    public func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return selectionController?.dataSource(self, tableCollectionView: tableCollectionView, shouldHighlightItemAtIndexPath: indexPath) ??
             super.tableCollectionView(tableCollectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
     
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         selectionController?.dataSource(self, tableCollectionView: tableCollectionView, didHighlightItemAtIndexPath: indexPath)
     }
     
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         selectionController?.dataSource(self, tableCollectionView: tableCollectionView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         return selectionController?.dataSource(self, tableCollectionView: tableCollectionView, willSelectItemAtIndexPath: indexPath) ??
             super.tableCollectionView(tableCollectionView, willSelectItemAtIndexPath: indexPath)
     }
     
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         selectionController?.dataSource(self, tableCollectionView: tableCollectionView, didSelectItemAtIndexPath: indexPath)
     }
     
-    public func tableCollectionView(tableCollectionView: TableCollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         return selectionController?.dataSource(self, tableCollectionView: tableCollectionView, willDeselectItemAtIndexPath: indexPath) ??
             super.tableCollectionView(tableCollectionView, willDeselectItemAtIndexPath: indexPath)
     }
-    
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         selectionController?.dataSource(self, tableCollectionView: tableCollectionView, didDeselectItemAtIndexPath: indexPath)
     }
 }

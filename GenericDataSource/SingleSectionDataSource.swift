@@ -50,13 +50,13 @@ public class SingleSectionDataSource: CompositionDataSource {
 
     // MARK:- Data Source
 
-    public func numberOfSections() -> Int {
+    public override func numberOfSections() -> Int {
         updateMappings()
 
         return 1
     }
 
-    public func numberOfItems(inSection section: Int) -> Int {
+    public override func numberOfItems(inSection section: Int) -> Int {
         updateMappings()
         
         return itemsCount

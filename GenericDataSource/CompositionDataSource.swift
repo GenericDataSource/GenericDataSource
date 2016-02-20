@@ -137,7 +137,7 @@ public class CompositionDataSource: AbstractDataSource {
     
     // MARK: Cell
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
         updateMappings()
 
@@ -150,7 +150,7 @@ public class CompositionDataSource: AbstractDataSource {
     
     // MARK: Size
     
-    public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         updateMappings()
         
         let mapping = mappingForIndexPath(indexPath)
@@ -162,7 +162,7 @@ public class CompositionDataSource: AbstractDataSource {
     
     // MARK: Selection
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
 
         updateMappings()
 
@@ -173,7 +173,7 @@ public class CompositionDataSource: AbstractDataSource {
         mapping.dataSource.tableCollectionView(tableCollectionWrapper, didHighlightItemAtIndexPath: localIndexPath)
     }
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 
         updateMappings()
 
@@ -184,7 +184,7 @@ public class CompositionDataSource: AbstractDataSource {
         return mapping.dataSource.tableCollectionView(tableCollectionWrapper, shouldHighlightItemAtIndexPath: localIndexPath)
     }
 
-    public func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public override func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         updateMappings()
 

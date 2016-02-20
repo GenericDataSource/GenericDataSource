@@ -14,7 +14,7 @@ extension UICollectionViewCell : ReusableCell { }
 
 extension UITableView : TableCollectionView {
     
-    public var innerScrollView: UIScrollView { return self }
+    public var scrollView: UIScrollView { return self }
 
     public func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return globalIndex
@@ -130,7 +130,7 @@ extension UITableView : TableCollectionView {
 
 extension UICollectionView : TableCollectionView {
     
-    public var innerScrollView: UIScrollView { return self }
+    public var scrollView: UIScrollView { return self }
 
     public func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return globalIndex

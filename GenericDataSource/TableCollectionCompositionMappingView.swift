@@ -18,7 +18,7 @@ internal class TableCollectionCompositionMappingView : TableCollectionView {
         self.view = view
     }
 
-    var innerScrollView: UIScrollView { return view.innerScrollView }
+    var scrollView: UIScrollView { return view.scrollView }
 
     func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return mapping.localIndexPathForGlobalIndexPath(globalIndex)
