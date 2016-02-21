@@ -26,7 +26,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         }
         reportsDataSource.items = reports
 
-        let dataSource  = SingleSectionDataSource()
+        let dataSource  = CompositeDataSource(type: .SingleSection)
         dataSource.addDataSource(reportsDataSource)
 
         // assign as data source
@@ -65,7 +65,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         }
         reportsDataSource.items = reports
 
-        let dataSource  = SingleSectionDataSource()
+        let dataSource  = CompositeDataSource(type: .SingleSection)
         dataSource.addDataSource(reportsDataSource)
 
         // assign as data source
@@ -112,7 +112,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         }
         textReportsDataSource.items = reports
 
-        let dataSource  = SingleSectionDataSource()
+        let dataSource  = CompositeDataSource(type: .SingleSection)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)
 
@@ -173,7 +173,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         }
         textReportsDataSource.items = reports
 
-        let dataSource  = SingleSectionDataSource()
+        let dataSource  = CompositeDataSource(type: .SingleSection)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)
 

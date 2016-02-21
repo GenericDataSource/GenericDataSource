@@ -14,7 +14,11 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     public var items: [ItemType] = []
 
-    public var reuseIdentifier: String? = nil
+    public let reuseIdentifier: String
+    
+    public init(reuseIdentifier: String) {
+        self.reuseIdentifier = reuseIdentifier
+    }
 
     public var selectionController: AnySelectionController<ItemType, CellType>? = nil
 
@@ -47,28 +51,21 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return items.count
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public override func tableCollectionView(collectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
-        let cell = cellOfTableCollectionView(tableCollectionView, cellForItemAtIndexPath: indexPath)
+        let cell = tableCollectionView(collectionView, nonConfiguredCellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
-        configure(tableCollectionView: tableCollectionView, cell: cell, item: item, indexPath: indexPath)
+        configure(tableCollectionView: collectionView, cell: cell, item: item, indexPath: indexPath)
         return cell
     }
 
-    private func cellOfTableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
-        guard let reuseIdentifier = reuseIdentifier else {
-            return dequeCellFromTableCollectionView(tableCollectionView, cellForItemAtIndexPath: indexPath)
-        }
+    public func tableCollectionView(tableCollectionView: TableCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
 
         let cell = tableCollectionView.dequeueReusableCellViewWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         guard let castedCell = cell as? CellType else {
             fatalError("cell: \(cell) with reuse identifier '\(reuseIdentifier)' expected to be of type \(CellType.self).")
         }
         return castedCell
-    }
-
-    public func dequeCellFromTableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
-        fatalError("Should be implemented by subclasses or set reuseIdentifier to non-nil value.")
     }
 
     public func configure(tableCollectionView tableCollectionView: TableCollectionView, cell: CellType, item: ItemType, indexPath: NSIndexPath) {
@@ -127,8 +124,9 @@ public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataS
     public typealias ConfigureBlock = (item: ItemType, cell: CellType, indexPath: NSIndexPath) -> Void
     let configureBlock: ConfigureBlock
 
-    public init(configureBlock: ConfigureBlock) {
+    public init(reuseIdentifier: String, configureBlock: ConfigureBlock) {
         self.configureBlock = configureBlock
+        super.init(reuseIdentifier: reuseIdentifier)
     }
 
     public override func configure(tableCollectionView tableCollectionView: TableCollectionView, cell: CellType, item: ItemType, indexPath: NSIndexPath) {

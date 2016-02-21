@@ -10,17 +10,16 @@ import UIKit
 
 internal let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath:", "collectionView:layout:sizeForItemAtIndexPath:"]
 
-extension AbstractDataSource: DataSource { }
-
-public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
+public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
     public var scrollViewDelegate: UIScrollViewDelegate? = nil
 
     public weak var reusableViewDelegate: DataSourceReusableViewDelegate? = nil
     
-    override init() {
-        guard self.dynamicType != AbstractDataSource.self else {
-            fatalError("AbstractDataSource instances can not be created; create a subclass instance instead.")
+    public override init() {
+        let type = AbstractDataSource.self
+        guard self.dynamicType != type else {
+            fatalError("\(type) instances can not be created; create a subclass instance instead.")
         }
     }
 
@@ -164,21 +163,21 @@ public class AbstractDataSource : NSObject, UITableViewDataSource, UICollectionV
     // MARK:- Data Source
     
     public func numberOfSections() -> Int {
-        fatalError("Should be implemented by subclasses")
+        fatalError("\(self): Should be implemented by subclasses")
     }
     
     public func numberOfItems(inSection section: Int) -> Int {
-        fatalError("Should be implemented by subclasses")
+        fatalError("\(self): Should be implemented by subclasses")
     }
-    
+
     public func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
         fatalError("\(self): Should be implemented by subclasses")
     }
     
     public func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        fatalError("Should be implemented by subclasses")
+        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
-    
+
     public func canHandleCellSize() -> Bool {
         return false
     }

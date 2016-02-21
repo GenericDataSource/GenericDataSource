@@ -10,10 +10,10 @@ import UIKit
 
 internal class TableCollectionCompositionMappingView : TableCollectionView {
 
-    let mapping: CompositionDataSource.Mapping
+    let mapping: DataSourcesCollection.Mapping
     let view : TableCollectionView
 
-    init(mapping: CompositionDataSource.Mapping, view: TableCollectionView) {
+    init(mapping: DataSourcesCollection.Mapping, view: TableCollectionView) {
         self.mapping = mapping
         self.view = view
     }

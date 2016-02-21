@@ -73,9 +73,8 @@ class PDFReportCollectionViewCell: UICollectionViewCell, ReportCell {
 
 class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject>: BasicDataSource<Report, CellType> {
 
-    override init() {
-        super.init()
-        reuseIdentifier = NSStringFromClass(CellType.self)
+    init() {
+        super.init(reuseIdentifier: NSStringFromClass(CellType.self))
     }
 
     func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
@@ -89,16 +88,19 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
 
 class ReportNoReuseBasicDataSource<CellType where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject>: BasicDataSource<Report, CellType> {
 
-    override func dequeCellFromTableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    init() {
+        super.init(reuseIdentifier: "")
+    }
+    
+    override func tableCollectionView(tableCollectionView: TableCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
         return CellType.init()
     }
 }
 
 class ReportBasicBlockDataSource<CellType where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject>: BasicBlockDataSource<Report, CellType> {
 
-    override init(configureBlock: ConfigureBlock) {
-        super.init(configureBlock: configureBlock)
-        reuseIdentifier = NSStringFromClass(CellType.self)
+    init(configureBlock: ConfigureBlock) {
+        super.init(reuseIdentifier: NSStringFromClass(CellType.self), configureBlock: configureBlock)
     }
 
     func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {

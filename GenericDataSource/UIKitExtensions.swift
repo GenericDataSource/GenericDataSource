@@ -8,6 +8,25 @@
 
 import Foundation
 
+extension UITableView {
+    
+    public func useDataSource(dataSource: AbstractDataSource?) {
+        self.dataSource = dataSource
+        self.delegate = dataSource
+        dataSource?.reusableViewDelegate = self
+    }
+}
+
+
+extension UICollectionView {
+    
+    public func useDataSource(dataSource: AbstractDataSource?) {
+        self.dataSource = dataSource
+        self.delegate = dataSource
+        dataSource?.reusableViewDelegate = self
+    }
+}
+
 extension UITableViewCell : ReusableCell { }
 
 extension UICollectionViewCell : ReusableCell { }
