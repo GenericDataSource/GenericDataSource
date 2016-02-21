@@ -75,46 +75,46 @@ public class CompositeDataSource: AbstractDataSource {
     
     // MARK: Cell
     
-    public override func numberOfSections() -> Int {
+    public override func ds_numberOfSections() -> Int {
         return collection.numberOfSections()
     }
 
-    public override func numberOfItems(inSection section: Int) -> Int {
+    public override func ds_numberOfItems(inSection section: Int) -> Int {
         return collection.numberOfItems(inSection: section)
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public override func ds_collectionView(collectionView: CollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
-        let mapping = collection.tableCollectionViewWrapperFromIndexPath(indexPath, tableCollectionView: tableCollectionView)
-        return mapping.dataSource.tableCollectionView(mapping.wrapperView, cellForItemAtIndexPath: mapping.localIndexPath)
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, cellForItemAtIndexPath: mapping.localIndexPath)
     }
 
     // MARK: Size
     
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public override func ds_collectionView(collectionView: CollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let mapping = collection.tableCollectionViewWrapperFromIndexPath(indexPath, tableCollectionView: tableCollectionView)
-        return mapping.dataSource.tableCollectionView(mapping.wrapperView, sizeForItemAtIndexPath: mapping.localIndexPath)
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, sizeForItemAtIndexPath: mapping.localIndexPath)
     }
     
     // MARK: Selection
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
 
-        let mapping = collection.tableCollectionViewWrapperFromIndexPath(indexPath, tableCollectionView: tableCollectionView)
-        mapping.dataSource.tableCollectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func ds_collectionView(collectionView: CollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
 
-        let mapping = collection.tableCollectionViewWrapperFromIndexPath(indexPath, tableCollectionView: tableCollectionView)
-        return mapping.dataSource.tableCollectionView(mapping.wrapperView, shouldHighlightItemAtIndexPath: mapping.localIndexPath)
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAtIndexPath: mapping.localIndexPath)
     }
 
-    public override func tableCollectionView(tableCollectionView: TableCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        let mapping = collection.tableCollectionViewWrapperFromIndexPath(indexPath, tableCollectionView: tableCollectionView)
-        mapping.dataSource.tableCollectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
     }
 }
 
@@ -128,15 +128,15 @@ extension CompositeDataSource : DataSourceReusableViewDelegate {
         reusableViewDelegate?.performBatchUpdates(updates, completion: completion)
     }
 
-    public func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    public func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.insertSections(sections, withRowAnimation: animation)
     }
 
-    public func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    public func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.deleteSections(sections, withRowAnimation: animation)
     }
 
-    public func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    public func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.reloadSections(sections, withRowAnimation: animation)
     }
 
@@ -144,15 +144,15 @@ extension CompositeDataSource : DataSourceReusableViewDelegate {
         reusableViewDelegate?.moveSection(section, toSection: newSection)
     }
 
-    public func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    public func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.insertItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.deleteItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
-    public func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    public func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         reusableViewDelegate?.reloadItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 

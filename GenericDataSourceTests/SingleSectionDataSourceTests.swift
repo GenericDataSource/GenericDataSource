@@ -33,7 +33,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         tableView.dataSource = dataSource
 
         // register the cell
-        reportsDataSource.registerReusableViewsInTableCollectionView(tableView)
+        reportsDataSource.registerReusableViewsInCollectionView(tableView)
 
         // execute the test
         tableView.queryingDataSource()
@@ -72,7 +72,7 @@ class SingleSectionDataSourceTests : XCTestCase {
         collectionView.dataSource = dataSource
 
         // register the cell
-        reportsDataSource.registerReusableViewsInTableCollectionView(collectionView)
+        reportsDataSource.registerReusableViewsInCollectionView(collectionView)
 
         // execute the test
         collectionView.queryingDataSource()
@@ -120,8 +120,8 @@ class SingleSectionDataSourceTests : XCTestCase {
         tableView.dataSource = dataSource
 
         // register the cell
-        pdfReportsDataSource.registerReusableViewsInTableCollectionView(tableView)
-        textReportsDataSource.registerReusableViewsInTableCollectionView(tableView)
+        pdfReportsDataSource.registerReusableViewsInCollectionView(tableView)
+        textReportsDataSource.registerReusableViewsInCollectionView(tableView)
 
         // execute the test
         tableView.queryingDataSource()
@@ -181,8 +181,8 @@ class SingleSectionDataSourceTests : XCTestCase {
         collectionView.dataSource = dataSource
 
         // register the cell
-        pdfReportsDataSource.registerReusableViewsInTableCollectionView(collectionView)
-        textReportsDataSource.registerReusableViewsInTableCollectionView(collectionView)
+        pdfReportsDataSource.registerReusableViewsInCollectionView(collectionView)
+        textReportsDataSource.registerReusableViewsInCollectionView(collectionView)
 
         // execute the test
         collectionView.queryingDataSource()

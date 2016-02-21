@@ -143,15 +143,15 @@ class DataSourcesCollection {
         return mapping.globalIndexPathForLocalIndexPath(indexPath)
     }
     
-    func tableCollectionViewWrapperFromIndexPath(
+    func collectionViewWrapperFromIndexPath(
         indexPath: NSIndexPath,
-        tableCollectionView: TableCollectionView)
+        collectionView: CollectionView)
         -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: TableCollectionCompositionMappingView) {
         updateMappings()
         
         let mapping = mappingForIndexPath(indexPath)
         let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
-        let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: tableCollectionView)
+        let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: collectionView)
 
         return (mapping.dataSource, localIndexPath, tableCollectionWrapper)
     }

@@ -77,11 +77,11 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
         super.init(reuseIdentifier: NSStringFromClass(CellType.self))
     }
 
-    func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
-        tableCollectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+    func registerReusableViewsInCollectionView(collectionView: CollectionView) {
+        collectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
-    override func configure(tableCollectionView tableCollectionView: TableCollectionView, cell: CellType, item: Report, indexPath: NSIndexPath) {
+    override func configure(collectionView collectionView: CollectionView, cell: CellType, item: Report, indexPath: NSIndexPath) {
         cell.configureForReport(item, indexPath: indexPath)
     }
 }
@@ -92,7 +92,7 @@ class ReportNoReuseBasicDataSource<CellType where CellType: ReportCell, CellType
         super.init(reuseIdentifier: "")
     }
     
-    override func tableCollectionView(tableCollectionView: TableCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    override func ds_collectionView(collectionView: CollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
         return CellType.init()
     }
 }
@@ -103,7 +103,7 @@ class ReportBasicBlockDataSource<CellType where CellType: ReportCell, CellType: 
         super.init(reuseIdentifier: NSStringFromClass(CellType.self), configureBlock: configureBlock)
     }
 
-    func registerReusableViewsInTableCollectionView(tableCollectionView: TableCollectionView) {
-        tableCollectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+    func registerReusableViewsInCollectionView(collectionView: CollectionView) {
+        collectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }

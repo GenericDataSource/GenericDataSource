@@ -1,5 +1,5 @@
 //
-//  TableCollectionView.swift
+//  CollectionView.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/13/16.
@@ -23,7 +23,7 @@ extension UITableView : DataSourceReusableViewDelegate {
 
 extension UICollectionView : DataSourceReusableViewDelegate { }
 
-public protocol TableCollectionView {
+public protocol CollectionView {
     
     var scrollView: UIScrollView { get }
     
@@ -46,14 +46,14 @@ public protocol TableCollectionView {
     
     func scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool)
     
-    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?)
-    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?)
-    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?)
+    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
     func moveSection(section: Int, toSection newSection: Int)
     
-    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?)
-    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?)
-    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?)
+    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
     func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath)
     
     func deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool)

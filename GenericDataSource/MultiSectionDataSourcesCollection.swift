@@ -59,7 +59,7 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
             updateMappings()
     
             let mapping = mappingForGlobalSection(section)
-            return mapping.dataSource.numberOfItems(inSection: 0)
+            return mapping.dataSource.ds_numberOfItems(inSection: 0)
         }
 }
 
@@ -87,7 +87,7 @@ extension MultiSectionDataSourcesCollection {
     
             func updateMappings(startingWithGlobalSection globalSection:Int) -> Int {
     
-                let sectionCount = self.dataSource.numberOfSections()
+                let sectionCount = self.dataSource.ds_numberOfSections()
     
                 globalToLocalSections.removeAll()
                 localToGlobalSections.removeAll()

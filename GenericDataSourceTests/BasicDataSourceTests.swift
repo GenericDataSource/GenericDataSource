@@ -30,7 +30,7 @@ class BasicDataSourceTests: XCTestCase {
         tableView.dataSource = dataSource
 
         // register the cell
-        dataSource.registerReusableViewsInTableCollectionView(tableView)
+        dataSource.registerReusableViewsInCollectionView(tableView)
 
         // execute the test
         tableView.queryingDataSource()
@@ -66,7 +66,7 @@ class BasicDataSourceTests: XCTestCase {
         collectionView.dataSource = dataSource
 
         // register the cell
-        dataSource.registerReusableViewsInTableCollectionView(collectionView)
+        dataSource.registerReusableViewsInCollectionView(collectionView)
 
         // execute the test
         collectionView.queryingDataSource()
@@ -104,7 +104,7 @@ class BasicDataSourceTests: XCTestCase {
         collectionView.dataSource = dataSource
 
         // register the cell
-        dataSource.registerReusableViewsInTableCollectionView(collectionView)
+        dataSource.registerReusableViewsInCollectionView(collectionView)
 
         // execute the test
         collectionView.queryingDataSource()
@@ -140,7 +140,7 @@ class BasicDataSourceTests: XCTestCase {
         tableView.dataSource = dataSource
 
         // register the cell
-//        dataSource.registerReusableViewsInTableCollectionView(tableView)
+//        dataSource.registerReusableViewsInCollectionView(tableView)
 
         // execute the test
         tableView.queryingDataSource()

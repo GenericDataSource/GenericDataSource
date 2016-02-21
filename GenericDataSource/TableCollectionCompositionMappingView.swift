@@ -8,12 +8,12 @@
 
 import UIKit
 
-internal class TableCollectionCompositionMappingView : TableCollectionView {
+internal class TableCollectionCompositionMappingView : CollectionView {
 
     let mapping: DataSourcesCollection.Mapping
-    let view : TableCollectionView
+    let view : CollectionView
 
-    init(mapping: DataSourcesCollection.Mapping, view: TableCollectionView) {
+    init(mapping: DataSourcesCollection.Mapping, view: CollectionView) {
         self.mapping = mapping
         self.view = view
     }
@@ -83,7 +83,7 @@ internal class TableCollectionCompositionMappingView : TableCollectionView {
         view.scrollToItemAtIndexPath(globalIndex, atScrollPosition: scrollPosition, animated: animated)
     }
 
-    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
@@ -92,7 +92,7 @@ internal class TableCollectionCompositionMappingView : TableCollectionView {
         view.insertSections(globalSections, withRowAnimation: animation)
     }
 
-    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
@@ -100,7 +100,7 @@ internal class TableCollectionCompositionMappingView : TableCollectionView {
         view.deleteSections(globalSections, withRowAnimation: animation)
     }
 
-    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation?) {
+    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
@@ -114,17 +114,17 @@ internal class TableCollectionCompositionMappingView : TableCollectionView {
         view.moveSection(globalSection, toSection: newGlobalSection)
     }
 
-    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
         view.insertItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
 
-    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
         view.deleteItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
 
-    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation?) {
+    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
         view.reloadItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }

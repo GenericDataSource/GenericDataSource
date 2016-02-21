@@ -86,7 +86,7 @@ extension SingleSectionDataSourcesCollection {
         
         func updateMappings(startingWithGlobalItem globalItem:Int) -> Int {
             
-            let itemCount = self.dataSource.numberOfItems(inSection: 0)
+            let itemCount = self.dataSource.ds_numberOfItems(inSection: 0)
             
             globalToLocalItems.removeAll()
             localToGlobalItems.removeAll()

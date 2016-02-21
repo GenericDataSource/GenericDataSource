@@ -13,77 +13,77 @@ import Foundation
  */
 public struct AnySelectionController<ItemType, CellType: ReusableCell> : SelectionController {
 
-    private let shouldHighlight: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> Bool
-    private let didHighlight: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> Void
-    private let didUnhighlight: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> Void
+    private let shouldHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Bool
+    private let didHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
+    private let didUnhighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
     
-    private let willSelect: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> NSIndexPath?
-    private let didSelect: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> Void
+    private let willSelect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> NSIndexPath?
+    private let didSelect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
     
-    private let willDeselect: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> NSIndexPath?
-    private let didDeselect: (BasicDataSource<ItemType, CellType>, TableCollectionView, NSIndexPath) -> Void
+    private let willDeselect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> NSIndexPath?
+    private let didDeselect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
 
     init<C: SelectionController where C.ItemType == ItemType, C.CellType == CellType>(_ selectionController: C) {
-        shouldHighlight = selectionController.dataSource:tableCollectionView:shouldHighlightItemAtIndexPath:
-        didHighlight = selectionController.dataSource:tableCollectionView:didHighlightItemAtIndexPath:
-        didUnhighlight = selectionController.dataSource:tableCollectionView:didUnhighlightItemAtIndexPath:
+        shouldHighlight = selectionController.dataSource:collectionView:shouldHighlightItemAtIndexPath:
+        didHighlight = selectionController.dataSource:collectionView:didHighlightItemAtIndexPath:
+        didUnhighlight = selectionController.dataSource:collectionView:didUnhighlightItemAtIndexPath:
         
-        willSelect = selectionController.dataSource:tableCollectionView:willSelectItemAtIndexPath:
-        didSelect = selectionController.dataSource:tableCollectionView:didSelectItemAtIndexPath:
+        willSelect = selectionController.dataSource:collectionView:willSelectItemAtIndexPath:
+        didSelect = selectionController.dataSource:collectionView:didSelectItemAtIndexPath:
         
-        willDeselect = selectionController.dataSource:tableCollectionView:willDeselectItemAtIndexPath:
-        didDeselect = selectionController.dataSource:tableCollectionView:didDeselectItemAtIndexPath:
+        willDeselect = selectionController.dataSource:collectionView:willDeselectItemAtIndexPath:
+        didDeselect = selectionController.dataSource:collectionView:didDeselectItemAtIndexPath:
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-            return shouldHighlight(dataSource, tableCollectionView, indexPath)
+            return shouldHighlight(dataSource, collectionView, indexPath)
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-            return didHighlight(dataSource, tableCollectionView, indexPath)
+            return didHighlight(dataSource, collectionView, indexPath)
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-            return didUnhighlight(dataSource, tableCollectionView, indexPath)
+            return didUnhighlight(dataSource, collectionView, indexPath)
     }
     
     // MARK:- Selecting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-            return willSelect(dataSource, tableCollectionView, indexPath)
+            return willSelect(dataSource, collectionView, indexPath)
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            return didSelect(dataSource, tableCollectionView, indexPath)
+            return didSelect(dataSource, collectionView, indexPath)
     }
     
     // MARK:- Deselecting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-            return willDeselect(dataSource, tableCollectionView, indexPath)
+            return willDeselect(dataSource, collectionView, indexPath)
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        tableCollectionView: TableCollectionView,
+        collectionView: CollectionView,
         didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-            return didDeselect(dataSource, tableCollectionView, indexPath)
+            return didDeselect(dataSource, collectionView, indexPath)
     }
 }
 

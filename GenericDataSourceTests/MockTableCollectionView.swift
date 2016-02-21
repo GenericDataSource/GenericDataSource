@@ -1,5 +1,5 @@
 //
-//  MockTableCollectionView.swift
+//  MockCollectionView.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 9/16/15.
@@ -9,7 +9,7 @@
 import UIKit
 @testable import GenericDataSource
 
-protocol MockReusableView : TableCollectionView {
+protocol MockReusableView : CollectionView {
 
     func queryingDataSource()
 }
