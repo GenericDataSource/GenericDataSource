@@ -78,7 +78,7 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
     }
 
     func registerReusableViewsInCollectionView(collectionView: CollectionView) {
-        collectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
     override func configure(collectionView collectionView: CollectionView, cell: CellType, item: Report, indexPath: NSIndexPath) {
@@ -104,6 +104,6 @@ class ReportBasicBlockDataSource<CellType where CellType: ReportCell, CellType: 
     }
 
     func registerReusableViewsInCollectionView(collectionView: CollectionView) {
-        collectionView.registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }

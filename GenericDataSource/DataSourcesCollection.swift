@@ -24,6 +24,8 @@ private func ==(lhs: DataSourceWrapper, rhs: DataSourceWrapper) -> Bool {
 }
 
 class DataSourcesCollection {
+    
+    weak var reusableViewDelegate: DataSourceReusableViewDelegate? = nil
 
     var mappings: [Mapping] = []
     private var dataSourceToMappings: [DataSourceWrapper: Mapping] = [:]
@@ -68,8 +70,8 @@ class DataSourcesCollection {
         assert(existingMapping == nil, "Tried to add a data source more than once: \(dataSource)")
         
         // TODO: add it again
-        // dataSource.reusableViewDelegate = self
-        
+        dataSource.ds_reusableViewDelegate = reusableViewDelegate
+
         return wrapper
     }
 

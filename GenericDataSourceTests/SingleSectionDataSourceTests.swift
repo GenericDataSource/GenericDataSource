@@ -40,7 +40,7 @@ class SingleSectionDataSourceTests : XCTestCase {
 
         // assert
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(total, tableView.numberOfItemsInSection(0))
+        XCTAssertEqual(total, tableView.ds_numberOfItemsInSection(0))
         let cells = tableView.cells[0] as! [TextReportTableViewCell]
 
         for (index, cell) in cells.enumerate() {
@@ -128,7 +128,7 @@ class SingleSectionDataSourceTests : XCTestCase {
 
         // assert
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(total, tableView.numberOfItemsInSection(0))
+        XCTAssertEqual(total, tableView.ds_numberOfItemsInSection(0))
         let cells = tableView.cells[0]
 
         for (index, cell) in cells.enumerate() {

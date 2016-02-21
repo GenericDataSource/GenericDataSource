@@ -14,7 +14,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
 
     public var scrollViewDelegate: UIScrollViewDelegate? = nil
 
-    public weak var reusableViewDelegate: DataSourceReusableViewDelegate? = nil
+    public weak var ds_reusableViewDelegate: DataSourceReusableViewDelegate? = nil
     
     public override init() {
         let type = AbstractDataSource.self

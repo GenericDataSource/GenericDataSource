@@ -18,125 +18,125 @@ internal class TableCollectionCompositionMappingView : CollectionView {
         self.view = view
     }
 
-    var scrollView: UIScrollView { return view.scrollView }
+    var ds_scrollView: UIScrollView { return view.ds_scrollView }
 
-    func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
+    func ds_localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return mapping.localIndexPathForGlobalIndexPath(globalIndex)
     }
 
-    func globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
+    func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
         return mapping.globalIndexPathForLocalIndexPath(localIndex)
     }
 
-    func registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
-        view.registerNib(nib, forCellWithReuseIdentifier: identifier)
+    func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+        view.ds_registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
 
-    func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
-        view.registerClass(cellClass, forCellWithReuseIdentifier: identifier)
+    func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+        view.ds_registerClass(cellClass, forCellWithReuseIdentifier: identifier)
     }
 
-    func dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         let globalIndex = mapping.globalIndexPathForLocalIndexPath(indexPath)
-        return view.dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndex)
+        return view.ds_dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndex)
     }
 
-    func totalNumberOfSections() -> Int {
-        return view.totalNumberOfSections()
+    func ds_totalNumberOfSections() -> Int {
+        return view.ds_totalNumberOfSections()
     }
 
-    func numberOfItemsInSection(section: Int) -> Int {
-        return view.numberOfItemsInSection(section)
+    func ds_numberOfItemsInSection(section: Int) -> Int {
+        return view.ds_numberOfItemsInSection(section)
     }
 
-    func indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
+    func ds_indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
 
-        if let globalIndex = indexPathForReusableCell(cell) {
+        if let globalIndex = view.ds_indexPathForReusableCell(cell) {
             return mapping.localIndexPathForGlobalIndexPath(globalIndex)
         }
         return nil
     }
 
-    func indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
-        if let globalIndex = view.indexPathForItemAtPoint(point) {
+    func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
+        if let globalIndex = view.ds_indexPathForItemAtPoint(point) {
             return mapping.localIndexPathForGlobalIndexPath(globalIndex)
         }
         return nil
     }
 
-    func cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
+    func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
         let globalIndex = mapping.globalIndexPathForLocalIndexPath(indexPath)
-        return view.cellForItemAtIndexPath(globalIndex)
+        return view.ds_cellForItemAtIndexPath(globalIndex)
     }
 
-    func visibleCells() -> [ReusableCell] {
-        return view.visibleCells()
+    func ds_visibleCells() -> [ReusableCell] {
+        return view.ds_visibleCells()
     }
 
-    func indexPathsForVisibleItems() -> [NSIndexPath] {
-        let globalIndexPaths = view.indexPathsForVisibleItems()
+    func ds_indexPathsForVisibleItems() -> [NSIndexPath] {
+        let globalIndexPaths = view.ds_indexPathsForVisibleItems()
         return mapping.localIndexPathesForGlobalIndexPathes(globalIndexPaths)
     }
 
-    func scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
-        let globalIndex = globalIndexPathForLocalIndexPath(indexPath)
-        view.scrollToItemAtIndexPath(globalIndex, atScrollPosition: scrollPosition, animated: animated)
+    func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
+        let globalIndex = ds_globalIndexPathForLocalIndexPath(indexPath)
+        view.ds_scrollToItemAtIndexPath(globalIndex, atScrollPosition: scrollPosition, animated: animated)
     }
 
-    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
         }
 
-        view.insertSections(globalSections, withRowAnimation: animation)
+        view.ds_insertSections(globalSections, withRowAnimation: animation)
     }
 
-    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
         }
-        view.deleteSections(globalSections, withRowAnimation: animation)
+        view.ds_deleteSections(globalSections, withRowAnimation: animation)
     }
 
-    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         let globalSections = NSMutableIndexSet()
         for section in sections {
             globalSections.addIndex(mapping.globalSectionForLocalSection(section))
         }
-        view.reloadSections(globalSections, withRowAnimation: animation)
+        view.ds_reloadSections(globalSections, withRowAnimation: animation)
     }
 
-    func moveSection(section: Int, toSection newSection: Int) {
+    func ds_moveSection(section: Int, toSection newSection: Int) {
         let globalSection = mapping.globalSectionForLocalSection(section)
         let newGlobalSection = mapping.globalSectionForLocalSection(newSection)
-        view.moveSection(globalSection, toSection: newGlobalSection)
+        view.ds_moveSection(globalSection, toSection: newGlobalSection)
     }
 
-    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
-        view.insertItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        view.ds_insertItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
 
-    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
-        view.deleteItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        view.ds_deleteItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
 
-    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         let globalIndexPaths = mapping.globalIndexPathesForLocalIndexPathes(indexPaths)
-        view.reloadItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        view.ds_reloadItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
 
-    func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
+    func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
         let globalIndexPath = mapping.globalIndexPathForLocalIndexPath(indexPath)
         let newGlobalIndexPath = mapping.globalIndexPathForLocalIndexPath(newIndexPath)
-        view.moveItemAtIndexPath(globalIndexPath, toIndexPath: newGlobalIndexPath)
+        view.ds_moveItemAtIndexPath(globalIndexPath, toIndexPath: newGlobalIndexPath)
     }
 
-    func deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
+    func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
         let globalIndexPath = mapping.globalIndexPathForLocalIndexPath(indexPath)
-        view.deselectItemAtIndexPath(globalIndexPath, animated: animated)
+        view.ds_deselectItemAtIndexPath(globalIndexPath, animated: animated)
     }
 }

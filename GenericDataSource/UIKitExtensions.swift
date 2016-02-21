@@ -10,20 +10,20 @@ import Foundation
 
 extension UITableView {
     
-    public func useDataSource(dataSource: AbstractDataSource?) {
+    public func useDataSource(dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
-        dataSource?.reusableViewDelegate = self
+        dataSource.ds_reusableViewDelegate = self
     }
 }
 
 
 extension UICollectionView {
     
-    public func useDataSource(dataSource: AbstractDataSource?) {
+    public func useDataSource(dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
-        dataSource?.reusableViewDelegate = self
+        dataSource.ds_reusableViewDelegate = self
     }
 }
 
@@ -31,64 +31,89 @@ extension UITableViewCell : ReusableCell { }
 
 extension UICollectionViewCell : ReusableCell { }
 
+extension UITableView : DataSourceReusableViewDelegate {
+    
+    public func ds_reloadData() {
+        reloadData()
+    }
+    
+    public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        beginUpdates()
+        updates?()
+        endUpdates()
+        completion?(false)
+    }
+}
+
+extension UICollectionView : DataSourceReusableViewDelegate {
+    
+    public func ds_reloadData() {
+        reloadData()
+    }
+    
+    public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        performBatchUpdates(updates, completion: completion)
+    }
+}
+
+
 extension UITableView : CollectionView {
     
-    public var scrollView: UIScrollView { return self }
+    public var ds_scrollView: UIScrollView { return self }
     
-    public func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
+    public func ds_localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return globalIndex
     }
     
-    public func globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
+    public func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
         return localIndex
     }
     
-    public func registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+    public func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
         registerNib(nib, forCellReuseIdentifier: identifier)
     }
     
-    public func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+    public func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         registerClass(cellClass, forCellReuseIdentifier: identifier)
     }
     
-    public func dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         let cell = dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
         return cell
     }
     
-    public func totalNumberOfSections() -> Int {
+    public func ds_totalNumberOfSections() -> Int {
         return numberOfSections
     }
     
-    public func numberOfItemsInSection(section: Int) -> Int {
+    public func ds_numberOfItemsInSection(section: Int) -> Int {
         return numberOfRowsInSection(section)
     }
     
-    public func indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
-        if let cell = cell as? UITableViewCell {
-            return indexPathForCell(cell)
+    public func ds_indexPathForReusableCell(reusableCell: ReusableCell) -> NSIndexPath? {
+        guard let cell = reusableCell as? UITableViewCell else {
+            fatalError("Cell '\(reusableCell)' should be of type UITableViewCell.")
         }
-        return nil
+        return indexPathForCell(cell)
     }
     
-    public func indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
+    public func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
         return indexPathForRowAtPoint(point)
     }
     
-    public func cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
+    public func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
         return cellForRowAtIndexPath(indexPath)
     }
     
-    public func visibleCells() -> [ReusableCell] {
-        let cells: [UITableViewCell] = visibleCells()
-        return cells
+    public func ds_visibleCells() -> [ReusableCell] {
+        return visibleCells
     }
     
-    public func indexPathsForVisibleItems() -> [NSIndexPath] {
+    public func ds_indexPathsForVisibleItems() -> [NSIndexPath] {
         return indexPathsForVisibleRows ?? []
     }
     
-    public func scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
+    public func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
         let position: UITableViewScrollPosition
         if scrollPosition.contains(.Top) {
             position = .Top
@@ -102,85 +127,137 @@ extension UITableView : CollectionView {
         scrollToRowAtIndexPath(indexPath, atScrollPosition: position, animated: animated)
     }
     
-    public func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        insertSections(sections, withRowAnimation: animation)
+    }
+    
+    public func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        deleteSections(sections, withRowAnimation: animation)
+    }
+    
+    public func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        reloadSections(sections, withRowAnimation: animation)
+    }
+    
+    public func ds_moveSection(section: Int, toSection newSection: Int) {
+        moveSection(section, toSection: newSection)
+    }
+
+    public func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         insertRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
     
-    public func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         reloadRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
     
-    public func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
+    public func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
         moveRowAtIndexPath(indexPath, toIndexPath: newIndexPath)
     }
     
-    public func deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
+    public func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
         deselectRowAtIndexPath(indexPath, animated: animated)
     }
 }
 
 extension UICollectionView : CollectionView {
     
-    public var scrollView: UIScrollView { return self }
+    public var ds_scrollView: UIScrollView { return self }
     
-    public func localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
+    public func ds_localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
         return globalIndex
     }
     
-    public func globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
+    public func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
         return localIndex
     }
     
-    public func dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+        registerNib(nib, forCellWithReuseIdentifier: identifier)
+    }
+
+    public func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+        registerClass(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    public func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         let cell = dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
         return cell
     }
-    public func indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
-        if let cell = cell as? UICollectionViewCell {
-            return indexPathForCell(cell)
+    
+    public func ds_indexPathForReusableCell(reusableCell: ReusableCell) -> NSIndexPath? {
+        guard let cell = reusableCell as? UICollectionViewCell else {
+            fatalError("Cell '\(reusableCell)' should be of type UICollectionViewCell.")
         }
-        return nil
+        return indexPathForCell(cell)
     }
     
-    public func totalNumberOfSections() -> Int {
+    public func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
+        return indexPathForItemAtPoint(point)
+    }
+    
+    public func ds_totalNumberOfSections() -> Int {
         return numberOfSections()
     }
     
-    public func cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
+    public func ds_numberOfItemsInSection(section: Int) -> Int {
+        return numberOfItemsInSection(section)
+    }
+    
+    public func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
         let cell: UICollectionViewCell? = cellForItemAtIndexPath(indexPath)
         return cell
     }
     
-    public func visibleCells() -> [ReusableCell] {
-        let cells: [UICollectionViewCell] = visibleCells()
-        return cells
+    public func ds_visibleCells() -> [ReusableCell] {
+        return visibleCells()
     }
     
-    public func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_indexPathsForVisibleItems() -> [NSIndexPath] {
+        return indexPathsForVisibleItems()
+    }
+    
+    public func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
+        scrollToItemAtIndexPath(indexPath, atScrollPosition: scrollPosition, animated: animated)
+    }
+
+    public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         insertSections(sections)
     }
     
-    public func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         deleteSections(sections)
     }
     
-    public func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
         reloadSections(sections)
     }
+
+    public func ds_moveSection(section: Int, toSection newSection: Int) {
+        moveSection(section, toSection: newSection)
+    }
     
-    public func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         insertItemsAtIndexPaths(indexPaths)
     }
     
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         deleteItemsAtIndexPaths(indexPaths)
     }
 
-    public func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    public func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
         reloadItemsAtIndexPaths(indexPaths)
+    }
+
+    public func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
+        moveItemAtIndexPath(indexPath, toIndexPath: newIndexPath)
+    }
+
+    public func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
+        deselectItemAtIndexPath(indexPath, animated: animated)
     }
 }

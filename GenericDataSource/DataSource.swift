@@ -12,7 +12,7 @@ public protocol DataSource : NSObjectProtocol {
     
     func ds_canHandleCellSize() -> Bool
     
-    weak var reusableViewDelegate: DataSourceReusableViewDelegate? { get set }
+    weak var ds_reusableViewDelegate: DataSourceReusableViewDelegate? { get set }
     
     func ds_numberOfSections() -> Int
     func ds_numberOfItems(inSection section: Int) -> Int
@@ -33,20 +33,3 @@ public protocol DataSource : NSObjectProtocol {
 }
 
 
-public protocol DataSourceReusableViewDelegate : class {
-    
-    func reloadData()
-
-    // animate batch updates
-    func performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?)
-    
-    func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
-    func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
-    func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
-    func moveSection(section: Int, toSection newSection: Int)
-    
-    func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
-    func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
-    func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
-    func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath)
-}

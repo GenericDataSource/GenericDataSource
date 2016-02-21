@@ -39,6 +39,9 @@ public class CompositeDataSource: AbstractDataSource {
         case .MultiSection:
             collection = MultiSectionDataSourcesCollection()
         }
+        super.init()
+
+        collection.reusableViewDelegate = self
     }
 
     public var dataSources: [DataSource] {
@@ -120,44 +123,44 @@ public class CompositeDataSource: AbstractDataSource {
 
 extension CompositeDataSource : DataSourceReusableViewDelegate {
 
-    public func reloadData() {
-        reusableViewDelegate?.reloadData()
+    public func ds_reloadData() {
+        ds_reusableViewDelegate?.ds_reloadData()
     }
 
-    public func performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        reusableViewDelegate?.performBatchUpdates(updates, completion: completion)
+    public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        ds_reusableViewDelegate?.ds_performBatchUpdates(updates, completion: completion)
     }
 
-    public func insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.insertSections(sections, withRowAnimation: animation)
+    public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_insertSections(sections, withRowAnimation: animation)
     }
 
-    public func deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.deleteSections(sections, withRowAnimation: animation)
+    public func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_deleteSections(sections, withRowAnimation: animation)
     }
 
-    public func reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.reloadSections(sections, withRowAnimation: animation)
+    public func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_reloadSections(sections, withRowAnimation: animation)
     }
 
-    public func moveSection(section: Int, toSection newSection: Int) {
-        reusableViewDelegate?.moveSection(section, toSection: newSection)
+    public func ds_moveSection(section: Int, toSection newSection: Int) {
+        ds_reusableViewDelegate?.ds_moveSection(section, toSection: newSection)
     }
 
-    public func insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.insertItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    public func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_insertItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
-    public func deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.deleteItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    public func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_deleteItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
-    public func reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        reusableViewDelegate?.reloadItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
+    public func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+        ds_reusableViewDelegate?.ds_reloadItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
-    public func moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
-        reusableViewDelegate?.moveItemAtIndexPath(indexPath, toIndexPath: newIndexPath)
+    public func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
+        ds_reusableViewDelegate?.ds_moveItemAtIndexPath(indexPath, toIndexPath: newIndexPath)
     }
 }
 
