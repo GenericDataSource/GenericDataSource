@@ -32,6 +32,6 @@ public protocol DataSource : class {
     func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
 }
 
-public protocol DataSourceReusableViewDelegate : CollectionView {
+public protocol DataSourceReusableViewDelegate : class, CollectionView {
     
 }
