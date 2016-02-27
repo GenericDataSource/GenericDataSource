@@ -24,7 +24,6 @@
 		549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */; };
 		549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */; };
 		549FA2051C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */; };
-		549FA2081C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */; };
 		54E0ABD81C70E25E001C698E /* DataSourceSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* DataSourceSelectionDelegate.swift */; };
 		54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -60,7 +59,6 @@
 		549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeReusableViewDelegate.swift; sourceTree = "<group>"; };
-		549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderFooterDelegate.swift; sourceTree = "<group>"; };
 		54E0ABD71C70E25E001C698E /* DataSourceSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceSelectionDelegate.swift; sourceTree = "<group>"; };
 		54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,7 +122,6 @@
 		5495761E1C6FBACC00E9C26C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				549FA2061C7A60D400F6EEF6 /* HeaderFooter */,
 				54E0ABD51C70E198001C698E /* Selection */,
 				54E0ABD61C70E19E001C698E /* DataSources */,
 			);
@@ -211,14 +208,6 @@
 				549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */,
 			);
 			name = private;
-			sourceTree = "<group>";
-		};
-		549FA2061C7A60D400F6EEF6 /* HeaderFooter */ = {
-			isa = PBXGroup;
-			children = (
-				549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */,
-			);
-			name = HeaderFooter;
 			sourceTree = "<group>";
 		};
 		54E0ABD51C70E198001C698E /* Selection */ = {
@@ -362,7 +351,6 @@
 				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* CollectionView.swift in Sources */,
-				549FA2081C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
