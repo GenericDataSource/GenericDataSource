@@ -1,5 +1,5 @@
 //
-//  AnySelectionController.swift
+//  AnyDataSourceSelectionDelegate.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/14/16.
@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- *  Type-erasure for SelectionController.
+ *  Type-erasure for `DataSourceSelectionDelegate`.
  */
-public struct AnySelectionController<ItemType, CellType: ReusableCell> : SelectionController {
+public struct AnyDataSourceSelectionDelegate<ItemType, CellType: ReusableCell> : DataSourceSelectionDelegate {
 
     private let shouldHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Bool
     private let didHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
@@ -23,16 +23,16 @@ public struct AnySelectionController<ItemType, CellType: ReusableCell> : Selecti
     private let willDeselect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> NSIndexPath?
     private let didDeselect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
 
-    init<C: SelectionController where C.ItemType == ItemType, C.CellType == CellType>(_ selectionController: C) {
-        shouldHighlight = selectionController.dataSource:collectionView:shouldHighlightItemAtIndexPath:
-        didHighlight = selectionController.dataSource:collectionView:didHighlightItemAtIndexPath:
-        didUnhighlight = selectionController.dataSource:collectionView:didUnhighlightItemAtIndexPath:
+    init<C: DataSourceSelectionDelegate where C.ItemType == ItemType, C.CellType == CellType>(_ selectionDelegate: C) {
+        shouldHighlight = selectionDelegate.dataSource:collectionView:shouldHighlightItemAtIndexPath:
+        didHighlight = selectionDelegate.dataSource:collectionView:didHighlightItemAtIndexPath:
+        didUnhighlight = selectionDelegate.dataSource:collectionView:didUnhighlightItemAtIndexPath:
         
-        willSelect = selectionController.dataSource:collectionView:willSelectItemAtIndexPath:
-        didSelect = selectionController.dataSource:collectionView:didSelectItemAtIndexPath:
+        willSelect = selectionDelegate.dataSource:collectionView:willSelectItemAtIndexPath:
+        didSelect = selectionDelegate.dataSource:collectionView:didSelectItemAtIndexPath:
         
-        willDeselect = selectionController.dataSource:collectionView:willDeselectItemAtIndexPath:
-        didDeselect = selectionController.dataSource:collectionView:didDeselectItemAtIndexPath:
+        willDeselect = selectionDelegate.dataSource:collectionView:willDeselectItemAtIndexPath:
+        didDeselect = selectionDelegate.dataSource:collectionView:didDeselectItemAtIndexPath:
     }
     
     public func dataSource(
@@ -88,9 +88,9 @@ public struct AnySelectionController<ItemType, CellType: ReusableCell> : Selecti
 }
 
 
-extension SelectionController {
+extension DataSourceSelectionDelegate {
     
-    func anySelectionController() -> AnySelectionController<ItemType, CellType> {
-        return AnySelectionController(self)
+    func anyDataSourceSelectionDelegate() -> AnyDataSourceSelectionDelegate<ItemType, CellType> {
+        return AnyDataSourceSelectionDelegate(self)
     }
 }

@@ -12,7 +12,7 @@
 		549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */; };
 		549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576231C6FBB7B00E9C26C /* BasicDataSource.swift */; };
 		549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */; };
-		5495762E1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762A1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift */; };
+		5495762E1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */; };
 		5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */; };
 		549576361C6FBBC600E9C26C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
 		549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */; };
@@ -23,8 +23,10 @@
 		549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */; };
 		549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */; };
 		549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */; };
-		54E0ABD81C70E25E001C698E /* SelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* SelectionController.swift */; };
-		54E0ABDB1C70F33C001C698E /* AnySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */; };
+		549FA2051C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */; };
+		549FA2081C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */; };
+		54E0ABD81C70E25E001C698E /* DataSourceSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* DataSourceSelectionDelegate.swift */; };
+		54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +48,7 @@
 		549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSource.swift; sourceTree = "<group>"; };
 		549576231C6FBB7B00E9C26C /* BasicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSource.swift; sourceTree = "<group>"; };
 		549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSource.swift; sourceTree = "<group>"; };
-		5495762A1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCollectionCompositionMappingView.swift; sourceTree = "<group>"; };
+		5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCompositionMappingView.swift; sourceTree = "<group>"; };
 		5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSourceTests.swift; sourceTree = "<group>"; };
 		549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTableCollectionView.swift; sourceTree = "<group>"; };
@@ -57,8 +59,10 @@
 		549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
-		54E0ABD71C70E25E001C698E /* SelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionController.swift; sourceTree = "<group>"; };
-		54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnySelectionController.swift; sourceTree = "<group>"; };
+		549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeReusableViewDelegate.swift; sourceTree = "<group>"; };
+		549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceHeaderFooterDelegate.swift; sourceTree = "<group>"; };
+		54E0ABD71C70E25E001C698E /* DataSourceSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceSelectionDelegate.swift; sourceTree = "<group>"; };
+		54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 		5495761E1C6FBACC00E9C26C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				549FA2061C7A60D400F6EEF6 /* HeaderFooter */,
 				54E0ABD51C70E198001C698E /* Selection */,
 				54E0ABD61C70E19E001C698E /* DataSources */,
 			);
@@ -156,9 +161,9 @@
 		549FA1991C79E93F00F6EEF6 /* Composite */ = {
 			isa = PBXGroup;
 			children = (
-				549FA19F1C79E9F800F6EEF6 /* Mapping */,
+				549FA2031C7A083B00F6EEF6 /* private */,
 				549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */,
-				5495762A1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift */,
+				5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */,
 			);
 			name = Composite;
 			sourceTree = "<group>";
@@ -199,11 +204,28 @@
 			name = Mapping;
 			sourceTree = "<group>";
 		};
+		549FA2031C7A083B00F6EEF6 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				549FA19F1C79E9F800F6EEF6 /* Mapping */,
+				549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */,
+			);
+			name = private;
+			sourceTree = "<group>";
+		};
+		549FA2061C7A60D400F6EEF6 /* HeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				549FA2071C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift */,
+			);
+			name = HeaderFooter;
+			sourceTree = "<group>";
+		};
 		54E0ABD51C70E198001C698E /* Selection */ = {
 			isa = PBXGroup;
 			children = (
-				54E0ABD71C70E25E001C698E /* SelectionController.swift */,
-				54E0ABDA1C70F33C001C698E /* AnySelectionController.swift */,
+				54E0ABD71C70E25E001C698E /* DataSourceSelectionDelegate.swift */,
+				54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift */,
 			);
 			name = Selection;
 			sourceTree = "<group>";
@@ -330,15 +352,17 @@
 				549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */,
 				549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */,
 				549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */,
-				54E0ABD81C70E25E001C698E /* SelectionController.swift in Sources */,
+				54E0ABD81C70E25E001C698E /* DataSourceSelectionDelegate.swift in Sources */,
 				549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */,
-				5495762E1C6FBB9100E9C26C /* TableCollectionCompositionMappingView.swift in Sources */,
+				5495762E1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift in Sources */,
 				549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */,
-				54E0ABDB1C70F33C001C698E /* AnySelectionController.swift in Sources */,
+				54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionDelegate.swift in Sources */,
 				5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */,
+				549FA2051C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift in Sources */,
 				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* CollectionView.swift in Sources */,
+				549FA2081C7A618C00F6EEF6 /* DataSourceHeaderFooterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,11 @@ private func ==(lhs: DataSourceWrapper, rhs: DataSourceWrapper) -> Bool {
 
 class DataSourcesCollection {
     
-    weak var reusableViewDelegate: DataSourceReusableViewDelegate? = nil
+    unowned let parentDataSource: CompositeDataSource
+    
+    init(parentDataSource: CompositeDataSource) {
+        self.parentDataSource = parentDataSource
+    }
 
     var mappings: [Mapping] = []
     private var dataSourceToMappings: [DataSourceWrapper: Mapping] = [:]
@@ -34,16 +38,28 @@ class DataSourcesCollection {
         return mappings.map { $0.dataSource }
     }
     
+    private func dataSourceMappingForDataSource(dataSource: DataSource) -> Mapping {
+        let wrapper = DataSourceWrapper(dataSource: dataSource)
+        let existingMapping = dataSourceToMappings[wrapper]
+        assert(existingMapping == nil, "Tried to add a data source more than once: \(dataSource)")
+        
+        let mapping = createMappingForDataSource(dataSource)
+        dataSourceToMappings[wrapper] = mapping
+        
+        let delegate = CompositeReusableViewDelegate(dataSource: dataSource, parentDataSource: parentDataSource)
+        mapping.reusableDelegate = delegate
+        // TODO: add it again
+        dataSource.ds_reusableViewDelegate = delegate
+        
+        return mapping
+    }
+
     // MARK: inserting
     
     func addDataSource(dataSource: DataSource) {
         
-        let wrapper = dataSourceWrapperForAddingDataSource(dataSource)
-        
-        // create the mapping
-        let newMapping = createMappingForDataSource(dataSource)
-        mappings.append(newMapping)
-        dataSourceToMappings[wrapper] = newMapping
+        let mapping = dataSourceMappingForDataSource(dataSource)
+        mappings.append(mapping)
         
         // update the mapping
         updateMappings()
@@ -52,27 +68,12 @@ class DataSourcesCollection {
     func insertDataSource(dataSource: DataSource, atIndex index: Int) {
         
         assert(index >= 0 && index <= mappings.count, "Invalid index \(index) should be between [0..\(mappings.count)")
-        
-        let wrapper = dataSourceWrapperForAddingDataSource(dataSource)
-        
-        // create the mapping
-        let newMapping = createMappingForDataSource(dataSource)
-        mappings.insert(newMapping, atIndex: index)
-        dataSourceToMappings[wrapper] = newMapping
-        
+
+        let mapping = dataSourceMappingForDataSource(dataSource)
+        mappings.insert(mapping, atIndex: index)
+
         // update the mapping
         updateMappings()
-    }
-    
-    private func dataSourceWrapperForAddingDataSource(dataSource: DataSource) -> DataSourceWrapper {
-        let wrapper = DataSourceWrapper(dataSource: dataSource)
-        let existingMapping = dataSourceToMappings[wrapper]
-        assert(existingMapping == nil, "Tried to add a data source more than once: \(dataSource)")
-        
-        // TODO: add it again
-        dataSource.ds_reusableViewDelegate = reusableViewDelegate
-
-        return wrapper
     }
 
     func removeDataSource(dataSource: DataSource) {
@@ -136,34 +137,65 @@ class DataSourcesCollection {
     
     // MARK:- API
     
-    func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath? {
+    func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
         
         guard let mapping = mappingForDataSource(dataSource) else {
-            return nil
+            fatalError("dataSource is not a child to composite data source")
         }
         
         return mapping.globalIndexPathForLocalIndexPath(indexPath)
     }
     
+    func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
+        
+        guard let mapping = mappingForDataSource(dataSource) else {
+            fatalError("dataSource is not a child to composite data source")
+        }
+        
+        return mapping.globalSectionForLocalSection(localSection)
+    }
+    
+    func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+        
+        guard let mapping = mappingForDataSource(dataSource) else {
+            fatalError("dataSource is not a child to composite data source")
+        }
+        
+        return mapping.localIndexPathForGlobalIndexPath(indexPath)
+    }
+    
+    func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
+        guard let mapping = mappingForDataSource(dataSource) else {
+            fatalError("dataSource is not a child to composite data source")
+        }
+        
+        return mapping.localSectionForGlobalSection(section)
+    }
+    
     func collectionViewWrapperFromIndexPath(
         indexPath: NSIndexPath,
         collectionView: CollectionView)
-        -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: TableCollectionCompositionMappingView) {
+        -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: CollectionCompositionMappingView) {
         updateMappings()
         
         let mapping = mappingForIndexPath(indexPath)
         let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
-        let tableCollectionWrapper = TableCollectionCompositionMappingView(mapping: mapping, view: collectionView)
+        let tableCollectionWrapper = CollectionCompositionMappingView(mapping: mapping, view: collectionView)
 
         return (mapping.dataSource, localIndexPath, tableCollectionWrapper)
     }
-    
-    
+
+    func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) {
+        
+    }
 }
 
 extension DataSourcesCollection {
     
     internal class Mapping : Equatable {
+        
+        /// retained
+        var reusableDelegate: CompositeReusableViewDelegate?
         
         let dataSource: DataSource
         

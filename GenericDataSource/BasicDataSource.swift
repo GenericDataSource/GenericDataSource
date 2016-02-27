@@ -20,7 +20,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         self.reuseIdentifier = reuseIdentifier
     }
 
-    public var selectionController: AnySelectionController<ItemType, CellType>? = nil
+    public var selectionController: AnyDataSourceSelectionDelegate<ItemType, CellType>? = nil
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> ItemType {
         return items[indexPath.item]
@@ -75,7 +75,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     // MARK: Size
 
-    public override func ds_canHandleCellSize() -> Bool {
+    public override func ds_shouldConsumeCellSizeDelegateCalls() -> Bool {
         return itemSize != nil
     }
 

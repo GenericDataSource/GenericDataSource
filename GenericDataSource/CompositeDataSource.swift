@@ -30,18 +30,17 @@ public class CompositeDataSource: AbstractDataSource {
         case MultiSection
     }
     
-    private let collection: DataSourcesCollection
+    private var collection: DataSourcesCollection!
     
     public init(type: Type) {
+        super.init()
+        
         switch type {
         case .SingleSection:
-            collection = SingleSectionDataSourcesCollection()
+            collection = SingleSectionDataSourcesCollection(parentDataSource: self)
         case .MultiSection:
-            collection = MultiSectionDataSourcesCollection()
+            collection = MultiSectionDataSourcesCollection(parentDataSource: self)
         }
-        super.init()
-
-        collection.reusableViewDelegate = self
     }
 
     public var dataSources: [DataSource] {
@@ -70,8 +69,22 @@ public class CompositeDataSource: AbstractDataSource {
         return collection.indexOfDataSource(dataSource)
     }
 
-    public func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath? {
+    public func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
         return collection.globalIndexPathForLocalIndexPath(indexPath, dataSource: dataSource)
+    }
+    
+    // MARK:- internal
+    
+    func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
+        return collection.globalSectionForLocalSection(localSection, dataSource: dataSource)
+    }
+    
+    func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+        return collection.localIndexPathForGlobalIndexPath(indexPath, dataSource: dataSource)
+    }
+    
+    func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
+        return collection.localSectionForGlobalSection(section, dataSource: dataSource)
     }
 
     // MARK:- Data Source
@@ -120,47 +133,3 @@ public class CompositeDataSource: AbstractDataSource {
         mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
     }
 }
-
-extension CompositeDataSource : DataSourceReusableViewDelegate {
-
-    public func ds_reloadData() {
-        ds_reusableViewDelegate?.ds_reloadData()
-    }
-
-    public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        ds_reusableViewDelegate?.ds_performBatchUpdates(updates, completion: completion)
-    }
-
-    public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_insertSections(sections, withRowAnimation: animation)
-    }
-
-    public func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_deleteSections(sections, withRowAnimation: animation)
-    }
-
-    public func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_reloadSections(sections, withRowAnimation: animation)
-    }
-
-    public func ds_moveSection(section: Int, toSection newSection: Int) {
-        ds_reusableViewDelegate?.ds_moveSection(section, toSection: newSection)
-    }
-
-    public func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_insertItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
-    }
-
-    public func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_deleteItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
-    }
-
-    public func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation) {
-        ds_reusableViewDelegate?.ds_reloadItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
-    }
-
-    public func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
-        ds_reusableViewDelegate?.ds_moveItemAtIndexPath(indexPath, toIndexPath: newIndexPath)
-    }
-}
-

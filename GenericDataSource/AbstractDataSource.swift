@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath:", "collectionView:layout:sizeForItemAtIndexPath:"]
+private let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath:", "collectionView:layout:sizeForItemAtIndexPath:"]
 
 public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -35,7 +35,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     public override func respondsToSelector(selector: Selector) -> Bool {
 
         if sizeSelectors.contains(selector) {
-            return ds_canHandleCellSize()
+            return ds_shouldConsumeCellSizeDelegateCalls()
         }
 
         if scrollViewDelegateCanHandleSelector(selector) {
@@ -144,7 +144,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     public func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         return ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
     }
-    
+
     public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         return ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
     }
@@ -186,7 +186,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
         fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
 
-    public func ds_canHandleCellSize() -> Bool {
+    public func ds_shouldConsumeCellSizeDelegateCalls() -> Bool {
         return false
     }
     

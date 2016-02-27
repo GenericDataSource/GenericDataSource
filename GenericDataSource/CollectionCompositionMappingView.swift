@@ -1,5 +1,5 @@
 //
-//  TableCollectionCompositionMappingView.swift
+//  CollectionCompositionMappingView.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 9/16/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class TableCollectionCompositionMappingView : CollectionView {
+internal class CollectionCompositionMappingView : CollectionView {
 
     let mapping: DataSourcesCollection.Mapping
     let view : CollectionView
@@ -41,8 +41,8 @@ internal class TableCollectionCompositionMappingView : CollectionView {
         return view.ds_dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndex)
     }
 
-    func ds_totalNumberOfSections() -> Int {
-        return view.ds_totalNumberOfSections()
+    func ds_numberOfSections() -> Int {
+        return view.ds_numberOfSections()
     }
 
     func ds_numberOfItemsInSection(section: Int) -> Int {
@@ -75,6 +75,11 @@ internal class TableCollectionCompositionMappingView : CollectionView {
 
     func ds_indexPathsForVisibleItems() -> [NSIndexPath] {
         let globalIndexPaths = view.ds_indexPathsForVisibleItems()
+        return mapping.localIndexPathesForGlobalIndexPathes(globalIndexPaths)
+    }
+    
+    func ds_indexPathesForSelectedItems() -> [NSIndexPath] {
+        let globalIndexPaths = view.ds_indexPathesForSelectedItems()
         return mapping.localIndexPathesForGlobalIndexPathes(globalIndexPaths)
     }
 
@@ -134,9 +139,27 @@ internal class TableCollectionCompositionMappingView : CollectionView {
         let newGlobalIndexPath = mapping.globalIndexPathForLocalIndexPath(newIndexPath)
         view.ds_moveItemAtIndexPath(globalIndexPath, toIndexPath: newGlobalIndexPath)
     }
+    
+    func ds_selectItemAtIndexPath(indexPath: NSIndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition) {
+        let globalIndexPath: NSIndexPath?
+        if let indexPath = indexPath {
+            globalIndexPath = mapping.globalIndexPathForLocalIndexPath(indexPath)
+        } else {
+            globalIndexPath = nil
+        }
+        view.ds_selectItemAtIndexPath(globalIndexPath, animated: animated, scrollPosition: scrollPosition)
+    }
 
     func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
         let globalIndexPath = mapping.globalIndexPathForLocalIndexPath(indexPath)
         view.ds_deselectItemAtIndexPath(globalIndexPath, animated: animated)
+    }
+    
+    func ds_reloadData() {
+        view.ds_reloadData()
+    }
+    
+    func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        view.ds_performBatchUpdates(updates, completion: completion)
     }
 }

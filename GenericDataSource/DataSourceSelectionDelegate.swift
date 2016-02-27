@@ -1,5 +1,5 @@
 //
-//  SelectionController.swift
+//  DataSourceSelectionDelegate.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/14/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol SelectionController {
+public protocol DataSourceSelectionDelegate {
     
     typealias ItemType
     typealias CellType: ReusableCell
@@ -53,7 +53,7 @@ public protocol SelectionController {
 }
 
 // MARK:- Default implementation
-extension SelectionController {
+extension DataSourceSelectionDelegate {
     
     // MARK:- Highlighting
     public func dataSource(

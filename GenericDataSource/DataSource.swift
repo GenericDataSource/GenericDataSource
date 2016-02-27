@@ -8,10 +8,10 @@
 
 import Foundation
 
-public protocol DataSource : NSObjectProtocol {
+public protocol DataSource : class {
     
-    func ds_canHandleCellSize() -> Bool
-    
+    func ds_shouldConsumeCellSizeDelegateCalls() -> Bool
+
     weak var ds_reusableViewDelegate: DataSourceReusableViewDelegate? { get set }
     
     func ds_numberOfSections() -> Int
@@ -32,4 +32,6 @@ public protocol DataSource : NSObjectProtocol {
     func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
 }
 
-
+public protocol DataSourceReusableViewDelegate : CollectionView {
+    
+}
