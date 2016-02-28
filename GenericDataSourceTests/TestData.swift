@@ -15,10 +15,10 @@ public struct Report : Equatable {
     var id: Int
     var name: String
     
-    public static func generate(numberOfReports numberOfReports: Int) -> [Report] {
+    public static func generate(from from: Int = 1, numberOfReports: Int, name: String = "report") -> [Report] {
         var reports: [Report] = []
-        for i in 1...numberOfReports {
-            reports.append(Report(id: i, name: "report-\(i)"))
+        for i in from...numberOfReports {
+            reports.append(Report(id: i, name: "\(name)-\(i)"))
         }
         return reports
     }

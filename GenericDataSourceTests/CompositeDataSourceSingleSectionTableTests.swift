@@ -15,11 +15,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
@@ -38,16 +38,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -81,16 +81,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -124,16 +124,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -167,16 +167,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -210,16 +210,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -253,16 +253,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -296,16 +296,16 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let tableView = MockTableView()
         let dataSource  = CompositeDataSource(type: .SingleSection)
         
-        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
         dataSource.addDataSource(pdfReportsDataSource)
         
-        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
-        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
         pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
         textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
@@ -378,21 +378,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let total = 55
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
-        
-        var reports: [Report] = []
-        for i in 1...total/2 {
-            reports.append(Report(id: i, name: "pdf report-\(i)"))
-        }
-        pdfReportsDataSource.items = reports
+        pdfReportsDataSource.items = Report.generate(numberOfReports: total / 2, name: "pdf report")
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        
-        reports = []
-        for i in total/2 + 1...total {
-            reports.append(Report(id: i, name: "text report-\(i)"))
-        }
-        textReportsDataSource.items = reports
-        
+        textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
+
         let dataSource  = CompositeDataSource(type: .SingleSection)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)

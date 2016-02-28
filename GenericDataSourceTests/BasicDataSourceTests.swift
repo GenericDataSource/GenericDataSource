@@ -129,7 +129,7 @@ class BasicDataSourceTests: XCTestCase {
         dataSource.registerReusableViewsInCollectionView(collectionView)
 
         // execute the test
-        collectionView.ueryDataSource()
+        collectionView.queryDataSource()
 
         // assert
         XCTAssertEqual(1, collectionView.numberOfSections())

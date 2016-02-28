@@ -108,7 +108,6 @@ class DataSourcesCollection {
         return mappings.indexOf(mapping)
     }
 
-    
     func mappingForDataSource(dataSource: DataSource) -> Mapping? {
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
@@ -151,7 +150,7 @@ class DataSourcesCollection {
     func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
         
         guard let mapping = mappingForDataSource(dataSource) else {
-            fatalError("dataSource is not a child to composite data source")
+            fatalError("dataSource is not a child to a composite data source")
         }
         
         return mapping.globalSectionForLocalSection(localSection)

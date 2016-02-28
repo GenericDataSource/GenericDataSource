@@ -135,7 +135,7 @@ class MockCollectionView : UICollectionView {
         }
     }
 
-    func ueryDataSource() {
+    func queryDataSource() {
 
         // clear the created cell
         for (_, var cellData) in reusableCells {
