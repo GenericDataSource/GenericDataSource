@@ -35,7 +35,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     public override func respondsToSelector(selector: Selector) -> Bool {
 
         if sizeSelectors.contains(selector) {
-            return ds_shouldConsumeCellSizeDelegateCalls()
+            return ds_shouldConsumeItemSizeDelegateCalls()
         }
 
         if scrollViewDelegateCanHandleSelector(selector) {
@@ -112,7 +112,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
     
     public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return ds_collectionView(tableView, willSelectItemAtIndexPath: indexPath)
+        return ds_collectionView(tableView, shouldSelectItemAtIndexPath: indexPath) ? indexPath : nil
     }
     
     public func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -120,7 +120,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
     
     public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return ds_collectionView(tableView, willDeselectItemAtIndexPath: indexPath)
+        return ds_collectionView(tableView, shouldDeselectItemAtIndexPath: indexPath) ? indexPath : nil
     }
     
     // MARK: Size
@@ -150,7 +150,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
     
     public func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return ds_collectionView(collectionView, willSelectItemAtIndexPath: indexPath) != nil
+        return ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
     }
     
     public func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
@@ -158,7 +158,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
     
     public func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return ds_collectionView(collectionView, willDeselectItemAtIndexPath: indexPath) != nil
+        return ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
     }
 
     // MARK: Size
@@ -169,24 +169,24 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
 
     // MARK:- Data Source
-    
+
     public func ds_numberOfSections() -> Int {
-        fatalError("\(self): Should be implemented by subclasses")
+        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
     
     public func ds_numberOfItems(inSection section: Int) -> Int {
-        fatalError("\(self): Should be implemented by subclasses")
+        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
 
     public func ds_collectionView(collectionView: CollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
-        fatalError("\(self): Should be implemented by subclasses")
+        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
     
     public func ds_collectionView(collectionView: CollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
 
-    public func ds_shouldConsumeCellSizeDelegateCalls() -> Bool {
+    public func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
         return false
     }
     
@@ -202,16 +202,16 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
         // does nothing
     }
 
-    public func ds_collectionView(collectionView: CollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return indexPath
+    public func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
     
     public func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
-    
-    public func ds_collectionView(collectionView: CollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return indexPath
+
+    public func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
     public func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing

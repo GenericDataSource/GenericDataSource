@@ -8,21 +8,6 @@
 
 import UIKit
 
-private class DataSourceWrapper : Hashable {
-    let dataSource: DataSource
-    init(dataSource: DataSource) {
-        self.dataSource = dataSource
-    }
-
-    var hashValue: Int {
-        return unsafeAddressOf(dataSource).hashValue
-    }
-}
-
-private func ==(lhs: DataSourceWrapper, rhs: DataSourceWrapper) -> Bool {
-    return lhs.dataSource === rhs.dataSource
-}
-
 public class CompositeDataSource: AbstractDataSource {
     
     public enum Type {
@@ -47,7 +32,7 @@ public class CompositeDataSource: AbstractDataSource {
         return collection.dataSources
     }
 
-    // MARK: inserting
+    // MARK: Children DataSources
 
     public func addDataSource(dataSource: DataSource) {
         collection.addDataSource(dataSource)
@@ -60,6 +45,10 @@ public class CompositeDataSource: AbstractDataSource {
     public func removeDataSource(dataSource: DataSource) {
         collection.removeDataSource(dataSource)
     }
+    
+    public func dataSourceAtIndex(index: Int) -> DataSource {
+        return collection.dataSourceAtIndex(index)
+    }
 
     public func containsDataSource(dataSource: DataSource) -> Bool {
         return collection.containsDataSource(dataSource)
@@ -69,22 +58,22 @@ public class CompositeDataSource: AbstractDataSource {
         return collection.indexOfDataSource(dataSource)
     }
 
+    // MARK:- IndexPath and Section translations
+    
+    public func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
+        return collection.globalSectionForLocalSection(localSection, dataSource: dataSource)
+    }
+    
+    public func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
+        return collection.localSectionForGlobalSection(section, dataSource: dataSource)
+    }
+
     public func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
         return collection.globalIndexPathForLocalIndexPath(indexPath, dataSource: dataSource)
     }
     
-    // MARK:- internal
-    
-    func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
-        return collection.globalSectionForLocalSection(localSection, dataSource: dataSource)
-    }
-    
-    func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+    public func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
         return collection.localIndexPathForGlobalIndexPath(indexPath, dataSource: dataSource)
-    }
-    
-    func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
-        return collection.localSectionForGlobalSection(section, dataSource: dataSource)
     }
 
     // MARK:- Data Source
@@ -114,22 +103,39 @@ public class CompositeDataSource: AbstractDataSource {
     }
     
     // MARK: Selection
-
-    public override func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
-    }
-
+    
     public override func ds_collectionView(collectionView: CollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAtIndexPath: mapping.localIndexPath)
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+    public override func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
+    }
+    
+    public override func ds_collectionView(collectionView: CollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: mapping.localIndexPath)
+    }
+    
+    public override func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: mapping.localIndexPath)
+    }
+
+    public override func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
+    }
+    
+    public override func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: mapping.localIndexPath)
+    }
+
+    public override func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didDeselectItemAtIndexPath: mapping.localIndexPath)
     }
 }

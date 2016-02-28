@@ -10,17 +10,36 @@ import UIKit
 
 public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource {
 
-    public var itemSize: CGSize? = nil
+    /// The size of the cell. When setting a value to it. It will set `useDelegateForItemSize` to `true`.
+    public var itemSize: CGSize = CGSize.zero {
+        didSet {
+            useDelegateForItemSize = true
+        }
+    }
+
+    /// Used for UITableView.
+    public var itemHeight: CGFloat {
+        set {
+            itemSize = CGSize(width: 0, height: newValue)
+        }
+        get {
+            return itemSize.height
+        }
+    }
+
+    public var useDelegateForItemSize: Bool = false
 
     public var items: [ItemType] = []
 
     public let reuseIdentifier: String
     
+    public var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
+
     public init(reuseIdentifier: String) {
         self.reuseIdentifier = reuseIdentifier
     }
 
-    public var selectionController: AnyDataSourceSelectionDelegate<ItemType, CellType>? = nil
+    // MARK:- Items
 
     public func itemAtIndexPath(indexPath: NSIndexPath) -> ItemType {
         return items[indexPath.item]
@@ -28,15 +47,6 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     public func replaceItemAtIndexPath(indexPath: NSIndexPath, withItem item: ItemType) {
         items[indexPath.item] = item
-    }
-
-    public func indexPathForItem<T : Equatable>(item: T) -> NSIndexPath? {
-        for (index, item) in items.enumerate() {
-            if item is T {
-                return NSIndexPath(forItem: index, inSection: 0)
-            }
-        }
-        return nil
     }
 
     // MARK:- DataSource
@@ -75,62 +85,47 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     // MARK: Size
 
-    public override func ds_shouldConsumeCellSizeDelegateCalls() -> Bool {
-        return itemSize != nil
+    public override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+        return useDelegateForItemSize
     }
 
     public override func ds_collectionView(collectionView: CollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        guard let itemSize = itemSize else {
-            fatalError("sizeForItemAtIndexPath requested with nil itemSize.")
-        }
         return itemSize
     }
 
     // MARK: Selection
     public override func ds_collectionView(collectionView: CollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return selectionController?.dataSource(self, collectionView: collectionView, shouldHighlightItemAtIndexPath: indexPath) ??
+        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldHighlightItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
     
     public override func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        selectionController?.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath)
+        return selectionHandler?.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
     }
     
     public override func ds_collectionView(collectionView: CollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-        selectionController?.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath)
+        return selectionHandler?.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return selectionController?.dataSource(self, collectionView: collectionView, willSelectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, willSelectItemAtIndexPath: indexPath)
+    public override func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldSelectItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
     }
     
     public override func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        selectionController?.dataSource(self, collectionView: collectionView, didSelectItemAtIndexPath: indexPath)
+        return selectionHandler?.dataSource(self, collectionView: collectionView, didSelectItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
     }
-    
-    public override func ds_collectionView(collectionView: CollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return selectionController?.dataSource(self, collectionView: collectionView, willDeselectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, willDeselectItemAtIndexPath: indexPath)
+
+    public override func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldDeselectItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
     }
 
     public override func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        selectionController?.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath)
+        return selectionHandler?.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath) ??
+            super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
     }
-}
-
-public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSource <ItemType, CellType> {
-
-    public typealias ConfigureBlock = (item: ItemType, cell: CellType, indexPath: NSIndexPath) -> Void
-    let configureBlock: ConfigureBlock
-
-    public init(reuseIdentifier: String, configureBlock: ConfigureBlock) {
-        self.configureBlock = configureBlock
-        super.init(reuseIdentifier: reuseIdentifier)
-    }
-
-    public override func configure(collectionView collectionView: CollectionView, cell: CellType, item: ItemType, indexPath: NSIndexPath) {
-        self.configureBlock(item: item, cell: cell, indexPath: indexPath)
-    }
-
 }

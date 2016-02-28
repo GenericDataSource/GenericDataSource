@@ -38,7 +38,7 @@ class DataSourcesCollection {
         return mappings.map { $0.dataSource }
     }
     
-    private func dataSourceMappingForDataSource(dataSource: DataSource) -> Mapping {
+    private func createAndPrepareMappingForDataSource(dataSource: DataSource) -> Mapping {
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
         assert(existingMapping == nil, "Tried to add a data source more than once: \(dataSource)")
@@ -47,29 +47,29 @@ class DataSourcesCollection {
         dataSourceToMappings[wrapper] = mapping
         
         let delegate = CompositeReusableViewDelegate(dataSource: dataSource, parentDataSource: parentDataSource)
+        // retain it
         mapping.reusableDelegate = delegate
-        // TODO: add it again
         dataSource.ds_reusableViewDelegate = delegate
-        
+
         return mapping
     }
 
-    // MARK: inserting
+    // MARK: API
     
     func addDataSource(dataSource: DataSource) {
         
-        let mapping = dataSourceMappingForDataSource(dataSource)
+        let mapping = createAndPrepareMappingForDataSource(dataSource)
         mappings.append(mapping)
         
         // update the mapping
         updateMappings()
     }
-    
+
     func insertDataSource(dataSource: DataSource, atIndex index: Int) {
         
         assert(index >= 0 && index <= mappings.count, "Invalid index \(index) should be between [0..\(mappings.count)")
 
-        let mapping = dataSourceMappingForDataSource(dataSource)
+        let mapping = createAndPrepareMappingForDataSource(dataSource)
         mappings.insert(mapping, atIndex: index)
 
         // update the mapping
@@ -93,8 +93,10 @@ class DataSourcesCollection {
         updateMappings()
     }
     
-    // MARK: immutable
-    
+    func dataSourceAtIndex(index: Int) -> DataSource {
+        return mappings[index].dataSource
+    }
+
     func containsDataSource(dataSource: DataSource) -> Bool {
         return mappingForDataSource(dataSource) != nil
     }
@@ -107,7 +109,7 @@ class DataSourcesCollection {
     }
 
     
-    internal func mappingForDataSource(dataSource: DataSource) -> Mapping? {
+    func mappingForDataSource(dataSource: DataSource) -> Mapping? {
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
         return existingMapping
@@ -115,15 +117,15 @@ class DataSourcesCollection {
     
     // MARK:- Subclassing
     
-    internal func createMappingForDataSource(dataSource: DataSource) -> Mapping {
+    func createMappingForDataSource(dataSource: DataSource) -> Mapping {
         fatalError("Should be implemented by subclasses")
     }
     
-    internal func updateMappings() {
+    func updateMappings() {
         fatalError("Should be implemented by subclasses")
     }
     
-    internal func mappingForIndexPath(indexPath: NSIndexPath) -> Mapping {
+    func mappingForIndexPath(indexPath: NSIndexPath) -> Mapping {
         fatalError("Should be implemented by subclasses")
     }
     

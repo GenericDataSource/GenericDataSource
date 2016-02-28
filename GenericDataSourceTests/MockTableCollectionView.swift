@@ -11,7 +11,7 @@ import UIKit
 
 protocol MockReusableView : CollectionView {
 
-    func queryingDataSource()
+    func ueryDataSource()
 }
 
 
@@ -57,7 +57,7 @@ class MockTableView : UITableView {
         }
     }
 
-    func queryingDataSource() {
+    func queryDataSource() {
 
         // clear the created cell
         for (_, var cellData) in reusableCells {
@@ -135,7 +135,7 @@ class MockCollectionView : UICollectionView {
         }
     }
 
-    func queryingDataSource() {
+    func ueryDataSource() {
 
         // clear the created cell
         for (_, var cellData) in reusableCells {

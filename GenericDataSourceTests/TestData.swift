@@ -14,6 +14,14 @@ public struct Report : Equatable {
 
     var id: Int
     var name: String
+    
+    public static func generate(numberOfReports numberOfReports: Int) -> [Report] {
+        var reports: [Report] = []
+        for i in 1...numberOfReports {
+            reports.append(Report(id: i, name: "report-\(i)"))
+        }
+        return reports
+    }
 }
 
 public func ==(lhs: Report, rhs: Report) -> Bool {

@@ -10,7 +10,7 @@ import Foundation
 
 public protocol DataSource : class {
     
-    func ds_shouldConsumeCellSizeDelegateCalls() -> Bool
+    func ds_shouldConsumeItemSizeDelegateCalls() -> Bool
 
     weak var ds_reusableViewDelegate: DataSourceReusableViewDelegate? { get set }
     
@@ -25,13 +25,11 @@ public protocol DataSource : class {
     func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath)
     func ds_collectionView(collectionView: CollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath)
     
-    func ds_collectionView(collectionView: CollectionView, willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
+    func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     
-    func ds_collectionView(collectionView: CollectionView, willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
+    func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
 }
 
-public protocol DataSourceReusableViewDelegate : class, CollectionView {
-    
-}
+public protocol DataSourceReusableViewDelegate : class, CollectionView { }

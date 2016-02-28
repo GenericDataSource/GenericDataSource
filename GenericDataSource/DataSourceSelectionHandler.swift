@@ -1,5 +1,5 @@
 //
-//  DataSourceSelectionDelegate.swift
+//  DataSourceSelectionHandler.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/14/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol DataSourceSelectionDelegate {
+public protocol DataSourceSelectionHandler {
     
     typealias ItemType
     typealias CellType: ReusableCell
@@ -33,7 +33,7 @@ public protocol DataSourceSelectionDelegate {
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: CollectionView,
-        willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
+        shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
@@ -44,7 +44,7 @@ public protocol DataSourceSelectionDelegate {
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: CollectionView,
-        willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
+        shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
@@ -53,7 +53,7 @@ public protocol DataSourceSelectionDelegate {
 }
 
 // MARK:- Default implementation
-extension DataSourceSelectionDelegate {
+extension DataSourceSelectionHandler {
     
     // MARK:- Highlighting
     public func dataSource(
@@ -81,23 +81,23 @@ extension DataSourceSelectionDelegate {
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: CollectionView,
-        willSelectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-            return indexPath
+        shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+            return true
     }
-    
+
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: CollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
             // does nothing
     }
-    
+
     // MARK:- Deselecting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: CollectionView,
-        willDeselectItemAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-            return indexPath
+        shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+            return true
     }
     
     public func dataSource(
