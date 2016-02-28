@@ -186,10 +186,6 @@ class DataSourcesCollection {
 
         return (mapping.dataSource, localIndexPath, tableCollectionWrapper)
     }
-
-    func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) {
-        
-    }
 }
 
 extension DataSourcesCollection {
