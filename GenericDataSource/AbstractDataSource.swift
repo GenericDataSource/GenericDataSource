@@ -61,6 +61,9 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
 
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if ds_numberOfSections() <= section {
+            return 0
+        }
         return ds_numberOfItems(inSection: section)
     }
 
@@ -178,11 +181,11 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
         fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
 
-    public func ds_collectionView(collectionView: CollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
         fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
     
-    public func ds_collectionView(collectionView: CollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
     }
 
@@ -190,30 +193,30 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
         return false
     }
     
-    public func ds_collectionView(collectionView: CollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    public func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
     
-    public func ds_collectionView(collectionView: CollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-        // does nothing
-    }
-
-    public func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    public func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
 
-    public func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    public func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    
+    public func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // does nothing
+    }
+
+    public func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    public func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
 }

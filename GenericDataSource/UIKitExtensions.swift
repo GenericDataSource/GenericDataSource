@@ -24,7 +24,7 @@ extension UITableViewScrollPosition {
 
 extension UITableView {
     
-    public func useDataSource(dataSource: AbstractDataSource) {
+    public func ds_useDataSource(dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self
@@ -34,7 +34,7 @@ extension UITableView {
 
 extension UICollectionView {
     
-    public func useDataSource(dataSource: AbstractDataSource) {
+    public func ds_useDataSource(dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self
@@ -74,25 +74,30 @@ private class CompletionBlock {
     init(block: Bool -> Void) { self.block = block }
 }
 
-extension CollectionView where Self : BatchUpdater {
+private struct AssociatedKeys {
+    static var performingBatchUpdates = "performingBatchUpdates"
+    static var completionBlocks = "completionBlocks"
+}
+
+extension GeneralCollectionView where Self : BatchUpdater {
 
     private var performingBatchUpdates: Bool {
         get {
-            let value = objc_getAssociatedObject(self, "performingBatchUpdates") as? NSNumber
+            let value = objc_getAssociatedObject(self, &AssociatedKeys.performingBatchUpdates) as? NSNumber
             return value?.boolValue ?? false
         }
         set {
-            objc_setAssociatedObject(self, "performingBatchUpdates", newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.performingBatchUpdates, NSNumber(bool: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     private var completionBlocks: [CompletionBlock] {
         get {
-            let value = objc_getAssociatedObject(self, "performingBatchUpdates") as? [CompletionBlock]
+            let value = objc_getAssociatedObject(self, &AssociatedKeys.completionBlocks) as? [CompletionBlock]
             return value ?? []
         }
         set {
-            objc_setAssociatedObject(self, "performingBatchUpdates", newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.completionBlocks, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -119,7 +124,7 @@ extension CollectionView where Self : BatchUpdater {
     }
 }
 
-extension UITableView: CollectionView {
+extension UITableView: GeneralCollectionView {
     
     public func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
         registerNib(nib, forCellReuseIdentifier: identifier)
@@ -204,7 +209,7 @@ extension UITableView: CollectionView {
         return numberOfRowsInSection(section)
     }
     
-    public func ds_indexPathForReusableCell(reusableCell: ReusableCell) -> NSIndexPath? {
+    public func ds_indexPathForCell(reusableCell: ReusableCell) -> NSIndexPath? {
         guard let cell = reusableCell as? UITableViewCell else {
             fatalError("Cell '\(reusableCell)' should be of type UITableViewCell.")
         }
@@ -220,7 +225,12 @@ extension UITableView: CollectionView {
     }
     
     public func ds_visibleCells() -> [ReusableCell] {
-        return visibleCells
+        let cells = visibleCells
+        var reusableCells = [ReusableCell]()
+        for cell in cells {
+            reusableCells.append(cell)
+        }
+        return reusableCells
     }
     
     public func ds_indexPathsForVisibleItems() -> [NSIndexPath] {
@@ -232,7 +242,7 @@ extension UITableView: CollectionView {
     }
 }
 
-extension UICollectionView: CollectionView {
+extension UICollectionView: GeneralCollectionView {
     
     public func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
         registerNib(nib, forCellWithReuseIdentifier: identifier)
@@ -309,7 +319,7 @@ extension UICollectionView: CollectionView {
         return cell
     }
     
-    public func ds_indexPathForReusableCell(reusableCell: ReusableCell) -> NSIndexPath? {
+    public func ds_indexPathForCell(reusableCell: ReusableCell) -> NSIndexPath? {
         guard let cell = reusableCell as? UICollectionViewCell else {
             fatalError("Cell '\(reusableCell)' should be of type UICollectionViewCell.")
         }
@@ -334,7 +344,12 @@ extension UICollectionView: CollectionView {
     }
     
     public func ds_visibleCells() -> [ReusableCell] {
-        return visibleCells()
+        let cells = visibleCells()
+        var reusableCells = [ReusableCell]()
+        for cell in cells {
+            reusableCells.append(cell)
+        }
+        return reusableCells
     }
     
     public func ds_indexPathsForVisibleItems() -> [NSIndexPath] {

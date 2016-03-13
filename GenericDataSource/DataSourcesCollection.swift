@@ -175,7 +175,7 @@ class DataSourcesCollection {
     
     func collectionViewWrapperFromIndexPath(
         indexPath: NSIndexPath,
-        collectionView: CollectionView)
+        collectionView: GeneralCollectionView)
         -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: CollectionCompositionMappingView) {
         updateMappings()
         

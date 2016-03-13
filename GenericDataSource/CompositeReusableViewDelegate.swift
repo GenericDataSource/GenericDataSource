@@ -144,8 +144,8 @@ class CompositeReusableViewDelegate : DataSourceReusableViewDelegate {
         return delegate.ds_numberOfItemsInSection(globalSection)
     }
     
-    func ds_indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
-        if let indexPath = delegate?.ds_indexPathForReusableCell(cell) {
+    func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath? {
+        if let indexPath = delegate?.ds_indexPathForCell(cell) {
             return localIndexPathForGlobalIndexPath(indexPath)
         }
         return nil

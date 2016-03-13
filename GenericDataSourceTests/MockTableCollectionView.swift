@@ -9,7 +9,7 @@
 import UIKit
 @testable import GenericDataSource
 
-protocol MockReusableView : CollectionView {
+protocol MockReusableView : GeneralCollectionView {
 
     func ueryDataSource()
 }

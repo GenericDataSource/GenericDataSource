@@ -65,7 +65,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return items.count
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
         let cell = ds_collectionView(collectionView, nonConfiguredCellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
@@ -74,7 +74,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return cell
     }
 
-    public func ds_collectionView(collectionView: CollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    public func ds_collectionView(collectionView: GeneralCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
 
         let cell = collectionView.ds_dequeueReusableCellViewWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         guard let castedCell = cell as? CellType else {
@@ -83,7 +83,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return castedCell
     }
 
-    public func ds_collectionView(collectionView collectionView: CollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath) {
+    public func ds_collectionView(collectionView collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath) {
         // does nothing
         // should be overriden by subclasses
     }
@@ -94,42 +94,42 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return useDelegateForItemSize
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return itemSize
     }
 
     // MARK: Selection
-    public override func ds_collectionView(collectionView: CollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return selectionHandler?.dataSource(self, collectionView: collectionView, shouldHighlightItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
     
-    public override func ds_collectionView(collectionView: CollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         return selectionHandler?.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
     }
     
-    public override func ds_collectionView(collectionView: CollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
         return selectionHandler?.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return selectionHandler?.dataSource(self, collectionView: collectionView, shouldSelectItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
     }
     
-    public override func ds_collectionView(collectionView: CollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         return selectionHandler?.dataSource(self, collectionView: collectionView, didSelectItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return selectionHandler?.dataSource(self, collectionView: collectionView, shouldDeselectItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
     }
 
-    public override func ds_collectionView(collectionView: CollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         return selectionHandler?.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath) ??
             super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
     }

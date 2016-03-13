@@ -8,12 +8,12 @@
 
 import UIKit
 
-internal class CollectionCompositionMappingView : CollectionView {
+internal class CollectionCompositionMappingView : GeneralCollectionView {
 
     let mapping: DataSourcesCollection.Mapping
-    let view : CollectionView
+    let view : GeneralCollectionView
 
-    init(mapping: DataSourcesCollection.Mapping, view: CollectionView) {
+    init(mapping: DataSourcesCollection.Mapping, view: GeneralCollectionView) {
         self.mapping = mapping
         self.view = view
     }
@@ -49,9 +49,9 @@ internal class CollectionCompositionMappingView : CollectionView {
         return view.ds_numberOfItemsInSection(section)
     }
 
-    func ds_indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath? {
+    func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath? {
 
-        if let globalIndex = view.ds_indexPathForReusableCell(cell) {
+        if let globalIndex = view.ds_indexPathForCell(cell) {
             return mapping.localIndexPathForGlobalIndexPath(globalIndex)
         }
         return nil

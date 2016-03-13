@@ -1,5 +1,5 @@
 //
-//  CollectionView.swift
+//  GeneralCollectionView.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/13/16.
@@ -10,7 +10,7 @@ import Foundation
 
 public protocol ReusableCell { }
 
-public protocol CollectionView: class {
+public protocol GeneralCollectionView: class {
     
     var ds_scrollView: UIScrollView { get }
     
@@ -22,7 +22,7 @@ public protocol CollectionView: class {
     func ds_numberOfSections() -> Int
     func ds_numberOfItemsInSection(section: Int) -> Int
     
-    func ds_indexPathForReusableCell(cell: ReusableCell) -> NSIndexPath?
+    func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath?
     func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath?
     func ds_indexPathsForVisibleItems() -> [NSIndexPath]
     func ds_indexPathesForSelectedItems() -> [NSIndexPath]

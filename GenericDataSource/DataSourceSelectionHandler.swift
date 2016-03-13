@@ -17,7 +17,7 @@ public protocol DataSourceSelectionHandler {
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         configureCell cell: CellType,
         withItem item: ItemType,
         atIndexPath indexPath: NSIndexPath)
@@ -25,39 +25,39 @@ public protocol DataSourceSelectionHandler {
     // MARK:- Highlighting
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didHighlightItemAtIndexPath indexPath: NSIndexPath)
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didUnhighlightItemAtIndexPath indexPath: NSIndexPath)
     
     // MARK:- Selecting
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath)
     
     // MARK:- Deselecting
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didDeselectItemAtIndexPath indexPath: NSIndexPath)
 }
 
@@ -69,7 +69,7 @@ extension DataSourceSelectionHandler {
 
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         configureCell cell: CellType,
         withItem item: ItemType,
         atIndexPath indexPath: NSIndexPath) {
@@ -78,21 +78,21 @@ extension DataSourceSelectionHandler {
     // MARK:- Highlighting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
             return true
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didHighlightItemAtIndexPath indexPath: NSIndexPath) {
             // does nothing
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
             // does nothing
     }
@@ -100,14 +100,14 @@ extension DataSourceSelectionHandler {
     // MARK:- Selecting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
             return true
     }
 
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
             // does nothing
     }
@@ -115,14 +115,14 @@ extension DataSourceSelectionHandler {
     // MARK:- Deselecting
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
             return true
     }
     
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
-        collectionView: CollectionView,
+        collectionView: GeneralCollectionView,
         didDeselectItemAtIndexPath indexPath: NSIndexPath) {
             // does nothing
     }

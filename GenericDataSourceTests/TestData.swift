@@ -85,11 +85,11 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
         super.init(reuseIdentifier: NSStringFromClass(CellType.self))
     }
 
-    func registerReusableViewsInCollectionView(collectionView: CollectionView) {
+    func registerReusableViewsInCollectionView(collectionView: GeneralCollectionView) {
         collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
-    override func ds_collectionView(collectionView collectionView: CollectionView, configureCell cell: CellType, withItem item: Report, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Report, atIndexPath indexPath: NSIndexPath) {
         cell.configureForReport(item, indexPath: indexPath)
     }
 }
@@ -100,7 +100,7 @@ class ReportNoReuseBasicDataSource<CellType where CellType: ReportCell, CellType
         super.init(reuseIdentifier: "")
     }
     
-    override func ds_collectionView(collectionView: CollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    override func ds_collectionView(collectionView: GeneralCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
         return CellType.init()
     }
 }
@@ -111,7 +111,7 @@ class ReportBasicBlockDataSource<CellType where CellType: ReportCell, CellType: 
         super.init(reuseIdentifier: NSStringFromClass(CellType.self), configureBlock: configureBlock)
     }
 
-    func registerReusableViewsInCollectionView(collectionView: CollectionView) {
+    func registerReusableViewsInCollectionView(collectionView: GeneralCollectionView) {
         collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }
