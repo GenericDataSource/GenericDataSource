@@ -52,14 +52,14 @@ internal class CollectionCompositionMappingView : GeneralCollectionView {
     func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath? {
 
         if let globalIndex = view.ds_indexPathForCell(cell) {
-            return mapping.localIndexPathForGlobalIndexPath(globalIndex)
+            return ds_localIndexPathForGlobalIndexPath(globalIndex)
         }
         return nil
     }
 
     func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
         if let globalIndex = view.ds_indexPathForItemAtPoint(point) {
-            return mapping.localIndexPathForGlobalIndexPath(globalIndex)
+            return ds_localIndexPathForGlobalIndexPath(globalIndex)
         }
         return nil
     }
