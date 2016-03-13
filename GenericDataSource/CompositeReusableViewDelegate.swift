@@ -107,7 +107,7 @@ class CompositeReusableViewDelegate : DataSourceReusableViewDelegate {
     
     var ds_scrollView: UIScrollView {
         guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate.")
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to be ds_reusableViewDelegate for the GenericDataSource.")
         }
         return delegate.ds_scrollView
     }
@@ -122,7 +122,7 @@ class CompositeReusableViewDelegate : DataSourceReusableViewDelegate {
 
     func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate.")
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to be ds_reusableViewDelegate for the GenericDataSource.")
         }
 
         let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
@@ -131,14 +131,14 @@ class CompositeReusableViewDelegate : DataSourceReusableViewDelegate {
     
     func ds_numberOfSections() -> Int {
         guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate.")
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to be ds_reusableViewDelegate for the GenericDataSource.")
         }
         return delegate.ds_numberOfSections()
     }
     
     func ds_numberOfItemsInSection(section: Int) -> Int {
         guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate.")
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to be ds_reusableViewDelegate for the GenericDataSource.")
         }
         let globalSection = globalSectionForLocalSection(section)
         return delegate.ds_numberOfItemsInSection(globalSection)

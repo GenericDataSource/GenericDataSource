@@ -13,6 +13,15 @@ public protocol DataSourceSelectionHandler {
     typealias ItemType
     typealias CellType: ReusableCell
     
+    func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>)
+    
+    func dataSource(
+        dataSource: BasicDataSource<ItemType, CellType>,
+        collectionView: CollectionView,
+        configureCell cell: CellType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath)
+
     // MARK:- Highlighting
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
@@ -54,6 +63,17 @@ public protocol DataSourceSelectionHandler {
 
 // MARK:- Default implementation
 extension DataSourceSelectionHandler {
+
+    public func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {
+    }
+
+    public func dataSource(
+        dataSource: BasicDataSource<ItemType, CellType>,
+        collectionView: CollectionView,
+        configureCell cell: CellType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath) {
+    }
     
     // MARK:- Highlighting
     public func dataSource(

@@ -89,7 +89,7 @@ class ReportBasicDataSource<CellType where CellType: ReportCell, CellType: Reusa
         collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
-    override func configure(collectionView collectionView: CollectionView, cell: CellType, item: Report, indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView collectionView: CollectionView, configureCell cell: CellType, withItem item: Report, atIndexPath indexPath: NSIndexPath) {
         cell.configureForReport(item, indexPath: indexPath)
     }
 }

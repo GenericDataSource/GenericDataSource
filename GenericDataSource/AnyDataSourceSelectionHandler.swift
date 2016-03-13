@@ -13,6 +13,9 @@ import Foundation
  */
 public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
+    private let itemsChanged: (BasicDataSource<ItemType, CellType>) -> Void
+    private let configureCell: (BasicDataSource<ItemType, CellType>, CollectionView, CellType, ItemType, NSIndexPath) -> Void
+
     private let shouldHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Bool
     private let didHighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
     private let didUnhighlight: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
@@ -24,6 +27,10 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     private let didDeselect: (BasicDataSource<ItemType, CellType>, CollectionView, NSIndexPath) -> Void
 
     init<C: DataSourceSelectionHandler where C.ItemType == ItemType, C.CellType == CellType>(_ selectionHandler: C) {
+        
+        itemsChanged = selectionHandler.dataSourceItemsModified
+        configureCell = selectionHandler.dataSource:collectionView:configureCell:withItem:atIndexPath:
+
         shouldHighlight = selectionHandler.dataSource:collectionView:shouldHighlightItemAtIndexPath:
         didHighlight = selectionHandler.dataSource:collectionView:didHighlightItemAtIndexPath:
         didUnhighlight = selectionHandler.dataSource:collectionView:didUnhighlightItemAtIndexPath:
@@ -33,6 +40,19 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
         
         shouldDeselect = selectionHandler.dataSource:collectionView:shouldDeselectItemAtIndexPath:
         didDeselect = selectionHandler.dataSource:collectionView:didDeselectItemAtIndexPath:
+    }
+    
+    public func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {
+        return itemsChanged(dataSource)
+    }
+
+    public func dataSource(
+        dataSource: BasicDataSource<ItemType, CellType>,
+        collectionView: CollectionView,
+        configureCell cell: CellType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath) {
+            return configureCell(dataSource, collectionView, cell, item, indexPath)
     }
     
     public func dataSource(

@@ -34,6 +34,67 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         XCTAssertEqual(size2, dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAtIndexPath: NSIndexPath(forItem: 100, inSection: 1)))
     }
     
+    func testSelectorConfigureCell()  {
+        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let dataSource  = CompositeDataSource(type: .MultiSection)
+        
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        dataSource.addDataSource(pdfReportsDataSource)
+        
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+        dataSource.addDataSource(textReportsDataSource)
+        
+        // register the cell
+        pdfReportsDataSource.registerReusableViewsInCollectionView(collectionView)
+        textReportsDataSource.registerReusableViewsInCollectionView(collectionView)
+        
+        let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
+        let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
+        
+        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
+        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        
+        var index = NSIndexPath(forItem: 0, inSection: 0)
+        var cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: index)
+        XCTAssertTrue(selector1.configureCellCalled)
+        XCTAssertEqual(cell, selector1.cell)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
+        XCTAssertEqual(index, selector1.indexPath)
+        XCTAssertFalse(selector2.configureCellCalled)
+        selector1.configureCellCalled = false
+        
+        index = NSIndexPath(forItem: 49, inSection: 0)
+        cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: index)
+        XCTAssertTrue(selector1.configureCellCalled)
+        XCTAssertEqual(cell, selector1.cell)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
+        XCTAssertEqual(index, selector1.indexPath)
+        XCTAssertFalse(selector2.configureCellCalled)
+        selector1.configureCellCalled = false
+        
+        index = NSIndexPath(forItem: 50, inSection: 1)
+        cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: index)
+        XCTAssertTrue(selector2.configureCellCalled)
+        XCTAssertEqual(cell, selector2.cell)
+        var localIndex = NSIndexPath(forItem: index.item, inSection: index.section - 1)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
+        XCTAssertEqual(localIndex, selector2.indexPath)
+        XCTAssertFalse(selector1.configureCellCalled)
+        selector2.configureCellCalled = false
+        
+        index = NSIndexPath(forItem: 150, inSection: 1)
+        cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: index)
+        XCTAssertTrue(selector2.configureCellCalled)
+        XCTAssertEqual(cell, selector2.cell)
+        localIndex = NSIndexPath(forItem: index.item, inSection: index.section - 1)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
+        XCTAssertEqual(localIndex, selector2.indexPath)
+        XCTAssertFalse(selector1.configureCellCalled)
+        selector2.configureCellCalled = false
+    }
+    
     func testShouldHighlight()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let dataSource  = CompositeDataSource(type: .MultiSection)

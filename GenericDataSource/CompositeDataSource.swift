@@ -14,7 +14,7 @@ public class CompositeDataSource: AbstractDataSource {
         case SingleSection
         case MultiSection
     }
-    
+
     private var collection: DataSourcesCollection!
     
     public init(type: Type) {

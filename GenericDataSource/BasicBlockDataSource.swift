@@ -17,8 +17,8 @@ public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataS
         self.configureBlock = configureBlock
         super.init(reuseIdentifier: reuseIdentifier)
     }
-    
-    public override func configure(collectionView collectionView: CollectionView, cell: CellType, item: ItemType, indexPath: NSIndexPath) {
+
+    public override func ds_collectionView(collectionView collectionView: CollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath) {
         self.configureBlock(item: item, cell: cell, indexPath: indexPath)
     }
     

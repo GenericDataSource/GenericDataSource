@@ -143,6 +143,78 @@ class BasicDataSourceTests: XCTestCase {
         }
     }
     
+    func testSelectionItemsModified() {
+
+        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
+        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
+        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
+        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        
+        tableDataSource.items = Report.generate(numberOfReports: 10)
+        XCTAssertTrue(tableSelector.itemsModifiedCalled)
+        
+        collectionDataSource.items = Report.generate(numberOfReports: 10)
+        XCTAssertTrue(collectionSelector.itemsModifiedCalled)
+    }
+    
+    func testConfigureCellBySelectorCollectionView() {
+        
+        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.numberOfReuseCells = 10
+        
+        let selection = MockSelectionController<Report, TextReportCollectionViewCell>()
+        let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        dataSource.selectionHandler = selection.anyDataSourceSelectionHandler()
+        
+        let reports = Report.generate(numberOfReports: 200)
+        dataSource.items = reports
+        
+        // assign as data source
+        collectionView.dataSource = dataSource
+        
+        // register the cell
+        dataSource.registerReusableViewsInCollectionView(collectionView)
+        
+        // execute the test
+        let indexPath = NSIndexPath(forItem: 10, inSection: 0)
+        let cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        
+        XCTAssertTrue(selection.configureCellCalled)
+        XCTAssertEqual(cell, selection.cell)
+        XCTAssertEqual(indexPath, selection.indexPath)
+        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
+    }
+    
+    func testConfigureCellBySelectorTableView() {
+        
+        let tableView = MockTableView()
+        tableView.numberOfReuseCells = 10
+        
+        let selection = MockSelectionController<Report, TextReportTableViewCell>()
+        let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
+        dataSource.selectionHandler = selection.anyDataSourceSelectionHandler()
+        
+        let reports = Report.generate(numberOfReports: 200)
+        dataSource.items = reports
+        
+        // assign as data source
+        tableView.dataSource = dataSource
+        
+        // register the cell
+        dataSource.registerReusableViewsInCollectionView(tableView)
+        
+        // execute the test
+        let indexPath = NSIndexPath(forItem: 10, inSection: 0)
+        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        
+        XCTAssertTrue(selection.configureCellCalled)
+        XCTAssertEqual(cell, selection.cell)
+        XCTAssertEqual(indexPath, selection.indexPath)
+        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
+    }
+    
     func testSelectionShouldHighlight() {
         
         let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()

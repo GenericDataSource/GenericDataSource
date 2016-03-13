@@ -29,7 +29,11 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     public var useDelegateForItemSize: Bool = false
 
-    public var items: [ItemType] = []
+    public var items: [ItemType] = [] {
+        didSet {
+            selectionHandler?.dataSourceItemsModified(self)
+        }
+    }
 
     public let reuseIdentifier: String
     
@@ -65,7 +69,8 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
         let cell = ds_collectionView(collectionView, nonConfiguredCellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
-        configure(collectionView: collectionView, cell: cell, item: item, indexPath: indexPath)
+        ds_collectionView(collectionView: collectionView, configureCell: cell, withItem: item, atIndexPath: indexPath)
+        selectionHandler?.dataSource(self, collectionView: collectionView, configureCell: cell, withItem: item, atIndexPath: indexPath)
         return cell
     }
 
@@ -78,7 +83,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         return castedCell
     }
 
-    public func configure(collectionView collectionView: CollectionView, cell: CellType, item: ItemType, indexPath: NSIndexPath) {
+    public func ds_collectionView(collectionView collectionView: CollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath) {
         // does nothing
         // should be overriden by subclasses
     }

@@ -18,8 +18,28 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     var didSelectCalled = false
     var shouldDeselectCalled = false
     var didDeselectCalled = false
+    var itemsModifiedCalled = false
+    var configureCellCalled = false
     
+    var cell: CellType?
+    var item: ItemType?
     var indexPath: NSIndexPath?
+
+    func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {
+        itemsModifiedCalled = true
+    }
+    
+    func dataSource(
+        dataSource: BasicDataSource<ItemType, CellType>,
+        collectionView: CollectionView,
+        configureCell cell: CellType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath) {
+            configureCellCalled = true
+            self.cell = cell
+            self.item = item
+            self.indexPath = indexPath
+    }
     
     // MARK:- Highlighting
     func dataSource(
