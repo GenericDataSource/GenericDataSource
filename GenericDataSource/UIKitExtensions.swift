@@ -45,7 +45,78 @@ extension UITableViewCell : ReusableCell { }
 
 extension UICollectionViewCell : ReusableCell { }
 
-extension UITableView : DataSourceReusableViewDelegate {
+extension UITableView : DataSourceReusableViewDelegate { }
+
+extension UICollectionView : DataSourceReusableViewDelegate { }
+
+protocol BatchUpdater: class {
+    
+    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?)
+}
+
+extension UICollectionView : BatchUpdater {
+    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        performBatchUpdates(updates, completion: completion)
+    }
+}
+
+extension UITableView : BatchUpdater {
+    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        beginUpdates()
+        updates?()
+        endUpdates()
+        completion?(false)
+    }
+}
+
+private class CompletionBlock {
+    let block: Bool -> Void
+    init(block: Bool -> Void) { self.block = block }
+}
+
+extension CollectionView where Self : BatchUpdater {
+
+    private var performingBatchUpdates: Bool {
+        get {
+            let value = objc_getAssociatedObject(self, "performingBatchUpdates") as? NSNumber
+            return value?.boolValue ?? false
+        }
+        set {
+            objc_setAssociatedObject(self, "performingBatchUpdates", newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    private var completionBlocks: [CompletionBlock] {
+        get {
+            let value = objc_getAssociatedObject(self, "performingBatchUpdates") as? [CompletionBlock]
+            return value ?? []
+        }
+        set {
+            objc_setAssociatedObject(self, "performingBatchUpdates", newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
+    }
+    
+    private func internal_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+        guard !performingBatchUpdates else {
+            if let completion = completion {
+                var blocks = completionBlocks
+                blocks.append(CompletionBlock(block: completion))
+                completionBlocks = blocks
+            }
+            updates?()
+            return
+        }
+        
+        performingBatchUpdates = true
+        actualPerformBatchUpdates(updates) { [weak self] completed in
+            self?.performingBatchUpdates = false
+            completion?(completed)
+            for block in self?.completionBlocks ?? [] {
+                block.block(completed)
+            }
+            self?.completionBlocks = []
+        }
+    }
 }
 
 extension UITableView: CollectionView {
@@ -63,10 +134,7 @@ extension UITableView: CollectionView {
     }
     
     public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        beginUpdates()
-        updates?()
-        endUpdates()
-        completion?(false)
+        internal_performBatchUpdates(updates, completion: completion)
     }
     
     public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {
@@ -164,9 +232,6 @@ extension UITableView: CollectionView {
     }
 }
 
-extension UICollectionView : DataSourceReusableViewDelegate {
-}
-
 extension UICollectionView: CollectionView {
     
     public func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
@@ -180,9 +245,9 @@ extension UICollectionView: CollectionView {
     public func ds_reloadData() {
         reloadData()
     }
-    
+
     public func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
-        performBatchUpdates(updates, completion: completion)
+        internal_performBatchUpdates(updates, completion: completion)
     }
     
     public func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation) {

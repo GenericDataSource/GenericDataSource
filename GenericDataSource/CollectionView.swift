@@ -10,7 +10,7 @@ import Foundation
 
 public protocol ReusableCell { }
 
-public protocol CollectionView {
+public protocol CollectionView: class {
     
     var ds_scrollView: UIScrollView { get }
     
