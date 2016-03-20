@@ -30,7 +30,7 @@ class DataSourcesCollection {
     init(parentDataSource: CompositeDataSource) {
         self.parentDataSource = parentDataSource
     }
-
+    
     var mappings: [Mapping] = []
     private var dataSourceToMappings: [DataSourceWrapper: Mapping] = [:]
     
@@ -46,14 +46,15 @@ class DataSourcesCollection {
         let mapping = createMappingForDataSource(dataSource)
         dataSourceToMappings[wrapper] = mapping
         
-        let delegate = CompositeReusableViewDelegate(dataSource: dataSource, parentDataSource: parentDataSource)
+        let collectionMapping = CompositeParentGeneralCollectionViewMapping(dataSource: dataSource, parentDataSource: parentDataSource)
+        let delegate = DelegatedGeneralCollectionView(mapping: collectionMapping)
         // retain it
         mapping.reusableDelegate = delegate
         dataSource.ds_reusableViewDelegate = delegate
-
+        
         return mapping
     }
-
+    
     // MARK: API
     
     func addDataSource(dataSource: DataSource) {
@@ -64,18 +65,18 @@ class DataSourcesCollection {
         // update the mapping
         updateMappings()
     }
-
+    
     func insertDataSource(dataSource: DataSource, atIndex index: Int) {
         
         assert(index >= 0 && index <= mappings.count, "Invalid index \(index) should be between [0..\(mappings.count)")
-
+        
         let mapping = createAndPrepareMappingForDataSource(dataSource)
         mappings.insert(mapping, atIndex: index)
-
+        
         // update the mapping
         updateMappings()
     }
-
+    
     func removeDataSource(dataSource: DataSource) {
         
         let wrapper = DataSourceWrapper(dataSource: dataSource)
@@ -96,7 +97,7 @@ class DataSourcesCollection {
     func dataSourceAtIndex(index: Int) -> DataSource {
         return mappings[index].dataSource
     }
-
+    
     func containsDataSource(dataSource: DataSource) -> Bool {
         return mappingForDataSource(dataSource) != nil
     }
@@ -107,7 +108,7 @@ class DataSourcesCollection {
         }
         return mappings.indexOf(mapping)
     }
-
+    
     func mappingForDataSource(dataSource: DataSource) -> Mapping? {
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
@@ -172,18 +173,20 @@ class DataSourcesCollection {
         
         return mapping.localSectionForGlobalSection(section)
     }
-    
+
     func collectionViewWrapperFromIndexPath(
         indexPath: NSIndexPath,
         collectionView: GeneralCollectionView)
-        -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: CollectionCompositionMappingView) {
-        updateMappings()
-        
-        let mapping = mappingForIndexPath(indexPath)
-        let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
-        let tableCollectionWrapper = CollectionCompositionMappingView(mapping: mapping, view: collectionView)
+        -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: DelegatedGeneralCollectionView) {
+            updateMappings()
+            
+            let mapping = mappingForIndexPath(indexPath)
+            let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
+            
+            let wrapperMapping = GeneralCollectionViewWrapperMapping(mapping: mapping, view: collectionView)
+            let wrapperView = DelegatedGeneralCollectionView(mapping: wrapperMapping)
 
-        return (mapping.dataSource, localIndexPath, tableCollectionWrapper)
+            return (mapping.dataSource, localIndexPath, wrapperView)
     }
 }
 
@@ -192,7 +195,7 @@ extension DataSourcesCollection {
     internal class Mapping : Equatable {
         
         /// retained
-        var reusableDelegate: CompositeReusableViewDelegate?
+        var reusableDelegate: DelegatedGeneralCollectionView?
         
         let dataSource: DataSource
         

@@ -17,7 +17,7 @@
 		549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */; };
 		549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576231C6FBB7B00E9C26C /* BasicDataSource.swift */; };
 		549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */; };
-		5495762E1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */; };
+		5495762E1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */; };
 		5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */; };
 		549576361C6FBBC600E9C26C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
 		549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */; };
@@ -28,7 +28,7 @@
 		549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */; };
 		549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */; };
 		549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */; };
-		549FA2051C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */; };
+		549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */; };
 		54E0ABD81C70E25E001C698E /* DataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */; };
 		54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */; };
 		54E0D2BC1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D2BB1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift */; };
@@ -67,7 +67,7 @@
 		549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AbstractDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		549576231C6FBB7B00E9C26C /* BasicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BasicDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompositeDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCompositionMappingView.swift; sourceTree = "<group>"; };
+		5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewWrapperMapping.swift; sourceTree = "<group>"; };
 		5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BasicDataSourceTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTableCollectionView.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
 		549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
-		549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeReusableViewDelegate.swift; sourceTree = "<group>"; };
+		549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeParentGeneralCollectionViewMapping.swift; sourceTree = "<group>"; };
 		54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSourceSelectionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		54E0D2BB1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSingleSectionTableTests.swift; sourceTree = "<group>"; };
@@ -112,11 +112,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5467AD431C9ED073008FE4E7 /* mapping */ = {
+			isa = PBXGroup;
+			children = (
+				549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */,
+				5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */,
+			);
+			name = mapping;
+			sourceTree = "<group>";
+		};
 		546B1CBE1C823EBA0009DD26 /* ReusableDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				549FA2041C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift */,
-				5495762A1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift */,
+				5467AD431C9ED073008FE4E7 /* mapping */,
 				5467AD411C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift */,
 			);
 			name = ReusableDelegate;
@@ -211,7 +219,7 @@
 		549FA1991C79E93F00F6EEF6 /* Composite */ = {
 			isa = PBXGroup;
 			children = (
-				549FA2031C7A083B00F6EEF6 /* private */,
+				549FA2031C7A083B00F6EEF6 /* internal */,
 				549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */,
 			);
 			name = Composite;
@@ -254,13 +262,13 @@
 			name = Mapping;
 			sourceTree = "<group>";
 		};
-		549FA2031C7A083B00F6EEF6 /* private */ = {
+		549FA2031C7A083B00F6EEF6 /* internal */ = {
 			isa = PBXGroup;
 			children = (
 				549FA19F1C79E9F800F6EEF6 /* Mapping */,
 				546B1CBE1C823EBA0009DD26 /* ReusableDelegate */,
 			);
-			name = private;
+			name = internal;
 			sourceTree = "<group>";
 		};
 		54E0ABD51C70E198001C698E /* Selection */ = {
@@ -431,12 +439,12 @@
 				549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */,
 				54E0ABD81C70E25E001C698E /* DataSourceSelectionHandler.swift in Sources */,
 				549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */,
-				5495762E1C6FBB9100E9C26C /* CollectionCompositionMappingView.swift in Sources */,
+				5495762E1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift in Sources */,
 				549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */,
 				54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift in Sources */,
 				5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */,
 				5467AD421C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift in Sources */,
-				549FA2051C7A084600F6EEF6 /* CompositeReusableViewDelegate.swift in Sources */,
+				549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */,
 				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* GeneralCollectionView.swift in Sources */,
