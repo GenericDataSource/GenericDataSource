@@ -1,27 +1,59 @@
 //
-//  CompositeReusableViewDelegate.swift
+//  DelegatedGeneralCollectionView.swift
 //  GenericDataSource
 //
-//  Created by Mohamed Afifi on 2/21/16.
+//  Created by Mohamed Afifi on 3/20/16.
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class CompositeReusableViewDelegate : GeneralCollectionView {
+protocol GeneralCollectionViewMapping {
     
-    unowned var parentDataSource: CompositeDataSource
+    func localSectionForGlobalSection(globalSection: Int) -> Int
+    func globalSectionForLocalSection(localSection: Int) -> Int
+    
+    func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath
+    
+    func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath
+    
+    var delegate: GeneralCollectionView? { get }
+}
 
-    unowned var dataSource: DataSource
+extension GeneralCollectionViewMapping {
 
+    final func localIndexPathsForGlobalIndexPaths(globalIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
+        return globalIndexPaths.map(localIndexPathForGlobalIndexPath)
+    }
+    
+    final func globalIndexPathsForLocalIndexPaths(localIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
+        return localIndexPaths.map(globalIndexPathForLocalIndexPath)
+    }
+    
+    final func globalSectionSetForLocalSectionSet(localSections: NSIndexSet) -> NSIndexSet {
+        
+        let globalSections = NSMutableIndexSet()
+        for section in localSections {
+            let globalSection = globalSectionForLocalSection(section)
+            globalSections.addIndex(globalSection)
+        }
+        return globalSections
+    }
+}
+
+class DelegatedGeneralCollectionView: GeneralCollectionView {
+    
+    let mapping: GeneralCollectionViewMapping
+    
     var delegate: GeneralCollectionView? {
-        return parentDataSource.ds_reusableViewDelegate
+        return mapping.delegate
+    }
+
+    init(mapping: GeneralCollectionViewMapping) {
+        self.mapping = mapping
     }
     
-    init(dataSource: DataSource, parentDataSource: CompositeDataSource) {
-        self.dataSource = dataSource
-        self.parentDataSource = parentDataSource
-    }
+    // MARK:- Register, dequeue
     
     func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         delegate?.ds_registerClass(cellClass, forCellWithReuseIdentifier: identifier)
@@ -31,10 +63,33 @@ class CompositeReusableViewDelegate : GeneralCollectionView {
         delegate?.ds_registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
     
-    func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
-        let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
-        delegate?.ds_scrollToItemAtIndexPath(globalIndexPath, atScrollPosition: scrollPosition, animated: animated)
+    func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
+        guard let delegate = delegate else {
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
+        }
+
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
+        return delegate.ds_dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndexPath)
     }
+
+    // MARK:- Numbers
+    
+    func ds_numberOfSections() -> Int {
+        guard let delegate = delegate else {
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
+        }
+        return delegate.ds_numberOfSections()
+    }
+    
+    func ds_numberOfItemsInSection(section: Int) -> Int {
+        guard let delegate = delegate else {
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
+        }
+        let globalSection = globalSectionForLocalSection(section)
+        return delegate.ds_numberOfItemsInSection(globalSection)
+    }
+    
+    // MARK:- Manpulate items and sections
     
     func ds_reloadData() {
         delegate?.ds_reloadData()
@@ -79,18 +134,27 @@ class CompositeReusableViewDelegate : GeneralCollectionView {
         let globalIndexPaths = globalIndexPathsForLocalIndexPaths(indexPaths)
         delegate?.ds_reloadItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
     }
-
+    
     func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath) {
-        let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
-        let globalNewIndexPath = globalIndexPathForLocalIndexPath(indexPath)
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
+        let globalNewIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
         
         delegate?.ds_moveItemAtIndexPath(globalIndexPath, toIndexPath: globalNewIndexPath)
     }
     
+    // MARK:- Scroll
+    
+    func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
+        delegate?.ds_scrollToItemAtIndexPath(globalIndexPath, atScrollPosition: scrollPosition, animated: animated)
+    }
+
+    // MARK:- Select/Deselect
+    
     func ds_selectItemAtIndexPath(indexPath: NSIndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition) {
         let globalIndexPath: NSIndexPath?
         if let indexPath = indexPath {
-            globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
+            globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
         } else {
             globalIndexPath = nil
         }
@@ -99,61 +163,22 @@ class CompositeReusableViewDelegate : GeneralCollectionView {
     }
     
     func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool) {
-        let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
         delegate?.ds_deselectItemAtIndexPath(globalIndexPath, animated: animated)
     }
     
-    // MARK:- Returning something
-    
-    var ds_scrollView: UIScrollView {
-        guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
-        }
-        return delegate.ds_scrollView
-    }
-    
-    func ds_localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath {
-        return parentDataSource.localIndexPathForGlobalIndexPath(globalIndex, dataSource: dataSource)
-    }
-    
-    func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
-        return parentDataSource.globalIndexPathForLocalIndexPath(localIndex, dataSource: dataSource)
-    }
-
-    func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
-        guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
-        }
-
-        let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
-        return delegate.ds_dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndexPath)
-    }
-    
-    func ds_numberOfSections() -> Int {
-        guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
-        }
-        return delegate.ds_numberOfSections()
-    }
-    
-    func ds_numberOfItemsInSection(section: Int) -> Int {
-        guard let delegate = delegate else {
-            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
-        }
-        let globalSection = globalSectionForLocalSection(section)
-        return delegate.ds_numberOfItemsInSection(globalSection)
-    }
+    // MARK:- IndexPaths, Cells
     
     func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath? {
         if let indexPath = delegate?.ds_indexPathForCell(cell) {
-            return localIndexPathForGlobalIndexPath(indexPath)
+            return ds_localIndexPathForGlobalIndexPath(indexPath)
         }
         return nil
     }
-
+    
     func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath? {
         if let indexPath = delegate?.ds_indexPathForItemAtPoint(point) {
-            return localIndexPathForGlobalIndexPath(indexPath)
+            return ds_localIndexPathForGlobalIndexPath(indexPath)
         }
         return nil
     }
@@ -177,39 +202,42 @@ class CompositeReusableViewDelegate : GeneralCollectionView {
     }
     
     func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell? {
-        let globalIndexPath = globalIndexPathForLocalIndexPath(indexPath)
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
         return delegate?.ds_cellForItemAtIndexPath(globalIndexPath)
+    }
+    
+    // MARK:- Scroll View
+    
+    var ds_scrollView: UIScrollView {
+        guard let delegate = delegate else {
+            fatalError("Couldn't call \(__FUNCTION__) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
+        }
+        return delegate.ds_scrollView
     }
 
     // MARK:- Private
-    
-    private func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath {
-        return parentDataSource.localIndexPathForGlobalIndexPath(globalIndexPath, dataSource: dataSource)
+
+    func ds_localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath {
+        return mapping.localIndexPathForGlobalIndexPath(globalIndexPath)
     }
-    
+
     private func localIndexPathsForGlobalIndexPaths(globalIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
-        return globalIndexPaths.map { parentDataSource.localIndexPathForGlobalIndexPath($0, dataSource: dataSource) }
+        return mapping.localIndexPathsForGlobalIndexPaths(globalIndexPaths)
     }
- 
-    private func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
-        return parentDataSource.globalIndexPathForLocalIndexPath(localIndexPath, dataSource: dataSource)
+
+    func ds_globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
+        return mapping.globalIndexPathForLocalIndexPath(localIndexPath)
     }
 
     private func globalIndexPathsForLocalIndexPaths(localIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
-        return localIndexPaths.map { parentDataSource.globalIndexPathForLocalIndexPath($0, dataSource: dataSource) }
+        return mapping.globalIndexPathsForLocalIndexPaths(localIndexPaths)
     }
 
     private func globalSectionForLocalSection(localSection: Int) -> Int {
-        return parentDataSource.globalSectionForLocalSection(localSection, dataSource: dataSource)
+        return mapping.globalSectionForLocalSection(localSection)
     }
 
     private func globalSectionSetForLocalSectionSet(localSections: NSIndexSet) -> NSIndexSet {
-
-        let globalSections = NSMutableIndexSet()
-        for section in localSections {
-            let globalSection = parentDataSource.globalSectionForLocalSection(section, dataSource: dataSource)
-            globalSections.addIndex(globalSection)
-        }
-        return globalSections
+        return mapping.globalSectionSetForLocalSectionSet(localSections)
     }
 }

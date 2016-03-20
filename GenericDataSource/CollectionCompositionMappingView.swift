@@ -28,12 +28,12 @@ internal class CollectionCompositionMappingView : GeneralCollectionView {
         return mapping.globalIndexPathForLocalIndexPath(localIndex)
     }
 
-    func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
-        view.ds_registerNib(nib, forCellWithReuseIdentifier: identifier)
-    }
-
     func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         view.ds_registerClass(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+        view.ds_registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
 
     func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {

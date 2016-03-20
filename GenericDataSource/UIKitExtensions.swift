@@ -45,10 +45,6 @@ extension UITableViewCell : ReusableCell { }
 
 extension UICollectionViewCell : ReusableCell { }
 
-extension UITableView : DataSourceReusableViewDelegate { }
-
-extension UICollectionView : DataSourceReusableViewDelegate { }
-
 protocol BatchUpdater: class {
     
     func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?)

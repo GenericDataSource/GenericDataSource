@@ -12,7 +12,7 @@ public protocol DataSource : class {
     
     func ds_shouldConsumeItemSizeDelegateCalls() -> Bool
 
-    weak var ds_reusableViewDelegate: DataSourceReusableViewDelegate? { get set }
+    weak var ds_reusableViewDelegate: GeneralCollectionView? { get set }
     
     func ds_numberOfSections() -> Int
     func ds_numberOfItems(inSection section: Int) -> Int
@@ -31,5 +31,3 @@ public protocol DataSource : class {
     func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
     func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
 }
-
-public protocol DataSourceReusableViewDelegate : class, GeneralCollectionView { }
