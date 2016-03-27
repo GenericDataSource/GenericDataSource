@@ -55,7 +55,7 @@ public protocol GeneralCollectionView: class {
     func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath?
     func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath?
     func ds_indexPathsForVisibleItems() -> [NSIndexPath]
-    func ds_indexPathesForSelectedItems() -> [NSIndexPath]
+    func ds_indexPathsForSelectedItems() -> [NSIndexPath]
     
     func ds_visibleCells() -> [ReusableCell]
     func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell?

@@ -237,7 +237,7 @@ extension UITableView: GeneralCollectionView {
         return indexPathsForVisibleRows ?? []
     }
 
-    public func ds_indexPathesForSelectedItems() -> [NSIndexPath] {
+    public func ds_indexPathsForSelectedItems() -> [NSIndexPath] {
         return indexPathsForSelectedRows ?? []
     }
 }
@@ -360,7 +360,7 @@ extension UICollectionView: GeneralCollectionView {
         return indexPathsForVisibleItems()
     }
     
-    public func ds_indexPathesForSelectedItems() -> [NSIndexPath] {
+    public func ds_indexPathsForSelectedItems() -> [NSIndexPath] {
         return indexPathsForSelectedItems() ?? []
     }
 }

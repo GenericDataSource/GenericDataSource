@@ -163,10 +163,10 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         let index = NSIndexPath(forItem: 0, inSection: 0)
         instance.ds_selectItemAtIndexPath(index, animated: false, scrollPosition: .Top)
         
-        XCTAssertEqual([index], instance.ds_indexPathesForSelectedItems())
+        XCTAssertEqual([index], instance.ds_indexPathsForSelectedItems())
         
         instance.ds_deselectItemAtIndexPath(index, animated: false)
-        XCTAssertEqual([], instance.ds_indexPathesForSelectedItems())
+        XCTAssertEqual([], instance.ds_indexPathsForSelectedItems())
     }
     
     func testScrollView() {
