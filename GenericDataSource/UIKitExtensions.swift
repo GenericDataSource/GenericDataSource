@@ -191,6 +191,10 @@ extension UITableView: GeneralCollectionView {
     public func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath {
         return localIndex
     }
+
+    public func ds_globalSectionForLocalSection(localSection: Int) -> Int {
+        return localSection
+    }
     
     public func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         let cell = dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
@@ -310,6 +314,10 @@ extension UICollectionView: GeneralCollectionView {
         return localIndex
     }
     
+    public func ds_globalSectionForLocalSection(localSection: Int) -> Int {
+        return localSection
+    }
+
     public func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell {
         let cell = dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
         return cell

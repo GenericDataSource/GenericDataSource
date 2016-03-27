@@ -224,19 +224,11 @@ extension DataSourcesCollection {
             let localSection = localSectionForGlobalSection(globalIndexPath.section)
             return NSIndexPath(forItem: localItem, inSection: localSection)
         }
-        
+
         func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
             let globalItem = globalItemForLocalItem(localIndexPath.item)
             let globalSection = globalSectionForLocalSection(localIndexPath.section)
             return NSIndexPath(forItem: globalItem, inSection: globalSection)
-        }
-        
-        final func localIndexPathesForGlobalIndexPathes(globalIndexPathes: [NSIndexPath]) -> [NSIndexPath] {
-            return globalIndexPathes.map(localIndexPathForGlobalIndexPath)
-        }
-        
-        final func globalIndexPathesForLocalIndexPathes(localIndexPathes: [NSIndexPath]) -> [NSIndexPath] {
-            return localIndexPathes.map(globalIndexPathForLocalIndexPath)
         }
     }
 }

@@ -10,9 +10,9 @@ import Foundation
 
 public protocol DataSourceSelectionHandler {
     
-    typealias ItemType
-    typealias CellType: ReusableCell
-    
+    associatedtype ItemType
+    associatedtype CellType: ReusableCell
+
     func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>)
     
     func dataSource(

@@ -306,7 +306,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertEqual(indexPath, tableSelector.indexPath)
         XCTAssertEqual(indexPath, collectionSelector.indexPath)
     }
-    
+
     func testSelectionDidSelect() {
         
         let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()

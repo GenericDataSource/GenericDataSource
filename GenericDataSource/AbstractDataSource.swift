@@ -8,7 +8,10 @@
 
 import UIKit
 
-private let sizeSelectors: [Selector] = ["tableView:heightForRowAtIndexPath:", "collectionView:layout:sizeForItemAtIndexPath:"]
+private let sizeSelectors: [Selector] = [
+    #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:)),
+    #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAtIndexPath:))
+]
 
 public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -174,19 +177,19 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     // MARK:- Data Source
 
     public func ds_numberOfSections() -> Int {
-        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
+        fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
     
     public func ds_numberOfItems(inSection section: Int) -> Int {
-        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
+        fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
     public func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
-        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
+        fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
     
     public func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        fatalError("\(self): \(__FUNCTION__) Should be implemented by subclasses")
+        fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
     public func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {

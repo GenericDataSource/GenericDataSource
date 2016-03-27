@@ -36,7 +36,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
     }
 
     public let reuseIdentifier: String
-    
+
     public var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
 
     public init(reuseIdentifier: String) {
@@ -99,38 +99,53 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
     }
 
     // MARK: Selection
+
     public override func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldHighlightItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
+        }
+        return selectionHandler.dataSource(self, collectionView: collectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
-    
+
     public override func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
+        }
+        selectionHandler.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath)
     }
-    
+
     public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
+        }
+        selectionHandler.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
     public override func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldSelectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
+        }
+        return selectionHandler.dataSource(self, collectionView: collectionView, shouldSelectItemAtIndexPath: indexPath)
     }
     
     public override func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, didSelectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+        }
+        selectionHandler.dataSource(self, collectionView: collectionView, didSelectItemAtIndexPath: indexPath)
     }
 
     public override func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, shouldDeselectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
+        }
+        return selectionHandler.dataSource(self, collectionView: collectionView, shouldDeselectItemAtIndexPath: indexPath)
     }
 
     public override func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        return selectionHandler?.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath) ??
-            super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
+        guard let selectionHandler = selectionHandler else {
+            return super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
+        }
+        selectionHandler.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath)
     }
 }

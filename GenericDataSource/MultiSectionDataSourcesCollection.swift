@@ -30,7 +30,8 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
     
                 let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
                 while (count < newSectionCount) {
-                    globalSectionToMappings[count++] = mapping
+                    globalSectionToMappings[count] = mapping
+                    count += 1
                 }
             }
             sectionsCount = count
@@ -95,7 +96,7 @@ extension MultiSectionDataSourcesCollection {
                 var mutableGlobalSection = globalSection
                 for localSection in 0..<sectionCount {
                     addMapping(globalSection: mutableGlobalSection, localSection: localSection)
-                    mutableGlobalSection++
+                    mutableGlobalSection += 1
                 }
     
                 return sectionCount

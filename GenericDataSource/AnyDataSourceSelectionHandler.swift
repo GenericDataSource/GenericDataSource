@@ -29,17 +29,17 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     init<C: DataSourceSelectionHandler where C.ItemType == ItemType, C.CellType == CellType>(_ selectionHandler: C) {
         
         itemsChanged = selectionHandler.dataSourceItemsModified
-        configureCell = selectionHandler.dataSource:collectionView:configureCell:withItem:atIndexPath:
+        configureCell = selectionHandler.dataSource(_:collectionView:configureCell:withItem:atIndexPath:)
 
-        shouldHighlight = selectionHandler.dataSource:collectionView:shouldHighlightItemAtIndexPath:
-        didHighlight = selectionHandler.dataSource:collectionView:didHighlightItemAtIndexPath:
-        didUnhighlight = selectionHandler.dataSource:collectionView:didUnhighlightItemAtIndexPath:
+        shouldHighlight = selectionHandler.dataSource(_:collectionView:shouldHighlightItemAtIndexPath:)
+        didHighlight = selectionHandler.dataSource(_:collectionView:didHighlightItemAtIndexPath:)
+        didUnhighlight = selectionHandler.dataSource(_:collectionView:didUnhighlightItemAtIndexPath:)
         
-        shouldSelect = selectionHandler.dataSource:collectionView:shouldSelectItemAtIndexPath:
-        didSelect = selectionHandler.dataSource:collectionView:didSelectItemAtIndexPath:
-        
-        shouldDeselect = selectionHandler.dataSource:collectionView:shouldDeselectItemAtIndexPath:
-        didDeselect = selectionHandler.dataSource:collectionView:didDeselectItemAtIndexPath:
+        shouldSelect = selectionHandler.dataSource(_:collectionView:shouldSelectItemAtIndexPath:)
+        didSelect = selectionHandler.dataSource(_:collectionView:didSelectItemAtIndexPath:)
+
+        shouldDeselect = selectionHandler.dataSource(_:collectionView:shouldDeselectItemAtIndexPath:)
+        didDeselect = selectionHandler.dataSource(_:collectionView:didDeselectItemAtIndexPath:)
     }
     
     public func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {

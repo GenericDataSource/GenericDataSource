@@ -31,7 +31,8 @@ class SingleSectionDataSourcesCollection: DataSourcesCollection {
             
             let newItemCount = mapping.updateMappings(startingWithGlobalItem: count) + count
             while (count < newItemCount) {
-                globalItemToMappings[count++] = mapping
+                globalItemToMappings[count] = mapping
+                count += 1
             }
         }
         itemsCount = count
@@ -94,7 +95,7 @@ extension SingleSectionDataSourcesCollection {
             var mutableGlobalItem = globalItem
             for localItem in 0..<itemCount {
                 addMapping(globalItem: mutableGlobalItem, localItem: localItem)
-                mutableGlobalItem++
+                mutableGlobalItem += 1
             }
             
             return itemCount
