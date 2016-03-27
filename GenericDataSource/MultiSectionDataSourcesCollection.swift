@@ -64,7 +64,6 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
         }
 }
 
-
 extension MultiSectionDataSourcesCollection {
     
         internal class MutliSectionMapping : Mapping {

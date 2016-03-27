@@ -168,6 +168,10 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         instance.ds_deselectItemAtIndexPath(index, animated: false)
         XCTAssertEqual([], instance.ds_indexPathsForSelectedItems())
     }
+
+    func testIndexPathsForSelectedItemsNil() {
+        XCTAssertEqual([], instance.ds_indexPathsForSelectedItems())
+    }
     
     func testScrollView() {
         XCTAssertEqual(instance, instance.ds_scrollView)
@@ -181,6 +185,10 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     func testGlobalIndexPath() {
         let index = NSIndexPath(forItem: 19, inSection: 45)
         XCTAssertEqual(index, instance.ds_globalIndexPathForLocalIndexPath(index))
+    }
+    
+    func testGlobalSection() {
+        XCTAssertEqual(10, instance.ds_globalSectionForLocalSection(10))
     }
     
     func testIndexPathForCell() {

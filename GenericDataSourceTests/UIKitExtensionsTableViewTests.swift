@@ -190,6 +190,10 @@ class UIKitExtensionsTableViewTests: XCTestCase {
         XCTAssertEqual(index, instance.ds_globalIndexPathForLocalIndexPath(index))
     }
     
+    func testGlobalSection() {
+        XCTAssertEqual(10, instance.ds_globalSectionForLocalSection(10))
+    }
+    
     func testIndexPathForCell() {
         let index = NSIndexPath(forItem: 0, inSection: 0)
         instance.ds_reloadData()

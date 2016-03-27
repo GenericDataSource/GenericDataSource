@@ -29,7 +29,9 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     // MARK: respondsToSelector
 
     private func scrollViewDelegateCanHandleSelector(selector: Selector) -> Bool {
-        if let scrollViewDelegate = scrollViewDelegate where selector.description.hasPrefix("scrollView") && scrollViewDelegate.respondsToSelector(selector) {
+        if let scrollViewDelegate = scrollViewDelegate
+            where isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) &&
+                scrollViewDelegate.respondsToSelector(selector) {
             return true
         }
         return false
@@ -222,4 +224,14 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     public func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
+}
+
+private func isSelector(selector: Selector, belongsToProtocol aProtocol: Protocol) -> Bool {
+    return isSelector(selector, belongsToProtocol: aProtocol, isRequired: true, isInstance: true) ||
+        isSelector(selector, belongsToProtocol: aProtocol, isRequired: false, isInstance: true)
+}
+
+private func isSelector(selector: Selector, belongsToProtocol aProtocol: Protocol, isRequired: Bool, isInstance: Bool) -> Bool {
+    let method = protocol_getMethodDescription(aProtocol, selector, isRequired, isInstance)
+    return method.types != nil
 }

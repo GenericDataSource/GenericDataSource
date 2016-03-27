@@ -17,11 +17,7 @@ class GeneralCollectionViewWrapperMapping: GeneralCollectionViewMapping {
         self.mapping = mapping
         self.delegate = view
     }
-    
-    func localSectionForGlobalSection(globalSection: Int) -> Int {
-        return mapping.localSectionForGlobalSection(globalSection)
-    }
-    
+
     func globalSectionForLocalSection(localSection: Int) -> Int {
         return mapping.globalSectionForLocalSection(localSection)
     }

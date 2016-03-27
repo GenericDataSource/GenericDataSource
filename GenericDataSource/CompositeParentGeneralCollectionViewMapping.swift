@@ -22,10 +22,6 @@ class CompositeParentGeneralCollectionViewMapping: GeneralCollectionViewMapping 
         self.dataSource = dataSource
         self.parentDataSource = parentDataSource
     }
-    
-    func localSectionForGlobalSection(globalSection: Int) -> Int {
-        return parentDataSource.localSectionForGlobalSection(globalSection, dataSource: dataSource)
-    }
 
     func globalSectionForLocalSection(localSection: Int) -> Int {
         return parentDataSource.globalSectionForLocalSection(localSection, dataSource: dataSource)

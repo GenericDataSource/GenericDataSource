@@ -10,11 +10,9 @@ import UIKit
 
 protocol GeneralCollectionViewMapping {
     
-    func localSectionForGlobalSection(globalSection: Int) -> Int
     func globalSectionForLocalSection(localSection: Int) -> Int
-    
+
     func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath
-    
     func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath
     
     var delegate: GeneralCollectionView? { get }
