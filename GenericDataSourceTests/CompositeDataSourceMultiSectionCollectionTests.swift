@@ -52,9 +52,9 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
-        
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         var index = NSIndexPath(forItem: 0, inSection: 0)
         var cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: index)
@@ -110,8 +110,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertTrue(dataSource.collectionView(collectionView, shouldHighlightItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldHighlightCalled)
@@ -153,8 +153,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.collectionView(collectionView, didHighlightItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didHighlightCalled)
@@ -196,8 +196,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.collectionView(collectionView, didUnhighlightItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didUnhighlightCalled)
@@ -239,8 +239,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertTrue(dataSource.collectionView(collectionView, shouldSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldSelectCalled)
@@ -282,8 +282,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.collectionView(collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didSelectCalled)
@@ -325,8 +325,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertTrue(dataSource.collectionView(collectionView, shouldDeselectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldDeselectCalled)
@@ -368,8 +368,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.collectionView(collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didDeselectCalled)

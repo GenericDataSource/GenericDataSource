@@ -149,9 +149,9 @@ class BasicDataSourceTests: XCTestCase {
         let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
-        
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
+
         tableDataSource.items = Report.generate(numberOfReports: 10)
         XCTAssertTrue(tableSelector.itemsModifiedCalled)
         
@@ -166,7 +166,7 @@ class BasicDataSourceTests: XCTestCase {
         
         let selection = MockSelectionController<Report, TextReportCollectionViewCell>()
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        dataSource.selectionHandler = selection.anyDataSourceSelectionHandler()
+        dataSource.setSelectionHandler(selection.anyDataSourceSelectionHandler())
         
         let reports = Report.generate(numberOfReports: 200)
         dataSource.items = reports
@@ -194,8 +194,8 @@ class BasicDataSourceTests: XCTestCase {
         
         let selection = MockSelectionController<Report, TextReportTableViewCell>()
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        dataSource.selectionHandler = selection.anyDataSourceSelectionHandler()
-        
+        dataSource.setSelectionHandler(selection)
+
         let reports = Report.generate(numberOfReports: 200)
         dataSource.items = reports
         
@@ -223,8 +223,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
 
@@ -246,8 +246,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
         
@@ -269,8 +269,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
         
@@ -292,8 +292,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
         
@@ -315,8 +315,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
         
@@ -338,8 +338,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
 
@@ -361,8 +361,8 @@ class BasicDataSourceTests: XCTestCase {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.selectionHandler = tableSelector.anyDataSourceSelectionHandler()
-        collectionDataSource.selectionHandler = collectionSelector.anyDataSourceSelectionHandler()
+        tableDataSource.setSelectionHandler(tableSelector)
+        collectionDataSource.setSelectionHandler(collectionSelector)
         
         let indexPath = NSIndexPath(forItem: 20, inSection: 10)
         

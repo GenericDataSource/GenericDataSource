@@ -53,8 +53,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         var index = NSIndexPath(forItem: 0, inSection: 0)
         var cell = dataSource.tableView(tableView, cellForRowAtIndexPath: index)
@@ -110,8 +110,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldHighlightCalled)
@@ -153,8 +153,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.tableView(tableView, didHighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didHighlightCalled)
@@ -196,8 +196,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.tableView(tableView, didUnhighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didUnhighlightCalled)
@@ -239,8 +239,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), dataSource.tableView(tableView, willSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldSelectCalled)
@@ -282,8 +282,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didSelectCalled)
@@ -325,8 +325,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), dataSource.tableView(tableView, willDeselectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
         XCTAssertTrue(selector1.shouldDeselectCalled)
@@ -368,8 +368,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
         
-        pdfReportsDataSource.selectionHandler = selector1.anyDataSourceSelectionHandler()
-        textReportsDataSource.selectionHandler = selector2.anyDataSourceSelectionHandler()
+        pdfReportsDataSource.setSelectionHandler(selector1)
+        textReportsDataSource.setSelectionHandler(selector2)
         
         dataSource.tableView(tableView, didDeselectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertTrue(selector1.didDeselectCalled)

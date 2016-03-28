@@ -37,7 +37,11 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     public let reuseIdentifier: String
 
-    public var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
+    private var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
+
+    public func setSelectionHandler<H: DataSourceSelectionHandler where H.CellType == CellType, H.ItemType == ItemType>(selectionHandler: H) {
+        self.selectionHandler = selectionHandler.anyDataSourceSelectionHandler()
+    }
 
     public init(reuseIdentifier: String) {
         self.reuseIdentifier = reuseIdentifier
@@ -52,7 +56,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
     public func replaceItemAtIndexPath(indexPath: NSIndexPath, withItem item: ItemType) {
         items[indexPath.item] = item
     }
-
+    
     // MARK:- DataSource
     
     // MARK: Cell
@@ -147,5 +151,12 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
             return super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
         }
         selectionHandler.dataSource(self, collectionView: collectionView, didDeselectItemAtIndexPath: indexPath)
+    }
+}
+
+extension BasicDataSource where ItemType : Equatable {
+
+    public func indexPathForItem(item: ItemType) -> NSIndexPath? {
+        return items.indexOf(item).flatMap { NSIndexPath(forItem: $0, inSection: 0) }
     }
 }

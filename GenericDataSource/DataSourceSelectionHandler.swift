@@ -9,12 +9,12 @@
 import Foundation
 
 public protocol DataSourceSelectionHandler {
-    
+
     associatedtype ItemType
     associatedtype CellType: ReusableCell
 
     func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>)
-    
+
     func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
