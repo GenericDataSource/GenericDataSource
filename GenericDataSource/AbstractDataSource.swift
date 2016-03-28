@@ -15,7 +15,12 @@ private let sizeSelectors: [Selector] = [
 
 public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    public var scrollViewDelegate: UIScrollViewDelegate? = nil
+    // retained
+    public var scrollViewDelegate: UIScrollViewDelegate? = nil {
+        willSet {
+            precondition(self !== newValue, "You cannot set a DataSource as UIScrollViewDelegate. Instead just override the UIScrollViewDelegate methods.")
+        }
+    }
 
     public weak var ds_reusableViewDelegate: GeneralCollectionView? = nil
     
