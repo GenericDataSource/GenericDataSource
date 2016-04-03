@@ -30,23 +30,17 @@ class MasterViewController: UITableViewController {
             cell.contentView.backgroundColor = nil
         }
 
-        let selectionHandler = SingleSelectionHandler<Model, UITableViewCell> { (_, _, cell, _, index, selected) in
-            print(index.item, selected)
-            if selected {
-                cell.backgroundColor = UIColor.lightGrayColor()
-                cell.textLabel?.textColor = UIColor.whiteColor()
-            } else {
-                cell.backgroundColor = UIColor.whiteColor()
-                cell.textLabel?.textColor = UIColor.blackColor()
-            }
+        let selectionHandler = BlockSelectionHandler<Model, UITableViewCell>()
+        selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
+            let item = dataSource.itemAtIndexPath(indexPath)
+            self?.performSegueWithIdentifier(item.segue, sender: self)
         }
-        selectionHandler.allowsDeselection = false
 
         dataSource.setSelectionHandler(selectionHandler)
 
         let models = [Model(segue: "basic", title: "BasicDataSource"),
-                      Model(segue: "single", title: "CompositeDataSource (SingleSection)"),
-                      Model(segue: "multiple", title: "CompositeDataSource (MultipleSection)")]
+                      Model(segue: "basic", title: "CompositeDataSource (SingleSection)"),
+                      Model(segue: "basic", title: "CompositeDataSource (MultipleSection)")]
         
         tableView.ds_useDataSource(dataSource)
         dataSource.items = models
@@ -59,4 +53,3 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 }
-

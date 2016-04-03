@@ -16,7 +16,7 @@
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
 		547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */; };
 		547447041CA88B2C00F3597E /* AbstractDataSourceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */; };
-		547447061CA92C8500F3597E /* SingleSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447051CA92C8500F3597E /* SingleSelectionHandler.swift */; };
+		547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447051CA92C8500F3597E /* BlockSelectionHandler.swift */; };
 		547447081CA92D1900F3597E /* UnselectableSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */; };
 		549576081C6FBA9400E9C26C /* GenericDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 549576071C6FBA9400E9C26C /* GenericDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5495760F1C6FBA9400E9C26C /* GenericDataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549576041C6FBA9400E9C26C /* GenericDataSource.framework */; };
@@ -69,7 +69,7 @@
 		547446FE1CA7F82C00F3597E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewMultiSectionTestCases.swift; sourceTree = "<group>"; };
 		547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSourceTestCases.swift; sourceTree = "<group>"; };
-		547447051CA92C8500F3597E /* SingleSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSelectionHandler.swift; sourceTree = "<group>"; };
+		547447051CA92C8500F3597E /* BlockSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandler.swift; sourceTree = "<group>"; };
 		547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandler.swift; sourceTree = "<group>"; };
 		549576041C6FBA9400E9C26C /* GenericDataSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericDataSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		549576071C6FBA9400E9C26C /* GenericDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericDataSource.h; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 			children = (
 				54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */,
 				54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */,
-				547447051CA92C8500F3597E /* SingleSelectionHandler.swift */,
+				547447051CA92C8500F3597E /* BlockSelectionHandler.swift */,
 				547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */,
 			);
 			name = Selection;
@@ -481,7 +481,7 @@
 				5467AD421C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift in Sources */,
 				549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */,
 				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
-				547447061CA92C8500F3597E /* SingleSelectionHandler.swift in Sources */,
+				547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* GeneralCollectionView.swift in Sources */,
 			);

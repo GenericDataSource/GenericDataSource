@@ -9,8 +9,7 @@
 import Foundation
 
 public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
-    
-    
+
     public func dataSource(
         dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,

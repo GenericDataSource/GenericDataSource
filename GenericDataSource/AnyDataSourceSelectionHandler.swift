@@ -109,8 +109,8 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
 
 
 extension DataSourceSelectionHandler {
-    
-    func anyDataSourceSelectionHandler() -> AnyDataSourceSelectionHandler<ItemType, CellType> {
+
+    public func anyDataSourceSelectionHandler() -> AnyDataSourceSelectionHandler<ItemType, CellType> {
         return AnyDataSourceSelectionHandler(self)
     }
 }
