@@ -71,14 +71,14 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     public override func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
 
-        let cell = ds_collectionView(collectionView, nonConfiguredCellForItemAtIndexPath: indexPath)
+        let cell = ds_collectionView(collectionView, dequeueCellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
         ds_collectionView(collectionView: collectionView, configureCell: cell, withItem: item, atIndexPath: indexPath)
         selectionHandler?.dataSource(self, collectionView: collectionView, configureCell: cell, withItem: item, atIndexPath: indexPath)
         return cell
     }
 
-    public func ds_collectionView(collectionView: GeneralCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    public func ds_collectionView(collectionView: GeneralCollectionView, dequeueCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
 
         let cell = collectionView.ds_dequeueReusableCellViewWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         guard let castedCell = cell as? CellType else {

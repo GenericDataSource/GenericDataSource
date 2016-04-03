@@ -31,6 +31,15 @@ public class CompositeDataSource: AbstractDataSource {
     public var dataSources: [DataSource] {
         return collection.dataSources
     }
+    
+    public override func respondsToSelector(selector: Selector) -> Bool {
+
+        if sizeSelectors.contains(selector) {
+            return ds_shouldConsumeItemSizeDelegateCalls()
+        }
+        
+        return super.respondsToSelector(selector)
+    }
 
     // MARK: Children DataSources
 
@@ -77,6 +86,15 @@ public class CompositeDataSource: AbstractDataSource {
     }
 
     // MARK:- Data Source
+    
+    public override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+        for ds in dataSources {
+            guard ds.ds_shouldConsumeItemSizeDelegateCalls() else {
+                return false
+            }
+        }
+        return true
+    }
     
     // MARK: Cell
     

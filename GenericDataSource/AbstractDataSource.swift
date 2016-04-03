@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let sizeSelectors: [Selector] = [
+let sizeSelectors: [Selector] = [
     #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:)),
     #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAtIndexPath:))
 ]

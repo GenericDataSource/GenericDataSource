@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BlockSelectionHandler<ItemType: Equatable, CellType: ReusableCell> : DataSourceSelectionHandler {
+public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
     public var defaultShouldHighlight: Bool = true
     public var defaultShouldSelect: Bool = true
