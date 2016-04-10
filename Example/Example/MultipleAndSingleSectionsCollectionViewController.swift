@@ -21,8 +21,7 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         
         dataSource.addDataSource(firstSection)
         dataSource.addDataSource(colorsDataSource)
-        
-        
+
         colorsDataSource.items = Service.getFewColors()
         colorsDataSource.itemSize = CGSize(width: 70, height: 70)
         colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))
