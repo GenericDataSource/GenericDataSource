@@ -131,10 +131,10 @@ public class CompositeDataSource: AbstractDataSource {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
     }
-    
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: mapping.localIndexPath)
     }
     
     public override func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {

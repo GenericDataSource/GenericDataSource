@@ -117,7 +117,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
     
     public func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
-        return ds_collectionView(tableView, didUnhighlightRowAtIndexPath: indexPath)
+        return ds_collectionView(tableView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -155,7 +155,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     }
 
     public func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-        return ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
+        return ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
     public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -210,8 +210,8 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     public func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
-    
-    public func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+
+    public func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         // does nothing
     }
 

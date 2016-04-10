@@ -118,9 +118,9 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
         selectionHandler.dataSource(self, collectionView: collectionView, didHighlightItemAtIndexPath: indexPath)
     }
 
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
         guard let selectionHandler = selectionHandler else {
-            return super.ds_collectionView(collectionView, didUnhighlightRowAtIndexPath: indexPath)
+            return super.ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: indexPath)
         }
         selectionHandler.dataSource(self, collectionView: collectionView, didUnhighlightItemAtIndexPath: indexPath)
     }
