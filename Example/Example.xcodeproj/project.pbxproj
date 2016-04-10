@@ -22,6 +22,9 @@
 		5494071C1CB197D4007C565D /* MultipleSectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5494071B1CB197D4007C565D /* MultipleSectionsTableViewController.swift */; };
 		5494071E1CB19998007C565D /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5494071D1CB19998007C565D /* ContactCollectionViewCell.swift */; };
 		549407211CB19BF6007C565D /* AlertNameSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407201CB19BF6007C565D /* AlertNameSelectionHandler.swift */; };
+		549407231CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407221CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift */; };
+		549407251CB1A94B007C565D /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */; };
+		549407271CB1AB24007C565D /* TitleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407261CB1AB24007C565D /* TitleDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		5494071B1CB197D4007C565D /* MultipleSectionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleSectionsTableViewController.swift; sourceTree = "<group>"; };
 		5494071D1CB19998007C565D /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
 		549407201CB19BF6007C565D /* AlertNameSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNameSelectionHandler.swift; sourceTree = "<group>"; };
+		549407221CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleAndSingleSectionsCollectionViewController.swift; sourceTree = "<group>"; };
+		549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		549407261CB1AB24007C565D /* TitleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				5474475A1CA93C1D00F3597E /* Main.storyboard */,
-				5474475D1CA93C1D00F3597E /* Assets.xcassets */,
 				5474475F1CA93C1D00F3597E /* LaunchScreen.storyboard */,
+				5474475D1CA93C1D00F3597E /* Assets.xcassets */,
 				547447621CA93C1D00F3597E /* Info.plist */,
 			);
 			name = Resources;
@@ -145,6 +151,7 @@
 			children = (
 				5494070E1CB14235007C565D /* ColorsDataSource.swift */,
 				549407161CB14F9B007C565D /* ContactsDataSource.swift */,
+				549407261CB1AB24007C565D /* TitleDataSource.swift */,
 				549407201CB19BF6007C565D /* AlertNameSelectionHandler.swift */,
 			);
 			name = DataSources;
@@ -157,6 +164,7 @@
 				5494070B1CB12D23007C565D /* ColorsCollectionVIewController.swift */,
 				549407141CB14F50007C565D /* SingleSectionTableViewController.swift */,
 				5494071B1CB197D4007C565D /* MultipleSectionsTableViewController.swift */,
+				549407221CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5494071D1CB19998007C565D /* ContactCollectionViewCell.swift */,
+				549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -263,6 +272,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				549407231CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift in Sources */,
+				549407251CB1A94B007C565D /* TitleCollectionViewCell.swift in Sources */,
 				547447571CA93C1D00F3597E /* RootViewController.swift in Sources */,
 				549407211CB19BF6007C565D /* AlertNameSelectionHandler.swift in Sources */,
 				5494071E1CB19998007C565D /* ContactCollectionViewCell.swift in Sources */,
@@ -270,6 +281,7 @@
 				549407111CB14C14007C565D /* Service.swift in Sources */,
 				549407151CB14F50007C565D /* SingleSectionTableViewController.swift in Sources */,
 				549407131CB14C85007C565D /* Model.swift in Sources */,
+				549407271CB1AB24007C565D /* TitleDataSource.swift in Sources */,
 				5494071C1CB197D4007C565D /* MultipleSectionsTableViewController.swift in Sources */,
 				549407171CB14F9B007C565D /* ContactsDataSource.swift in Sources */,
 				5494070F1CB14235007C565D /* ColorsDataSource.swift in Sources */,

@@ -14,7 +14,8 @@ class Service {
     class func getExamples() -> [Example] {
         return [Example(segue: "basic", title: "Basic"),
                 Example(segue: "single", title: "Composite (SingleSection)"),
-                Example(segue: "multiple", title: "Composite (MultipleSection)")]
+                Example(segue: "multiple", title: "Composite (MultipleSection)"),
+                Example(segue: "mixed", title: "Composite (Single + Multiple)")]
     }
 
     class func getColors() -> [Color] {
