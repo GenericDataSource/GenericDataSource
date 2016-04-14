@@ -18,6 +18,10 @@
 		547447041CA88B2C00F3597E /* AbstractDataSourceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */; };
 		547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447051CA92C8500F3597E /* BlockSelectionHandler.swift */; };
 		547447081CA92D1900F3597E /* UnselectableSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */; };
+		5476A02B1CBC4FE2002978FA /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02A1CBC4FE2002978FA /* ReusableCell.swift */; };
+		5476A02D1CBC501F002978FA /* BatchUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02C1CBC501F002978FA /* BatchUpdater.swift */; };
+		5476A02F1CBC508C002978FA /* UITableView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */; };
+		5476A0311CBC50B0002978FA /* UICollectionView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */; };
 		549576081C6FBA9400E9C26C /* GenericDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 549576071C6FBA9400E9C26C /* GenericDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5495760F1C6FBA9400E9C26C /* GenericDataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549576041C6FBA9400E9C26C /* GenericDataSource.framework */; };
 		549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */; };
@@ -71,6 +75,10 @@
 		547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSourceTestCases.swift; sourceTree = "<group>"; };
 		547447051CA92C8500F3597E /* BlockSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandler.swift; sourceTree = "<group>"; };
 		547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandler.swift; sourceTree = "<group>"; };
+		5476A02A1CBC4FE2002978FA /* ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		5476A02C1CBC501F002978FA /* BatchUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdater.swift; sourceTree = "<group>"; };
+		5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CollectionView.swift"; sourceTree = "<group>"; };
+		5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CollectionView.swift"; sourceTree = "<group>"; };
 		549576041C6FBA9400E9C26C /* GenericDataSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericDataSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		549576071C6FBA9400E9C26C /* GenericDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericDataSource.h; sourceTree = "<group>"; };
 		549576091C6FBA9400E9C26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -261,6 +269,10 @@
 			children = (
 				5495763C1C6FC0C900E9C26C /* GeneralCollectionView.swift */,
 				5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */,
+				5476A02A1CBC4FE2002978FA /* ReusableCell.swift */,
+				5476A02C1CBC501F002978FA /* BatchUpdater.swift */,
+				5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */,
+				5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -471,10 +483,12 @@
 				546B1CC01C82442F0009DD26 /* BasicBlockDataSource.swift in Sources */,
 				549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */,
 				549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */,
+				5476A02F1CBC508C002978FA /* UITableView+CollectionView.swift in Sources */,
 				54E0ABD81C70E25E001C698E /* DataSourceSelectionHandler.swift in Sources */,
 				549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */,
 				5495762E1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift in Sources */,
 				547447081CA92D1900F3597E /* UnselectableSelectionHandler.swift in Sources */,
+				5476A02B1CBC4FE2002978FA /* ReusableCell.swift in Sources */,
 				549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */,
 				54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift in Sources */,
 				5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */,
@@ -482,6 +496,8 @@
 				549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */,
 				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
 				547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */,
+				5476A0311CBC50B0002978FA /* UICollectionView+CollectionView.swift in Sources */,
+				5476A02D1CBC501F002978FA /* BatchUpdater.swift in Sources */,
 				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
 				5495763D1C6FC0C900E9C26C /* GeneralCollectionView.swift in Sources */,
 			);

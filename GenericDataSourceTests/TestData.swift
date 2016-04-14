@@ -100,7 +100,7 @@ class ReportNoReuseBasicDataSource<CellType where CellType: ReportCell, CellType
         super.init(reuseIdentifier: "")
     }
     
-    override func ds_collectionView(collectionView: GeneralCollectionView, nonConfiguredCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    override func ds_collectionView(collectionView: GeneralCollectionView, dequeueCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
         return CellType.init()
     }
 }

@@ -8,8 +8,6 @@
 
 import Foundation
 
-public protocol ReusableCell { }
-
 public protocol GeneralCollectionView: class {
     
     var ds_scrollView: UIScrollView { get }
