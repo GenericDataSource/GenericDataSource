@@ -88,14 +88,13 @@ public class CompositeDataSource: AbstractDataSource {
     // MARK:- Data Source
     
     public override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        for ds in dataSources {
-            guard ds.ds_shouldConsumeItemSizeDelegateCalls() else {
-                return false
-            }
+        if dataSources.isEmpty {
+            return false
         }
-        return true
+        // if all data sources should consume item size delegates
+        return dataSources.filter { $0.ds_shouldConsumeItemSizeDelegateCalls() }.count == dataSources.count
     }
-    
+
     // MARK: Cell
     
     public override func ds_numberOfSections() -> Int {
