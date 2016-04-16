@@ -39,6 +39,11 @@ class DataSourcesCollection {
     }
     
     private func createAndPrepareMappingForDataSource(dataSource: DataSource) -> Mapping {
+        
+        guard (dataSource as? CompositeDataSource)?.type != .MultiSection else {
+            fatalError("Cannot add a multi-section composite data source as child data source.")
+        }
+
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
         assert(existingMapping == nil, "Tried to add a data source more than once: \(dataSource)")

@@ -80,7 +80,6 @@ public protocol DataSource : class {
     
     /**
      Tells the delegate that the specified item was highlighted.
-     Parameters
      
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
@@ -95,7 +94,6 @@ public protocol DataSource : class {
      */
     func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath)
     
-    
     /**
      Asks the delegate if the specified item should be selected.
      `true` if the item should be selected or `false` if it should not.
@@ -109,7 +107,6 @@ public protocol DataSource : class {
     
     /**
      Tells the delegate that the specified item was selected.
-     Parameters
      
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
@@ -126,9 +123,9 @@ public protocol DataSource : class {
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
     func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
+
     /**
      Tells the delegate that the specified item was deselected.
-     Parameters
      
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
