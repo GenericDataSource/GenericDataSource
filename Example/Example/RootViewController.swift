@@ -20,17 +20,19 @@ class RootViewController: UITableViewController {
             cell.textLabel?.text = item.title
             cell.contentView.backgroundColor = nil
         }
+        // Need to keep a strong reference to our data source.
         self.dataSource = dataSource
 
+        tableView.ds_useDataSource(dataSource)
+        dataSource.items = Service.getExamples()
+        
+        // optionally adding a selection handler
         let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
         selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
             let item = dataSource.itemAtIndexPath(indexPath)
             self?.performSegueWithIdentifier(item.segue, sender: self)
         }
         dataSource.setSelectionHandler(selectionHandler)
-
-        tableView.ds_useDataSource(dataSource)
-        dataSource.items = Service.getExamples()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
