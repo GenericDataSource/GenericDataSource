@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/GenericDataSource.svg?style=flat)](http://cocoapods.org/pods/GenericDataSource)
 [![Platform](https://img.shields.io/cocoapods/p/GenericDataSource.svg?style=flat)](http://cocoapods.org/pods/GenericDataSource)
 
-A generic small composable components for data source implementation for `UITableView` and `UICollectionView`.
+A generic small composable components for data source implementation for `UITableView` and `UICollectionView` written in Swift.
 
 ## Features
 
@@ -154,6 +154,11 @@ Will involove creating one `MultiSection` composite data source with children `S
 Check the Examples application for complete implementation.
 
 --
+## Attribution
+
+The main idea comes from [WWDC 2014 Advanced User Interfaces with Collection Views] (https://developer.apple.com/videos/play/wwdc2014/232/)
+written in swift with generics.
+
 ## Author
 
 Mohamed Afifi, mohamede1945@gmail.com
