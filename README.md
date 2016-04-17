@@ -14,7 +14,7 @@ A generic small composable components for data source implementation for `UITabl
 - [x] Basic data source responsible for its cell size/height.
 - [x] Basic data source responsible for highlighting/selection/deselection using `selectionHandler`.
 - [x] Comprehensive Unit Test Coverage
-- [x] [Complete Documentation](http://cocoadocs.org/docsets/Alamofire)
+- [x] [Complete Documentation](http://cocoadocs.org/docsets/GenericDataSources)
 
 ## Installation
 
