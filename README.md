@@ -6,6 +6,16 @@
 
 A generic small composable components for data source implementation for `UITableView` and `UICollectionView`.
 
+## Features
+
+- [x] Basic data source to manage set of cells binded by array of items.
+- [x] Composite data source (multi section) manages children data sources each child represent a section.
+- [x] Composite data source (single section) manages children data sources all children are in the same section. Children depends on sibiling with 0 code. So, if the first child produces 2 cells the second one render its cells starting 3rd cell. If the first child produces 5 cells, second child will render its cells starting 6th cell.
+- [x] Basic data source responsible for its cell size/height.
+- [x] Basic data source responsible for highlighting/selection/deselection using `selectionHandler`.
+- [x] Comprehensive Unit Test Coverage
+- [x] [Complete Documentation](http://cocoadocs.org/docsets/Alamofire)
+
 ## Installation
 
 ### CocoaPods
