@@ -1,8 +1,8 @@
 # GenericDataSource
 
-[![Version](https://img.shields.io/cocoapods/v/GenericDataSource.svg?style=flat)](http://cocoapods.org/pods/GenericDataSource)
-[![License](https://img.shields.io/cocoapods/l/GenericDataSource.svg?style=flat)](http://cocoapods.org/pods/GenericDataSource)
-[![Platform](https://img.shields.io/cocoapods/p/GenericDataSource.svg?style=flat)](http://cocoapods.org/pods/GenericDataSource)
+[![Version](https://img.shields.io/cocoapods/v/GenericDataSources.svg?style=flat)](http://cocoapods.org/pods/GenericDataSources)
+[![License](https://img.shields.io/cocoapods/l/GenericDataSources.svg?style=flat)](http://cocoapods.org/pods/GenericDataSources)
+[![Platform](https://img.shields.io/cocoapods/p/GenericDataSources.svg?style=flat)](http://cocoapods.org/pods/GenericDataSources)
 
 A generic small composable components for data source implementation for `UITableView` and `UICollectionView` written in Swift.
 
