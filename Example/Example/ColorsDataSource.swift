@@ -16,7 +16,7 @@ class ColorsDataSource<CellType: ReusableCell where CellType: UIView>: BasicData
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Color, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Color, atIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = item.color
     }
 }

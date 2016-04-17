@@ -16,7 +16,7 @@ class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
         super.init(reuseIdentifier: reuseIdentifier)
     }
     
-    override func ds_collectionView(collectionView collectionView: GeneralCollectionView, configureCell cell: TitleCollectionViewCell, withItem item: String, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: TitleCollectionViewCell, withItem item: String, atIndexPath indexPath: NSIndexPath) {
         cell.textLabel?.text = item
     }
     
