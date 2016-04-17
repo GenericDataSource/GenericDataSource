@@ -141,6 +141,8 @@ Just use the same example above and change `CompositeDataSource(type: .SingleSec
 
 Will involove creating one `MultiSection` composite data source with children `SingleSection` composite data sources that manages a section each will have multiple data sources. It's possible to have basic and single section data sources children of the multi section composite data source.
 
+Check the Examples application for complete implementation.
+
 --
 ## Author
 
