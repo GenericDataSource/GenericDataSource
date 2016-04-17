@@ -35,6 +35,7 @@ use_frameworks!
 
 pod 'GenericDataSources'
 ```
+**IMPORTANT:** The pod name is GenericDataSource**s** with "s" at the end.
 
 ### Manually
 
