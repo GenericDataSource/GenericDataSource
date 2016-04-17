@@ -127,6 +127,7 @@ override func viewDidLoad() {
 
 ```
 Benefits:
+
 1. Code will allow you to reuse the data sources since they are now independent of the view controller.
 2. There are no `if` `else` now to check which item is it and dequeue the cell accordingly, it's all done for us by the amazing `CompositeDataSource`.
 3. It's also possible to change the ordering by just add the colors data source first.
