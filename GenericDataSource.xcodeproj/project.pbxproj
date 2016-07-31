@@ -203,8 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				5495761E1C6FBACC00E9C26C /* Sources */,
-				5495761F1C6FBB2400E9C26C /* Headers */,
-				549576201C6FBB5600E9C26C /* Frameworks */,
+				5495761F1C6FBB2400E9C26C /* ... */,
 			);
 			path = GenericDataSource;
 			sourceTree = "<group>";
@@ -228,20 +227,13 @@
 			name = Sources;
 			sourceTree = "<group>";
 		};
-		5495761F1C6FBB2400E9C26C /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				549576071C6FBA9400E9C26C /* GenericDataSource.h */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		549576201C6FBB5600E9C26C /* Frameworks */ = {
+		5495761F1C6FBB2400E9C26C /* ... */ = {
 			isa = PBXGroup;
 			children = (
 				549576091C6FBA9400E9C26C /* Info.plist */,
+				549576071C6FBA9400E9C26C /* GenericDataSource.h */,
 			);
-			name = Frameworks;
+			name = ...;
 			sourceTree = "<group>";
 		};
 		549576311C6FBBB200E9C26C /* Tests */ = {
