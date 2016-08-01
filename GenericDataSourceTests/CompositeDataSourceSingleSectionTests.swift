@@ -10,7 +10,36 @@ import XCTest
 @testable import GenericDataSource
 
 class CompositeDataSourceSingleSectionTests : XCTestCase {
-    
+
+    func testSizeForItemMethod() {
+
+        let dataSource  = CompositeDataSource(type: .SingleSection)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        dataSource.addDataSource(pdfReportsDataSource)
+
+        XCTAssertEqual(1, dataSource.dataSources.count)
+        XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
+
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+        dataSource.addDataSource(textReportsDataSource)
+
+        XCTAssertEqual(2, dataSource.dataSources.count)
+        XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
+        XCTAssertTrue(textReportsDataSource === dataSource.dataSources[1])
+
+        XCTAssertFalse(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertFalse(dataSource.respondsToSelector(#selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))))
+
+        pdfReportsDataSource.itemSize = CGSize(width: 1, height: 1)
+        textReportsDataSource.itemSize = CGSize(width: 1, height: 1)
+
+        XCTAssertTrue(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertTrue(dataSource.respondsToSelector(#selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:))))
+    }
+
     func testAddDataSource() {
         
         let dataSource  = CompositeDataSource(type: .SingleSection)

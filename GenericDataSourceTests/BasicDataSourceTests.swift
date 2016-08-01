@@ -10,18 +10,35 @@ import XCTest
 @testable import GenericDataSource
 
 class BasicDataSourceTests: XCTestCase {
+
+    func testItemSizeFunctionOverriden() {
+        class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
+            private override func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+                return CGSize(width: 100, height: 100)
+            }
+        }
+        let dataSource = Test()
+
+        XCTAssertTrue(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+
+        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
+        let actualSize = dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        XCTAssertEqual(CGSize(width: 100, height: 100), actualSize)
+    }
     
     func testItemSize() {
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         
-        XCTAssertFalse(dataSource.useDelegateForItemSize)
+        XCTAssertFalse(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
-        
+
         let size = CGSize(width: 10, height: 20)
         dataSource.itemSize = size
 
         XCTAssertEqual(size, dataSource.itemSize)
-        XCTAssertTrue(dataSource.useDelegateForItemSize)
+        XCTAssertTrue(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -33,14 +50,14 @@ class BasicDataSourceTests: XCTestCase {
     func testCellHeight() {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         
-        XCTAssertFalse(dataSource.useDelegateForItemSize)
+        XCTAssertFalse(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let height: CGFloat = 150
         dataSource.itemHeight = height
         
         XCTAssertEqual(height, dataSource.itemHeight)
-        XCTAssertTrue(dataSource.useDelegateForItemSize)
+        XCTAssertTrue(dataSource.respondsToSelector(#selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let tableView = MockTableView()
