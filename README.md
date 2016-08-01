@@ -37,6 +37,14 @@ pod 'GenericDataSources'
 ```
 **IMPORTANT:** The pod name is GenericDataSource**s** with "s" at the end.
 
+### Carthage
+
+To integrate GenericDataSource into your Xcode project using Carthage, specify it in your Cartfile:
+
+```bash
+github "GenericDataSource/GenericDataSource"
+```
+
 ### Manually
 
 Add GenericDataSource.xcodeproj to your project file by drag and drop. 
