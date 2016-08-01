@@ -46,6 +46,78 @@ You can then consult to [Adding an Existing Framework to a Project](https://deve
 ---
 ## Usage
 
+Let's start with a complex example from high level and then explain in more details
+
+### Real World Example
+
+Suppose we want to implement the following screen as `UICollectionView`.
+
+![Read World Example Screenshot](https://cloud.githubusercontent.com/assets/5665498/17307249/5c1bbc84-5834-11e6-97fc-4e8caa238fd6.PNG)
+
+1. We will create cells as we do normally.
+    * A Cell for the  top part title and See All including a nested `UICollectionView`.
+    * A cell for the Quick Links.
+    * A cell for the actions (Add Payment Method, New to the App Store?, etc.). We will assume one cell and we will reuse it.
+    * A cell for Redeem, Send gifts, etc.
+2. Now we need to think about DataSources.
+3. It's simple, one data source for each cell type (`BasicDataSource`).
+4. We can then create composite data sources that holds those basics. like that
+    * `CompositeDataSource(type: .SingleSection)` for the Top, quick links, add payment, etc. data sources.
+    * `CompositeDataSource(type: .MultiSection)` for the first composite and the last part (Redeem, Gifts).
+5. Bind the multi section compsite data source to the collection view and that's it.
+6. See how we think structurely about our UI and data sources instaed of one big cell.
+
+See how we can do it in the following code
+```Swift
+// 1. Cells
+class FeaturedTopCell: UICollectionViewCell {}
+class QuickLinksCell: UICollectionViewCell {}
+class ActionBlueCell: UICollectionViewCell {}
+class ActionRoundedRectCell: UICollectionViewCell {}
+
+// 2. Basic Data Sources
+class FeaturedTopDataSource: BasicDataSource<FeaturedModel, FeaturedTopCell>  { }
+class QuickLinksDataSource: BasicDataSource<String, QuickLinksCell>  { }
+class ActionBlueDataSource: BasicDataSource<String, ActionBlueCell>  { }
+class ActionRoundedRectDataSource: BasicDataSource<String, ActionRoundedRectCell>  { }
+
+// 3. Create data source instances once.
+let featuredDS = FeaturedTopDataSource()
+let quickLinksDS = QuickLinksDataSource()
+let actionBlueDS = ActionBlueDataSource()
+let actionRoundedRectDS = ActionRoundedRectDataSource()
+
+// 4. Create first section hierarchy.
+let firstSection = CompsiteDataSource(type: .SingleSection)
+firstSection.addDataSource(featuredDS)
+firstSection.addDataSource(quickLinksDS)
+firstSection.addDataSource(actionBlueDS)
+
+// 5. Complete the hierarchy.
+let outerDS = CompsiteDataSource(type: .MultiSection)
+outerDS.addDataSource(firstSection)
+outerDS.addDataSource(actionRoundedRectDS)
+
+// 6. set data sources to the collection view.
+collectionView.ds_useDataSource(outerDS)
+
+// 7. You can set the data later or earlier.
+featuredDS.items = [FeaturedModel()]
+quickLinksDS.items = ["Quick Links"]
+actionBlueDS.items = ["Add Payment Method", "New to the App Store", "About in-App Purchases", "Parents' Guide to iTunes", "App Collections"]
+actionRoundedRectDS.items = ["Redeem", "Send Gifts"]
+
+// 8. We can reload the collection view if the data is loaded async.
+collectionView.reloadData()
+```
+
+There are many benifits of doing that:
+
+1. You don't need to think about indexes anymore, all is handled for us. Only think about how you can structure your cells into smaller data sources.
+2. We can switch between `UITableView` and `UICollectionView` without touching data sources or models. Only change the cells to inhert from `UITableViewCell` and everything else works.
+3. We can add/delete/update cells easily. For example we decided to add more blue links. We can do it by just adding new item to the array passed to the data source.
+4. We can re-arrange cells as we want. Just move around the `addDataSource` calls.
+
 ### Basic Data Source Example
 Create a basic data source and bind it to to a table view.
 
