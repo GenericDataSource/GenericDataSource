@@ -13,7 +13,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testAddDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -33,7 +33,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testInsertDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -53,7 +53,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testRemoveDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -78,7 +78,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testDataSourceAtIndex() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -98,7 +98,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testContainsDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -115,7 +115,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testIndexOfDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -132,7 +132,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testGlobalSectionForLocalSection() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -148,7 +148,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testLocalSectionForGlobalSection() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -164,7 +164,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
 
     func testGlobalIndexPathForLocalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -174,20 +174,20 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0),
-            dataSource.globalIndexPathForLocalIndexPath(NSIndexPath(forItem: 0, inSection: 0), dataSource: pdfReportsDataSource))
-        XCTAssertEqual(NSIndexPath(forItem: 5, inSection: 0),
-            dataSource.globalIndexPathForLocalIndexPath(NSIndexPath(forItem: 5, inSection: 0), dataSource: pdfReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 0, section: 0),
+            dataSource.globalIndexPathForLocalIndexPath(IndexPath(item: 0, section: 0), dataSource: pdfReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 5, section: 0),
+            dataSource.globalIndexPathForLocalIndexPath(IndexPath(item: 5, section: 0), dataSource: pdfReportsDataSource))
         
-        XCTAssertEqual(NSIndexPath(forItem: 50, inSection: 1),
-            dataSource.globalIndexPathForLocalIndexPath(NSIndexPath(forItem: 50, inSection: 0), dataSource: textReportsDataSource))
-        XCTAssertEqual(NSIndexPath(forItem: 55, inSection: 1),
-            dataSource.globalIndexPathForLocalIndexPath(NSIndexPath(forItem: 55, inSection: 0), dataSource: textReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 50, section: 1),
+            dataSource.globalIndexPathForLocalIndexPath(IndexPath(item: 50, section: 0), dataSource: textReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 55, section: 1),
+            dataSource.globalIndexPathForLocalIndexPath(IndexPath(item: 55, section: 0), dataSource: textReportsDataSource))
     }
     
     func testLocalIndexPathForGlobalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .MultiSection)
+        let dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -197,14 +197,14 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
         dataSource.addDataSource(textReportsDataSource)
         
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0),
-            dataSource.localIndexPathForGlobalIndexPath(NSIndexPath(forItem: 0, inSection: 0), dataSource: pdfReportsDataSource))
-        XCTAssertEqual(NSIndexPath(forItem: 5, inSection: 0),
-            dataSource.localIndexPathForGlobalIndexPath(NSIndexPath(forItem: 5, inSection: 0), dataSource: pdfReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 0, section: 0),
+            dataSource.localIndexPathForGlobalIndexPath(IndexPath(item: 0, section: 0), dataSource: pdfReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 5, section: 0),
+            dataSource.localIndexPathForGlobalIndexPath(IndexPath(item: 5, section: 0), dataSource: pdfReportsDataSource))
         
-        XCTAssertEqual(NSIndexPath(forItem: 50, inSection: 0),
-            dataSource.localIndexPathForGlobalIndexPath(NSIndexPath(forItem: 50, inSection: 1), dataSource: textReportsDataSource))
-        XCTAssertEqual(NSIndexPath(forItem: 55, inSection: 0),
-            dataSource.localIndexPathForGlobalIndexPath(NSIndexPath(forItem: 55, inSection: 1), dataSource: textReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 50, section: 0),
+            dataSource.localIndexPathForGlobalIndexPath(IndexPath(item: 50, section: 1), dataSource: textReportsDataSource))
+        XCTAssertEqual(IndexPath(item: 55, section: 0),
+            dataSource.localIndexPathForGlobalIndexPath(IndexPath(item: 55, section: 1), dataSource: textReportsDataSource))
     }
 }

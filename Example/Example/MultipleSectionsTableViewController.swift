@@ -11,7 +11,7 @@ import GenericDataSource
 
 class MultipleSectionsTableViewController: UICollectionViewController {
 
-    let dataSource = CompositeDataSource(type: .MultiSection)
+    let dataSource = CompositeDataSource(type: .multiSection)
     let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
     let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 
@@ -33,7 +33,7 @@ class MultipleSectionsTableViewController: UICollectionViewController {
         contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
     }
 
-    @IBAction func exchangeButtonTapped(sender: AnyObject) {
+    @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
         let firstDataSource = dataSource.dataSourceAtIndex(0)
         dataSource.removeDataSource(firstDataSource)

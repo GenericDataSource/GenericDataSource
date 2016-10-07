@@ -23,15 +23,15 @@ class CompositeParentGeneralCollectionViewMapping: GeneralCollectionViewMapping 
         self.parentDataSource = parentDataSource
     }
 
-    func globalSectionForLocalSection(localSection: Int) -> Int {
+    func globalSectionForLocalSection(_ localSection: Int) -> Int {
         return parentDataSource.globalSectionForLocalSection(localSection, dataSource: dataSource)
     }
     
-    func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath {
+    func localIndexPathForGlobalIndexPath(_ globalIndexPath: IndexPath) -> IndexPath {
         return parentDataSource.localIndexPathForGlobalIndexPath(globalIndexPath, dataSource: dataSource)
     }
 
-    func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
+    func globalIndexPathForLocalIndexPath(_ localIndexPath: IndexPath) -> IndexPath {
         return parentDataSource.globalIndexPathForLocalIndexPath(localIndexPath, dataSource: dataSource)
     }
 }

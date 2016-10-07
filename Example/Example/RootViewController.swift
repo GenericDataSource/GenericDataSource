@@ -11,7 +11,7 @@ import GenericDataSource
 
 class RootViewController: UITableViewController {
 
-    private var dataSource: BasicBlockDataSource<Example, UITableViewCell>?
+    fileprivate var dataSource: BasicBlockDataSource<Example, UITableViewCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +30,17 @@ class RootViewController: UITableViewController {
         let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
         selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
             let item = dataSource.itemAtIndexPath(indexPath)
-            self?.performSegueWithIdentifier(item.segue, sender: self)
+            self?.performSegue(withIdentifier: item.segue, sender: self)
         }
         dataSource.setSelectionHandler(selectionHandler)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         
         if let indexPath = dataSource?.ds_reusableViewDelegate?.ds_indexPathsForSelectedItems().first {
             let item = dataSource?.itemAtIndexPath(indexPath)
-            segue.destinationViewController.title = item?.title
+            segue.destination.title = item?.title
         }
     }
 }

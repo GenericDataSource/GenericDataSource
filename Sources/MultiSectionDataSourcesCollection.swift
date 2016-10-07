@@ -9,11 +9,11 @@
 import Foundation
 
 class MultiSectionDataSourcesCollection: DataSourcesCollection {
-    private var sectionsCount: Int = 0
+    fileprivate var sectionsCount: Int = 0
 
-    private var globalSectionToMappings: [Int: MutliSectionMapping] = [:]
+    fileprivate var globalSectionToMappings: [Int: MutliSectionMapping] = [:]
 
-    override func createMappingForDataSource(dataSource: DataSource) -> Mapping {
+    override func createMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         return MutliSectionMapping(dataSource: dataSource)
     }
 
@@ -25,7 +25,7 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
 
         for mapping in mappings {
             guard let mapping = mapping as? MutliSectionMapping else {
-                fatalError("Mappings for \(self.dynamicType) should be of type \(MutliSectionMapping.self)")
+                fatalError("Mappings for \(type(of: self)) should be of type \(MutliSectionMapping.self)")
             }
 
             let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
@@ -37,11 +37,11 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
         sectionsCount = count
     }
 
-    override func mappingForIndexPath(indexPath: NSIndexPath) -> Mapping {
-        return mappingForGlobalSection(indexPath.section)
+    override func mappingForIndexPath(_ indexPath: IndexPath) -> Mapping {
+        return mappingForGlobalSection((indexPath as NSIndexPath).section)
     }
 
-    func mappingForGlobalSection(section: Int) -> MutliSectionMapping {
+    func mappingForGlobalSection(_ section: Int) -> MutliSectionMapping {
         guard let mapping = globalSectionToMappings[section] else {
             fatalError("Couldn't find mapping for section: \(section)")
         }
@@ -68,13 +68,13 @@ extension MultiSectionDataSourcesCollection {
 
     internal class MutliSectionMapping : Mapping {
 
-        private var globalSectionStartIndex: Int = 0
+        fileprivate var globalSectionStartIndex: Int = 0
 
-        override func localSectionForGlobalSection(globalSection: Int) -> Int {
+        override func localSectionForGlobalSection(_ globalSection: Int) -> Int {
             return globalSection - globalSectionStartIndex
         }
 
-        override func globalSectionForLocalSection(localSection: Int) -> Int {
+        override func globalSectionForLocalSection(_ localSection: Int) -> Int {
             return localSection + globalSectionStartIndex
         }
 

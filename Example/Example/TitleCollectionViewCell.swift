@@ -14,7 +14,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
         contentView.layer.borderWidth = 1
     }
 }

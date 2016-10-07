@@ -19,31 +19,31 @@ class Service {
     }
 
     class func getColors() -> [Color] {
-        return [Color(color: UIColor.blackColor(), name: "Black"),
-                Color(color: UIColor.darkGrayColor(), name: "Dark Gray"),
-                Color(color: UIColor.lightGrayColor(), name: "Light Gray"),
-                Color(color: UIColor.grayColor(), name: "Gray"),
-                Color(color: UIColor.redColor(), name: "Red"),
-                Color(color: UIColor.greenColor(), name: "Green"),
-                Color(color: UIColor.blueColor(), name: "Blue"),
-                Color(color: UIColor.cyanColor(), name: "Cyan"),
-                Color(color: UIColor.yellowColor(), name: "Yellow"),
-                Color(color: UIColor.magentaColor(), name: "Magenta"),
-                Color(color: UIColor.orangeColor(), name: "Orange"),
-                Color(color: UIColor.purpleColor(), name: "Purple"),
-                Color(color: UIColor.brownColor(), name: "Brown")]
+        return [Color(color: UIColor.black, name: "Black"),
+                Color(color: UIColor.darkGray, name: "Dark Gray"),
+                Color(color: UIColor.lightGray, name: "Light Gray"),
+                Color(color: UIColor.gray, name: "Gray"),
+                Color(color: UIColor.red, name: "Red"),
+                Color(color: UIColor.green, name: "Green"),
+                Color(color: UIColor.blue, name: "Blue"),
+                Color(color: UIColor.cyan, name: "Cyan"),
+                Color(color: UIColor.yellow, name: "Yellow"),
+                Color(color: UIColor.magenta, name: "Magenta"),
+                Color(color: UIColor.orange, name: "Orange"),
+                Color(color: UIColor.purple, name: "Purple"),
+                Color(color: UIColor.brown, name: "Brown")]
     }
 
     class func getFewColors() -> [Color] {
-        return [Color(color: UIColor.redColor(), name: "Red"),
-                Color(color: UIColor.greenColor(), name: "Green"),
-                Color(color: UIColor.blueColor(), name: "Blue"),
-                Color(color: UIColor.cyanColor(), name: "Cyan"),
-                Color(color: UIColor.yellowColor(), name: "Yellow"),
-                Color(color: UIColor.magentaColor(), name: "Magenta"),
-                Color(color: UIColor.orangeColor(), name: "Orange"),
-                Color(color: UIColor.purpleColor(), name: "Purple"),
-                Color(color: UIColor.brownColor(), name: "Brown")]
+        return [Color(color: UIColor.red, name: "Red"),
+                Color(color: UIColor.green, name: "Green"),
+                Color(color: UIColor.blue, name: "Blue"),
+                Color(color: UIColor.cyan, name: "Cyan"),
+                Color(color: UIColor.yellow, name: "Yellow"),
+                Color(color: UIColor.magenta, name: "Magenta"),
+                Color(color: UIColor.orange, name: "Orange"),
+                Color(color: UIColor.purple, name: "Purple"),
+                Color(color: UIColor.brown, name: "Brown")]
     }
 
     class func getContacts() -> [Contact] {

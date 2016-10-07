@@ -13,7 +13,7 @@ extension UITableViewCell: ContactCell { }
 
 class SingleSectionTableViewController: UITableViewController {
     
-    let dataSource = CompositeDataSource(type: .SingleSection)
+    let dataSource = CompositeDataSource(type: .singleSection)
     let colorsDataSource = ColorsDataSource<UITableViewCell>(reuseIdentifier: "color")
     let contactsDataSource = ContactsDataSource<UITableViewCell>(reuseIdentifier: "contact")
 
@@ -35,7 +35,7 @@ class SingleSectionTableViewController: UITableViewController {
         contactsDataSource.items = Service.getContacts()
     }
 
-    @IBAction func exchangeButtonTapped(sender: AnyObject) {
+    @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
         let firstDataSource = dataSource.dataSourceAtIndex(0)
         dataSource.removeDataSource(firstDataSource)
@@ -43,13 +43,13 @@ class SingleSectionTableViewController: UITableViewController {
 
         // the indexes
         let numberOfItems = firstDataSource.ds_numberOfItems(inSection: 0)
-        let initialIndexPaths = (0..<numberOfItems).map { NSIndexPath(forItem: $0, inSection: 0) }
+        let initialIndexPaths = (0..<numberOfItems).map { IndexPath(item: $0, section: 0) }
         let firstIndex = dataSource.ds_numberOfItems(inSection: 0) - numberOfItems
 
         // update the table view
         dataSource.ds_reusableViewDelegate?.ds_performBatchUpdates({ [weak self] in
             for index in initialIndexPaths {
-                self?.dataSource.ds_reusableViewDelegate?.ds_moveItemAtIndexPath(index, toIndexPath: NSIndexPath(forItem: firstIndex + index.item, inSection: 0))
+                self?.dataSource.ds_reusableViewDelegate?.ds_moveItemAtIndexPath(index, toIndexPath: IndexPath(item: firstIndex + index.item, section: 0))
             }
             }, completion: nil)
     }

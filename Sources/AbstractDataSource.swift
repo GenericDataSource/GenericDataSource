@@ -10,8 +10,8 @@ import UIKit
 
 /// Represents the selectors for querying a height/size of a cell.
 let sizeSelectors: [Selector] = [
-    #selector(UITableViewDelegate.tableView(_:heightForRowAtIndexPath:)),
-    #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAtIndexPath:)),
+    #selector(UITableViewDelegate.tableView(_:heightForRowAt:)),
+    #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAt:)),
     #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))
 ]
 
@@ -22,13 +22,13 @@ let sizeSelectors: [Selector] = [
  
  Since this class is will be the delegate of the UITableView and UICollectionView. You can catch UIScrollViewDelegate methods by either subclass and implement the required method or provide use the property `scrollViewDelegate`. **Note that** this property is retained.
  */
-public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
+open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
     /**
      Represents the scroll view delegate property. Delegate calls of functions in UIScrollViewDelegate protocol are forwarded to this object.
      **Note that:** this object is retained.
      */
-    public var scrollViewDelegate: UIScrollViewDelegate? = nil {
+    open var scrollViewDelegate: UIScrollViewDelegate? = nil {
         willSet {
             precondition(self !== newValue, "You cannot set a DataSource as UIScrollViewDelegate. Instead just override the UIScrollViewDelegate methods.")
         }
@@ -38,24 +38,24 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      Represents the reusable view delegate usually you treat it as if it's a UICollectionView/UITableView object. In most cases, you don't need to assign this property.
      But you will need to use it to query the view for data (e.g. number of sections, etc.)
      */
-    public weak var ds_reusableViewDelegate: GeneralCollectionView? = nil
+    open weak var ds_reusableViewDelegate: GeneralCollectionView? = nil
 
     /**
      Initialize new instance of the AbstractDataSource `fatalError`. You should use one of its subclasses.
      */
     public override init() {
         let type = AbstractDataSource.self
-        guard self.dynamicType != type else {
+        guard type(of: self) != type else {
             fatalError("\(type) instances can not be created; create a subclass instance instead.")
         }
     }
 
     // MARK: respondsToSelector
 
-    private func scrollViewDelegateCanHandleSelector(selector: Selector) -> Bool {
+    fileprivate func scrollViewDelegateCanHandleSelector(_ selector: Selector) -> Bool {
         if let scrollViewDelegate = scrollViewDelegate
-            where isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) &&
-                scrollViewDelegate.respondsToSelector(selector) {
+            , isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) &&
+                scrollViewDelegate.responds(to: selector) {
             return true
         }
         return false
@@ -69,7 +69,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: `true` if the receiver implements or inherits a method that can respond to aSelector, otherwise `false`.
      */
-    public override func respondsToSelector(selector: Selector) -> Bool {
+    open override func responds(to selector: Selector) -> Bool {
 
         if sizeSelectors.contains(selector) {
             return ds_shouldConsumeItemSizeDelegateCalls()
@@ -79,7 +79,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
              return true
         }
 
-        return super.respondsToSelector(selector)
+        return super.responds(to: selector)
     }
     
     /**
@@ -90,11 +90,11 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: The object to which unrecognized messages should first be directed.
      */
-    public override func forwardingTargetForSelector(selector: Selector) -> AnyObject? {
+    open override func forwardingTarget(for selector: Selector) -> Any? {
         if scrollViewDelegateCanHandleSelector(selector) {
             return scrollViewDelegate
         }
-        return super.forwardingTargetForSelector(selector)
+        return super.forwardingTarget(for: selector)
     }
 
     // MARK:- DataSource
@@ -104,14 +104,14 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return ds_numberOfSections()
     }
 
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ds_numberOfSections() <= section {
             return 0
         }
@@ -121,7 +121,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ds_collectionView(tableView, cellForItemAtIndexPath: indexPath)
         guard let castedCell = cell as? UITableViewCell else {
             fatalError("Couldn't cast cell '\(cell)' to UITableViewCell")
@@ -135,22 +135,22 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ds_numberOfItems(inSection: section)
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return ds_numberOfSections()
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell: ReusableCell = ds_collectionView(collectionView, cellForItemAtIndexPath: indexPath)
             guard let castedCell = cell as? UICollectionViewCell else {
                 fatalError("Couldn't cast cell '\(cell)' to UICollectionViewCell")
@@ -165,49 +165,49 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, shouldHighlightItemAtIndexPath: indexPath)
     }
 
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didHighlightItemAtIndexPath: indexPath)
     }
     
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didSelectItemAtIndexPath: indexPath)
     }
     
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldSelectItemAtIndexPath: indexPath) ? indexPath : nil
     }
     
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didDeselectItemAtIndexPath: indexPath)
     }
 
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, willDeselectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldDeselectItemAtIndexPath: indexPath) ? indexPath : nil
     }
     
@@ -216,7 +216,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ds_collectionView(tableView, sizeForItemAtIndexPath: indexPath).height
     }
 
@@ -227,49 +227,49 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: indexPath)
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
     }
     
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
     }
     
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
     }
 
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
     }
 
@@ -278,8 +278,8 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return ds_collectionView(collectionView, sizeForItemAtIndexPath: indexPath)
     }
 
@@ -291,7 +291,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      `false` if the size/height information is provided to the `UITableView` using `rowHeight` and/or `estimatedRowHeight`
      or to the `UICollectionViewFlowLayout` using `itemSize` and/or `estimatedItemSize`.
      */
-    public func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+    open func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
         return false
     }
 
@@ -304,7 +304,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: The number of sections.
      */
-    public func ds_numberOfSections() -> Int {
+    open func ds_numberOfSections() -> Int {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
@@ -317,7 +317,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: The number of items in a given section
      */
-    public func ds_numberOfItems(inSection section: Int) -> Int {
+    open func ds_numberOfItems(inSection section: Int) -> Int {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
@@ -331,7 +331,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> ReusableCell {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
@@ -345,7 +345,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: The size of the cell in a given location. For `UITableView`, the width is ignored.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
     
@@ -358,7 +358,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -368,7 +368,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: IndexPath) {
         // does nothing
     }
 
@@ -378,7 +378,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: IndexPath) {
         // does nothing
     }
 
@@ -391,7 +391,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: `true` if the item should be selected or `false` if it should not.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -401,7 +401,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         // does nothing
     }
 
@@ -414,7 +414,7 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -424,17 +424,17 @@ public class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, U
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
         // does nothing
     }
 }
 
-private func isSelector(selector: Selector, belongsToProtocol aProtocol: Protocol) -> Bool {
+private func isSelector(_ selector: Selector, belongsToProtocol aProtocol: Protocol) -> Bool {
     return isSelector(selector, belongsToProtocol: aProtocol, isRequired: true, isInstance: true) ||
         isSelector(selector, belongsToProtocol: aProtocol, isRequired: false, isInstance: true)
 }
 
-private func isSelector(selector: Selector, belongsToProtocol aProtocol: Protocol, isRequired: Bool, isInstance: Bool) -> Bool {
+private func isSelector(_ selector: Selector, belongsToProtocol aProtocol: Protocol, isRequired: Bool, isInstance: Bool) -> Bool {
     let method = protocol_getMethodDescription(aProtocol, selector, isRequired, isInstance)
     return method.types != nil
 }

@@ -18,15 +18,15 @@ class GeneralCollectionViewWrapperMapping: GeneralCollectionViewMapping {
         self.delegate = view
     }
 
-    func globalSectionForLocalSection(localSection: Int) -> Int {
+    func globalSectionForLocalSection(_ localSection: Int) -> Int {
         return mapping.globalSectionForLocalSection(localSection)
     }
     
-    func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath {
+    func localIndexPathForGlobalIndexPath(_ globalIndexPath: IndexPath) -> IndexPath {
         return mapping.localIndexPathForGlobalIndexPath(globalIndexPath)
     }
     
-    func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
+    func globalIndexPathForLocalIndexPath(_ localIndexPath: IndexPath) -> IndexPath {
         return mapping.globalIndexPathForLocalIndexPath(localIndexPath)
     }
 }

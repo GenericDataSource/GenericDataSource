@@ -16,7 +16,7 @@ class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
         super.init(reuseIdentifier: reuseIdentifier)
     }
     
-    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: TitleCollectionViewCell, withItem item: String, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configureCell cell: TitleCollectionViewCell, withItem item: String, atIndexPath indexPath: IndexPath) {
         cell.textLabel?.text = item
     }
     
@@ -24,7 +24,7 @@ class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
         return true
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.ds_scrollView.bounds.width - 40, height: 50)
     }
 }

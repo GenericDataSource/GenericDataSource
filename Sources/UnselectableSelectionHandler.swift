@@ -24,9 +24,9 @@ public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : D
      - returns: It always returns `false`.
      */
     public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
 
@@ -41,9 +41,9 @@ public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : D
      */
 
     public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
 
@@ -57,9 +57,9 @@ public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : D
      - returns: It always returns `false`.
      */
     public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
 }

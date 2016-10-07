@@ -19,13 +19,13 @@ import UIKit
 
  For sizing cells, you can use `itemSize` for `UICollectionView` and `itemHeight` for `UITableView`. Or if you want to specify a custom size, you can override `ds_collectionView(_:sizeForItemAtIndexPath:)`, **but needs** to set `useDelegateForItemSize` to `true` otherwise the overriden method will not be called.
  */
-public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource {
+open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource {
 
-    private var itemSizeSet: Bool = false
+    fileprivate var itemSizeSet: Bool = false
 
     /// The size of the cell. Usually used with a `UICollectionView`.
     /// When setting a value to it. It will set `useDelegateForItemSize` to `true`.
-    public var itemSize: CGSize = CGSize.zero {
+    open var itemSize: CGSize = CGSize.zero {
         didSet {
             itemSizeSet = true
         }
@@ -33,7 +33,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
     /// The height of the cell. Usually used with a `UITableView`.
     /// When setting a value to it. It will set `useDelegateForItemSize` to `true`.
-    public var itemHeight: CGFloat {
+    open var itemHeight: CGFloat {
         set {
             itemSize = CGSize(width: 1, height: newValue)
         }
@@ -48,23 +48,23 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      `ds_collectionView(_:sizeForItemAtIndexPath:)`. If you will use `itemSize` or `itemHeight`,
      then those properties sets this property to `true`.
      */
-    @available(*, deprecated, message="Now, we can detect if you implemented sizeForItemAtIndexPath or not")
-    public var useDelegateForItemSize: Bool = false
+    @available(*, deprecated, message: "Now, we can detect if you implemented sizeForItemAtIndexPath or not")
+    open var useDelegateForItemSize: Bool = false
 
     /**
      Represents the list of items managed by this basic data source.
      */
-    public var items: [ItemType] = [] {
+    open var items: [ItemType] = [] {
         didSet {
             selectionHandler?.dataSourceItemsModified(self)
         }
     }
 
     /// Represents the reuse identifier to use for dequeuing cells from the `UICollectionView`/`UITableView`.
-    public let reuseIdentifier: String
+    open let reuseIdentifier: String
 
     /// Represents the selection handler used for delegating calls to selection handler.
-    private var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
+    fileprivate var selectionHandler: AnyDataSourceSelectionHandler<ItemType, CellType>? = nil
 
     /**
      Sets the selection handler used for delegating selection, highlighting calls to it.
@@ -72,7 +72,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter selectionHandler: The new selection handler instance to be set.
      This parameter will be retained.
      */
-    public func setSelectionHandler<H: DataSourceSelectionHandler where H.CellType == CellType, H.ItemType == ItemType>(selectionHandler: H) {
+    open func setSelectionHandler<H: DataSourceSelectionHandler>(_ selectionHandler: H) where H.CellType == CellType, H.ItemType == ItemType {
         self.selectionHandler = selectionHandler.anyDataSourceSelectionHandler()
     }
 
@@ -96,8 +96,8 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
 
      - returns: The item at a certain index path.
      */
-    public func itemAtIndexPath(indexPath: NSIndexPath) -> ItemType {
-        return items[indexPath.item]
+    open func itemAtIndexPath(_ indexPath: IndexPath) -> ItemType {
+        return items[(indexPath as NSIndexPath).item]
     }
 
     /**
@@ -108,8 +108,8 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter indexPath:  The index path parameter, the section value is ignored.
      - parameter item:      The new item that will be saved in the `items` array.
      */
-    public func replaceItemAtIndexPath(indexPath: NSIndexPath, withItem item: ItemType) {
-        items[indexPath.item] = item
+    open func replaceItemAtIndexPath(_ indexPath: IndexPath, withItem item: ItemType) {
+        items[(indexPath as NSIndexPath).item] = item
     }
 
     // MARK:- DataSource
@@ -121,7 +121,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: The number of sections. Always returns `1`.
      */
-    public override func ds_numberOfSections() -> Int {
+    open override func ds_numberOfSections() -> Int {
         return 1
     }
 
@@ -132,7 +132,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: The number of items in the `items` array.
      */
-    public override func ds_numberOfItems(inSection section: Int) -> Int {
+    open override func ds_numberOfItems(inSection section: Int) -> Int {
         return items.count
     }
 
@@ -147,7 +147,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> ReusableCell {
 
         let cell = ds_collectionView(collectionView, dequeueCellForItemAtIndexPath: indexPath)
         let item: ItemType = itemAtIndexPath(indexPath)
@@ -164,7 +164,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: The dequeued cell.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, dequeueCellForItemAtIndexPath indexPath: NSIndexPath) -> CellType {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAtIndexPath indexPath: IndexPath) -> CellType {
 
         let cell = collectionView.ds_dequeueReusableCellViewWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         guard let castedCell = cell as? CellType else {
@@ -183,7 +183,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter item:           The item that is used in the configure operation.
      - parameter indexPath:      The index ptah of the cell under configuration.
      */
-    public func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath) {
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: ItemType, atIndexPath indexPath: IndexPath) {
         // does nothing
         // should be overriden by subclasses
     }
@@ -202,9 +202,9 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      `false` if the size/height information is provided to the `UITableView` using `rowHeight` and/or `estimatedRowHeight`
      or to the `UICollectionViewFlowLayout` using `itemSize` and/or `estimatedItemSize`.
      */
-    public override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
         let selector = #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))
-        let subclassImp = method_getImplementation(class_getInstanceMethod(self.dynamicType, selector))
+        let subclassImp = method_getImplementation(class_getInstanceMethod(type(of: self), selector))
         let superImp = method_getImplementation(class_getInstanceMethod(BasicDataSource.self, selector))
 
         return itemSizeSet || (subclassImp != superImp)
@@ -220,7 +220,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: The size of the item at certain index path.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return itemSize
     }
 
@@ -237,7 +237,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, shouldHighlightItemAtIndexPath: indexPath)
         }
@@ -252,7 +252,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: IndexPath) {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, didHighlightItemAtIndexPath: indexPath)
         }
@@ -267,7 +267,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: IndexPath) {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: indexPath)
         }
@@ -285,7 +285,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: `true` if the item should be selected or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: indexPath)
         }
@@ -300,7 +300,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
         }
@@ -318,7 +318,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: indexPath)
         }
@@ -333,7 +333,7 @@ public class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSou
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
         guard let selectionHandler = selectionHandler else {
             return super.ds_collectionView(collectionView, didDeselectItemAtIndexPath: indexPath)
         }
@@ -350,7 +350,7 @@ extension BasicDataSource where ItemType : Equatable {
      
      - returns: The index path for a certain item, or `nil` if there is no such item.
      */
-    public func indexPathForItem(item: ItemType) -> NSIndexPath? {
-        return items.indexOf(item).flatMap { NSIndexPath(forItem: $0, inSection: 0) }
+    public func indexPathForItem(_ item: ItemType) -> IndexPath? {
+        return items.index(of: item).flatMap { IndexPath(item: $0, section: 0) }
     }
 }

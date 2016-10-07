@@ -9,7 +9,7 @@
 import XCTest
 
 
-public func XCTAssertIdentical<T: AnyObject>(@autoclosure expression1: () -> T?, @autoclosure _ expression2: () -> T?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> T?, _ expression2: @autoclosure () -> T?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
     
     let object1 = expression1()
     let object2 = expression2()
@@ -19,7 +19,7 @@ public func XCTAssertIdentical<T: AnyObject>(@autoclosure expression1: () -> T?,
 }
 
 
-public func XCTAssertIdentical<T: AnyObject>(@autoclosure expression1: () -> [T]?, @autoclosure _ expression2: () -> [T]?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
+public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> [T]?, _ expression2: @autoclosure () -> [T]?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
     
     let object1 = expression1()
     let object2 = expression2()
@@ -27,7 +27,7 @@ public func XCTAssertIdentical<T: AnyObject>(@autoclosure expression1: () -> [T]
     
     XCTAssertEqual(object1?.count, object2?.count, errorMessage, file: file, line: line)
     
-    guard let castedObject1 = object1, castedObject2 = object2 else {
+    guard let castedObject1 = object1, let castedObject2 = object2 else {
         return
     }
     

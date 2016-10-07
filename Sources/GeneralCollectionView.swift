@@ -39,15 +39,15 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_registerNib(nib: UINib?, forCellWithReuseIdentifier identifier: String)
+    func ds_registerNib(_ nib: UINib?, forCellWithReuseIdentifier identifier: String)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
+    func ds_registerClass(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_dequeueReusableCellViewWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> ReusableCell
+    func ds_dequeueReusableCellViewWithIdentifier(_ identifier: String, forIndexPath indexPath: IndexPath) -> ReusableCell
     
     // MARK:- Numbers
 
@@ -58,7 +58,7 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_numberOfItemsInSection(section: Int) -> Int
+    func ds_numberOfItemsInSection(_ section: Int) -> Int
     
     // MARK:- Manpulate items and sections
     
@@ -69,75 +69,75 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?)
+    func ds_performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?)
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_insertSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_insertSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_deleteSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_deleteSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_reloadSections(sections: NSIndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_reloadSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_moveSection(section: Int, toSection newSection: Int)
+    func ds_moveSection(_ section: Int, toSection newSection: Int)
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_insertItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_insertItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_deleteItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_reloadItemsAtIndexPaths(indexPaths: [NSIndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_reloadItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_moveItemAtIndexPath(indexPath: NSIndexPath, toIndexPath newIndexPath: NSIndexPath)
+    func ds_moveItemAtIndexPath(_ indexPath: IndexPath, toIndexPath newIndexPath: IndexPath)
     
     // MARK:- Scroll
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_scrollToItemAtIndexPath(indexPath: NSIndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool)
+    func ds_scrollToItemAtIndexPath(_ indexPath: IndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool)
     
     // MARK:- Select/Deselect
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_selectItemAtIndexPath(indexPath: NSIndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition)
-    func ds_deselectItemAtIndexPath(indexPath: NSIndexPath, animated: Bool)
+    func ds_selectItemAtIndexPath(_ indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition)
+    func ds_deselectItemAtIndexPath(_ indexPath: IndexPath, animated: Bool)
     
     // MARK:- IndexPaths, Cells
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathForCell(cell: ReusableCell) -> NSIndexPath?
+    func ds_indexPathForCell(_ cell: ReusableCell) -> IndexPath?
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathForItemAtPoint(point: CGPoint) -> NSIndexPath?
+    func ds_indexPathForItemAtPoint(_ point: CGPoint) -> IndexPath?
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathsForVisibleItems() -> [NSIndexPath]
+    func ds_indexPathsForVisibleItems() -> [IndexPath]
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathsForSelectedItems() -> [NSIndexPath]
+    func ds_indexPathsForSelectedItems() -> [IndexPath]
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
@@ -146,7 +146,7 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_cellForItemAtIndexPath(indexPath: NSIndexPath) -> ReusableCell?
+    func ds_cellForItemAtIndexPath(_ indexPath: IndexPath) -> ReusableCell?
     
     
     // MARK: - Local, Global
@@ -158,7 +158,7 @@ import Foundation
      
      - returns: The global index path relative to the composite data source.
      */
-    func ds_localIndexPathForGlobalIndexPath(globalIndex: NSIndexPath) -> NSIndexPath
+    func ds_localIndexPathForGlobalIndexPath(_ globalIndex: IndexPath) -> IndexPath
     
     /**
      Converts an index path value relative to a specific data source to an index path value relative to the composite data source.
@@ -167,7 +167,7 @@ import Foundation
      
      - returns: The global index path relative to the composite data source.
      */
-    func ds_globalIndexPathForLocalIndexPath(localIndex: NSIndexPath) -> NSIndexPath
+    func ds_globalIndexPathForLocalIndexPath(_ localIndex: IndexPath) -> IndexPath
     
     /**
      Converts a section value relative to a specific data source to a section value relative to the composite data source.
@@ -176,26 +176,26 @@ import Foundation
 
      - returns: The global section relative to the composite data source.
      */
-    func ds_globalSectionForLocalSection(localSection: Int) -> Int
+    func ds_globalSectionForLocalSection(_ localSection: Int) -> Int
     
 }
 
 extension GeneralCollectionView {
 
-    func ds_localIndexPathsForGlobalIndexPaths(globalIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
+    func ds_localIndexPathsForGlobalIndexPaths(_ globalIndexPaths: [IndexPath]) -> [IndexPath] {
         return globalIndexPaths.map { ds_localIndexPathForGlobalIndexPath($0) }
     }
 
-    func ds_globalIndexPathsForLocalIndexPaths(localIndexPaths: [NSIndexPath]) -> [NSIndexPath] {
+    func ds_globalIndexPathsForLocalIndexPaths(_ localIndexPaths: [IndexPath]) -> [IndexPath] {
         return localIndexPaths.map {  ds_globalIndexPathForLocalIndexPath($0) }
     }
 
-    func ds_globalSectionSetForLocalSectionSet(localSections: NSIndexSet) -> NSIndexSet {
+    func ds_globalSectionSetForLocalSectionSet(_ localSections: IndexSet) -> IndexSet {
         let globalSections = NSMutableIndexSet()
         for section in localSections {
             let globalSection = ds_globalSectionForLocalSection(section)
-            globalSections.addIndex(globalSection)
+            globalSections.add(globalSection)
         }
-        return globalSections
+        return globalSections as IndexSet
     }
 }

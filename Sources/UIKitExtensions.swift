@@ -10,14 +10,14 @@ import Foundation
 
 extension UITableViewScrollPosition {
     init(scrollPosition: UICollectionViewScrollPosition) {
-        if scrollPosition.contains(.Top) {
-            self = .Top
-        } else if scrollPosition.contains(.Bottom) {
-            self = .Bottom
-        } else if scrollPosition.contains(.CenteredVertically) {
-            self = .Middle
+        if scrollPosition.contains(.top) {
+            self = .top
+        } else if scrollPosition.contains(.bottom) {
+            self = .bottom
+        } else if scrollPosition.contains(.centeredVertically) {
+            self = .middle
         } else {
-            self = .None
+            self = .none
         }
     }
 }
@@ -29,7 +29,7 @@ extension UITableView {
      
      - parameter dataSource: The data source to set for the table view.
      */
-    public func ds_useDataSource(dataSource: AbstractDataSource) {
+    public func ds_useDataSource(_ dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self
@@ -43,7 +43,7 @@ extension UICollectionView {
      
      - parameter dataSource: The data source to set for the table view.
      */
-    public func ds_useDataSource(dataSource: AbstractDataSource) {
+    public func ds_useDataSource(_ dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self

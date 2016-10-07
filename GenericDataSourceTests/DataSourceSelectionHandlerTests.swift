@@ -21,7 +21,7 @@ class DataSourceSelectionHandlerTests: XCTestCase {
         let tableView = UITableView()
         let dataSource = BasicDataSource<Report, TextReportTableViewCell>(reuseIdentifier: "")
         let instance = DataSourceSelectionHandlerTester()
-        let index = NSIndexPath(forItem: 0, inSection: 0)
+        let index = IndexPath(item: 0, section: 0)
         
         // test
         instance.dataSourceItemsModified(dataSource)

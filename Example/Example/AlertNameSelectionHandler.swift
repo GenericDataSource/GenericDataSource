@@ -21,9 +21,9 @@ class AlertNameSelectionHandler<ItemType: NameableEntity, CellType: ReusableCell
     }
 
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        didSelectItemAtIndexPath indexPath: IndexPath) {
         UIAlertView(title: "", message: dataSource.itemAtIndexPath(indexPath).name + " " + typeName + " tapped!", delegate: nil, cancelButtonTitle: "Ok").show()
     }
 }

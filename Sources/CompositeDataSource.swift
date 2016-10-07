@@ -26,7 +26,7 @@ import UIKit
  `ds_collectionView(_:sizeForItemAtIndexPath:)` and return the desired size for all
  the cells regardless of the children data sources.)
  */
-public class CompositeDataSource: AbstractDataSource {
+open class CompositeDataSource: AbstractDataSource {
 
     /**
      The type of the composite data source.
@@ -34,16 +34,16 @@ public class CompositeDataSource: AbstractDataSource {
      - SingleSection: Single section data source represents one section, children data sources are all on the same section.
      - MultiSection:  Mutli section data source represents multiple sections, each child data source represents a section.
      */
-    public enum Type {
-        case SingleSection
-        case MultiSection
+    public enum `Type` {
+        case singleSection
+        case multiSection
     }
 
     /// The collection class that manages the data sources.
-    private var collection: DataSourcesCollection!
+    fileprivate var collection: DataSourcesCollection!
 
     ///  Represents the type of the composite data source.
-    public let type: Type
+    open let type: Type
 
     /**
      Creates new instance with the desired type.
@@ -55,15 +55,15 @@ public class CompositeDataSource: AbstractDataSource {
         super.init()
 
         switch type {
-        case .SingleSection:
+        case .singleSection:
             collection = SingleSectionDataSourcesCollection(parentDataSource: self)
-        case .MultiSection:
+        case .multiSection:
             collection = MultiSectionDataSourcesCollection(parentDataSource: self)
         }
     }
 
     /// Returns the list of children data sources.
-    public var dataSources: [DataSource] {
+    open var dataSources: [DataSource] {
         return collection.dataSources
     }
 
@@ -75,13 +75,13 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the receiver implements or inherits a method that can respond to aSelector, otherwise `false`.
      */
-    public override func respondsToSelector(selector: Selector) -> Bool {
+    open override func responds(to selector: Selector) -> Bool {
 
         if sizeSelectors.contains(selector) {
             return ds_shouldConsumeItemSizeDelegateCalls()
         }
 
-        return super.respondsToSelector(selector)
+        return super.responds(to: selector)
     }
 
     // MARK: Children DataSources
@@ -91,7 +91,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - parameter dataSource: The new data source to add.
      */
-    public func addDataSource(dataSource: DataSource) {
+    open func addDataSource(_ dataSource: DataSource) {
         collection.addDataSource(dataSource)
     }
 
@@ -101,7 +101,7 @@ public class CompositeDataSource: AbstractDataSource {
      - parameter dataSource: The new data source to add.
      - parameter index:      The index to insert the new data source at.
      */
-    public func insertDataSource(dataSource: DataSource, atIndex index: Int) {
+    open func insertDataSource(_ dataSource: DataSource, atIndex index: Int) {
         collection.insertDataSource(dataSource, atIndex: index)
     }
 
@@ -110,7 +110,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - parameter dataSource: The data source to remove.
      */
-    public func removeDataSource(dataSource: DataSource) {
+    open func removeDataSource(_ dataSource: DataSource) {
         collection.removeDataSource(dataSource)
     }
 
@@ -121,7 +121,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The data source at specified index.
      */
-    public func dataSourceAtIndex(index: Int) -> DataSource {
+    open func dataSourceAtIndex(_ index: Int) -> DataSource {
         return collection.dataSourceAtIndex(index)
     }
 
@@ -132,7 +132,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `true``, if the data source exists. Otherwise `false`.
      */
-    public func containsDataSource(dataSource: DataSource) -> Bool {
+    open func containsDataSource(_ dataSource: DataSource) -> Bool {
         return collection.containsDataSource(dataSource)
     }
 
@@ -143,7 +143,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The index of the data source.
      */
-    public func indexOfDataSource(dataSource: DataSource) -> Int? {
+    open func indexOfDataSource(_ dataSource: DataSource) -> Int? {
         return collection.indexOfDataSource(dataSource)
     }
 
@@ -157,7 +157,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The global section relative to the composite data source.
      */
-    public func globalSectionForLocalSection(section: Int, dataSource: DataSource) -> Int {
+    open func globalSectionForLocalSection(_ section: Int, dataSource: DataSource) -> Int {
         return collection.globalSectionForLocalSection(section, dataSource: dataSource)
     }
 
@@ -169,7 +169,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The global section relative to the composite data source.
      */
-    public func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
+    open func localSectionForGlobalSection(_ section: Int, dataSource: DataSource) -> Int {
         return collection.localSectionForGlobalSection(section, dataSource: dataSource)
     }
 
@@ -181,7 +181,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The global index path relative to the composite data source.
      */
-    public func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+    open func globalIndexPathForLocalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
         return collection.globalIndexPathForLocalIndexPath(indexPath, dataSource: dataSource)
     }
 
@@ -193,7 +193,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The global index path relative to the composite data source.
      */
-    public func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+    open func localIndexPathForGlobalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
         return collection.localIndexPathForGlobalIndexPath(indexPath, dataSource: dataSource)
     }
 
@@ -205,7 +205,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `false` if there is no data sources or any of the data sources cannot handle size delegate calls.
      */
-    public override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
         if dataSources.isEmpty {
             return false
         }
@@ -223,7 +223,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The number of sections.
      */
-    public override func ds_numberOfSections() -> Int {
+    open override func ds_numberOfSections() -> Int {
         return collection.numberOfSections()
     }
 
@@ -234,7 +234,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The number of items in a given section
      */
-    public override func ds_numberOfItems(inSection section: Int) -> Int {
+    open override func ds_numberOfItems(inSection section: Int) -> Int {
         return collection.numberOfItems(inSection: section)
     }
 
@@ -246,7 +246,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> ReusableCell {
 
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, cellForItemAtIndexPath: mapping.localIndexPath)
@@ -262,7 +262,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: The size of the cell in a given location. For `UITableView`, the width is ignored.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
 
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView?(mapping.wrapperView, sizeForItemAtIndexPath: mapping.localIndexPath) ?? CGSize.zero
@@ -279,7 +279,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAtIndexPath: mapping.localIndexPath)
     }
@@ -291,7 +291,7 @@ public class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
 
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
     }
@@ -302,7 +302,7 @@ public class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: mapping.localIndexPath)
     }
@@ -316,7 +316,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be selected or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: mapping.localIndexPath)
     }
@@ -327,7 +327,7 @@ public class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
     }
@@ -341,7 +341,7 @@ public class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: mapping.localIndexPath)
     }
@@ -352,7 +352,7 @@ public class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    public override func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
         return mapping.dataSource.ds_collectionView(mapping.wrapperView, didDeselectItemAtIndexPath: mapping.localIndexPath)
     }

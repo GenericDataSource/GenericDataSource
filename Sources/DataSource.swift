@@ -53,7 +53,7 @@ import Foundation
      
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> ReusableCell
+    func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> ReusableCell
 
     /**
      Asks the data source for the size of a cell in a particular location of the general collection view.
@@ -63,7 +63,7 @@ import Foundation
      
      - returns: The size of the cell in a given location. For `UITableView`, the width is ignored.
      */
-    optional func ds_collectionView(collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    @objc optional func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
 
     // MARK:- Selection
 
@@ -76,7 +76,7 @@ import Foundation
      
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool
     
     /**
      Tells the delegate that the specified item was highlighted.
@@ -84,7 +84,7 @@ import Foundation
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath)
+    func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: IndexPath)
     
     /**
      Tells the delegate that the highlight was removed from the item at the specified index path.
@@ -92,7 +92,7 @@ import Foundation
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath)
+    func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: IndexPath)
     
     /**
      Asks the delegate if the specified item should be selected.
@@ -103,7 +103,7 @@ import Foundation
      
      - returns: `true` if the item should be selected or `false` if it should not.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool
     
     /**
      Tells the delegate that the specified item was selected.
@@ -111,7 +111,7 @@ import Foundation
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath)
     
     /**
      Asks the delegate if the specified item should be deselected.
@@ -122,7 +122,7 @@ import Foundation
      
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool
 
     /**
      Tells the delegate that the specified item was deselected.
@@ -130,5 +130,5 @@ import Foundation
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    func ds_collectionView(collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
+    func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: IndexPath)
 }

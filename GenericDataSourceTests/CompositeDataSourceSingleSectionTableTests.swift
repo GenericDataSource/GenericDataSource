@@ -13,7 +13,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testItemSize()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -28,15 +28,15 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.itemHeight = height1
         textReportsDataSource.itemHeight = height2
 
-        XCTAssertEqual(height1, dataSource.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
-        XCTAssertEqual(height1, dataSource.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 20)))
-        XCTAssertEqual(height2, dataSource.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 0)))
-        XCTAssertEqual(height2, dataSource.tableView(tableView, heightForRowAtIndexPath: NSIndexPath(forItem: 100, inSection: 20)))
+        XCTAssertEqual(height1, dataSource.tableView(tableView, heightForRowAt: IndexPath(item: 0, section: 0)))
+        XCTAssertEqual(height1, dataSource.tableView(tableView, heightForRowAt: IndexPath(item: 49, section: 20)))
+        XCTAssertEqual(height2, dataSource.tableView(tableView, heightForRowAt: IndexPath(item: 50, section: 0)))
+        XCTAssertEqual(height2, dataSource.tableView(tableView, heightForRowAt: IndexPath(item: 100, section: 20)))
     }
     
     func testSelectorConfigureCell()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -56,40 +56,40 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        var index = NSIndexPath(forItem: 0, inSection: 0)
-        var cell = dataSource.tableView(tableView, cellForRowAtIndexPath: index)
+        var index = IndexPath(item: 0, section: 0)
+        var cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
         
-        index = NSIndexPath(forItem: 49, inSection: 15)
-        cell = dataSource.tableView(tableView, cellForRowAtIndexPath: index)
+        index = IndexPath(item: 49, section: 15)
+        cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
         
-        index = NSIndexPath(forItem: 50, inSection: 15)
-        cell = dataSource.tableView(tableView, cellForRowAtIndexPath: index)
+        index = IndexPath(item: 50, section: 15)
+        cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        var localIndex = NSIndexPath(forItem: index.item - pdfReportsDataSource.items.count, inSection: index.section)
-        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
+        var localIndex = IndexPath(item: (index as NSIndexPath).item - pdfReportsDataSource.items.count, section: (index as NSIndexPath).section)
+        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
 
-        index = NSIndexPath(forItem: 150, inSection: 15)
-        cell = dataSource.tableView(tableView, cellForRowAtIndexPath: index)
+        index = IndexPath(item: 150, section: 15)
+        cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        localIndex = NSIndexPath(forItem: index.item - pdfReportsDataSource.items.count, inSection: index.section)
-        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
+        localIndex = IndexPath(item: (index as NSIndexPath).item - pdfReportsDataSource.items.count, section: (index as NSIndexPath).section)
+        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
@@ -97,7 +97,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testShouldHighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -113,34 +113,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(item: 0, section: 0)))
         XCTAssertTrue(selector1.shouldHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.shouldHighlightCalled)
         selector1.shouldHighlightCalled = false
         
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(item: 49, section: 15)))
         XCTAssertTrue(selector1.shouldHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.shouldHighlightCalled)
         selector1.shouldHighlightCalled = false
         
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(item: 50, section: 15)))
         XCTAssertTrue(selector2.shouldHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.shouldHighlightCalled)
         selector2.shouldHighlightCalled = false
         
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(item: 150, section: 22)))
         XCTAssertTrue(selector2.shouldHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.shouldHighlightCalled)
         selector2.shouldHighlightCalled = false
     }
     
     func testDidHighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -156,34 +156,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        dataSource.tableView(tableView, didHighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        dataSource.tableView(tableView, didHighlightRowAt: IndexPath(item: 0, section: 0))
         XCTAssertTrue(selector1.didHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.didHighlightCalled)
         selector1.didHighlightCalled = false
         
-        dataSource.tableView(tableView, didHighlightRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15))
+        dataSource.tableView(tableView, didHighlightRowAt: IndexPath(item: 49, section: 15))
         XCTAssertTrue(selector1.didHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.didHighlightCalled)
         selector1.didHighlightCalled = false
         
-        dataSource.tableView(tableView, didHighlightRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15))
+        dataSource.tableView(tableView, didHighlightRowAt: IndexPath(item: 50, section: 15))
         XCTAssertTrue(selector2.didHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.didHighlightCalled)
         selector2.didHighlightCalled = false
         
-        dataSource.tableView(tableView, didHighlightRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22))
+        dataSource.tableView(tableView, didHighlightRowAt: IndexPath(item: 150, section: 22))
         XCTAssertTrue(selector2.didHighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.didHighlightCalled)
         selector2.didHighlightCalled = false
     }
     
     func testDidUnhighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -199,34 +199,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        dataSource.tableView(tableView, didUnhighlightRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        dataSource.tableView(tableView, didUnhighlightRowAt: IndexPath(item: 0, section: 0))
         XCTAssertTrue(selector1.didUnhighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.didUnhighlightCalled)
         selector1.didUnhighlightCalled = false
         
-        dataSource.tableView(tableView, didUnhighlightRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15))
+        dataSource.tableView(tableView, didUnhighlightRowAt: IndexPath(item: 49, section: 15))
         XCTAssertTrue(selector1.didUnhighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.didUnhighlightCalled)
         selector1.didUnhighlightCalled = false
         
-        dataSource.tableView(tableView, didUnhighlightRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15))
+        dataSource.tableView(tableView, didUnhighlightRowAt: IndexPath(item: 50, section: 15))
         XCTAssertTrue(selector2.didUnhighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.didUnhighlightCalled)
         selector2.didUnhighlightCalled = false
         
-        dataSource.tableView(tableView, didUnhighlightRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22))
+        dataSource.tableView(tableView, didUnhighlightRowAt: IndexPath(item: 150, section: 22))
         XCTAssertTrue(selector2.didUnhighlightCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.didUnhighlightCalled)
         selector2.didUnhighlightCalled = false
     }
     
     func testShouldSelect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -242,34 +242,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), dataSource.tableView(tableView, willSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
+        XCTAssertEqual(IndexPath(item: 0, section: 0), dataSource.tableView(tableView, willSelectRowAt: IndexPath(item: 0, section: 0)))
         XCTAssertTrue(selector1.shouldSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.shouldSelectCalled)
         selector1.shouldSelectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), dataSource.tableView(tableView, willSelectRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15)))
+        XCTAssertEqual(IndexPath(item: 49, section: 15), dataSource.tableView(tableView, willSelectRowAt: IndexPath(item: 49, section: 15)))
         XCTAssertTrue(selector1.shouldSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.shouldSelectCalled)
         selector1.shouldSelectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 50, inSection: 15), dataSource.tableView(tableView, willSelectRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15)))
+        XCTAssertEqual(IndexPath(item: 50, section: 15), dataSource.tableView(tableView, willSelectRowAt: IndexPath(item: 50, section: 15)))
         XCTAssertTrue(selector2.shouldSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.shouldSelectCalled)
         selector2.shouldSelectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 150, inSection: 22), dataSource.tableView(tableView, willSelectRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22)))
+        XCTAssertEqual(IndexPath(item: 150, section: 22), dataSource.tableView(tableView, willSelectRowAt: IndexPath(item: 150, section: 22)))
         XCTAssertTrue(selector2.shouldSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.shouldSelectCalled)
         selector2.shouldSelectCalled = false
     }
     
     func testDidSelect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -285,34 +285,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        dataSource.tableView(tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
         XCTAssertTrue(selector1.didSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.didSelectCalled)
         selector1.didSelectCalled = false
         
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15))
+        dataSource.tableView(tableView, didSelectRowAt: IndexPath(item: 49, section: 15))
         XCTAssertTrue(selector1.didSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.didSelectCalled)
         selector1.didSelectCalled = false
         
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15))
+        dataSource.tableView(tableView, didSelectRowAt: IndexPath(item: 50, section: 15))
         XCTAssertTrue(selector2.didSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.didSelectCalled)
         selector2.didSelectCalled = false
         
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22))
+        dataSource.tableView(tableView, didSelectRowAt: IndexPath(item: 150, section: 22))
         XCTAssertTrue(selector2.didSelectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.didSelectCalled)
         selector2.didSelectCalled = false
     }
     
     func testShouldDeselect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -328,34 +328,34 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), dataSource.tableView(tableView, willDeselectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)))
+        XCTAssertEqual(IndexPath(item: 0, section: 0), dataSource.tableView(tableView, willDeselectRowAt: IndexPath(item: 0, section: 0)))
         XCTAssertTrue(selector1.shouldDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.shouldDeselectCalled)
         selector1.shouldDeselectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), dataSource.tableView(tableView, willDeselectRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15)))
+        XCTAssertEqual(IndexPath(item: 49, section: 15), dataSource.tableView(tableView, willDeselectRowAt: IndexPath(item: 49, section: 15)))
         XCTAssertTrue(selector1.shouldDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.shouldDeselectCalled)
         selector1.shouldDeselectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 50, inSection: 15), dataSource.tableView(tableView, willDeselectRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15)))
+        XCTAssertEqual(IndexPath(item: 50, section: 15), dataSource.tableView(tableView, willDeselectRowAt: IndexPath(item: 50, section: 15)))
         XCTAssertTrue(selector2.shouldDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.shouldDeselectCalled)
         selector2.shouldDeselectCalled = false
         
-        XCTAssertEqual(NSIndexPath(forItem: 150, inSection: 22), dataSource.tableView(tableView, willDeselectRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22)))
+        XCTAssertEqual(IndexPath(item: 150, section: 22), dataSource.tableView(tableView, willDeselectRowAt: IndexPath(item: 150, section: 22)))
         XCTAssertTrue(selector2.shouldDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.shouldDeselectCalled)
         selector2.shouldDeselectCalled = false
     }
     
     func testDidDeselect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -371,27 +371,27 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         pdfReportsDataSource.setSelectionHandler(selector1)
         textReportsDataSource.setSelectionHandler(selector2)
         
-        dataSource.tableView(tableView, didDeselectRowAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        dataSource.tableView(tableView, didDeselectRowAt: IndexPath(item: 0, section: 0))
         XCTAssertTrue(selector1.didDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 0), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 0), selector1.indexPath)
         XCTAssertFalse(selector2.didDeselectCalled)
         selector1.didDeselectCalled = false
         
-        dataSource.tableView(tableView, didDeselectRowAtIndexPath: NSIndexPath(forItem: 49, inSection: 15))
+        dataSource.tableView(tableView, didDeselectRowAt: IndexPath(item: 49, section: 15))
         XCTAssertTrue(selector1.didDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 49, inSection: 15), selector1.indexPath)
+        XCTAssertEqual(IndexPath(item: 49, section: 15), selector1.indexPath)
         XCTAssertFalse(selector2.didDeselectCalled)
         selector1.didDeselectCalled = false
         
-        dataSource.tableView(tableView, didDeselectRowAtIndexPath: NSIndexPath(forItem: 50, inSection: 15))
+        dataSource.tableView(tableView, didDeselectRowAt: IndexPath(item: 50, section: 15))
         XCTAssertTrue(selector2.didDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 0, inSection: 15), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 0, section: 15), selector2.indexPath)
         XCTAssertFalse(selector1.didDeselectCalled)
         selector2.didDeselectCalled = false
         
-        dataSource.tableView(tableView, didDeselectRowAtIndexPath: NSIndexPath(forItem: 150, inSection: 22))
+        dataSource.tableView(tableView, didDeselectRowAt: IndexPath(item: 150, section: 22))
         XCTAssertTrue(selector2.didDeselectCalled)
-        XCTAssertEqual(NSIndexPath(forItem: 100, inSection: 22), selector2.indexPath)
+        XCTAssertEqual(IndexPath(item: 100, section: 22), selector2.indexPath)
         XCTAssertFalse(selector1.didDeselectCalled)
         selector2.didDeselectCalled = false
     }
@@ -406,7 +406,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let reports = Report.generate(numberOfReports: 200)
         reportsDataSource.items = reports
         
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         dataSource.addDataSource(reportsDataSource)
         
         // assign as data source
@@ -425,9 +425,9 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         XCTAssertEqual(reports.count, tableView.ds_numberOfItemsInSection(0))
         let cells = tableView.cells[0] as! [TextReportTableViewCell]
         
-        for (index, cell) in cells.enumerate() {
+        for (index, cell) in cells.enumerated() {
             XCTAssertTrue(cell.reports.contains(Report(id: index + 1, name: "report-\(index + 1)")), "Invalid report at index: \(index)")
-            XCTAssertTrue(cell.indexPaths.contains(NSIndexPath(forItem: index, inSection: 0)), "Invalid index path at index: \(index)")
+            XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index, section: 0)), "Invalid index path at index: \(index)")
         }
     }
 
@@ -444,7 +444,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
 
-        let dataSource  = CompositeDataSource(type: .SingleSection)
+        let dataSource  = CompositeDataSource(type: .singleSection)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)
         
@@ -466,21 +466,21 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         XCTAssertEqual(total, tableView.ds_numberOfItemsInSection(0))
         let cells = tableView.cells[0]
         
-        for (index, cell) in cells.enumerate() {
+        for (index, cell) in cells.enumerated() {
             if index < total / 2 {
                 guard let cell = cell as? PDFReportTableViewCell else {
                     XCTFail("Invalid cell type at index: \(index)")
                     return
                 }
                 XCTAssertTrue(cell.reports.contains(Report(id: index + 1, name: "pdf report-\(index + 1)")), "Invalid report at index: \(index)")
-                XCTAssertTrue(cell.indexPaths.contains(NSIndexPath(forItem: index, inSection: 0)), "Invalid index path at index: \(index)")
+                XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index, section: 0)), "Invalid index path at index: \(index)")
             } else {
                 guard let cell = cell as? TextReportTableViewCell else {
                     XCTFail("Invalid cell type at index: \(index)")
                     return
                 }
                 XCTAssertTrue(cell.reports.contains(Report(id: index + 1, name: "text report-\(index + 1)")), "Invalid report at index: \(index)")
-                XCTAssertTrue(cell.indexPaths.contains(NSIndexPath(forItem: index - total / 2, inSection: 0)), "Invalid index path at index: \(index)")
+                XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index - total / 2, section: 0)), "Invalid index path at index: \(index)")
             }
         }
     }

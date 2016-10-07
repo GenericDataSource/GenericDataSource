@@ -37,13 +37,13 @@ class BasicBlockDataSourceTests: XCTestCase {
         collectionView.queryDataSource()
         
         // assert
-        XCTAssertEqual(1, collectionView.numberOfSections())
-        XCTAssertEqual(total, collectionView.numberOfItemsInSection(0))
+        XCTAssertEqual(1, collectionView.numberOfSections)
+        XCTAssertEqual(total, collectionView.numberOfItems(inSection: 0))
         let cells = collectionView.cells[0] as! [TextReportCollectionViewCell]
         
-        for (index, cell) in cells.enumerate() {
+        for (index, cell) in cells.enumerated() {
             XCTAssertTrue(cell.reports.contains(Report(id: index + 1, name: "report-\(index + 1)")), "Invalid report at index: \(index)")
-            XCTAssertTrue(cell.indexPaths.contains(NSIndexPath(forItem: index, inSection: 0)), "Invalid index path at index: \(index)")
+            XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index, section: 0)), "Invalid index path at index: \(index)")
             
         }
     }

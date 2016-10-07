@@ -23,18 +23,18 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     
     var cell: CellType?
     var item: ItemType?
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
 
-    func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {
+    func dataSourceItemsModified(_ dataSource: BasicDataSource<ItemType, CellType>) {
         itemsModifiedCalled = true
     }
     
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
         configureCell cell: CellType,
         withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath) {
+        atIndexPath indexPath: IndexPath) {
             configureCellCalled = true
             self.cell = cell
             self.item = item
@@ -43,62 +43,62 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     
     // MARK:- Highlighting
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
             shouldHighlightCalled = true
             self.indexPath = indexPath
             return true
     }
     
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        didHighlightItemAtIndexPath indexPath: IndexPath) {
             didHighlightCalled = true
             self.indexPath = indexPath
     }
     
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
             didUnhighlightCalled = true
             self.indexPath = indexPath
     }
     
     // MARK:- Selecting
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
             shouldSelectCalled = true
             self.indexPath = indexPath
             return true
     }
     
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        didSelectItemAtIndexPath indexPath: IndexPath) {
             didSelectCalled = true
             self.indexPath = indexPath
     }
     
     // MARK:- Deselecting
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
             shouldDeselectCalled = true
             self.indexPath = indexPath
             return true
     }
     
     func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        didDeselectItemAtIndexPath indexPath: IndexPath) {
             didDeselectCalled = true
             self.indexPath = indexPath
     }

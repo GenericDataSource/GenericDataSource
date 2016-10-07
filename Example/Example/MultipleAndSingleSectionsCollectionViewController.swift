@@ -11,7 +11,7 @@ import GenericDataSource
 
 class MultipleAndSingleSectionsCollectionViewController: UICollectionViewController {
     
-    let dataSource = CompositeDataSource(type: .MultiSection)
+    let dataSource = CompositeDataSource(type: .multiSection)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +29,13 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         collectionView?.ds_useDataSource(dataSource)
     }
 
-    private func createFirstSection() -> DataSource {
+    fileprivate func createFirstSection() -> DataSource {
         let titleDataSource = TitleDataSource(reuseIdentifier: "title")
         titleDataSource.items = ["Mix of Multiple and Single Sectioned DataSources"]
         
         let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 
-        let firstSection = CompositeDataSource(type: .SingleSection)
+        let firstSection = CompositeDataSource(type: .singleSection)
         firstSection.addDataSource(titleDataSource)
         firstSection.addDataSource(contactsDataSource)
 
@@ -46,7 +46,7 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         return firstSection
     }
 
-    @IBAction func exchangeButtonTapped(sender: AnyObject) {
+    @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
         let firstDataSource = dataSource.dataSourceAtIndex(0)
         dataSource.removeDataSource(firstDataSource)

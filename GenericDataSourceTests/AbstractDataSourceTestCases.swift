@@ -11,13 +11,13 @@ import XCTest
 
 private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
     
-    private var called = false
+    fileprivate var called = false
     
-    @objc func scrollViewDidScroll(scrollView: UIScrollView) {
+    @objc func scrollViewDidScroll(_ scrollView: UIScrollView) {
         called = true
     }
     
-    @objc func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    @objc func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         called = true
         return nil
     }
@@ -27,7 +27,7 @@ class AbstractDataSourceTestCases: XCTestCase {
     
     var instance: ReportBasicDataSource<PDFReportCollectionViewCell>!
     var tableView: UITableView!
-    private var delegate: ScrollViewDelegate!
+    fileprivate var delegate: ScrollViewDelegate!
     
     override func setUp() {
         super.setUp()
@@ -56,7 +56,7 @@ class AbstractDataSourceTestCases: XCTestCase {
     func testScrollViewDelegateSetViewForZooming() {
         
         XCTAssertFalse(delegate.called)
-        tableView.delegate?.viewForZoomingInScrollView?(tableView)
+        tableView.delegate?.viewForZooming?(in: tableView)
         XCTAssertTrue(delegate.called)
     }
 }

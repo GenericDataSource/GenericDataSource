@@ -13,33 +13,33 @@ import Foundation
 
  It's mainly used with `BasicDataSource`. It also can work with `BasicDataSource` nested inside multiple `CompositeDataSource`. You can have one handler for each data source.
  */
-public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
+open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
     /// Whether to always allow highlighting or not. This variable used when `shouldHighlightBlock` is nil.
-    public var defaultShouldHighlight: Bool = true
+    open var defaultShouldHighlight: Bool = true
     /// Whether to always allow selection or not. This variable used when `shouldSelectBlock` is nil.
-    public var defaultShouldSelect: Bool = true
+    open var defaultShouldSelect: Bool = true
     /// Whether to always allow deselection or not. This variable used when `shouldDeselectBlock` is nil.
-    public var defaultShouldDeselect: Bool = true
+    open var defaultShouldDeselect: Bool = true
 
     /// The items modified closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var itemsModifiedBlock: (BasicDataSource<ItemType, CellType> -> Void)?
+    open var itemsModifiedBlock: ((BasicDataSource<ItemType, CellType>) -> Void)?
     /// The configure closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var configureBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, CellType, ItemType, NSIndexPath) -> Void)?
+    open var configureBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, CellType, ItemType, IndexPath) -> Void)?
     /// The should highlight closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var shouldHighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Bool)?
+    open var shouldHighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool)?
     /// The did highlight closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var didHighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Void)?
+    open var didHighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void)?
     /// The did unhighlight closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var didUnhighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Void)?
+    open var didUnhighlightBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void)?
     /// The should select closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var shouldSelectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Bool)?
+    open var shouldSelectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool)?
     /// The did select closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var didSelectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Void)?
+    open var didSelectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void)?
     /// The should deselect closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var shouldDeselectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Bool)?
+    open var shouldDeselectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool)?
     /// The did deselect closure. Look at its corresponding method in `DataSourceSelectionHandler`.
-    public var didDeselectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, NSIndexPath) -> Void)?
+    open var didDeselectBlock: ((BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void)?
 
     /**
      Creates new instance. Default initializer.
@@ -50,7 +50,7 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
     /**
      Called when the items of the data source are modified inserted/delete/updated.
      */
-    public func dataSourceItemsModified(dataSource: BasicDataSource<ItemType, CellType>) {
+    open func dataSourceItemsModified(_ dataSource: BasicDataSource<ItemType, CellType>) {
         itemsModifiedBlock?(dataSource)
     }
 
@@ -63,12 +63,12 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
      - parameter item:           The item that will be binded to the cell.
      - parameter indexPath:      The local index path of the cell that will be configured.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
         configureCell cell: CellType,
                       withItem item: ItemType,
-                               atIndexPath indexPath: NSIndexPath) {
+                               atIndexPath indexPath: IndexPath) {
         configureBlock?(dataSource, collectionView, cell, item, indexPath)
     }
     
@@ -83,10 +83,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
 
      - returns: `true`, if can be highlighted.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
         return shouldHighlightBlock?(dataSource, collectionView, indexPath) ?? defaultShouldHighlight
     }
 
@@ -97,10 +97,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
      - parameter collectionView: The collection view that is used for the dequeuing operation.
      - parameter indexPath:      The local index path of the cell that will be configured.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        didHighlightItemAtIndexPath indexPath: IndexPath) {
         didHighlightBlock?(dataSource, collectionView, indexPath)
     }
 
@@ -111,10 +111,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
      - parameter collectionView: The collection view that is used for the dequeuing operation.
      - parameter indexPath:      The local index path of the cell that will be configured.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
         didUnhighlightBlock?(dataSource, collectionView, indexPath)
     }
     
@@ -129,10 +129,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
 
      - returns: `true`, if should select the item.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return shouldSelectBlock?(dataSource, collectionView, indexPath) ?? defaultShouldSelect
     }
 
@@ -143,10 +143,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
      - parameter collectionView: The collection view that is used for the dequeuing operation.
      - parameter indexPath:      The local index path of the cell that will be configured.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        didSelectItemAtIndexPath indexPath: IndexPath) {
         didSelectBlock?(dataSource, collectionView, indexPath)
     }
     
@@ -161,10 +161,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
 
      - returns: `true`, if the cell should be deleselected.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
         return shouldDeselectBlock?(dataSource, collectionView, indexPath) ?? defaultShouldDeselect
     }
 
@@ -175,10 +175,10 @@ public class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourc
      - parameter collectionView: The collection view that is used for the dequeuing operation.
      - parameter indexPath:      The local index path of the cell that will be configured.
      */
-    public func dataSource(
-        dataSource: BasicDataSource<ItemType, CellType>,
+    open func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        didDeselectItemAtIndexPath indexPath: IndexPath) {
         didDeselectBlock?(dataSource, collectionView, indexPath)
     }
 }

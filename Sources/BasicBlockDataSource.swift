@@ -11,13 +11,13 @@ import Foundation
 /**
  A basic data source class that configures the cells with a closure.
  */
-public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSource <ItemType, CellType> {
+open class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSource <ItemType, CellType> {
     
     /// The configure closure type.
-    public typealias ConfigureBlock = (item: ItemType, cell: CellType, indexPath: NSIndexPath) -> Void
+    public typealias ConfigureBlock = (_ item: ItemType, _ cell: CellType, _ indexPath: IndexPath) -> Void
 
     /// The configure block instance.
-    private let configureBlock: ConfigureBlock
+    fileprivate let configureBlock: ConfigureBlock
     
     /**
      Creates new instance of the basic block data source.
@@ -25,7 +25,7 @@ public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataS
      - parameter reuseIdentifier: The reuse identifier for dequeuing the cells.
      - parameter configureBlock:  The configuration block for the cell.
      */
-    public init(reuseIdentifier: String, configureBlock: ConfigureBlock) {
+    public init(reuseIdentifier: String, configureBlock: @escaping ConfigureBlock) {
         self.configureBlock = configureBlock
         super.init(reuseIdentifier: reuseIdentifier)
     }
@@ -38,11 +38,11 @@ public class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataS
      - parameter item:           The item that is used in the configure operation.
      - parameter indexPath:      The index ptah of the cell under configuration.
      */
-    public override func ds_collectionView(
-        collectionView: GeneralCollectionView,
+    open override func ds_collectionView(
+        _ collectionView: GeneralCollectionView,
         configureCell cell: CellType,
         withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath) {
-        self.configureBlock(item: item, cell: cell, indexPath: indexPath)
+        atIndexPath indexPath: IndexPath) {
+        self.configureBlock(item, cell, indexPath)
     }
 }

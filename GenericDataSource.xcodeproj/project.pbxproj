@@ -8,39 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5402DF871C8309D80032BF9A /* MockSelectionController.swift */; };
-		5467AD421C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5467AD411C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift */; };
-		546B1CC01C82442F0009DD26 /* BasicBlockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CBF1C82442F0009DD26 /* BasicBlockDataSource.swift */; };
 		546B1CC41C8244950009DD26 /* BasicBlockDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
 		547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */; };
 		547447041CA88B2C00F3597E /* AbstractDataSourceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */; };
-		547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447051CA92C8500F3597E /* BlockSelectionHandler.swift */; };
-		547447081CA92D1900F3597E /* UnselectableSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */; };
-		5476A02B1CBC4FE2002978FA /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02A1CBC4FE2002978FA /* ReusableCell.swift */; };
-		5476A02D1CBC501F002978FA /* BatchUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02C1CBC501F002978FA /* BatchUpdater.swift */; };
-		5476A02F1CBC508C002978FA /* UITableView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */; };
-		5476A0311CBC50B0002978FA /* UICollectionView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */; };
 		549576081C6FBA9400E9C26C /* GenericDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 549576071C6FBA9400E9C26C /* GenericDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5495760F1C6FBA9400E9C26C /* GenericDataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549576041C6FBA9400E9C26C /* GenericDataSource.framework */; };
-		549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */; };
-		549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576231C6FBB7B00E9C26C /* BasicDataSource.swift */; };
-		549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */; };
-		5495762E1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */; };
-		5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */; };
 		549576361C6FBBC600E9C26C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
 		549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */; };
 		549576381C6FBBC600E9C26C /* CompositeDataSourceSingleSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576341C6FBBC600E9C26C /* CompositeDataSourceSingleSectionTests.swift */; };
 		549576391C6FBBC600E9C26C /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576351C6FBBC600E9C26C /* TestData.swift */; };
-		5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495763A1C6FC01600E9C26C /* DataSource.swift */; };
-		5495763D1C6FC0C900E9C26C /* GeneralCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495763C1C6FC0C900E9C26C /* GeneralCollectionView.swift */; };
-		549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */; };
-		549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */; };
-		549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */; };
-		549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */; };
-		54E0ABD81C70E25E001C698E /* DataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */; };
-		54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */; };
 		54E0D2BC1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D2BB1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift */; };
 		54E0D2BE1C831007001202BE /* CompositeDataSourceSingleSectionCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D2BD1C831007001202BE /* CompositeDataSourceSingleSectionCollectionTests.swift */; };
 		54E0D2C01C831018001202BE /* CompositeDataSourceMultiSectionTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0D2BF1C831018001202BE /* CompositeDataSourceMultiSectionTableTests.swift */; };
@@ -51,6 +30,27 @@
 		54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */; };
 		54F9847F1C95D4E40024FE99 /* TestCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */; };
 		54F984811C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */; };
+		5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */; };
+		5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */; };
+		5CE64F2D1DA77B9D002456E1 /* BasicBlockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */; };
+		5CE64F2E1DA77B9D002456E1 /* BasicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F171DA77B9D002456E1 /* BasicDataSource.swift */; };
+		5CE64F2F1DA77B9D002456E1 /* BatchUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F181DA77B9D002456E1 /* BatchUpdater.swift */; };
+		5CE64F301DA77B9D002456E1 /* BlockSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F191DA77B9D002456E1 /* BlockSelectionHandler.swift */; };
+		5CE64F311DA77B9D002456E1 /* CompositeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1A1DA77B9D002456E1 /* CompositeDataSource.swift */; };
+		5CE64F321DA77B9D002456E1 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1B1DA77B9D002456E1 /* CompositeParentGeneralCollectionViewMapping.swift */; };
+		5CE64F331DA77B9D002456E1 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1C1DA77B9D002456E1 /* DataSource.swift */; };
+		5CE64F341DA77B9D002456E1 /* DataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1D1DA77B9D002456E1 /* DataSourcesCollection.swift */; };
+		5CE64F351DA77B9D002456E1 /* DataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1E1DA77B9D002456E1 /* DataSourceSelectionHandler.swift */; };
+		5CE64F361DA77B9D002456E1 /* DelegatedGeneralCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F1F1DA77B9D002456E1 /* DelegatedGeneralCollectionView.swift */; };
+		5CE64F371DA77B9D002456E1 /* GeneralCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F201DA77B9D002456E1 /* GeneralCollectionView.swift */; };
+		5CE64F381DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F211DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift */; };
+		5CE64F3B1DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F241DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift */; };
+		5CE64F3C1DA77B9D002456E1 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F251DA77B9D002456E1 /* ReusableCell.swift */; };
+		5CE64F3D1DA77B9D002456E1 /* SingleSectionDataSourcesCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F261DA77B9D002456E1 /* SingleSectionDataSourcesCollection.swift */; };
+		5CE64F3E1DA77B9D002456E1 /* UICollectionView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */; };
+		5CE64F3F1DA77B9D002456E1 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */; };
+		5CE64F401DA77B9D002456E1 /* UITableView+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */; };
+		5CE64F411DA77B9D002456E1 /* UnselectableSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F2A1DA77B9D002456E1 /* UnselectableSelectionHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,42 +65,21 @@
 
 /* Begin PBXFileReference section */
 		5402DF871C8309D80032BF9A /* MockSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSelectionController.swift; sourceTree = "<group>"; };
-		5467AD411C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionView.swift; sourceTree = "<group>"; };
-		546B1CBF1C82442F0009DD26 /* BasicBlockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSource.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
 		547446FE1CA7F82C00F3597E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewMultiSectionTestCases.swift; sourceTree = "<group>"; };
 		547447031CA88B2C00F3597E /* AbstractDataSourceTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSourceTestCases.swift; sourceTree = "<group>"; };
-		547447051CA92C8500F3597E /* BlockSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandler.swift; sourceTree = "<group>"; };
-		547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandler.swift; sourceTree = "<group>"; };
-		5476A02A1CBC4FE2002978FA /* ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
-		5476A02C1CBC501F002978FA /* BatchUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdater.swift; sourceTree = "<group>"; };
-		5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CollectionView.swift"; sourceTree = "<group>"; };
-		5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CollectionView.swift"; sourceTree = "<group>"; };
 		549576041C6FBA9400E9C26C /* GenericDataSource.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericDataSource.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		549576071C6FBA9400E9C26C /* GenericDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericDataSource.h; sourceTree = "<group>"; };
 		549576091C6FBA9400E9C26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5495760E1C6FBA9400E9C26C /* GenericDataSourceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericDataSourceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		549576151C6FBA9400E9C26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AbstractDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		549576231C6FBB7B00E9C26C /* BasicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BasicDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompositeDataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewWrapperMapping.swift; sourceTree = "<group>"; };
-		5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BasicDataSourceTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTableCollectionView.swift; sourceTree = "<group>"; };
 		549576341C6FBBC600E9C26C /* CompositeDataSourceSingleSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSingleSectionTests.swift; sourceTree = "<group>"; };
 		549576351C6FBBC600E9C26C /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
-		5495763A1C6FC01600E9C26C /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		5495763C1C6FC0C900E9C26C /* GeneralCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionView.swift; sourceTree = "<group>"; };
-		549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourcesCollection.swift; sourceTree = "<group>"; };
-		549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
-		549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
-		549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeParentGeneralCollectionViewMapping.swift; sourceTree = "<group>"; };
-		54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSourceSelectionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		54E0D2BB1C830FE3001202BE /* CompositeDataSourceSingleSectionTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSingleSectionTableTests.swift; sourceTree = "<group>"; };
 		54E0D2BD1C831007001202BE /* CompositeDataSourceSingleSectionCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSingleSectionCollectionTests.swift; sourceTree = "<group>"; };
 		54E0D2BF1C831018001202BE /* CompositeDataSourceMultiSectionTableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceMultiSectionTableTests.swift; sourceTree = "<group>"; };
@@ -111,6 +90,27 @@
 		54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsCollectionViewTests.swift; sourceTree = "<group>"; };
 		54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCollectionView.xib; sourceTree = "<group>"; };
 		54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceSelectionHandlerTests.swift; sourceTree = "<group>"; };
+		5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSource.swift; sourceTree = "<group>"; };
+		5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; };
+		5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSource.swift; sourceTree = "<group>"; };
+		5CE64F171DA77B9D002456E1 /* BasicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSource.swift; sourceTree = "<group>"; };
+		5CE64F181DA77B9D002456E1 /* BatchUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchUpdater.swift; sourceTree = "<group>"; };
+		5CE64F191DA77B9D002456E1 /* BlockSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandler.swift; sourceTree = "<group>"; };
+		5CE64F1A1DA77B9D002456E1 /* CompositeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSource.swift; sourceTree = "<group>"; };
+		5CE64F1B1DA77B9D002456E1 /* CompositeParentGeneralCollectionViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeParentGeneralCollectionViewMapping.swift; sourceTree = "<group>"; };
+		5CE64F1C1DA77B9D002456E1 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		5CE64F1D1DA77B9D002456E1 /* DataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourcesCollection.swift; sourceTree = "<group>"; };
+		5CE64F1E1DA77B9D002456E1 /* DataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceSelectionHandler.swift; sourceTree = "<group>"; };
+		5CE64F1F1DA77B9D002456E1 /* DelegatedGeneralCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionView.swift; sourceTree = "<group>"; };
+		5CE64F201DA77B9D002456E1 /* GeneralCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionView.swift; sourceTree = "<group>"; };
+		5CE64F211DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewWrapperMapping.swift; sourceTree = "<group>"; };
+		5CE64F241DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
+		5CE64F251DA77B9D002456E1 /* ReusableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		5CE64F261DA77B9D002456E1 /* SingleSectionDataSourcesCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionDataSourcesCollection.swift; sourceTree = "<group>"; };
+		5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CollectionView.swift"; sourceTree = "<group>"; };
+		5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+CollectionView.swift"; sourceTree = "<group>"; };
+		5CE64F2A1DA77B9D002456E1 /* UnselectableSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,24 +132,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5467AD431C9ED073008FE4E7 /* mapping */ = {
-			isa = PBXGroup;
-			children = (
-				549FA2041C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift */,
-				5495762A1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift */,
-			);
-			name = mapping;
-			sourceTree = "<group>";
-		};
-		546B1CBE1C823EBA0009DD26 /* ReusableDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				5467AD431C9ED073008FE4E7 /* mapping */,
-				5467AD411C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift */,
-			);
-			name = ReusableDelegate;
-			sourceTree = "<group>";
-		};
 		546B1CC51C8244990009DD26 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +166,8 @@
 		549575FA1C6FBA9400E9C26C = {
 			isa = PBXGroup;
 			children = (
-				549576061C6FBA9400E9C26C /* GenericDataSource */,
+				5CE64F131DA77B9D002456E1 /* Sources */,
+				5495761F1C6FBB2400E9C26C /* ... */,
 				549576121C6FBA9400E9C26C /* GenericDataSourceTests */,
 				549576051C6FBA9400E9C26C /* Products */,
 			);
@@ -199,15 +182,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		549576061C6FBA9400E9C26C /* GenericDataSource */ = {
-			isa = PBXGroup;
-			children = (
-				5495761E1C6FBACC00E9C26C /* Sources */,
-				5495761F1C6FBB2400E9C26C /* ... */,
-			);
-			path = GenericDataSource;
-			sourceTree = "<group>";
-		};
 		549576121C6FBA9400E9C26C /* GenericDataSourceTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,15 +192,6 @@
 			path = GenericDataSourceTests;
 			sourceTree = "<group>";
 		};
-		5495761E1C6FBACC00E9C26C /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				54E0ABD51C70E198001C698E /* Selection */,
-				54E0ABD61C70E19E001C698E /* DataSources */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
 		5495761F1C6FBB2400E9C26C /* ... */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +199,7 @@
 				549576071C6FBA9400E9C26C /* GenericDataSource.h */,
 			);
 			name = ...;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		549576311C6FBBB200E9C26C /* Tests */ = {
@@ -245,87 +211,6 @@
 				54F984771C95AE5F0024FE99 /* UIKit */,
 			);
 			name = Tests;
-			sourceTree = "<group>";
-		};
-		549FA1991C79E93F00F6EEF6 /* Composite */ = {
-			isa = PBXGroup;
-			children = (
-				549FA2031C7A083B00F6EEF6 /* internal */,
-				549576241C6FBB7B00E9C26C /* CompositeDataSource.swift */,
-			);
-			name = Composite;
-			sourceTree = "<group>";
-		};
-		549FA19A1C79E95E00F6EEF6 /* UIKit */ = {
-			isa = PBXGroup;
-			children = (
-				5495763C1C6FC0C900E9C26C /* GeneralCollectionView.swift */,
-				5495762B1C6FBB9100E9C26C /* UIKitExtensions.swift */,
-				5476A02A1CBC4FE2002978FA /* ReusableCell.swift */,
-				5476A02C1CBC501F002978FA /* BatchUpdater.swift */,
-				5476A02E1CBC508C002978FA /* UITableView+CollectionView.swift */,
-				5476A0301CBC50B0002978FA /* UICollectionView+CollectionView.swift */,
-			);
-			name = UIKit;
-			sourceTree = "<group>";
-		};
-		549FA19B1C79E98200F6EEF6 /* Basic */ = {
-			isa = PBXGroup;
-			children = (
-				549576231C6FBB7B00E9C26C /* BasicDataSource.swift */,
-				546B1CBF1C82442F0009DD26 /* BasicBlockDataSource.swift */,
-			);
-			name = Basic;
-			sourceTree = "<group>";
-		};
-		549FA19C1C79E98E00F6EEF6 /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				5495763A1C6FC01600E9C26C /* DataSource.swift */,
-				549576221C6FBB7B00E9C26C /* AbstractDataSource.swift */,
-			);
-			name = DataSource;
-			sourceTree = "<group>";
-		};
-		549FA19F1C79E9F800F6EEF6 /* Mapping */ = {
-			isa = PBXGroup;
-			children = (
-				549FA19D1C79E9F500F6EEF6 /* DataSourcesCollection.swift */,
-				549FA1FF1C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift */,
-				549FA2011C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift */,
-			);
-			name = Mapping;
-			sourceTree = "<group>";
-		};
-		549FA2031C7A083B00F6EEF6 /* internal */ = {
-			isa = PBXGroup;
-			children = (
-				549FA19F1C79E9F800F6EEF6 /* Mapping */,
-				546B1CBE1C823EBA0009DD26 /* ReusableDelegate */,
-			);
-			name = internal;
-			sourceTree = "<group>";
-		};
-		54E0ABD51C70E198001C698E /* Selection */ = {
-			isa = PBXGroup;
-			children = (
-				54E0ABD71C70E25E001C698E /* DataSourceSelectionHandler.swift */,
-				54E0ABDA1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift */,
-				547447051CA92C8500F3597E /* BlockSelectionHandler.swift */,
-				547447071CA92D1900F3597E /* UnselectableSelectionHandler.swift */,
-			);
-			name = Selection;
-			sourceTree = "<group>";
-		};
-		54E0ABD61C70E19E001C698E /* DataSources */ = {
-			isa = PBXGroup;
-			children = (
-				549FA19B1C79E98200F6EEF6 /* Basic */,
-				549FA1991C79E93F00F6EEF6 /* Composite */,
-				549FA19C1C79E98E00F6EEF6 /* DataSource */,
-				549FA19A1C79E95E00F6EEF6 /* UIKit */,
-			);
-			name = DataSources;
 			sourceTree = "<group>";
 		};
 		54E0D2B91C830FC0001202BE /* Basic */ = {
@@ -357,6 +242,114 @@
 			children = (
 				54F984781C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift */,
 				54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */,
+			);
+			name = UIKit;
+			sourceTree = "<group>";
+		};
+		5CE64F131DA77B9D002456E1 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F4B1DA77C41002456E1 /* DataSource */,
+				5CE64F441DA77BE4002456E1 /* DataSources */,
+				5CE64F4C1DA77C49002456E1 /* UIKit */,
+				5CE64F431DA77BDE002456E1 /* Selection */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5CE64F431DA77BDE002456E1 /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */,
+				5CE64F191DA77B9D002456E1 /* BlockSelectionHandler.swift */,
+				5CE64F1E1DA77B9D002456E1 /* DataSourceSelectionHandler.swift */,
+				5CE64F2A1DA77B9D002456E1 /* UnselectableSelectionHandler.swift */,
+			);
+			name = Selection;
+			sourceTree = "<group>";
+		};
+		5CE64F441DA77BE4002456E1 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F451DA77BEC002456E1 /* Basic */,
+				5CE64F461DA77BF0002456E1 /* Composite */,
+			);
+			name = DataSources;
+			sourceTree = "<group>";
+		};
+		5CE64F451DA77BEC002456E1 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */,
+				5CE64F171DA77B9D002456E1 /* BasicDataSource.swift */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		5CE64F461DA77BF0002456E1 /* Composite */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F471DA77BF6002456E1 /* internal */,
+				5CE64F1A1DA77B9D002456E1 /* CompositeDataSource.swift */,
+			);
+			name = Composite;
+			sourceTree = "<group>";
+		};
+		5CE64F471DA77BF6002456E1 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F481DA77C00002456E1 /* Mapping */,
+				5CE64F491DA77C06002456E1 /* ReusableDelegate */,
+			);
+			name = internal;
+			sourceTree = "<group>";
+		};
+		5CE64F481DA77C00002456E1 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F1D1DA77B9D002456E1 /* DataSourcesCollection.swift */,
+				5CE64F241DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift */,
+				5CE64F261DA77B9D002456E1 /* SingleSectionDataSourcesCollection.swift */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
+		5CE64F491DA77C06002456E1 /* ReusableDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F4A1DA77C2F002456E1 /* Mapping */,
+				5CE64F1F1DA77B9D002456E1 /* DelegatedGeneralCollectionView.swift */,
+			);
+			name = ReusableDelegate;
+			sourceTree = "<group>";
+		};
+		5CE64F4A1DA77C2F002456E1 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F1B1DA77B9D002456E1 /* CompositeParentGeneralCollectionViewMapping.swift */,
+				5CE64F211DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
+		5CE64F4B1DA77C41002456E1 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */,
+				5CE64F1C1DA77B9D002456E1 /* DataSource.swift */,
+			);
+			name = DataSource;
+			sourceTree = "<group>";
+		};
+		5CE64F4C1DA77C49002456E1 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				5CE64F181DA77B9D002456E1 /* BatchUpdater.swift */,
+				5CE64F201DA77B9D002456E1 /* GeneralCollectionView.swift */,
+				5CE64F251DA77B9D002456E1 /* ReusableCell.swift */,
+				5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */,
+				5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */,
+				5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -418,14 +411,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = mohamede1945;
 				TargetAttributes = {
 					549576031C6FBA9400E9C26C = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					5495760D1C6FBA9400E9C26C = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -471,27 +466,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				549FA2021C79F13800F6EEF6 /* MultiSectionDataSourcesCollection.swift in Sources */,
-				546B1CC01C82442F0009DD26 /* BasicBlockDataSource.swift in Sources */,
-				549576251C6FBB7B00E9C26C /* AbstractDataSource.swift in Sources */,
-				549576261C6FBB7B00E9C26C /* BasicDataSource.swift in Sources */,
-				5476A02F1CBC508C002978FA /* UITableView+CollectionView.swift in Sources */,
-				54E0ABD81C70E25E001C698E /* DataSourceSelectionHandler.swift in Sources */,
-				549FA2001C79EFAB00F6EEF6 /* SingleSectionDataSourcesCollection.swift in Sources */,
-				5495762E1C6FBB9100E9C26C /* GeneralCollectionViewWrapperMapping.swift in Sources */,
-				547447081CA92D1900F3597E /* UnselectableSelectionHandler.swift in Sources */,
-				5476A02B1CBC4FE2002978FA /* ReusableCell.swift in Sources */,
-				549576271C6FBB7B00E9C26C /* CompositeDataSource.swift in Sources */,
-				54E0ABDB1C70F33C001C698E /* AnyDataSourceSelectionHandler.swift in Sources */,
-				5495762F1C6FBB9100E9C26C /* UIKitExtensions.swift in Sources */,
-				5467AD421C9EBCB7008FE4E7 /* DelegatedGeneralCollectionView.swift in Sources */,
-				549FA2051C7A084600F6EEF6 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */,
-				549FA19E1C79E9F500F6EEF6 /* DataSourcesCollection.swift in Sources */,
-				547447061CA92C8500F3597E /* BlockSelectionHandler.swift in Sources */,
-				5476A0311CBC50B0002978FA /* UICollectionView+CollectionView.swift in Sources */,
-				5476A02D1CBC501F002978FA /* BatchUpdater.swift in Sources */,
-				5495763B1C6FC01600E9C26C /* DataSource.swift in Sources */,
-				5495763D1C6FC0C900E9C26C /* GeneralCollectionView.swift in Sources */,
+				5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */,
+				5CE64F301DA77B9D002456E1 /* BlockSelectionHandler.swift in Sources */,
+				5CE64F3D1DA77B9D002456E1 /* SingleSectionDataSourcesCollection.swift in Sources */,
+				5CE64F321DA77B9D002456E1 /* CompositeParentGeneralCollectionViewMapping.swift in Sources */,
+				5CE64F311DA77B9D002456E1 /* CompositeDataSource.swift in Sources */,
+				5CE64F351DA77B9D002456E1 /* DataSourceSelectionHandler.swift in Sources */,
+				5CE64F2D1DA77B9D002456E1 /* BasicBlockDataSource.swift in Sources */,
+				5CE64F2F1DA77B9D002456E1 /* BatchUpdater.swift in Sources */,
+				5CE64F371DA77B9D002456E1 /* GeneralCollectionView.swift in Sources */,
+				5CE64F2E1DA77B9D002456E1 /* BasicDataSource.swift in Sources */,
+				5CE64F411DA77B9D002456E1 /* UnselectableSelectionHandler.swift in Sources */,
+				5CE64F361DA77B9D002456E1 /* DelegatedGeneralCollectionView.swift in Sources */,
+				5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */,
+				5CE64F381DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift in Sources */,
+				5CE64F3B1DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift in Sources */,
+				5CE64F401DA77B9D002456E1 /* UITableView+CollectionView.swift in Sources */,
+				5CE64F3F1DA77B9D002456E1 /* UIKitExtensions.swift in Sources */,
+				5CE64F331DA77B9D002456E1 /* DataSource.swift in Sources */,
+				5CE64F341DA77B9D002456E1 /* DataSourcesCollection.swift in Sources */,
+				5CE64F3E1DA77B9D002456E1 /* UICollectionView+CollectionView.swift in Sources */,
+				5CE64F3C1DA77B9D002456E1 /* ReusableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,8 +540,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -593,8 +590,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -614,6 +613,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -625,11 +625,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = GenericDataSource/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -637,6 +638,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -644,37 +646,43 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = GenericDataSource/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mohamede1945.GenericDataSource;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		5495761C1C6FBA9400E9C26C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = GenericDataSourceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mohamede1945.GenericDataSourceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		5495761D1C6FBA9400E9C26C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = GenericDataSourceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mohamede1945.GenericDataSourceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

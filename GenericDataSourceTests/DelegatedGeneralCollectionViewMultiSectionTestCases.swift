@@ -11,9 +11,9 @@ import XCTest
 
 private class ClosureDataSource: ReportBasicDataSource<TextReportTableViewCell> {
     
-    var configure: ([GeneralCollectionView] -> Void)?
+    var configure: (([GeneralCollectionView]) -> Void)?
     
-    private override func ds_collectionView(collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    fileprivate override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         configure?([collectionView, ds_reusableViewDelegate!])
     }
 }
@@ -23,12 +23,12 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
     var tableView: TableView!
     
     var dataSource: CompositeDataSource!
-    private var textReportsDataSource: ClosureDataSource!
+    fileprivate var textReportsDataSource: ClosureDataSource!
     
     override func setUp() {
         super.setUp()
         
-        dataSource  = CompositeDataSource(type: .MultiSection)
+        dataSource  = CompositeDataSource(type: .multiSection)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -56,7 +56,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testRegisterClass() {
@@ -77,7 +77,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testRegisterNib() {
@@ -96,7 +96,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testDequeueCell() {
@@ -104,9 +104,9 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                collectionView.ds_dequeueReusableCellViewWithIdentifier("testCell", forIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                collectionView.ds_dequeueReusableCellViewWithIdentifier("testCell", forIndexPath: IndexPath(row: 0, section: 0))
                 
-                XCTAssertEqual(NSIndexPath(forRow: 0, inSection: 1), self.tableView.indexPath)
+                XCTAssertEqual(IndexPath(row: 0, section: 1), self.tableView.indexPath)
                 XCTAssertEqual("testCell", self.tableView.identifier)
                 
                 self.tableView.reset()
@@ -114,7 +114,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testNumberOfSections() {
@@ -132,7 +132,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testNumberOfItems() {
@@ -151,7 +151,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testReloadData() {
@@ -168,7 +168,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testPerformBatchUpdates() {
@@ -185,7 +185,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testInsertSections() {
@@ -193,11 +193,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexSet = NSIndexSet(index: 0)
-                let animation = UITableViewRowAnimation.Bottom
+                let indexSet = IndexSet(integer: 0)
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_insertSections(indexSet, withRowAnimation: animation)
                 
-                XCTAssertEqual(NSIndexSet(index: 1), self.tableView.sectionsSet)
+                XCTAssertEqual(IndexSet(integer: 1), self.tableView.sectionsSet)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
                 self.tableView.reset()
@@ -205,7 +205,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testDeleteSections() {
@@ -213,11 +213,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexSet = NSIndexSet(index: 0)
-                let animation = UITableViewRowAnimation.Bottom
+                let indexSet = IndexSet(integer: 0)
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_deleteSections(indexSet, withRowAnimation: animation)
 
-                XCTAssertEqual(NSIndexSet(index: 1), self.tableView.sectionsSet)
+                XCTAssertEqual(IndexSet(integer: 1), self.tableView.sectionsSet)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
                 self.tableView.reset()
@@ -225,7 +225,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testReloadSections() {
@@ -233,11 +233,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexSet = NSIndexSet(index: 0)
-                let animation = UITableViewRowAnimation.Bottom
+                let indexSet = IndexSet(integer: 0)
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_reloadSections(indexSet, withRowAnimation: animation)
                 
-                XCTAssertEqual(NSIndexSet(index: 1), self.tableView.sectionsSet)
+                XCTAssertEqual(IndexSet(integer: 1), self.tableView.sectionsSet)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
                 self.tableView.reset()
@@ -245,7 +245,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testMoveSection() {
@@ -263,7 +263,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testInsertItems() {
@@ -271,11 +271,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPaths = [NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 10, inSection: 0)]
-                let animation = UITableViewRowAnimation.Bottom
+                let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_insertItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
                 
-                XCTAssertEqual([NSIndexPath(forRow: 0, inSection: 1), NSIndexPath(forRow: 10, inSection: 1)],
+                XCTAssertEqual([IndexPath(row: 0, section: 1), IndexPath(row: 10, section: 1)],
                                self.tableView.indexPaths!)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
@@ -284,7 +284,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testDeleteItems() {
@@ -292,11 +292,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPaths = [NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 10, inSection: 0)]
-                let animation = UITableViewRowAnimation.Bottom
+                let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_deleteItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
                 
-                XCTAssertEqual([NSIndexPath(forRow: 0, inSection: 1), NSIndexPath(forRow: 10, inSection: 1)],
+                XCTAssertEqual([IndexPath(row: 0, section: 1), IndexPath(row: 10, section: 1)],
                                self.tableView.indexPaths!)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
@@ -305,7 +305,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testReloadItems() {
@@ -313,11 +313,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPaths = [NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 10, inSection: 0)]
-                let animation = UITableViewRowAnimation.Bottom
+                let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
+                let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_reloadItemsAtIndexPaths(indexPaths, withRowAnimation: animation)
                 
-                XCTAssertEqual([NSIndexPath(forRow: 0, inSection: 1), NSIndexPath(forRow: 10, inSection: 1)],
+                XCTAssertEqual([IndexPath(row: 0, section: 1), IndexPath(row: 10, section: 1)],
                                self.tableView.indexPaths!)
                 XCTAssertEqual(animation, self.tableView.animation)
                 
@@ -326,7 +326,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testMoveItem() {
@@ -334,17 +334,17 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                collectionView.ds_moveItemAtIndexPath(NSIndexPath(forRow: 15, inSection: 0), toIndexPath: NSIndexPath(forRow: 50, inSection: 0))
+                collectionView.ds_moveItemAtIndexPath(IndexPath(row: 15, section: 0), toIndexPath: IndexPath(row: 50, section: 0))
                 
-                XCTAssertEqual(NSIndexPath(forRow: 15, inSection: 1), self.tableView.indexPath)
-                XCTAssertEqual(NSIndexPath(forRow: 50, inSection: 1), self.tableView.toIndexPath)
+                XCTAssertEqual(IndexPath(row: 15, section: 1), self.tableView.indexPath)
+                XCTAssertEqual(IndexPath(row: 50, section: 1), self.tableView.toIndexPath)
                 
                 self.tableView.reset()
             }
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testScrollToItem() {
@@ -352,13 +352,13 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath = NSIndexPath(forRow: 145, inSection: 0)
-                let scroll = UICollectionViewScrollPosition.Bottom
+                let indexPath = IndexPath(row: 145, section: 0)
+                let scroll = UICollectionViewScrollPosition.bottom
                 let animated = true
                 collectionView.ds_scrollToItemAtIndexPath(indexPath, atScrollPosition: scroll, animated: animated)
                 
-                XCTAssertEqual(NSIndexPath(forRow: 145, inSection: 1), self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.Bottom, self.tableView.scrollPosition)
+                XCTAssertEqual(IndexPath(row: 145, section: 1), self.tableView.indexPath)
+                XCTAssertEqual(UITableViewScrollPosition.bottom, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
                 
                 self.tableView.reset()
@@ -366,7 +366,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testSelectItem() {
@@ -374,13 +374,13 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath = NSIndexPath(forRow: 145, inSection: 0)
-                let scroll = UICollectionViewScrollPosition.Top
+                let indexPath = IndexPath(row: 145, section: 0)
+                let scroll = UICollectionViewScrollPosition.top
                 let animated = true
                 collectionView.ds_selectItemAtIndexPath(indexPath, animated: animated, scrollPosition: scroll)
                 
-                XCTAssertEqual(NSIndexPath(forRow: 145, inSection: 1), self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.Top, self.tableView.scrollPosition)
+                XCTAssertEqual(IndexPath(row: 145, section: 1), self.tableView.indexPath)
+                XCTAssertEqual(UITableViewScrollPosition.top, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
                 
                 self.tableView.reset()
@@ -388,7 +388,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testSelectItemWithNil() {
@@ -396,13 +396,13 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath: NSIndexPath? = nil
-                let scroll = UICollectionViewScrollPosition.Top
+                let indexPath: IndexPath? = nil
+                let scroll = UICollectionViewScrollPosition.top
                 let animated = true
                 collectionView.ds_selectItemAtIndexPath(indexPath, animated: animated, scrollPosition: scroll)
                 
                 XCTAssertEqual(indexPath, self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.Top, self.tableView.scrollPosition)
+                XCTAssertEqual(UITableViewScrollPosition.top, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
                 
                 self.tableView.reset()
@@ -410,7 +410,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testDeselectItem() {
@@ -418,11 +418,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath = NSIndexPath(forRow: 145, inSection: 0)
+                let indexPath = IndexPath(row: 145, section: 0)
                 let animated = false
                 collectionView.ds_deselectItemAtIndexPath(indexPath, animated: animated)
                 
-                XCTAssertEqual(NSIndexPath(forRow: 145, inSection: 1), self.tableView.indexPath)
+                XCTAssertEqual(IndexPath(row: 145, section: 1), self.tableView.indexPath)
                 XCTAssertEqual(animated, self.tableView.animated)
                 
                 self.tableView.reset()
@@ -430,7 +430,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathForCell() {
@@ -439,10 +439,10 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
             
             for collectionView in collectionViews {
                 let cell = UITableViewCell()
-                self.tableView.indexPath = NSIndexPath(forRow: 50, inSection: 1)
+                self.tableView.indexPath = IndexPath(row: 50, section: 1)
                 let indexPath = collectionView.ds_indexPathForCell(cell)
                 
-                XCTAssertEqual(NSIndexPath(forRow: 50, inSection: 0), indexPath)
+                XCTAssertEqual(IndexPath(row: 50, section: 0), indexPath)
                 XCTAssertEqual(cell, self.tableView.cell)
                 
                 self.tableView.reset()
@@ -450,7 +450,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathForCellNil() {
@@ -470,7 +470,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathForItemAtPoint() {
@@ -479,10 +479,10 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
             
             for collectionView in collectionViews {
                 let point = CGPoint(x: 11, y: 22)
-                self.tableView.indexPath = NSIndexPath(forRow: 50, inSection: 1)
+                self.tableView.indexPath = IndexPath(row: 50, section: 1)
                 let indexPath = collectionView.ds_indexPathForItemAtPoint(point)
                 
-                XCTAssertEqual(NSIndexPath(forRow: 50, inSection: 0), indexPath)
+                XCTAssertEqual(IndexPath(row: 50, section: 0), indexPath)
                 XCTAssertEqual(point, self.tableView.point)
                 
                 self.tableView.reset()
@@ -490,7 +490,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathForItemAtPointNil() {
@@ -510,7 +510,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathsForVisibleItems() {
@@ -518,17 +518,17 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                self.tableView.indexPaths = [NSIndexPath(forRow: 50, inSection: 1), NSIndexPath(forRow: 100, inSection: 1)]
+                self.tableView.indexPaths = [IndexPath(row: 50, section: 1), IndexPath(row: 100, section: 1)]
                 let indexPaths = collectionView.ds_indexPathsForVisibleItems()
                 
-                XCTAssertEqual([NSIndexPath(forRow: 50, inSection: 0), NSIndexPath(forRow: 100, inSection: 0)], indexPaths)
+                XCTAssertEqual([IndexPath(row: 50, section: 0), IndexPath(row: 100, section: 0)], indexPaths)
                 
                 self.tableView.reset()
             }
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testIndexPathsForSelectedItems() {
@@ -536,17 +536,17 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                self.tableView.indexPaths = [NSIndexPath(forRow: 50, inSection: 1), NSIndexPath(forRow: 100, inSection: 1)]
+                self.tableView.indexPaths = [IndexPath(row: 50, section: 1), IndexPath(row: 100, section: 1)]
                 let indexPaths = collectionView.ds_indexPathsForSelectedItems()
                 
-                XCTAssertEqual([NSIndexPath(forRow: 50, inSection: 0), NSIndexPath(forRow: 100, inSection: 0)], indexPaths)
+                XCTAssertEqual([IndexPath(row: 50, section: 0), IndexPath(row: 100, section: 0)], indexPaths)
                 
                 self.tableView.reset()
             }
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testVisibleCells() {
@@ -571,7 +571,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testCellForItemAtIndexPath() {
@@ -580,9 +580,9 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
             
             for collectionView in collectionViews {
                 self.tableView.cell = UITableViewCell()
-                let cell = collectionView.ds_cellForItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                let cell = collectionView.ds_cellForItemAtIndexPath(IndexPath(row: 0, section: 0))
                 
-                XCTAssertEqual(NSIndexPath(forRow: 0, inSection: 1), self.tableView.indexPath)
+                XCTAssertEqual(IndexPath(row: 0, section: 1), self.tableView.indexPath)
                 XCTAssertEqual(cell as? UITableViewCell, self.tableView.cell)
                 
                 self.tableView.reset()
@@ -590,7 +590,7 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testLocalIndexPathForGlobalIndexPath() {
@@ -598,16 +598,16 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath = collectionView.ds_localIndexPathForGlobalIndexPath(NSIndexPath(forRow: 51, inSection: 1))
+                let indexPath = collectionView.ds_localIndexPathForGlobalIndexPath(IndexPath(row: 51, section: 1))
                 
-                XCTAssertEqual(NSIndexPath(forRow: 51, inSection: 0), indexPath)
+                XCTAssertEqual(IndexPath(row: 51, section: 0), indexPath)
                 
                 self.tableView.reset()
             }
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testGlobalIndexPathForLocalIndexPath() {
@@ -615,16 +615,16 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
             
             for collectionView in collectionViews {
-                let indexPath = collectionView.ds_globalIndexPathForLocalIndexPath(NSIndexPath(forRow: 2, inSection: 0))
+                let indexPath = collectionView.ds_globalIndexPathForLocalIndexPath(IndexPath(row: 2, section: 0))
                 
-                XCTAssertEqual(NSIndexPath(forRow: 2, inSection: 1), indexPath)
+                XCTAssertEqual(IndexPath(row: 2, section: 1), indexPath)
                 
                 self.tableView.reset()
             }
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
     
     func testGlobalSectionForLocalSection() {
@@ -640,6 +640,6 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         }
         
         // call configure
-        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: NSIndexPath(forRow: 50, inSection: 1))
+        dataSource.ds_collectionView(tableView, didSelectItemAtIndexPath: IndexPath(row: 50, section: 1))
     }
 }

@@ -10,17 +10,17 @@ import Foundation
 
 protocol BatchUpdater: class {
     
-    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?)
+    func actualPerformBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?)
 }
 
 extension UICollectionView : BatchUpdater {
-    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+    func actualPerformBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
         performBatchUpdates(updates, completion: completion)
     }
 }
 
 extension UITableView : BatchUpdater {
-    func actualPerformBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+    func actualPerformBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
         beginUpdates()
         updates?()
         endUpdates()
@@ -29,8 +29,8 @@ extension UITableView : BatchUpdater {
 }
 
 private class CompletionBlock {
-    let block: Bool -> Void
-    init(block: Bool -> Void) { self.block = block }
+    let block: (Bool) -> Void
+    init(block: @escaping (Bool) -> Void) { self.block = block }
 }
 
 private struct AssociatedKeys {
@@ -40,17 +40,17 @@ private struct AssociatedKeys {
 
 extension GeneralCollectionView where Self : BatchUpdater {
     
-    private var performingBatchUpdates: Bool {
+    fileprivate var performingBatchUpdates: Bool {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.performingBatchUpdates) as? NSNumber
             return value?.boolValue ?? false
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.performingBatchUpdates, NSNumber(bool: newValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.performingBatchUpdates, NSNumber(value: newValue as Bool), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    private var completionBlocks: [CompletionBlock] {
+    fileprivate var completionBlocks: [CompletionBlock] {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.completionBlocks) as? [CompletionBlock]
             return value ?? []
@@ -60,7 +60,7 @@ extension GeneralCollectionView where Self : BatchUpdater {
         }
     }
     
-    func internal_performBatchUpdates(updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
+    func internal_performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
         guard !performingBatchUpdates else {
             if let completion = completion {
                 var blocks = completionBlocks

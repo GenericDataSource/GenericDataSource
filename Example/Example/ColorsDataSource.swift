@@ -9,14 +9,14 @@
 import UIKit
 import GenericDataSource
 
-class ColorsDataSource<CellType: ReusableCell where CellType: UIView>: BasicDataSource<Color, CellType> {
+class ColorsDataSource<CellType: ReusableCell>: BasicDataSource<Color, CellType> where CellType: UIView {
 
     // This is needed as of swift 2.2, because if you subclassed a generic class, initializers are not inherited.
     override init(reuseIdentifier: String) {
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Color, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Color, atIndexPath indexPath: IndexPath) {
         cell.backgroundColor = item.color
     }
 }

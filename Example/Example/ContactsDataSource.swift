@@ -21,13 +21,13 @@ class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, CellTy
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Contact, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Contact, atIndexPath indexPath: IndexPath) {
         cell.configureForContact(item)
     }
 }
 
 extension ContactCell {
-    private func configureForContact(contact: Contact) {
+    fileprivate func configureForContact(_ contact: Contact) {
         textLabel?.text = contact.name
         detailTextLabel?.text = contact.email
     }

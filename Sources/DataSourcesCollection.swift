@@ -15,7 +15,7 @@ private class DataSourceWrapper : Hashable {
     }
     
     var hashValue: Int {
-        return unsafeAddressOf(dataSource).hashValue
+        return Unmanaged.passUnretained(dataSource).toOpaque().hashValue
     }
 }
 
@@ -32,15 +32,15 @@ class DataSourcesCollection {
     }
     
     var mappings: [Mapping] = []
-    private var dataSourceToMappings: [DataSourceWrapper: Mapping] = [:]
+    fileprivate var dataSourceToMappings: [DataSourceWrapper: Mapping] = [:]
     
     var dataSources: [DataSource] {
         return mappings.map { $0.dataSource }
     }
     
-    private func createAndPrepareMappingForDataSource(dataSource: DataSource) -> Mapping {
+    fileprivate func createAndPrepareMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         
-        guard (dataSource as? CompositeDataSource)?.type != .MultiSection else {
+        guard (dataSource as? CompositeDataSource)?.type != .multiSection else {
             fatalError("Cannot add a multi-section composite data source as child data source.")
         }
 
@@ -62,7 +62,7 @@ class DataSourcesCollection {
     
     // MARK: API
     
-    func addDataSource(dataSource: DataSource) {
+    func addDataSource(_ dataSource: DataSource) {
         
         let mapping = createAndPrepareMappingForDataSource(dataSource)
         mappings.append(mapping)
@@ -71,50 +71,50 @@ class DataSourcesCollection {
         updateMappings()
     }
     
-    func insertDataSource(dataSource: DataSource, atIndex index: Int) {
+    func insertDataSource(_ dataSource: DataSource, atIndex index: Int) {
         
         assert(index >= 0 && index <= mappings.count, "Invalid index \(index) should be between [0..\(mappings.count)")
         
         let mapping = createAndPrepareMappingForDataSource(dataSource)
-        mappings.insert(mapping, atIndex: index)
+        mappings.insert(mapping, at: index)
         
         // update the mapping
         updateMappings()
     }
     
-    func removeDataSource(dataSource: DataSource) {
+    func removeDataSource(_ dataSource: DataSource) {
         
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         guard let exsitingMapping = dataSourceToMappings[wrapper] else {
             fatalError("Tried to remove a data source that doesn't exist: \(dataSource)")
         }
-        guard let index = mappings.indexOf(exsitingMapping) else {
+        guard let index = mappings.index(of: exsitingMapping) else {
             fatalError("Tried to remove a data source that doesn't exist: \(dataSource)")
         }
         
         dataSourceToMappings[wrapper] = nil
-        mappings.removeAtIndex(index)
+        mappings.remove(at: index)
         
         // update the mapping
         updateMappings()
     }
     
-    func dataSourceAtIndex(index: Int) -> DataSource {
+    func dataSourceAtIndex(_ index: Int) -> DataSource {
         return mappings[index].dataSource
     }
     
-    func containsDataSource(dataSource: DataSource) -> Bool {
+    func containsDataSource(_ dataSource: DataSource) -> Bool {
         return mappingForDataSource(dataSource) != nil
     }
     
-    func indexOfDataSource(dataSource: DataSource) -> Int? {
+    func indexOfDataSource(_ dataSource: DataSource) -> Int? {
         guard let mapping = mappingForDataSource(dataSource) else {
             return nil
         }
-        return mappings.indexOf(mapping)
+        return mappings.index(of: mapping)
     }
     
-    func mappingForDataSource(dataSource: DataSource) -> Mapping? {
+    func mappingForDataSource(_ dataSource: DataSource) -> Mapping? {
         let wrapper = DataSourceWrapper(dataSource: dataSource)
         let existingMapping = dataSourceToMappings[wrapper]
         return existingMapping
@@ -122,7 +122,7 @@ class DataSourcesCollection {
     
     // MARK:- Subclassing
     
-    func createMappingForDataSource(dataSource: DataSource) -> Mapping {
+    func createMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         fatalError("Should be implemented by subclasses")
     }
     
@@ -130,7 +130,7 @@ class DataSourcesCollection {
         fatalError("Should be implemented by subclasses")
     }
     
-    func mappingForIndexPath(indexPath: NSIndexPath) -> Mapping {
+    func mappingForIndexPath(_ indexPath: IndexPath) -> Mapping {
         fatalError("Should be implemented by subclasses")
     }
     
@@ -144,7 +144,7 @@ class DataSourcesCollection {
     
     // MARK:- API
     
-    func globalIndexPathForLocalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+    func globalIndexPathForLocalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
         
         guard let mapping = mappingForDataSource(dataSource) else {
             fatalError("dataSource is not a child to composite data source")
@@ -153,7 +153,7 @@ class DataSourcesCollection {
         return mapping.globalIndexPathForLocalIndexPath(indexPath)
     }
     
-    func globalSectionForLocalSection(localSection: Int, dataSource: DataSource) -> Int {
+    func globalSectionForLocalSection(_ localSection: Int, dataSource: DataSource) -> Int {
         
         guard let mapping = mappingForDataSource(dataSource) else {
             fatalError("dataSource is not a child to a composite data source")
@@ -162,7 +162,7 @@ class DataSourcesCollection {
         return mapping.globalSectionForLocalSection(localSection)
     }
     
-    func localIndexPathForGlobalIndexPath(indexPath: NSIndexPath, dataSource: DataSource) -> NSIndexPath {
+    func localIndexPathForGlobalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
         
         guard let mapping = mappingForDataSource(dataSource) else {
             fatalError("dataSource is not a child to composite data source")
@@ -171,7 +171,7 @@ class DataSourcesCollection {
         return mapping.localIndexPathForGlobalIndexPath(indexPath)
     }
     
-    func localSectionForGlobalSection(section: Int, dataSource: DataSource) -> Int {
+    func localSectionForGlobalSection(_ section: Int, dataSource: DataSource) -> Int {
         guard let mapping = mappingForDataSource(dataSource) else {
             fatalError("dataSource is not a child to composite data source")
         }
@@ -180,9 +180,9 @@ class DataSourcesCollection {
     }
 
     func collectionViewWrapperFromIndexPath(
-        indexPath: NSIndexPath,
+        _ indexPath: IndexPath,
         collectionView: GeneralCollectionView)
-        -> (dataSource: DataSource, localIndexPath: NSIndexPath, wrapperView: DelegatedGeneralCollectionView) {
+        -> (dataSource: DataSource, localIndexPath: IndexPath, wrapperView: DelegatedGeneralCollectionView) {
             updateMappings()
             
             let mapping = mappingForIndexPath(indexPath)
@@ -208,32 +208,32 @@ extension DataSourcesCollection {
             self.dataSource = dataSource
         }
         
-        func localItemForGlobalItem(globalItem: Int) -> Int {
+        func localItemForGlobalItem(_ globalItem: Int) -> Int {
             return globalItem
         }
         
-        func globalItemForLocalItem(localItem: Int) -> Int {
+        func globalItemForLocalItem(_ localItem: Int) -> Int {
             return localItem
         }
         
-        func localSectionForGlobalSection(globalSection: Int) -> Int {
+        func localSectionForGlobalSection(_ globalSection: Int) -> Int {
             return globalSection
         }
         
-        func globalSectionForLocalSection(localSection: Int) -> Int {
+        func globalSectionForLocalSection(_ localSection: Int) -> Int {
             return localSection
         }
         
-        func localIndexPathForGlobalIndexPath(globalIndexPath: NSIndexPath) -> NSIndexPath {
-            let localItem = localItemForGlobalItem(globalIndexPath.item)
-            let localSection = localSectionForGlobalSection(globalIndexPath.section)
-            return NSIndexPath(forItem: localItem, inSection: localSection)
+        func localIndexPathForGlobalIndexPath(_ globalIndexPath: IndexPath) -> IndexPath {
+            let localItem = localItemForGlobalItem((globalIndexPath as NSIndexPath).item)
+            let localSection = localSectionForGlobalSection((globalIndexPath as NSIndexPath).section)
+            return IndexPath(item: localItem, section: localSection)
         }
 
-        func globalIndexPathForLocalIndexPath(localIndexPath: NSIndexPath) -> NSIndexPath {
-            let globalItem = globalItemForLocalItem(localIndexPath.item)
-            let globalSection = globalSectionForLocalSection(localIndexPath.section)
-            return NSIndexPath(forItem: globalItem, inSection: globalSection)
+        func globalIndexPathForLocalIndexPath(_ localIndexPath: IndexPath) -> IndexPath {
+            let globalItem = globalItemForLocalItem((localIndexPath as NSIndexPath).item)
+            let globalSection = globalSectionForLocalSection((localIndexPath as NSIndexPath).section)
+            return IndexPath(item: globalItem, section: globalSection)
         }
     }
 }

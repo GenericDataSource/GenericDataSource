@@ -10,11 +10,11 @@ import Foundation
 
 class SingleSectionDataSourcesCollection: DataSourcesCollection {
 
-    private var itemsCount: Int = 0
+    fileprivate var itemsCount: Int = 0
 
-    private var globalItemToMappings: [Int: SingleSectionMapping] = [:]
+    fileprivate var globalItemToMappings: [Int: SingleSectionMapping] = [:]
 
-    override func createMappingForDataSource(dataSource: DataSource) -> Mapping {
+    override func createMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         return SingleSectionMapping(dataSource: dataSource)
     }
 
@@ -26,7 +26,7 @@ class SingleSectionDataSourcesCollection: DataSourcesCollection {
 
         for mapping in mappings {
             guard let mapping = mapping as? SingleSectionMapping else {
-                fatalError("Mappings for \(self.dynamicType) should be of type \(SingleSectionMapping.self)")
+                fatalError("Mappings for \(type(of: self)) should be of type \(SingleSectionMapping.self)")
             }
 
             let newItemCount = mapping.updateMappings(startingWithGlobalItem: count) + count
@@ -38,11 +38,11 @@ class SingleSectionDataSourcesCollection: DataSourcesCollection {
         itemsCount = count
     }
 
-    override func mappingForIndexPath(indexPath: NSIndexPath) -> Mapping {
-        return mappingForGlobalItem(indexPath.item)
+    override func mappingForIndexPath(_ indexPath: IndexPath) -> Mapping {
+        return mappingForGlobalItem((indexPath as NSIndexPath).item)
     }
 
-    func mappingForGlobalItem(item: Int) -> SingleSectionMapping {
+    func mappingForGlobalItem(_ item: Int) -> SingleSectionMapping {
         guard let mapping = globalItemToMappings[item] else {
             fatalError("Couldn't find mapping for item: \(item)")
         }
@@ -68,13 +68,13 @@ extension SingleSectionDataSourcesCollection {
 
     internal class SingleSectionMapping : Mapping {
 
-        private var globalItemStartIndex: Int = 0
+        fileprivate var globalItemStartIndex: Int = 0
 
-        override func localItemForGlobalItem(globalItem: Int) -> Int {
+        override func localItemForGlobalItem(_ globalItem: Int) -> Int {
             return globalItem - globalItemStartIndex
         }
 
-        override func globalItemForLocalItem(localItem: Int) -> Int {
+        override func globalItemForLocalItem(_ localItem: Int) -> Int {
             return localItem + globalItemStartIndex
         }
 

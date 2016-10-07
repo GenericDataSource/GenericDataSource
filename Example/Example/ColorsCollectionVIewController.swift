@@ -11,7 +11,7 @@ import GenericDataSource
 
 class ColorsCollectionVIewController: UICollectionViewController {
 
-    private let dataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "cell")
+    fileprivate let dataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "cell")
 
     override func viewDidLoad() {
 

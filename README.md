@@ -6,6 +6,8 @@
 
 A generic small composable components for data source implementation for `UITableView` and `UICollectionView` written in Swift.
 
+**Supports Swift 3.0**
+
 ## Features
 
 - [x] Basic data source to manage set of cells binded by array of items.
@@ -15,6 +17,12 @@ A generic small composable components for data source implementation for `UITabl
 - [x] Basic data source responsible for highlighting/selection/deselection using `selectionHandler`.
 - [x] Comprehensive Unit Test Coverage
 - [x] [Complete Documentation](http://cocoadocs.org/docsets/GenericDataSources)
+
+## Requirements
+
+- iOS 7.0+
+- Xcode 8
+- Swift 3.0
 
 ## Installation
 
@@ -43,6 +51,19 @@ To integrate GenericDataSource into your Xcode project using Carthage, specify i
 
 ```bash
 github "GenericDataSource/GenericDataSource"
+```
+
+### Swift Package Manager
+
+```Swift
+import PackageDescription
+
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    dependencies: [
+        .Package(url: "https://github.com/GenericDataSource/GenericDataSource.git", majorVersion: 2)
+    ]
+)
 ```
 
 ### Manually

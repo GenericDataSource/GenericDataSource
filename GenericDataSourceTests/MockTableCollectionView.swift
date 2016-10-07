@@ -25,7 +25,7 @@ class MockTableView : UITableView {
     var itemsCountPerSection : [Int] = []
     var cells : [[UITableViewCell]] = []
 
-    override func registerClass(cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+    override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
         guard reusableCells[identifier] == nil else {
             assertionFailure("A cell with the same identifier '\(identifier)' already registered before.")
             return
@@ -38,18 +38,18 @@ class MockTableView : UITableView {
         reusableCells[identifier] = (theCellClass, [:])
     }
 
-    override func dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
         guard let cellData = reusableCells[identifier] else {
             assertionFailure("No cell registered with identifier '\(identifier)'.")
             return UITableViewCell()
         }
 
-        let index = indexPath.item % numberOfReuseCells
+        let index = (indexPath as NSIndexPath).item % numberOfReuseCells
 
         if let cell = cellData.cells[index] {
             return cell
         } else {
-            let cell = cellData.type.init(style: UITableViewCellStyle.Default, reuseIdentifier: identifier)
+            let cell = cellData.type.init(style: UITableViewCellStyle.default, reuseIdentifier: identifier)
             var mutableCellData = cellData
             mutableCellData.cells[index] = cell
             reusableCells[identifier] = mutableCellData
@@ -73,7 +73,7 @@ class MockTableView : UITableView {
         }
 
         // sections
-        sectionsCount = dataSource.numberOfSectionsInTableView?(self) ?? 1
+        sectionsCount = dataSource.numberOfSections?(in: self) ?? 1
 
         // items
         for section in 0..<sectionsCount {
@@ -81,11 +81,11 @@ class MockTableView : UITableView {
         }
 
         // cells
-        for (section, itemsCount) in itemsCountPerSection.enumerate() {
+        for (section, itemsCount) in itemsCountPerSection.enumerated() {
             var sectionCells: [UITableViewCell] = []
             for item in 0..<itemsCount {
-                let indexPath = NSIndexPath(forItem: item, inSection: section)
-                let cell = dataSource.tableView(self, cellForRowAtIndexPath: indexPath)
+                let indexPath = IndexPath(item: item, section: section)
+                let cell = dataSource.tableView(self, cellForRowAt: indexPath)
                 sectionCells.append(cell)
             }
             cells.append(sectionCells)
@@ -103,7 +103,7 @@ class MockCollectionView : UICollectionView {
     var itemsCountPerSection : [Int] = []
     var cells : [[UICollectionViewCell]] = []
 
-    override func registerClass(cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+    override func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         guard reusableCells[identifier] == nil else {
             assertionFailure("A cell with the same identifier '\(identifier)' already registered before.")
             return
@@ -116,13 +116,13 @@ class MockCollectionView : UICollectionView {
         reusableCells[identifier] = (theCellClass, [:])
     }
 
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellData = reusableCells[identifier] else {
             assertionFailure("No cell registered with identifier '\(identifier)'.")
             return UICollectionViewCell()
         }
 
-        let index = indexPath.item % numberOfReuseCells
+        let index = (indexPath as NSIndexPath).item % numberOfReuseCells
 
         if let cell = cellData.cells[index] {
             return cell
@@ -151,7 +151,7 @@ class MockCollectionView : UICollectionView {
         }
 
         // sections
-        sectionsCount = dataSource.numberOfSectionsInCollectionView?(self) ?? 1
+        sectionsCount = dataSource.numberOfSections?(in: self) ?? 1
 
         // items
         for section in 0..<sectionsCount {
@@ -159,11 +159,11 @@ class MockCollectionView : UICollectionView {
         }
 
         // cells
-        for (section, itemsCount) in itemsCountPerSection.enumerate() {
+        for (section, itemsCount) in itemsCountPerSection.enumerated() {
             var sectionCells: [UICollectionViewCell] = []
             for item in 0..<itemsCount {
-                let indexPath = NSIndexPath(forItem: item, inSection: section)
-                let cell = dataSource.collectionView(self, cellForItemAtIndexPath: indexPath)
+                let indexPath = IndexPath(item: item, section: section)
+                let cell = dataSource.collectionView(self, cellForItemAt: indexPath)
                 sectionCells.append(cell)
             }
             cells.append(sectionCells)
