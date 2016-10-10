@@ -74,7 +74,7 @@ class BasicBlockDataSourceTests: XCTestCase {
         
         // assert
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(total, tableView.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(total, tableView.ds_numberOfItems(inSection: 0))
         let cells = tableView.cells[0] as! [TextReportTableViewCell]
         
         for cell in cells {

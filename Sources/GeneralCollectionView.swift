@@ -39,15 +39,17 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_registerNib(_ nib: UINib?, forCellWithReuseIdentifier identifier: String)
+    @objc(ds_registerNib:forCellWithReuseIdentifier:)
+    func ds_register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_registerClass(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
+    @objc(ds_registerClass:forCellWithReuseIdentifier:)
+    func ds_register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_dequeueReusableCellViewWithIdentifier(_ identifier: String, forIndexPath indexPath: IndexPath) -> ReusableCell
+    func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell
     
     // MARK:- Numbers
 
@@ -58,7 +60,7 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_numberOfItemsInSection(_ section: Int) -> Int
+    func ds_numberOfItems(inSection section: Int) -> Int
     
     // MARK:- Manpulate items and sections
     
@@ -74,15 +76,15 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_insertSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_insertSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_deleteSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_reloadSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation)
+    func ds_reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
@@ -91,45 +93,45 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_insertItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_insertItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_deleteItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_reloadItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation)
+    func ds_reloadItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_moveItemAtIndexPath(_ indexPath: IndexPath, toIndexPath newIndexPath: IndexPath)
+    func ds_moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath)
     
     // MARK:- Scroll
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_scrollToItemAtIndexPath(_ indexPath: IndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool)
+    func ds_scrollToItem(at indexPath: IndexPath, at scrollPosition: UICollectionViewScrollPosition, animated: Bool)
     
     // MARK:- Select/Deselect
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_selectItemAtIndexPath(_ indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition)
-    func ds_deselectItemAtIndexPath(_ indexPath: IndexPath, animated: Bool)
+    func ds_selectItem(at indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition)
+    func ds_deselectItem(at indexPath: IndexPath, animated: Bool)
     
     // MARK:- IndexPaths, Cells
     
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathForCell(_ cell: ReusableCell) -> IndexPath?
+    func ds_indexPath(for cell: ReusableCell) -> IndexPath?
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_indexPathForItemAtPoint(_ point: CGPoint) -> IndexPath?
+    func ds_indexPathForItem(at point: CGPoint) -> IndexPath?
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
@@ -146,7 +148,7 @@ import Foundation
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
-    func ds_cellForItemAtIndexPath(_ indexPath: IndexPath) -> ReusableCell?
+    func ds_cellForItem(at indexPath: IndexPath) -> ReusableCell?
     
     
     // MARK: - Local, Global

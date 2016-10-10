@@ -422,7 +422,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         XCTAssertEqual(1, dataSource.dataSources.count)
         XCTAssertTrue(reportsDataSource === dataSource.dataSources[0])
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(reports.count, tableView.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(reports.count, tableView.ds_numberOfItems(inSection: 0))
         let cells = tableView.cells[0] as! [TextReportTableViewCell]
         
         for (index, cell) in cells.enumerated() {
@@ -463,7 +463,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
         XCTAssertTrue(textReportsDataSource === dataSource.dataSources[1])
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(total, tableView.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(total, tableView.ds_numberOfItems(inSection: 0))
         let cells = tableView.cells[0]
         
         for (index, cell) in cells.enumerated() {

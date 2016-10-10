@@ -14,7 +14,7 @@ import Foundation
 open class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSource <ItemType, CellType> {
     
     /// The configure closure type.
-    public typealias ConfigureBlock = (_ item: ItemType, _ cell: CellType, _ indexPath: IndexPath) -> Void
+    public typealias ConfigureBlock = (ItemType, CellType, IndexPath) -> Void
 
     /// The configure block instance.
     fileprivate let configureBlock: ConfigureBlock
@@ -40,9 +40,9 @@ open class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSou
      */
     open override func ds_collectionView(
         _ collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: ItemType,
-        atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath) {
         self.configureBlock(item, cell, indexPath)
     }
 }

@@ -35,17 +35,17 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public init<C: DataSourceSelectionHandler>(_ selectionHandler: C) where C.ItemType == ItemType, C.CellType == CellType {
         
         itemsChanged = selectionHandler.dataSourceItemsModified
-        configureCell = selectionHandler.dataSource(_:collectionView:configureCell:withItem:atIndexPath:)
+        configureCell = selectionHandler.dataSource(_:collectionView:configure:with:at:)
 
-        shouldHighlight = selectionHandler.dataSource(_:collectionView:shouldHighlightItemAtIndexPath:)
-        didHighlight = selectionHandler.dataSource(_:collectionView:didHighlightItemAtIndexPath:)
-        didUnhighlight = selectionHandler.dataSource(_:collectionView:didUnhighlightItemAtIndexPath:)
+        shouldHighlight = selectionHandler.dataSource(_:collectionView:shouldHighlightItemAt:)
+        didHighlight = selectionHandler.dataSource(_:collectionView:didHighlightItemAt:)
+        didUnhighlight = selectionHandler.dataSource(_:collectionView:didUnhighlightItemAt:)
         
-        shouldSelect = selectionHandler.dataSource(_:collectionView:shouldSelectItemAtIndexPath:)
-        didSelect = selectionHandler.dataSource(_:collectionView:didSelectItemAtIndexPath:)
+        shouldSelect = selectionHandler.dataSource(_:collectionView:shouldSelectItemAt:)
+        didSelect = selectionHandler.dataSource(_:collectionView:didSelectItemAt:)
 
-        shouldDeselect = selectionHandler.dataSource(_:collectionView:shouldDeselectItemAtIndexPath:)
-        didDeselect = selectionHandler.dataSource(_:collectionView:didDeselectItemAtIndexPath:)
+        shouldDeselect = selectionHandler.dataSource(_:collectionView:shouldDeselectItemAt:)
+        didDeselect = selectionHandler.dataSource(_:collectionView:didDeselectItemAt:)
     }
 
     /**
@@ -61,9 +61,9 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: ItemType,
-        atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath) {
             return configureCell(dataSource, collectionView, cell, item, indexPath)
     }
 
@@ -73,7 +73,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool {
             return shouldHighlight(dataSource, collectionView, indexPath)
     }
 
@@ -83,7 +83,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: IndexPath) {
+        didHighlightItemAt indexPath: IndexPath) {
             return didHighlight(dataSource, collectionView, indexPath)
     }
 
@@ -93,7 +93,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
+        didUnhighlightItemAt indexPath: IndexPath) {
             return didUnhighlight(dataSource, collectionView, indexPath)
     }
     
@@ -105,7 +105,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldSelectItemAt indexPath: IndexPath) -> Bool {
             return shouldSelect(dataSource, collectionView, indexPath)
     }
 
@@ -115,7 +115,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: IndexPath) {
+        didSelectItemAt indexPath: IndexPath) {
             return didSelect(dataSource, collectionView, indexPath)
     }
     
@@ -127,7 +127,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldDeselectItemAt indexPath: IndexPath) -> Bool {
             return shouldDeselect(dataSource, collectionView, indexPath)
     }
 
@@ -137,7 +137,7 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: IndexPath) {
+        didDeselectItemAt indexPath: IndexPath) {
             return didDeselect(dataSource, collectionView, indexPath)
     }
 }

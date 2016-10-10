@@ -66,9 +66,9 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-                      withItem item: ItemType,
-                               atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath) {
         configureBlock?(dataSource, collectionView, cell, item, indexPath)
     }
     
@@ -86,7 +86,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return shouldHighlightBlock?(dataSource, collectionView, indexPath) ?? defaultShouldHighlight
     }
 
@@ -100,7 +100,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: IndexPath) {
+        didHighlightItemAt indexPath: IndexPath) {
         didHighlightBlock?(dataSource, collectionView, indexPath)
     }
 
@@ -114,7 +114,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
+        didUnhighlightItemAt indexPath: IndexPath) {
         didUnhighlightBlock?(dataSource, collectionView, indexPath)
     }
     
@@ -132,7 +132,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return shouldSelectBlock?(dataSource, collectionView, indexPath) ?? defaultShouldSelect
     }
 
@@ -146,7 +146,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: IndexPath) {
+        didSelectItemAt indexPath: IndexPath) {
         didSelectBlock?(dataSource, collectionView, indexPath)
     }
     
@@ -164,7 +164,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return shouldDeselectBlock?(dataSource, collectionView, indexPath) ?? defaultShouldDeselect
     }
 
@@ -178,7 +178,7 @@ open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceS
     open func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: IndexPath) {
+        didDeselectItemAt indexPath: IndexPath) {
         didDeselectBlock?(dataSource, collectionView, indexPath)
     }
 }

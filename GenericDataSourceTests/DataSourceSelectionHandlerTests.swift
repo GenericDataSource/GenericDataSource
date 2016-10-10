@@ -25,19 +25,19 @@ class DataSourceSelectionHandlerTests: XCTestCase {
         
         // test
         instance.dataSourceItemsModified(dataSource)
+
+        instance.dataSource(dataSource, collectionView: tableView, configure: TextReportTableViewCell(), with: Report.generate(numberOfReports: 1)[0], at: index)
         
-        instance.dataSource(dataSource, collectionView: tableView, configureCell: TextReportTableViewCell(), withItem: Report.generate(numberOfReports: 1)[0], atIndexPath: index)
-        
-        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldHighlightItemAtIndexPath: index))
-        instance.dataSource(dataSource, collectionView: tableView, didHighlightItemAtIndexPath: index)
-        instance.dataSource(dataSource, collectionView: tableView, didUnhighlightItemAtIndexPath: index)
+        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldHighlightItemAt: index))
+        instance.dataSource(dataSource, collectionView: tableView, didHighlightItemAt: index)
+        instance.dataSource(dataSource, collectionView: tableView, didUnhighlightItemAt: index)
         
         
-        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldSelectItemAtIndexPath: index))
-        instance.dataSource(dataSource, collectionView: tableView, didSelectItemAtIndexPath: index)
+        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldSelectItemAt: index))
+        instance.dataSource(dataSource, collectionView: tableView, didSelectItemAt: index)
         
-        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldDeselectItemAtIndexPath: index))
-        instance.dataSource(dataSource, collectionView: tableView, didDeselectItemAtIndexPath: index)
+        XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldDeselectItemAt: index))
+        instance.dataSource(dataSource, collectionView: tableView, didDeselectItemAt: index)
     }
     
 }

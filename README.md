@@ -184,7 +184,7 @@ class ColorsDataSource: BasicDataSource<Color, UITableViewCell> {
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Color, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: CellType, with item: Color, at indexPath: NSIndexPath) {
         cell.backgroundColor = item.color
     }
 }
@@ -196,7 +196,7 @@ class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, Contac
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configureCell cell: ContactCell, withItem item: Contact, atIndexPath indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: NSIndexPath) {
         cell.configureForContact(item)
     }
 }

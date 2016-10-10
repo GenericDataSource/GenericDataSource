@@ -19,7 +19,7 @@ protocol GeneralCollectionViewMapping {
 }
 
 @objc class DelegatedGeneralCollectionView: NSObject, GeneralCollectionView {
-    
+
     let mapping: GeneralCollectionViewMapping
     
     var delegate: GeneralCollectionView {
@@ -40,18 +40,18 @@ protocol GeneralCollectionViewMapping {
     }
     
     // MARK:- Register, dequeue
-    
-    func ds_registerClass(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
-        delegate.ds_registerClass(cellClass, forCellWithReuseIdentifier: identifier)
+
+    func ds_register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
+        delegate.ds_register(cellClass, forCellWithReuseIdentifier: identifier)
     }
-    
-    func ds_registerNib(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) {
-        delegate.ds_registerNib(nib, forCellWithReuseIdentifier: identifier)
+
+    func ds_register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String) {
+        delegate.ds_register(nib, forCellWithReuseIdentifier: identifier)
     }
-    
-    func ds_dequeueReusableCellViewWithIdentifier(_ identifier: String, forIndexPath indexPath: IndexPath) -> ReusableCell {
+
+    func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell {
         let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
-        return delegate.ds_dequeueReusableCellViewWithIdentifier(identifier, forIndexPath: globalIndexPath)
+        return delegate.ds_dequeueReusableCell(withIdentifier: identifier, for: globalIndexPath)
     }
 
     // MARK:- Numbers
@@ -60,9 +60,9 @@ protocol GeneralCollectionViewMapping {
         return delegate.ds_numberOfSections()
     }
     
-    func ds_numberOfItemsInSection(_ section: Int) -> Int {
+    func ds_numberOfItems(inSection section: Int) -> Int {
         let globalSection = ds_globalSectionForLocalSection(section)
-        return delegate.ds_numberOfItemsInSection(globalSection)
+        return delegate.ds_numberOfItems(inSection: globalSection)
     }
     
     // MARK:- Manpulate items and sections
@@ -75,19 +75,19 @@ protocol GeneralCollectionViewMapping {
         delegate.ds_performBatchUpdates(updates, completion: completion)
     }
     
-    func ds_insertSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_insertSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         let globalSections = ds_globalSectionSetForLocalSectionSet(sections)
-        delegate.ds_insertSections(globalSections, withRowAnimation: animation)
+        delegate.ds_insertSections(globalSections, with: animation)
     }
     
-    func ds_deleteSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         let globalSections = ds_globalSectionSetForLocalSectionSet(sections)
-        delegate.ds_deleteSections(globalSections, withRowAnimation: animation)
+        delegate.ds_deleteSections(globalSections, with: animation)
     }
     
-    func ds_reloadSections(_ sections: IndexSet, withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         let globalSections = ds_globalSectionSetForLocalSectionSet(sections)
-        delegate.ds_reloadSections(globalSections, withRowAnimation: animation)
+        delegate.ds_reloadSections(globalSections, with: animation)
     }
     
     func ds_moveSection(_ section: Int, toSection newSection: Int) {
@@ -96,38 +96,38 @@ protocol GeneralCollectionViewMapping {
         delegate.ds_moveSection(globalSection, toSection: globalNewSection)
     }
     
-    func ds_insertItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_insertItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
         let globalIndexPaths = ds_globalIndexPathsForLocalIndexPaths(indexPaths)
-        delegate.ds_insertItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        delegate.ds_insertItems(at: globalIndexPaths, with: animation)
     }
     
-    func ds_deleteItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_deleteItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
         let globalIndexPaths = ds_globalIndexPathsForLocalIndexPaths(indexPaths)
-        delegate.ds_deleteItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        delegate.ds_deleteItems(at: globalIndexPaths, with: animation)
     }
     
-    func ds_reloadItemsAtIndexPaths(_ indexPaths: [IndexPath], withRowAnimation animation: UITableViewRowAnimation) {
+    func ds_reloadItems(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
         let globalIndexPaths = ds_globalIndexPathsForLocalIndexPaths(indexPaths)
-        delegate.ds_reloadItemsAtIndexPaths(globalIndexPaths, withRowAnimation: animation)
+        delegate.ds_reloadItems(at: globalIndexPaths, with: animation)
     }
-    
-    func ds_moveItemAtIndexPath(_ indexPath: IndexPath, toIndexPath newIndexPath: IndexPath) {
+
+    func ds_moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath) {
         let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
         let globalNewIndexPath = ds_globalIndexPathForLocalIndexPath(newIndexPath)
-        
-        delegate.ds_moveItemAtIndexPath(globalIndexPath, toIndexPath: globalNewIndexPath)
+
+        delegate.ds_moveItem(at: globalIndexPath, to: globalNewIndexPath)
     }
     
     // MARK:- Scroll
     
-    func ds_scrollToItemAtIndexPath(_ indexPath: IndexPath, atScrollPosition scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
+    func ds_scrollToItem(at indexPath: IndexPath, at scrollPosition: UICollectionViewScrollPosition, animated: Bool) {
         let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
-        delegate.ds_scrollToItemAtIndexPath(globalIndexPath, atScrollPosition: scrollPosition, animated: animated)
+        delegate.ds_scrollToItem(at: globalIndexPath, at: scrollPosition, animated: animated)
     }
 
     // MARK:- Select/Deselect
     
-    func ds_selectItemAtIndexPath(_ indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition) {
+    func ds_selectItem(at indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition) {
 
         let globalIndexPath: IndexPath?
         if let indexPath = indexPath {
@@ -136,25 +136,25 @@ protocol GeneralCollectionViewMapping {
             globalIndexPath = nil
         }
         
-        delegate.ds_selectItemAtIndexPath(globalIndexPath, animated: animated, scrollPosition: scrollPosition)
+        delegate.ds_selectItem(at: globalIndexPath, animated: animated, scrollPosition: scrollPosition)
     }
     
-    func ds_deselectItemAtIndexPath(_ indexPath: IndexPath, animated: Bool) {
+    func ds_deselectItem(at indexPath: IndexPath, animated: Bool) {
         let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
-        delegate.ds_deselectItemAtIndexPath(globalIndexPath, animated: animated)
+        delegate.ds_deselectItem(at: globalIndexPath, animated: animated)
     }
     
     // MARK:- IndexPaths, Cells
     
-    func ds_indexPathForCell(_ cell: ReusableCell) -> IndexPath? {
-        if let indexPath = delegate.ds_indexPathForCell(cell) {
+    func ds_indexPath(for cell: ReusableCell) -> IndexPath? {
+        if let indexPath = delegate.ds_indexPath(for: cell) {
             return ds_localIndexPathForGlobalIndexPath(indexPath)
         }
         return nil
     }
     
-    func ds_indexPathForItemAtPoint(_ point: CGPoint) -> IndexPath? {
-        if let indexPath = delegate.ds_indexPathForItemAtPoint(point) {
+    func ds_indexPathForItem(at point: CGPoint) -> IndexPath? {
+        if let indexPath = delegate.ds_indexPathForItem(at: point) {
             return ds_localIndexPathForGlobalIndexPath(indexPath)
         }
         return nil
@@ -174,9 +174,9 @@ protocol GeneralCollectionViewMapping {
         return delegate.ds_visibleCells()
     }
     
-    func ds_cellForItemAtIndexPath(_ indexPath: IndexPath) -> ReusableCell? {
+    func ds_cellForItem(at indexPath: IndexPath) -> ReusableCell? {
         let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
-        return delegate.ds_cellForItemAtIndexPath(globalIndexPath)
+        return delegate.ds_cellForItem(at: globalIndexPath)
     }
 
     // MARK: - Local, Global

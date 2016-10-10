@@ -56,7 +56,7 @@ class AbstractDataSourceTestCases: XCTestCase {
     func testScrollViewDelegateSetViewForZooming() {
         
         XCTAssertFalse(delegate.called)
-        tableView.delegate?.viewForZooming?(in: tableView)
+        _ = tableView.delegate?.viewForZooming?(in: tableView)
         XCTAssertTrue(delegate.called)
     }
 }

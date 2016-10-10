@@ -29,7 +29,7 @@ extension UITableView {
      
      - parameter dataSource: The data source to set for the table view.
      */
-    public func ds_useDataSource(_ dataSource: AbstractDataSource) {
+    open func ds_useDataSource(_ dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self
@@ -43,7 +43,7 @@ extension UICollectionView {
      
      - parameter dataSource: The data source to set for the table view.
      */
-    public func ds_useDataSource(_ dataSource: AbstractDataSource) {
+    open func ds_useDataSource(_ dataSource: AbstractDataSource) {
         self.dataSource = dataSource
         self.delegate = dataSource
         dataSource.ds_reusableViewDelegate = self

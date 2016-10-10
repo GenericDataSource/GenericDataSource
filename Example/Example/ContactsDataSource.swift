@@ -21,7 +21,7 @@ class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, CellTy
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(_ collectionView: GeneralCollectionView, configureCell cell: CellType, withItem item: Contact, atIndexPath indexPath: IndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: CellType, with item: Contact, at indexPath: IndexPath) {
         cell.configureForContact(item)
     }
 }

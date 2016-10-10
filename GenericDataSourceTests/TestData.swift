@@ -86,14 +86,14 @@ class ReportBasicDataSource<CellType>: BasicDataSource<Report, CellType> where C
     }
 
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
-        collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_register(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 
     override func ds_collectionView(
         _ collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: Report,
-        atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: Report,
+        at indexPath: IndexPath) {
         cell.configureForReport(item, indexPath: indexPath)
     }
 }
@@ -104,18 +104,18 @@ class ReportNoReuseBasicDataSource<CellType>: BasicDataSource<Report, CellType> 
         super.init(reuseIdentifier: "")
     }
     
-    override func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAtIndexPath indexPath: IndexPath) -> CellType {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAt indexPath: IndexPath) -> CellType {
         return CellType.init()
     }
 }
 
 class ReportBasicBlockDataSource<CellType>: BasicBlockDataSource<Report, CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    init(configureBlock: ConfigureBlock) {
+    init(configureBlock: @escaping ConfigureBlock) {
         super.init(reuseIdentifier: NSStringFromClass(CellType.self), configureBlock: configureBlock)
     }
 
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
-        collectionView.ds_registerClass(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_register(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }

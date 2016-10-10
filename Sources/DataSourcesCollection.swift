@@ -98,6 +98,14 @@ class DataSourcesCollection {
         // update the mapping
         updateMappings()
     }
+
+    func removeAllDataSources() {
+        dataSourceToMappings.removeAll()
+        mappings.removeAll()
+
+        // update the mapping
+        updateMappings()
+    }
     
     func dataSourceAtIndex(_ index: Int) -> DataSource {
         return mappings[index].dataSource

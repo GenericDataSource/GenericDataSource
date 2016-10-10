@@ -41,9 +41,9 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: ItemType,
-        atIndexPath indexPath: IndexPath)
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath)
 
     // MARK:- Highlighting
 
@@ -59,7 +59,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool
 
     /**
      Called when the cell is already highlighted.
@@ -71,7 +71,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: IndexPath)
+        didHighlightItemAt indexPath: IndexPath)
 
     /**
      Called after the cell is unhighlighted.
@@ -83,7 +83,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: IndexPath)
+        didUnhighlightItemAt indexPath: IndexPath)
     
     // MARK:- Selecting
 
@@ -99,7 +99,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool
+        shouldSelectItemAt indexPath: IndexPath) -> Bool
 
     /**
      Called when the select is selected.
@@ -111,7 +111,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: IndexPath)
+        didSelectItemAt indexPath: IndexPath)
     
     // MARK:- Deselecting
 
@@ -127,7 +127,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool
+        shouldDeselectItemAt indexPath: IndexPath) -> Bool
 
     /**
      The cell is already deselected.
@@ -139,7 +139,7 @@ public protocol DataSourceSelectionHandler {
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: IndexPath)
+        didDeselectItemAt indexPath: IndexPath)
 }
 
 // MARK:- Default implementation
@@ -157,9 +157,9 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: ItemType,
-        atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath) {
     }
     
     // MARK:- Highlighting
@@ -170,7 +170,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool {
             return true
     }
 
@@ -180,7 +180,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: IndexPath) {
+        didHighlightItemAt indexPath: IndexPath) {
             // does nothing
     }
 
@@ -190,7 +190,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
+        didUnhighlightItemAt indexPath: IndexPath) {
             // does nothing
     }
     
@@ -202,7 +202,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldSelectItemAt indexPath: IndexPath) -> Bool {
             return true
     }
 
@@ -212,7 +212,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: IndexPath) {
+        didSelectItemAt indexPath: IndexPath) {
             // does nothing
     }
 
@@ -224,7 +224,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldDeselectItemAt indexPath: IndexPath) -> Bool {
             return true
     }
 
@@ -234,7 +234,7 @@ extension DataSourceSelectionHandler {
     public func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: IndexPath) {
+        didDeselectItemAt indexPath: IndexPath) {
             // does nothing
     }
 }

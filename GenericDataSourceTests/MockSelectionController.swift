@@ -32,9 +32,9 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        configureCell cell: CellType,
-        withItem item: ItemType,
-        atIndexPath indexPath: IndexPath) {
+        configure cell: CellType,
+        with item: ItemType,
+        at indexPath: IndexPath) {
             configureCellCalled = true
             self.cell = cell
             self.item = item
@@ -45,7 +45,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldHighlightItemAt indexPath: IndexPath) -> Bool {
             shouldHighlightCalled = true
             self.indexPath = indexPath
             return true
@@ -54,7 +54,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didHighlightItemAtIndexPath indexPath: IndexPath) {
+        didHighlightItemAt indexPath: IndexPath) {
             didHighlightCalled = true
             self.indexPath = indexPath
     }
@@ -62,7 +62,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didUnhighlightItemAtIndexPath indexPath: IndexPath) {
+        didUnhighlightItemAt indexPath: IndexPath) {
             didUnhighlightCalled = true
             self.indexPath = indexPath
     }
@@ -71,7 +71,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldSelectItemAt indexPath: IndexPath) -> Bool {
             shouldSelectCalled = true
             self.indexPath = indexPath
             return true
@@ -80,7 +80,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didSelectItemAtIndexPath indexPath: IndexPath) {
+        didSelectItemAt indexPath: IndexPath) {
             didSelectCalled = true
             self.indexPath = indexPath
     }
@@ -89,7 +89,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
+        shouldDeselectItemAt indexPath: IndexPath) -> Bool {
             shouldDeselectCalled = true
             self.indexPath = indexPath
             return true
@@ -98,7 +98,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
-        didDeselectItemAtIndexPath indexPath: IndexPath) {
+        didDeselectItemAt indexPath: IndexPath) {
             didDeselectCalled = true
             self.indexPath = indexPath
     }

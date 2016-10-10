@@ -13,13 +13,13 @@ class BasicDataSourceTests: XCTestCase {
 
     func testItemSizeFunctionOverriden() {
         class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
-            fileprivate override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+            fileprivate override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 return CGSize(width: 100, height: 100)
             }
         }
         let dataSource = Test()
 
-        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
 
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -31,14 +31,14 @@ class BasicDataSourceTests: XCTestCase {
     func testItemSize() {
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         
-        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
 
         let size = CGSize(width: 10, height: 20)
         dataSource.itemSize = size
 
         XCTAssertEqual(size, dataSource.itemSize)
-        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -50,14 +50,14 @@ class BasicDataSourceTests: XCTestCase {
     func testCellHeight() {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         
-        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let height: CGFloat = 150
         dataSource.itemHeight = height
         
         XCTAssertEqual(height, dataSource.itemHeight)
-        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAtIndexPath:))))
+        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
         let tableView = MockTableView()
@@ -82,7 +82,7 @@ class BasicDataSourceTests: XCTestCase {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = reports
     
-        let fifth = dataSource.itemAtIndexPath(IndexPath(item: 4, section: 0))
+        let fifth = dataSource.item(at: IndexPath(item: 4, section: 0))
         XCTAssertEqual(reports[4], fifth)
     }
     
@@ -93,7 +93,7 @@ class BasicDataSourceTests: XCTestCase {
         dataSource.items = reports
     
         let test = Report(id: 1945, name: "mohamed")
-        dataSource.replaceItemAtIndexPath(IndexPath(item: 15, section: 0), withItem: test)
+        dataSource.replaceItem(at: IndexPath(item: 15, section: 0), with: test)
         var mutableReports = reports
         mutableReports[15] = test
         XCTAssertEqual(dataSource.items, mutableReports)
@@ -120,7 +120,7 @@ class BasicDataSourceTests: XCTestCase {
 
         // assert
         XCTAssertEqual(1, tableView.numberOfSections)
-        XCTAssertEqual(reports.count, tableView.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(reports.count, tableView.ds_numberOfItems(inSection: 0))
         let cells = tableView.cells[0] as! [TextReportTableViewCell]
 
         for (index, cell) in cells.enumerated() {
@@ -150,7 +150,7 @@ class BasicDataSourceTests: XCTestCase {
 
         // assert
         XCTAssertEqual(1, collectionView.numberOfSections)
-        XCTAssertEqual(reports.count, collectionView.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(reports.count, collectionView.ds_numberOfItems(inSection: 0))
         let cells = collectionView.cells[0] as! [TextReportCollectionViewCell]
 
         for (index, cell) in cells.enumerated() {

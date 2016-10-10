@@ -29,7 +29,7 @@ class RootViewController: UITableViewController {
         // optionally adding a selection handler
         let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
         selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
-            let item = dataSource.itemAtIndexPath(indexPath)
+            let item = dataSource.item(at: indexPath)
             self?.performSegue(withIdentifier: item.segue, sender: self)
         }
         dataSource.setSelectionHandler(selectionHandler)
@@ -39,7 +39,7 @@ class RootViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         if let indexPath = dataSource?.ds_reusableViewDelegate?.ds_indexPathsForSelectedItems().first {
-            let item = dataSource?.itemAtIndexPath(indexPath)
+            let item = dataSource?.item(at: indexPath)
             segue.destination.title = item?.title
         }
     }

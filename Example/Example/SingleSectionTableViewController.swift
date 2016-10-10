@@ -49,9 +49,8 @@ class SingleSectionTableViewController: UITableViewController {
         // update the table view
         dataSource.ds_reusableViewDelegate?.ds_performBatchUpdates({ [weak self] in
             for index in initialIndexPaths {
-                self?.dataSource.ds_reusableViewDelegate?.ds_moveItemAtIndexPath(index, toIndexPath: IndexPath(item: firstIndex + index.item, section: 0))
+                self?.dataSource.ds_reusableViewDelegate?.ds_moveItem(at: index, to: IndexPath(item: firstIndex + index.item, section: 0))
             }
             }, completion: nil)
     }
-    
 }

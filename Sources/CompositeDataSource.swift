@@ -23,7 +23,7 @@ import UIKit
 
  It's recommended to subclass it if you want to have a common behavior.
  (e.g. If all the cells will have a common cell size. Then, implement `ds_shouldConsumeItemSizeDelegateCalls` and return `true`, then implement
- `ds_collectionView(_:sizeForItemAtIndexPath:)` and return the desired size for all
+ `ds_collectionView(_:sizeForItemAt:)` and return the desired size for all
  the cells regardless of the children data sources.)
  */
 open class CompositeDataSource: AbstractDataSource {
@@ -112,6 +112,12 @@ open class CompositeDataSource: AbstractDataSource {
      */
     open func removeDataSource(_ dataSource: DataSource) {
         collection.removeDataSource(dataSource)
+    }
+
+
+    /// Clear the collection of data sources.
+    open func removeAllDataSources() {
+        collection.removeAllDataSources()
     }
 
     /**
@@ -246,10 +252,10 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> ReusableCell {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAt indexPath: IndexPath) -> ReusableCell {
 
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, cellForItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, cellForItemAt: mapping.localIndexPath)
     }
 
     // MARK: Size
@@ -262,10 +268,10 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: The size of the cell in a given location. For `UITableView`, the width is ignored.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView?(mapping.wrapperView, sizeForItemAtIndexPath: mapping.localIndexPath) ?? CGSize.zero
+        return mapping.dataSource.ds_collectionView?(mapping.wrapperView, sizeForItemAt: mapping.localIndexPath) ?? CGSize.zero
     }
 
     // MARK: Selection
@@ -279,9 +285,9 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -291,9 +297,9 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
 
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAtIndexPath indexPath: IndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAt indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -302,9 +308,9 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAtIndexPath indexPath: IndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -316,9 +322,9 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be selected or `false` if it should not.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, shouldSelectItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(collectionView, shouldSelectItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -327,9 +333,9 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAt indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -341,9 +347,9 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAtIndexPath indexPath: IndexPath) -> Bool {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, shouldDeselectItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(collectionView, shouldDeselectItemAt: mapping.localIndexPath)
     }
 
     /**
@@ -352,8 +358,8 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAt indexPath: IndexPath) {
         let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didDeselectItemAtIndexPath: mapping.localIndexPath)
+        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didDeselectItemAt: mapping.localIndexPath)
     }
 }

@@ -38,27 +38,27 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     }
     
     func testRegisterNib() {
-        instance.ds_registerNib(UINib(nibName: "TestCollectionView", bundle: Bundle(for: type(of: self))), forCellWithReuseIdentifier: "cell")
+        instance.ds_register(UINib(nibName: "TestCollectionView", bundle: Bundle(for: type(of: self))), forCellWithReuseIdentifier: "cell")
         
-        let cell = instance.ds_dequeueReusableCellViewWithIdentifier("cell", forIndexPath: IndexPath(item: 0, section: 0))
+        let cell = instance.ds_dequeueReusableCell(withIdentifier: "cell", for: IndexPath(item: 0, section: 0))
         XCTAssertTrue(type(of: cell) == UICollectionViewCell.self)
     }
     
     func testRegisterClass() {
-        instance.ds_registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        instance.ds_register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
-        let cell = instance.ds_dequeueReusableCellViewWithIdentifier("cell", forIndexPath: IndexPath(item: 0, section: 0))
+        let cell = instance.ds_dequeueReusableCell(withIdentifier: "cell", for: IndexPath(item: 0, section: 0))
         XCTAssertTrue(type(of: cell) == UICollectionViewCell.self)
     }
     
     func testReloadData() {
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
         dataSource.items = Report.generate(numberOfReports: 100)
         instance.ds_reloadData()
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testInsertSections() {
@@ -70,7 +70,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         
         sectionsDataSource.addDataSource(ReportBasicDataSource<TextReportCollectionViewCell>())
         
-        instance.ds_insertSections(IndexSet(integer: 1), withRowAnimation: .none)
+        instance.ds_insertSections(IndexSet(integer: 1), with: .none)
         XCTAssertEqual(2, instance.ds_numberOfSections())
     }
     
@@ -83,17 +83,17 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         
         sectionsDataSource.removeDataSource(dataSource)
         
-        instance.ds_deleteSections(IndexSet(integer: 0), withRowAnimation: .none)
+        instance.ds_deleteSections(IndexSet(integer: 0), with: .none)
         XCTAssertEqual(0, instance.ds_numberOfSections())
     }
     
     func testReloadSections() {
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
         dataSource.items = Report.generate(numberOfReports: 100)
         
-        instance.ds_reloadSections(IndexSet(integer: 0), withRowAnimation: .none)
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        instance.ds_reloadSections(IndexSet(integer: 0), with: .none)
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testMoveSection() {
@@ -103,69 +103,69 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         sectionsDataSource.addDataSource(ReportBasicDataSource<TextReportCollectionViewCell>())
         
         XCTAssertEqual(2, instance.ds_numberOfSections())
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItemsInSection(0))
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItemsInSection(1))
+        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
+        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
         
         sectionsDataSource.removeDataSource(dataSource)
         sectionsDataSource.addDataSource(dataSource)
         
         instance.ds_moveSection(0, toSection: 1)
         XCTAssertEqual(2, instance.ds_numberOfSections())
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItemsInSection(0))
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItemsInSection(1))
+        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
+        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
     }
     
     func testInsertItems() {
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
         let start = dataSource.items.count
         dataSource.items.append(contentsOf: Report.generate(numberOfReports: 2))
-        instance.ds_insertItemsAtIndexPaths([IndexPath(item: start + 1, section: 0), IndexPath(item: start, section: 0)], withRowAnimation: .none)
+        instance.ds_insertItems(at: [IndexPath(item: start + 1, section: 0), IndexPath(item: start, section: 0)], with: .none)
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testDeleteItems() {
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
         let start = dataSource.items.count
         dataSource.items.removeLast()
         dataSource.items.removeFirst()
-        instance.ds_deleteItemsAtIndexPaths([IndexPath(item: start - 1, section: 0), IndexPath(item: 0, section: 0)], withRowAnimation: .none)
+        instance.ds_deleteItems(at: [IndexPath(item: start - 1, section: 0), IndexPath(item: 0, section: 0)], with: .none)
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testReloadItems() {
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
-        instance.ds_reloadItemsAtIndexPaths([IndexPath(item: 1, section: 0), IndexPath(item: 0, section: 0)], withRowAnimation: .none)
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        instance.ds_reloadItems(at: [IndexPath(item: 1, section: 0), IndexPath(item: 0, section: 0)], with: .none)
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testMoveItem() {
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
         
-        instance.ds_moveItemAtIndexPath(IndexPath(item: 0, section: 0), toIndexPath: IndexPath(item: 1, section: 0))
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        instance.ds_moveItem(at: IndexPath(item: 0, section: 0), to: IndexPath(item: 1, section: 0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testScrollToItem() {
         let index = IndexPath(item: 5, section: 0)
-        instance.ds_scrollToItemAtIndexPath(index, atScrollPosition: UICollectionViewScrollPosition.left, animated: false)
+        instance.ds_scrollToItem(at: index, at: UICollectionViewScrollPosition.left, animated: false)
     }
 
     func testSelection() {
         let index = IndexPath(item: 0, section: 0)
-        instance.ds_selectItemAtIndexPath(index, animated: false, scrollPosition: .top)
+        instance.ds_selectItem(at: index, animated: false, scrollPosition: .top)
         
         XCTAssertEqual([index], instance.ds_indexPathsForSelectedItems())
         
-        instance.ds_deselectItemAtIndexPath(index, animated: false)
+        instance.ds_deselectItem(at: index, animated: false)
         XCTAssertEqual([], instance.ds_indexPathsForSelectedItems())
     }
 
@@ -195,21 +195,21 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         let index = IndexPath(item: 0, section: 0)
         instance.ds_reloadData()
         instance.layoutIfNeeded()
-        let theCell = instance.ds_cellForItemAtIndexPath(index)
+        let theCell = instance.ds_cellForItem(at: index)
         XCTAssertNotNil(theCell)
         guard let cell = theCell else {
             XCTFail()
             return
         }
         XCTAssertTrue(type(of: cell) == TextReportCollectionViewCell.self)
-        XCTAssertEqual(index, instance.ds_indexPathForCell(cell))
-        XCTAssertNil(instance.ds_indexPathForCell(UICollectionViewCell()))
+        XCTAssertEqual(index, instance.ds_indexPath(for: cell))
+        XCTAssertNil(instance.ds_indexPath(for: UICollectionViewCell()))
     }
     
     func testIndexPathForItemAtPoint() {
         let index = IndexPath(item: 0, section: 0)
         instance.ds_reloadData()
-        XCTAssertEqual(index, instance.ds_indexPathForItemAtPoint(CGPoint.zero))
+        XCTAssertEqual(index, instance.ds_indexPathForItem(at: CGPoint.zero))
     }
     
     func testVisibleCells() {
@@ -222,7 +222,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         
         var expectedCells = [UICollectionViewCell]()
         for index in indexes {
-            let theCell = instance.ds_cellForItemAtIndexPath(index)
+            let theCell = instance.ds_cellForItem(at: index)
             guard let cell = theCell as? UICollectionViewCell else {
                 XCTFail()
                 return
@@ -249,7 +249,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         instance.ds_performBatchUpdates({ () -> Void in
             
             self.dataSource.items.append(contentsOf: Report.generate(numberOfReports: 1))
-            self.instance.ds_insertItemsAtIndexPaths([IndexPath(item: self.dataSource.items.count - 1, section: 0)], withRowAnimation: .none)
+            self.instance.ds_insertItems(at: [IndexPath(item: self.dataSource.items.count - 1, section: 0)], with: .none)
             
             }) { (completed) -> Void in
             
@@ -258,7 +258,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         
         waitForExpectations(timeout: 10, handler: nil)
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
     
     func testPerformBatchUpdates2Levels() {
@@ -269,12 +269,12 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         instance.ds_performBatchUpdates({ () -> Void in
             
             self.dataSource.items.append(contentsOf: Report.generate(numberOfReports: 1))
-            self.instance.ds_insertItemsAtIndexPaths([IndexPath(item: self.dataSource.items.count - 1, section: 0)], withRowAnimation: .none)
+            self.instance.ds_insertItems(at: [IndexPath(item: self.dataSource.items.count - 1, section: 0)], with: .none)
             
             self.instance.ds_performBatchUpdates({ () -> Void in
                 
                 self.dataSource.items.append(contentsOf: Report.generate(numberOfReports: 1))
-                self.instance.ds_insertItemsAtIndexPaths([IndexPath(item: self.dataSource.items.count - 1, section: 0)], withRowAnimation: .none)
+                self.instance.ds_insertItems(at: [IndexPath(item: self.dataSource.items.count - 1, section: 0)], with: .none)
                 
                 }, completion: { _ -> Void in
                     expectation.fulfill()
@@ -285,6 +285,6 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
         
         waitForExpectations(timeout: 10, handler: nil)
         
-        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItemsInSection(0))
+        XCTAssertEqual(dataSource.items.count, instance.ds_numberOfItems(inSection: 0))
     }
 }

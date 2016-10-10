@@ -527,8 +527,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         XCTAssertTrue(singleSectionDataSource === dataSource.dataSources[0])
         XCTAssertTrue(textReportsDataSource2 === dataSource.dataSources[1])
         XCTAssertEqual(2, collectionView.numberOfSections)
-        XCTAssertEqual(pdfReportsDataSource.items.count + textReportsDataSource.items.count, collectionView.ds_numberOfItemsInSection(0))
-        XCTAssertEqual(textReportsDataSource2.items.count, collectionView.ds_numberOfItemsInSection(1))
+        XCTAssertEqual(pdfReportsDataSource.items.count + textReportsDataSource.items.count, collectionView.ds_numberOfItems(inSection: 0))
+        XCTAssertEqual(textReportsDataSource2.items.count, collectionView.ds_numberOfItems(inSection: 1))
         let cells1 = collectionView.cells[0]
         
         for (index, cell) in cells1.enumerated() {
