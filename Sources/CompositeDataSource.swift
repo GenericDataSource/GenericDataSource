@@ -34,30 +34,30 @@ open class CompositeDataSource: AbstractDataSource {
      - SingleSection: Single section data source represents one section, children data sources are all on the same section.
      - MultiSection:  Mutli section data source represents multiple sections, each child data source represents a section.
      */
-    public enum `Type` {
-        case singleSection
-        case multiSection
+    public enum SectionType {
+        case single
+        case multi
     }
 
     /// The collection class that manages the data sources.
     fileprivate var collection: DataSourcesCollection!
 
-    ///  Represents the type of the composite data source.
-    open let type: Type
+    ///  Represents the section type of the composite data source.
+    open let sectionType: SectionType
 
     /**
      Creates new instance with the desired type.
 
-     - parameter type: The desired composite data source type.
+     - parameter sectionType: The desired composite data source type.
      */
-    public init(type: Type) {
-        self.type = type
+    public init(sectionType: SectionType) {
+        self.sectionType = sectionType
         super.init()
 
-        switch type {
-        case .singleSection:
+        switch sectionType {
+        case .single:
             collection = SingleSectionDataSourcesCollection(parentDataSource: self)
-        case .multiSection:
+        case .multi:
             collection = MultiSectionDataSourcesCollection(parentDataSource: self)
         }
     }

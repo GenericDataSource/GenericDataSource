@@ -72,8 +72,8 @@ Suppose we want to implement the following screen as `UICollectionView`.
 2. Now we need to think about DataSources.
 3. It's simple, one data source for each cell type (`BasicDataSource`).
 4. We can then create composite data sources that holds those basics. like that
-    * `CompositeDataSource(type: .SingleSection)` for the Top, quick links, add payment, etc. data sources.
-    * `CompositeDataSource(type: .MultiSection)` for the first composite and the last part (Redeem, Gifts).
+    * `CompositeDataSource(sectionType: .SingleSection)` for the Top, quick links, add payment, etc. data sources.
+    * `CompositeDataSource(sectionType: .MultiSection)` for the first composite and the last part (Redeem, Gifts).
 5. Bind the multi section compsite data source to the collection view and that's it.
 6. See how we think structurely about our UI and data sources instaed of one big cell.
 
@@ -194,7 +194,7 @@ extension ContactCell {
 override func viewDidLoad() {
     super.viewDidLoad()
     
-    let dataSource = CompositeDataSource(type: .SingleSection)
+    let dataSource = CompositeDataSource(sectionType: .SingleSection)
     // strong refernce
     self.dataSource = dataSource
     let colorsDataSource = ColorsDataSource(reuseIdentifier: "color")
@@ -224,11 +224,11 @@ Benefits:
 1. Code will allow you to reuse the data sources since they are now independent of the view controller.
 2. There are no `if` `else` now to check which item is it and dequeue the cell accordingly, it's all done for us by the amazing `CompositeDataSource`.
 3. It's also possible to change the ordering by just add the colors data source first.
-4. To have the cells into multiple sections all you need to do is just change `CompositeDataSource(type: .SingleSection)` to `CompositeDataSource(type: .MultiSection)`.
+4. To have the cells into multiple sections all you need to do is just change `CompositeDataSource(sectionType: .SingleSection)` to `CompositeDataSource(sectionType: .MultiSection)`.
 
 ### Multiple Section Example
 
-Just use the same example above and change `CompositeDataSource(type: .SingleSection)` to `CompositeDataSource(type: .MultiSection)`!
+Just use the same example above and change `CompositeDataSource(sectionType: .SingleSection)` to `CompositeDataSource(sectionType: .MultiSection)`!
 
 ### More Complex Examples
 

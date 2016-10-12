@@ -7,4 +7,8 @@
 
 ## 2.0.0
 
-* Swift 3 Support
+* Swift 3.0 Support
+
+## 2.1.0
+
+* Renaming methods to match Swift 3.0 conventions.

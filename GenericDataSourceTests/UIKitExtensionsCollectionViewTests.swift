@@ -62,7 +62,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     }
     
     func testInsertSections() {
-        let sectionsDataSource = CompositeDataSource(type: .multiSection)
+        let sectionsDataSource = CompositeDataSource(sectionType: .multi)
         sectionsDataSource.addDataSource(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
         
@@ -75,7 +75,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     }
     
     func testDeleteSections() {
-        let sectionsDataSource = CompositeDataSource(type: .multiSection)
+        let sectionsDataSource = CompositeDataSource(sectionType: .multi)
         sectionsDataSource.addDataSource(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
         
@@ -97,7 +97,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     }
     
     func testMoveSection() {
-        let sectionsDataSource = CompositeDataSource(type: .multiSection)
+        let sectionsDataSource = CompositeDataSource(sectionType: .multi)
         sectionsDataSource.addDataSource(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
         sectionsDataSource.addDataSource(ReportBasicDataSource<TextReportCollectionViewCell>())

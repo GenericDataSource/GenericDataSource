@@ -13,7 +13,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testItemSize()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -36,7 +36,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testSelectorConfigureCell()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -97,7 +97,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testShouldHighlight()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -140,7 +140,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testDidHighlight()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -183,7 +183,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testDidUnhighlight()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -226,7 +226,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testShouldSelect()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -269,7 +269,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testDidSelect()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -312,7 +312,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testShouldDeselect()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -355,7 +355,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
     
     func testDidDeselect()  {
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -406,7 +406,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let reports = Report.generate(numberOfReports: 200)
         reportsDataSource.items = reports
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         dataSource.addDataSource(reportsDataSource)
         
         // assign as data source
@@ -445,7 +445,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)
         
@@ -501,14 +501,14 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
         
-        let singleSectionDataSource  = CompositeDataSource(type: .singleSection)
+        let singleSectionDataSource  = CompositeDataSource(sectionType: .single)
         singleSectionDataSource.addDataSource(pdfReportsDataSource)
         singleSectionDataSource.addDataSource(textReportsDataSource)
         
         let textReportsDataSource2 = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource2.items = Report.generate(numberOfReports: total, name: "another report")
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         dataSource.addDataSource(singleSectionDataSource)
         dataSource.addDataSource(textReportsDataSource2)
         

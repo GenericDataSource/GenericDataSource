@@ -13,7 +13,7 @@ extension UITableViewCell: ContactCell { }
 
 class SingleSectionTableViewController: UITableViewController {
     
-    let dataSource = CompositeDataSource(type: .singleSection)
+    let dataSource = CompositeDataSource(sectionType: .single)
     let colorsDataSource = ColorsDataSource<UITableViewCell>(reuseIdentifier: "color")
     let contactsDataSource = ContactsDataSource<UITableViewCell>(reuseIdentifier: "contact")
 

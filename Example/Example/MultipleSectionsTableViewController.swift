@@ -11,7 +11,7 @@ import GenericDataSource
 
 class MultipleSectionsTableViewController: UICollectionViewController {
 
-    let dataSource = CompositeDataSource(type: .multiSection)
+    let dataSource = CompositeDataSource(sectionType: .multi)
     let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
     let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 

@@ -13,7 +13,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
 
     func testSizeForItemAtIndexPathMethod() {
 
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
 
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -43,7 +43,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
 
     func testAddDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -63,7 +63,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testInsertDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -83,7 +83,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testRemoveDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -108,7 +108,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
 
     func testDataSourceAtIndex() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -128,7 +128,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testContainsDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -145,7 +145,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testIndexOfDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -162,7 +162,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testGlobalSectionForLocalSection() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -180,7 +180,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testLocalSectionForGlobalSection() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -198,7 +198,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testGlobalIndexPathForLocalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -221,7 +221,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
     
     func testLocalIndexPathForGlobalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)

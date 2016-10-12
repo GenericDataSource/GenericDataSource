@@ -11,7 +11,7 @@ import GenericDataSource
 
 class MultipleAndSingleSectionsCollectionViewController: UICollectionViewController {
     
-    let dataSource = CompositeDataSource(type: .multiSection)
+    let dataSource = CompositeDataSource(sectionType: .multi)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         
         let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 
-        let firstSection = CompositeDataSource(type: .singleSection)
+        let firstSection = CompositeDataSource(sectionType: .single)
         firstSection.addDataSource(titleDataSource)
         firstSection.addDataSource(contactsDataSource)
 

@@ -13,7 +13,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testItemSize()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -36,7 +36,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testSelectorConfigureCell()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -97,7 +97,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testShouldHighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -140,7 +140,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testDidHighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -183,7 +183,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testDidUnhighlight()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -226,7 +226,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testShouldSelect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -269,7 +269,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testDidSelect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -312,7 +312,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testShouldDeselect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -355,7 +355,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
     
     func testDidDeselect()  {
         let tableView = MockTableView()
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -406,7 +406,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let reports = Report.generate(numberOfReports: 200)
         reportsDataSource.items = reports
         
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         dataSource.addDataSource(reportsDataSource)
         
         // assign as data source
@@ -444,7 +444,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
 
-        let dataSource  = CompositeDataSource(type: .singleSection)
+        let dataSource  = CompositeDataSource(sectionType: .single)
         dataSource.addDataSource(pdfReportsDataSource)
         dataSource.addDataSource(textReportsDataSource)
         

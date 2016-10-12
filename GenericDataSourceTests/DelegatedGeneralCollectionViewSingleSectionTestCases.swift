@@ -28,7 +28,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        dataSource  = CompositeDataSource(type: .singleSection)
+        dataSource  = CompositeDataSource(sectionType: .single)
 
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)

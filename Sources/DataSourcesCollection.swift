@@ -40,7 +40,7 @@ class DataSourcesCollection {
     
     fileprivate func createAndPrepareMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         
-        guard (dataSource as? CompositeDataSource)?.type != .multiSection else {
+        guard (dataSource as? CompositeDataSource)?.sectionType != .multi else {
             fatalError("Cannot add a multi-section composite data source as child data source.")
         }
 

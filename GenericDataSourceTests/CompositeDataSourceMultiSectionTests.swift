@@ -13,7 +13,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testAddDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -33,7 +33,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testInsertDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -53,7 +53,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testRemoveDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -78,7 +78,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testDataSourceAtIndex() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -98,7 +98,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testContainsDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -115,7 +115,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testIndexOfDataSource() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -132,7 +132,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testGlobalSectionForLocalSection() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -148,7 +148,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testLocalSectionForGlobalSection() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -164,7 +164,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
 
     func testGlobalIndexPathForLocalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
@@ -187,7 +187,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
     
     func testLocalIndexPathForGlobalIndexPath() {
         
-        let dataSource  = CompositeDataSource(type: .multiSection)
+        let dataSource  = CompositeDataSource(sectionType: .multi)
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
