@@ -28,12 +28,6 @@ A generic small composable components for data source implementation for `UITabl
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
 To integrate GenericDataSource into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
@@ -51,19 +45,6 @@ To integrate GenericDataSource into your Xcode project using Carthage, specify i
 
 ```bash
 github "GenericDataSource/GenericDataSource"
-```
-
-### Swift Package Manager
-
-```Swift
-import PackageDescription
-
-let package = Package(
-    name: "YOUR_PROJECT_NAME",
-    dependencies: [
-        .Package(url: "https://github.com/GenericDataSource/GenericDataSource.git", majorVersion: 2)
-    ]
-)
 ```
 
 ### Manually
