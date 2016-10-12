@@ -7,7 +7,7 @@
 
 ## 2.0.0
 
-* Swift 3.0 Support
+* Swift 3.0 Support.
 
 ## 2.1.0
 
