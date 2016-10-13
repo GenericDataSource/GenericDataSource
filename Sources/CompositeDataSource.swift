@@ -114,7 +114,6 @@ open class CompositeDataSource: AbstractDataSource {
         collection.removeDataSource(dataSource)
     }
 
-
     /// Clear the collection of data sources.
     open func removeAllDataSources() {
         collection.removeAllDataSources()
@@ -203,6 +202,26 @@ open class CompositeDataSource: AbstractDataSource {
         return collection.localIndexPathForGlobalIndexPath(indexPath, dataSource: dataSource)
     }
 
+
+    /// Transform the passed index path and collection view to a local/child data source, index path and collection view.
+    /// This method should only be used to add new capabilities to the `CompositeDataSource`.
+    /// It shouldn't be used for regular usage of the data sources in app.
+    /// 
+    /// If you want to extend `CompositeDataSource`, you might have a local at one of the implementation of `DataSource` that uses this method.
+    /// Usually, you do it in 2 steps:
+    /// 1. Transform using this method the passed collection view and datasource.
+    /// 2. Use the transformed value to call the new data source with a new collection view and new index path.
+    /// 
+    /// **You shouldn't by any case combine global and local data.** Like calling a local data source with global collection view.
+    ///
+    /// - parameter globalIndexPath:      The global index path, it's local for the `CompositeDataSource`. But global for child data sources.
+    /// - parameter globalCollectionView: The global collect view, it's local for the `CompositeDataSource`. But global for child data sources.
+    ///
+    /// - returns: The transformed result that contains (new local data source, new local collection view and new local index path).
+    open func transform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
+        return collection.transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView)
+    }
+
     // MARK:- Data Source
 
     /**
@@ -254,8 +273,8 @@ open class CompositeDataSource: AbstractDataSource {
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAt indexPath: IndexPath) -> ReusableCell {
 
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, cellForItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, cellForItemAt: transformed.indexPath)
     }
 
     // MARK: Size
@@ -270,8 +289,8 @@ open class CompositeDataSource: AbstractDataSource {
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView?(mapping.wrapperView, sizeForItemAt: mapping.localIndexPath) ?? CGSize.zero
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView?(transformed.collectionView, sizeForItemAt: transformed.indexPath) ?? CGSize.zero
     }
 
     // MARK: Selection
@@ -286,8 +305,8 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, shouldHighlightItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, shouldHighlightItemAt: transformed.indexPath)
     }
 
     /**
@@ -298,8 +317,8 @@ open class CompositeDataSource: AbstractDataSource {
      */
 
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAt indexPath: IndexPath) {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didHighlightItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, didHighlightItemAt: transformed.indexPath)
     }
 
     /**
@@ -309,8 +328,8 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, didUnhighlightItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, didUnhighlightItemAt: transformed.indexPath)
     }
 
     /**
@@ -323,8 +342,8 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be selected or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, shouldSelectItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, shouldSelectItemAt: transformed.indexPath)
     }
 
     /**
@@ -334,8 +353,8 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didSelectItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, didSelectItemAt: transformed.indexPath)
     }
 
     /**
@@ -348,8 +367,8 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(collectionView, shouldDeselectItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, shouldDeselectItemAt: transformed.indexPath)
     }
 
     /**
@@ -359,7 +378,7 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let mapping = collection.collectionViewWrapperFromIndexPath(indexPath, collectionView: collectionView)
-        return mapping.dataSource.ds_collectionView(mapping.wrapperView, didDeselectItemAt: mapping.localIndexPath)
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, didDeselectItemAt: transformed.indexPath)
     }
 }

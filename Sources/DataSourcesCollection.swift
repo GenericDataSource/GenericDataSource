@@ -187,19 +187,16 @@ class DataSourcesCollection {
         return mapping.localSectionForGlobalSection(section)
     }
 
-    func collectionViewWrapperFromIndexPath(
-        _ indexPath: IndexPath,
-        collectionView: GeneralCollectionView)
-        -> (dataSource: DataSource, localIndexPath: IndexPath, wrapperView: DelegatedGeneralCollectionView) {
+    func transform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
             updateMappings()
             
-            let mapping = mappingForIndexPath(indexPath)
-            let localIndexPath = mapping.localIndexPathForGlobalIndexPath(indexPath)
+            let mapping = mappingForIndexPath(globalIndexPath)
+            let localIndexPath = mapping.localIndexPathForGlobalIndexPath(globalIndexPath)
             
-            let wrapperMapping = GeneralCollectionViewWrapperMapping(mapping: mapping, view: collectionView)
+            let wrapperMapping = GeneralCollectionViewWrapperMapping(mapping: mapping, view: globalCollectionView)
             let wrapperView = DelegatedGeneralCollectionView(mapping: wrapperMapping)
 
-            return (mapping.dataSource, localIndexPath, wrapperView)
+            return LocalDataSourceCollectionView(dataSource: mapping.dataSource, collectionView: wrapperView, indexPath: localIndexPath)
     }
 }
 
