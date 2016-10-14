@@ -41,6 +41,28 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
         XCTAssertTrue(ds.responds(to: #selector(UITableViewDelegate.tableView(_:heightForRowAt:))))
     }
 
+    func testRemoveAllDataSources() {
+
+        let dataSource  = CompositeDataSource(sectionType: .single)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        dataSource.addDataSource(pdfReportsDataSource)
+
+        XCTAssertEqual(1, dataSource.dataSources.count)
+        XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
+
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+        dataSource.addDataSource(textReportsDataSource)
+
+        XCTAssertEqual(2, dataSource.dataSources.count)
+
+        // test
+        dataSource.removeAllDataSources()
+        XCTAssertEqual(0, dataSource.dataSources.count)
+    }
+
     func testAddDataSource() {
         
         let dataSource  = CompositeDataSource(sectionType: .single)
