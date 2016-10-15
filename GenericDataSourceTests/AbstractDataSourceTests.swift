@@ -1,5 +1,5 @@
 //
-//  AbstractDataSourceTestCases.swift
+//  AbstractDataSourceTests.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 3/27/16.
@@ -23,7 +23,7 @@ private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
     }
 }
 
-class AbstractDataSourceTestCases: XCTestCase {
+class AbstractDataSourceTests: XCTestCase {
     
     var instance: ReportBasicDataSource<PDFReportCollectionViewCell>!
     var tableView: UITableView!

@@ -41,7 +41,7 @@ class DataSourcesCollection {
     fileprivate func createAndPrepareMappingForDataSource(_ dataSource: DataSource) -> Mapping {
         
         guard (dataSource as? CompositeDataSource)?.sectionType != .multi else {
-            fatalError("Cannot add a multi-section composite data source as child data source.")
+            fatalError("Cannot add a multi-section composite data source as child data source. It should be at the top level of the hierarchy.")
         }
 
         let wrapper = DataSourceWrapper(dataSource: dataSource)
