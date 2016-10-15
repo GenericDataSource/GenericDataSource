@@ -41,16 +41,20 @@ import Foundation
      */
     @objc(ds_registerNib:forCellWithReuseIdentifier:)
     func ds_register(_ nib: UINib?, forCellWithReuseIdentifier identifier: String)
+
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
     @objc(ds_registerClass:forCellWithReuseIdentifier:)
     func ds_register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String)
+
     /**
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
     func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell
-    
+
+    func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView
+
     // MARK:- Numbers
 
     /**

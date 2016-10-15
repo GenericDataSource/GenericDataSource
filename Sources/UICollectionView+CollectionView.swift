@@ -139,7 +139,11 @@ extension UICollectionView: GeneralCollectionView {
     open func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell {
         return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
-    
+
+    open func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
+        return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
+    }
+
     /**
      Just calls the corresponding method `return indexPathForCell(cell)`.
      */

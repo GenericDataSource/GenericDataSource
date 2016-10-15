@@ -54,6 +54,11 @@ protocol GeneralCollectionViewMapping {
         return delegate.ds_dequeueReusableCell(withIdentifier: identifier, for: globalIndexPath)
     }
 
+    func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
+        let globalIndexPath = ds_globalIndexPathForLocalIndexPath(indexPath)
+        return delegate.ds_dequeueReusableSupplementaryView(ofKind: kind, withIdentifier: identifier, for: globalIndexPath)
+    }
+
     // MARK:- Numbers
     
     func ds_numberOfSections() -> Int {

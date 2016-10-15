@@ -20,6 +20,10 @@
 		54433BE51DAF53070032AF9C /* LocalDataSourceCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */; };
 		54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */; };
 		54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE91DB0A6850032AF9C /* BlockSelectionHandlerTests.swift */; };
+		54433C0B1DB231A50032AF9C /* SupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C0A1DB231A50032AF9C /* SupplementaryViewCreator.swift */; };
+		54433C0D1DB2325D0032AF9C /* ReusableSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */; };
+		54433C0F1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */; };
+		54433C111DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
@@ -71,6 +75,10 @@
 		54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataSourceCollectionView.swift; sourceTree = "<group>"; };
 		54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandlerTests.swift; sourceTree = "<group>"; };
 		54433BE91DB0A6850032AF9C /* BlockSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandlerTests.swift; sourceTree = "<group>"; };
+		54433C0A1DB231A50032AF9C /* SupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewCreator.swift; sourceTree = "<group>"; };
+		54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableSupplementaryView.swift; sourceTree = "<group>"; };
+		54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSupplementaryViewCreator.swift; sourceTree = "<group>"; };
+		54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSupplementaryViewCreator.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
@@ -145,6 +153,16 @@
 				54433BE91DB0A6850032AF9C /* BlockSelectionHandlerTests.swift */,
 			);
 			name = Selection;
+			sourceTree = "<group>";
+		};
+		54433C091DB230240032AF9C /* Supplementary */ = {
+			isa = PBXGroup;
+			children = (
+				54433C0A1DB231A50032AF9C /* SupplementaryViewCreator.swift */,
+				54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */,
+				54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */,
+			);
+			name = Supplementary;
 			sourceTree = "<group>";
 		};
 		546B1CC51C8244990009DD26 /* Helper */ = {
@@ -265,10 +283,11 @@
 		5CE64F131DA77B9D002456E1 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				5CE64F4B1DA77C41002456E1 /* DataSource */,
+				54433C091DB230240032AF9C /* Supplementary */,
+				5CE64F4B1DA77C41002456E1 /* Base DataSource */,
 				5CE64F441DA77BE4002456E1 /* DataSources */,
-				5CE64F4C1DA77C49002456E1 /* UIKit */,
 				5CE64F431DA77BDE002456E1 /* Selection */,
+				5CE64F4C1DA77C49002456E1 /* UIKit */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -349,13 +368,13 @@
 			name = Mapping;
 			sourceTree = "<group>";
 		};
-		5CE64F4B1DA77C41002456E1 /* DataSource */ = {
+		5CE64F4B1DA77C41002456E1 /* Base DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */,
 				5CE64F1C1DA77B9D002456E1 /* DataSource.swift */,
 			);
-			name = DataSource;
+			name = "Base DataSource";
 			sourceTree = "<group>";
 		};
 		5CE64F4C1DA77C49002456E1 /* UIKit */ = {
@@ -364,6 +383,7 @@
 				5CE64F181DA77B9D002456E1 /* BatchUpdater.swift */,
 				5CE64F201DA77B9D002456E1 /* GeneralCollectionView.swift */,
 				5CE64F251DA77B9D002456E1 /* ReusableCell.swift */,
+				54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */,
 				5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */,
 				5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */,
 				5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */,
@@ -500,8 +520,12 @@
 				5CE64F381DA77B9D002456E1 /* GeneralCollectionViewWrapperMapping.swift in Sources */,
 				5CE64F3B1DA77B9D002456E1 /* MultiSectionDataSourcesCollection.swift in Sources */,
 				5CE64F401DA77B9D002456E1 /* UITableView+CollectionView.swift in Sources */,
+				54433C0F1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift in Sources */,
+				54433C0D1DB2325D0032AF9C /* ReusableSupplementaryView.swift in Sources */,
 				5CE64F3F1DA77B9D002456E1 /* UIKitExtensions.swift in Sources */,
+				54433C0B1DB231A50032AF9C /* SupplementaryViewCreator.swift in Sources */,
 				5CE64F331DA77B9D002456E1 /* DataSource.swift in Sources */,
+				54433C111DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift in Sources */,
 				5CE64F341DA77B9D002456E1 /* DataSourcesCollection.swift in Sources */,
 				5CE64F3E1DA77B9D002456E1 /* UICollectionView+CollectionView.swift in Sources */,
 				5CE64F3C1DA77B9D002456E1 /* ReusableCell.swift in Sources */,

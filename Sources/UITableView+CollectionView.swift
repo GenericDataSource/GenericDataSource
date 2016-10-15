@@ -145,7 +145,14 @@ extension UITableView: GeneralCollectionView {
     open func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell {
         return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
-    
+
+    open func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
+        guard let view = dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
+            fatalError("UITableView doesn't have a UIHeaderFooterView for reuse identifier '\(identifier)'")
+        }
+        return view
+    }
+
     /**
      Just calls the corresponding method `return numberOfSections`.
      */

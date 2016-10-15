@@ -24,6 +24,8 @@ let sizeSelectors: [Selector] = [
  */
 open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    open var supplementaryViewCreator: SupplementaryViewCreator?
+
     /**
      Represents the scroll view delegate property. Delegate calls of functions in UIScrollViewDelegate protocol are forwarded to this object.
      **Note that:** this object is retained.
@@ -123,10 +125,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
      */
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ds_collectionView(tableView, cellForItemAt: indexPath)
-        guard let castedCell = cell as? UITableViewCell else {
-            fatalError("Couldn't cast cell '\(cell)' to UITableViewCell")
-        }
-        return castedCell
+        return cast(cell)
     }
 
     // MARK:- UICollectionViewDataSource
@@ -149,13 +148,9 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
-    open func collectionView(_ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell: ReusableCell = ds_collectionView(collectionView, cellForItemAt: indexPath)
-            guard let castedCell = cell as? UICollectionViewCell else {
-                fatalError("Couldn't cast cell '\(cell)' to UICollectionViewCell")
-            }
-            return castedCell
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = ds_collectionView(collectionView, cellForItemAt: indexPath)
+        return cast(cell)
     }
 
     // MARK:- UITableViewDelegate
@@ -394,7 +389,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     /**
      Tells the delegate that the specified item was selected.
      
@@ -426,6 +421,103 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAt indexPath: IndexPath) {
         // does nothing
+    }
+
+    // MARK:- Header/Footer
+
+    // MARK: UITableView
+
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard supplementaryViewCreator != nil else { return nil }
+        let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
+        return cast(view)
+    }
+
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section)).height
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let castedView: UITableViewHeaderFooterView = cast(view)
+        ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        let castedView: UITableViewHeaderFooterView = cast(view)
+        ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
+    }
+
+    open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard supplementaryViewCreator != nil else { return nil }
+        let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
+        return cast(view)
+    }
+
+    open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section)).height
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        let castedView: UITableViewHeaderFooterView = cast(view)
+        ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        let castedView: UITableViewHeaderFooterView = cast(view)
+        ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
+    }
+
+    // MARK: UICollectionView
+
+    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)
+        return cast(view)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        ds_collectionView(collectionView, willDisplaySupplementaryView: view, ofKind: elementKind, at: indexPath)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        ds_collectionView(collectionView, didEndDisplayingSupplementaryView: view, ofKind: elementKind, at: indexPath)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
+    }
+
+    // MARK: DataSource
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
+        guard let creator = supplementaryViewCreator else {
+            fatalError("[\(type(of: self))] Calling `supplementaryViewOfKind` method with nil supplementaryViewOfKind property.")
+        }
+        return creator.collectionView(collectionView, viewOfKind: kind, at: indexPath)
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
+        return supplementaryViewCreator?.collectionView(collectionView, sizeForViewOfKind: kind, at: indexPath) ?? .zero
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
+        supplementaryViewCreator?.collectionView(collectionView, willDisplayView: view, ofKind: kind, at: indexPath)
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
+        supplementaryViewCreator?.collectionView(collectionView, didEndDisplayingView: view, ofKind: kind, at: indexPath)
+    }
+
+    // MARK:- Private
+
+    private func cast<T, U>(_ value: T) -> U {
+        guard let castedValue = value as? U else {
+            fatalError("[\(type(of: self))] Couldn't cast cell '\(value)' to '\(U.self)'")
+        }
+        return castedValue
     }
 }
 

@@ -381,4 +381,42 @@ open class CompositeDataSource: AbstractDataSource {
         let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didDeselectItemAt: transformed.indexPath)
     }
+
+    // MARK:- Header/Footer
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
+        // if, it's configured use it, otherwise delegate to one of the child data sources
+        guard supplementaryViewCreator == nil else {
+            return super.ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)
+        }
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, supplementaryViewOfKind: kind, at: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
+        // if, it's configured use it, otherwise delegate to one of the child data sources
+        guard supplementaryViewCreator == nil else {
+            return super.ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: kind, at: indexPath)
+        }
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, sizeForSupplementaryViewOfKind: kind, at: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
+        // if, it's configured use it, otherwise delegate to one of the child data sources
+        guard supplementaryViewCreator == nil else {
+            return super.ds_collectionView(collectionView, willDisplaySupplementaryView: view, ofKind: kind, at: indexPath)
+        }
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, willDisplaySupplementaryView: view, ofKind: kind, at: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
+        // if, it's configured use it, otherwise delegate to one of the child data sources
+        guard supplementaryViewCreator == nil else {
+            return super.ds_collectionView(collectionView, didEndDisplayingSupplementaryView: view, ofKind: kind, at: indexPath)
+        }
+        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(transformed.collectionView, didEndDisplayingSupplementaryView: view, ofKind: kind, at: transformed.indexPath)
+    }
 }
