@@ -17,11 +17,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let height1: CGFloat = 19
         let height2: CGFloat = 45
@@ -40,11 +40,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         // register the cell
         pdfReportsDataSource.registerReusableViewsInCollectionView(tableView)
@@ -60,7 +60,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         var cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
@@ -69,7 +69,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
@@ -78,8 +78,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        var localIndex = IndexPath(item: (index as NSIndexPath).item - pdfReportsDataSource.items.count, section: (index as NSIndexPath).section)
-        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
+        var localIndex = IndexPath(item: index.item - pdfReportsDataSource.items.count, section: index.section)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
@@ -88,8 +88,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         cell = dataSource.tableView(tableView, cellForRowAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        localIndex = IndexPath(item: (index as NSIndexPath).item - pdfReportsDataSource.items.count, section: (index as NSIndexPath).section)
-        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
+        localIndex = IndexPath(item: index.item - pdfReportsDataSource.items.count, section: index.section)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
@@ -101,11 +101,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -144,11 +144,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -187,11 +187,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -230,11 +230,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -273,11 +273,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -316,11 +316,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -359,11 +359,11 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportTableViewCell>()
         let selector2 = MockSelectionController<Report, TextReportTableViewCell>()
@@ -407,7 +407,7 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         reportsDataSource.items = reports
         
         let dataSource  = CompositeDataSource(sectionType: .single)
-        dataSource.addDataSource(reportsDataSource)
+        dataSource.add(reportsDataSource)
         
         // assign as data source
         tableView.dataSource = dataSource
@@ -445,8 +445,8 @@ class CompositeDataSourceSingleSectionTableTests: XCTestCase {
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
 
         let dataSource  = CompositeDataSource(sectionType: .single)
-        dataSource.addDataSource(pdfReportsDataSource)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         // assign as data source
         tableView.dataSource = dataSource

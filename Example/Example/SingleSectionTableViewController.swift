@@ -28,8 +28,8 @@ class SingleSectionTableViewController: UITableViewController {
         colorsDataSource.itemHeight = 30
         contactsDataSource.itemHeight = 50
 
-        dataSource.addDataSource(contactsDataSource)
-        dataSource.addDataSource(colorsDataSource)
+        dataSource.add(contactsDataSource)
+        dataSource.add(colorsDataSource)
 
         colorsDataSource.items = Service.getFewColors()
         contactsDataSource.items = Service.getContacts()
@@ -37,9 +37,9 @@ class SingleSectionTableViewController: UITableViewController {
 
     @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
-        let firstDataSource = dataSource.dataSourceAtIndex(0)
-        dataSource.removeDataSource(firstDataSource)
-        dataSource.addDataSource(firstDataSource)
+        let firstDataSource = dataSource.dataSource(at: 0)
+        dataSource.remove(firstDataSource)
+        dataSource.add(firstDataSource)
 
         // the indexes
         let numberOfItems = firstDataSource.ds_numberOfItems(inSection: 0)

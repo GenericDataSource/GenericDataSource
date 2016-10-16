@@ -1,5 +1,5 @@
 //
-//  MultiSectionDataSourcesCollection.swift
+//  _MultiSectionDataSourcesCollection.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/21/16.
@@ -8,24 +8,32 @@
 
 import Foundation
 
-class MultiSectionDataSourcesCollection: DataSourcesCollection {
+class _MultiSectionDataSourcesCollection: _DataSourcesCollection {
     fileprivate var sectionsCount: Int = 0
 
-    fileprivate var globalSectionToMappings: [Int: MutliSectionMapping] = [:]
+    fileprivate var globalSectionToMappings: [Int: _MutliSectionMapping] = [:]
 
-    override func createMappingForDataSource(_ dataSource: DataSource) -> Mapping {
-        return MutliSectionMapping(dataSource: dataSource)
+    var mappings: _MappingCollection = _MappingCollection()
+
+    unowned let parentDataSource: CompositeDataSource
+
+    init(parentDataSource: CompositeDataSource) {
+        self.parentDataSource = parentDataSource
     }
 
-    override func updateMappings() {
+    func createMapping(for dataSource: DataSource) -> _DataSourcesCollectionMapping {
+        return _MutliSectionMapping(dataSource: dataSource)
+    }
+
+    func updateMappings() {
 
         // reset
         var count = 0
         globalSectionToMappings.removeAll()
 
         for mapping in mappings {
-            guard let mapping = mapping as? MutliSectionMapping else {
-                fatalError("Mappings for \(type(of: self)) should be of type \(MutliSectionMapping.self)")
+            guard let mapping = mapping as? _MutliSectionMapping else {
+                fatalError("Mappings for \(type(of: self)) should be of type \(_MutliSectionMapping.self)")
             }
 
             let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
@@ -37,36 +45,35 @@ class MultiSectionDataSourcesCollection: DataSourcesCollection {
         sectionsCount = count
     }
 
-    override func mappingForIndexPath(_ indexPath: IndexPath) -> Mapping {
-        return mappingForGlobalSection((indexPath as NSIndexPath).section)
+    func mapping(for indexPath: IndexPath) -> _DataSourcesCollectionMapping? {
+        return mappingForGlobalSection(indexPath.section)
     }
 
-    func mappingForGlobalSection(_ section: Int) -> MutliSectionMapping {
-        guard let mapping = globalSectionToMappings[section] else {
-            fatalError("Couldn't find mapping for section: \(section)")
-        }
-        return mapping
+    func mappingForGlobalSection(_ section: Int) -> _MutliSectionMapping? {
+        return globalSectionToMappings[section]
     }
 
     // MARK:- Data Source
 
-    override func numberOfSections() -> Int {
+    func numberOfSections() -> Int {
         updateMappings()
 
         return sectionsCount
     }
 
-    override func numberOfItems(inSection section: Int) -> Int {
+    func numberOfItems(inSection section: Int) -> Int {
         updateMappings()
 
-        let mapping = mappingForGlobalSection(section)
+        guard let mapping = mappingForGlobalSection(section) else {
+            fatalError("Cannot find mapping for section '\(section)' in a MultiSection data sources requesting numberOfItems.")
+        }
         return mapping.dataSource.ds_numberOfItems(inSection: 0)
     }
 }
 
-extension MultiSectionDataSourcesCollection {
+extension _MultiSectionDataSourcesCollection {
 
-    internal class MutliSectionMapping : Mapping {
+    class _MutliSectionMapping : _DataSourcesCollectionMapping {
 
         fileprivate var globalSectionStartIndex: Int = 0
 

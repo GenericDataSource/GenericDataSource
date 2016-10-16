@@ -44,7 +44,7 @@ class MockTableView : UITableView {
             return UITableViewCell()
         }
 
-        let index = (indexPath as NSIndexPath).item % numberOfReuseCells
+        let index = indexPath.item % numberOfReuseCells
 
         if let cell = cellData.cells[index] {
             return cell
@@ -122,7 +122,7 @@ class MockCollectionView : UICollectionView {
             return UICollectionViewCell()
         }
 
-        let index = (indexPath as NSIndexPath).item % numberOfReuseCells
+        let index = indexPath.item % numberOfReuseCells
 
         if let cell = cellData.cells[index] {
             return cell

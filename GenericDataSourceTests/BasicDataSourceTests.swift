@@ -201,7 +201,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertTrue(selection.configureCellCalled)
         XCTAssertEqual(cell, selection.cell)
         XCTAssertEqual(indexPath, selection.indexPath)
-        XCTAssertEqual(dataSource.items[(indexPath as NSIndexPath).item], selection.item)
+        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
     }
     
     func testConfigureCellBySelectorTableView() {
@@ -229,7 +229,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertTrue(selection.configureCellCalled)
         XCTAssertEqual(cell, selection.cell)
         XCTAssertEqual(indexPath, selection.indexPath)
-        XCTAssertEqual(dataSource.items[(indexPath as NSIndexPath).item], selection.item)
+        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
     }
     
     func testSelectionShouldHighlight() {

@@ -97,7 +97,7 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
      - returns: The item at a certain index path.
      */
     open func item(at indexPath: IndexPath) -> ItemType {
-        return items[(indexPath as NSIndexPath).item]
+        return items[indexPath.item]
     }
 
     /**
@@ -109,7 +109,7 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
      - parameter item:      The new item that will be saved in the `items` array.
      */
     open func replaceItem(at indexPath: IndexPath, with item: ItemType) {
-        items[(indexPath as NSIndexPath).item] = item
+        items[indexPath.item] = item
     }
 
     // MARK:- DataSource

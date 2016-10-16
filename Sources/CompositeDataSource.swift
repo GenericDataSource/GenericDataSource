@@ -40,7 +40,7 @@ open class CompositeDataSource: AbstractDataSource {
     }
 
     /// The collection class that manages the data sources.
-    fileprivate var collection: DataSourcesCollection!
+    private var collection: _DataSourcesCollection!
 
     ///  Represents the section type of the composite data source.
     open let sectionType: SectionType
@@ -56,9 +56,9 @@ open class CompositeDataSource: AbstractDataSource {
 
         switch sectionType {
         case .single:
-            collection = SingleSectionDataSourcesCollection(parentDataSource: self)
+            collection = _SingleSectionDataSourcesCollection(parentDataSource: self)
         case .multi:
-            collection = MultiSectionDataSourcesCollection(parentDataSource: self)
+            collection = _MultiSectionDataSourcesCollection(parentDataSource: self)
         }
     }
 
@@ -91,8 +91,8 @@ open class CompositeDataSource: AbstractDataSource {
 
      - parameter dataSource: The new data source to add.
      */
-    open func addDataSource(_ dataSource: DataSource) {
-        collection.addDataSource(dataSource)
+    open func add(_ dataSource: DataSource) {
+        collection.add(dataSource)
     }
 
     /**
@@ -101,8 +101,8 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter dataSource: The new data source to add.
      - parameter index:      The index to insert the new data source at.
      */
-    open func insertDataSource(_ dataSource: DataSource, atIndex index: Int) {
-        collection.insertDataSource(dataSource, atIndex: index)
+    open func insert(_ dataSource: DataSource, at index: Int) {
+        collection.insert(dataSource, at: index)
     }
 
     /**
@@ -110,8 +110,13 @@ open class CompositeDataSource: AbstractDataSource {
 
      - parameter dataSource: The data source to remove.
      */
-    open func removeDataSource(_ dataSource: DataSource) {
-        collection.removeDataSource(dataSource)
+    open func remove(_ dataSource: DataSource) {
+        collection.remove(dataSource)
+    }
+
+    @discardableResult
+    open func remove(at index: Int) -> DataSource {
+        return collection.remove(at: index)
     }
 
     /// Clear the collection of data sources.
@@ -126,8 +131,8 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: The data source at specified index.
      */
-    open func dataSourceAtIndex(_ index: Int) -> DataSource {
-        return collection.dataSourceAtIndex(index)
+    open func dataSource(at index: Int) -> DataSource {
+        return collection.dataSource(at: index)
     }
 
     /**
@@ -137,8 +142,8 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: `true``, if the data source exists. Otherwise `false`.
      */
-    open func containsDataSource(_ dataSource: DataSource) -> Bool {
-        return collection.containsDataSource(dataSource)
+    open func contains(_ dataSource: DataSource) -> Bool {
+        return collection.contains(dataSource)
     }
 
     /**
@@ -148,8 +153,8 @@ open class CompositeDataSource: AbstractDataSource {
 
      - returns: The index of the data source.
      */
-    open func indexOfDataSource(_ dataSource: DataSource) -> Int? {
-        return collection.indexOfDataSource(dataSource)
+    open func index(of dataSource: DataSource) -> Int? {
+        return collection.index(of: dataSource)
     }
 
     // MARK:- IndexPath and Section translations
@@ -203,7 +208,8 @@ open class CompositeDataSource: AbstractDataSource {
     }
 
 
-    /// Transform the passed index path and collection view to a local/child data source, index path and collection view.
+    /// Transform the passed index path and collection view to a local/child data source, index path and collection view. **Crashes if mapping doesn't exist.**
+    /// 
     /// This method should only be used to add new capabilities to the `CompositeDataSource`.
     /// It shouldn't be used for regular usage of the data sources in app.
     /// 
@@ -218,7 +224,27 @@ open class CompositeDataSource: AbstractDataSource {
     /// - parameter globalCollectionView: The global collect view, it's local for the `CompositeDataSource`. But global for child data sources.
     ///
     /// - returns: The transformed result that contains (new local data source, new local collection view and new local index path).
-    open func transform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
+    open func unsafeTransform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
+        return collection.unsafeTransform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView)
+    }
+
+    /// Transform the passed index path and collection view to a local/child data source, index path and collection view.
+    ///
+    /// This method should only be used to add new capabilities to the `CompositeDataSource`.
+    /// It shouldn't be used for regular usage of the data sources in app.
+    ///
+    /// If you want to extend `CompositeDataSource`, you might have a local at one of the implementation of `DataSource` that uses this method.
+    /// Usually, you do it in 2 steps:
+    /// 1. Transform using this method the passed collection view and datasource.
+    /// 2. Use the transformed value to call the new data source with a new collection view and new index path.
+    ///
+    /// **You shouldn't by any case combine global and local data.** Like calling a local data source with global collection view.
+    ///
+    /// - parameter globalIndexPath:      The global index path, it's local for the `CompositeDataSource`. But global for child data sources.
+    /// - parameter globalCollectionView: The global collect view, it's local for the `CompositeDataSource`. But global for child data sources.
+    ///
+    /// - returns: The transformed result that contains (new local data source, new local collection view and new local index path).
+    open func transform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView? {
         return collection.transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView)
     }
 
@@ -273,7 +299,7 @@ open class CompositeDataSource: AbstractDataSource {
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAt indexPath: IndexPath) -> ReusableCell {
 
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, cellForItemAt: transformed.indexPath)
     }
 
@@ -289,7 +315,7 @@ open class CompositeDataSource: AbstractDataSource {
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView?(transformed.collectionView, sizeForItemAt: transformed.indexPath) ?? CGSize.zero
     }
 
@@ -305,7 +331,7 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, shouldHighlightItemAt: transformed.indexPath)
     }
 
@@ -317,7 +343,7 @@ open class CompositeDataSource: AbstractDataSource {
      */
 
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didHighlightItemAt indexPath: IndexPath) {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didHighlightItemAt: transformed.indexPath)
     }
 
@@ -328,7 +354,7 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(collectionView, didUnhighlightItemAt: transformed.indexPath)
     }
 
@@ -342,7 +368,7 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be selected or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(collectionView, shouldSelectItemAt: transformed.indexPath)
     }
 
@@ -353,7 +379,7 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didSelectItemAt indexPath: IndexPath) {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didSelectItemAt: transformed.indexPath)
     }
 
@@ -367,7 +393,7 @@ open class CompositeDataSource: AbstractDataSource {
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(collectionView, shouldDeselectItemAt: transformed.indexPath)
     }
 
@@ -378,45 +404,47 @@ open class CompositeDataSource: AbstractDataSource {
      - parameter indexPath:      An index path locating an item in the view.
      */
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didDeselectItemAt: transformed.indexPath)
     }
 
     // MARK:- Header/Footer
 
+    private func delegateSupplementaryViewCalls(collectionView: GeneralCollectionView, indexPath: IndexPath) -> LocalDataSourceCollectionView? {
+        guard supplementaryViewCreator == nil else { return nil }
+        guard let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView) else { return nil }
+        return transformed
+    }
+
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
-        // if, it's configured use it, otherwise delegate to one of the child data sources
-        guard supplementaryViewCreator == nil else {
+        // if, supplementaryViewCreator is not configured use it, otherwise delegate to one of the child data sources
+        guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
             return super.ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)
         }
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, supplementaryViewOfKind: kind, at: transformed.indexPath)
     }
 
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
         // if, it's configured use it, otherwise delegate to one of the child data sources
-        guard supplementaryViewCreator == nil else {
+        guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
             return super.ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: kind, at: indexPath)
         }
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, sizeForSupplementaryViewOfKind: kind, at: transformed.indexPath)
     }
 
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         // if, it's configured use it, otherwise delegate to one of the child data sources
-        guard supplementaryViewCreator == nil else {
+        guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
             return super.ds_collectionView(collectionView, willDisplaySupplementaryView: view, ofKind: kind, at: indexPath)
         }
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, willDisplaySupplementaryView: view, ofKind: kind, at: transformed.indexPath)
     }
 
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         // if, it's configured use it, otherwise delegate to one of the child data sources
-        guard supplementaryViewCreator == nil else {
+        guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
             return super.ds_collectionView(collectionView, didEndDisplayingSupplementaryView: view, ofKind: kind, at: indexPath)
         }
-        let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didEndDisplayingSupplementaryView: view, ofKind: kind, at: transformed.indexPath)
     }
 }

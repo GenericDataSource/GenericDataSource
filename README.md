@@ -99,14 +99,14 @@ let actionRoundedRectDS = ActionRoundedRectDataSource()
 
 // 4. Create first section hierarchy.
 let firstSection = CompsiteDataSource(type: .SingleSection)
-firstSection.addDataSource(featuredDS)
-firstSection.addDataSource(quickLinksDS)
-firstSection.addDataSource(actionBlueDS)
+firstSection.add(featuredDS)
+firstSection.add(quickLinksDS)
+firstSection.add(actionBlueDS)
 
 // 5. Complete the hierarchy.
 let outerDS = CompsiteDataSource(type: .MultiSection)
-outerDS.addDataSource(firstSection)
-outerDS.addDataSource(actionRoundedRectDS)
+outerDS.add(firstSection)
+outerDS.add(actionRoundedRectDS)
 
 // 6. set data sources to the collection view.
 collectionView.ds_useDataSource(outerDS)
@@ -165,7 +165,7 @@ class ColorsDataSource: BasicDataSource<Color, UITableViewCell> {
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: CellType, with item: Color, at indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: CellType, with item: Color, at indexPath: IndexPath) {
         cell.backgroundColor = item.color
     }
 }
@@ -177,7 +177,7 @@ class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, Contac
         super.init(reuseIdentifier: reuseIdentifier)
     }
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: NSIndexPath) {
+    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: IndexPath) {
         cell.configureForContact(item)
     }
 }
@@ -201,8 +201,8 @@ override func viewDidLoad() {
     let contactsDataSource = ContactsDataSource(reuseIdentifier: "contact")
     
     // add the data sources
-    dataSource.addDataSource(contactsDataSource)
-    dataSource.addDataSource(colorsDataSource)
+    dataSource.add(contactsDataSource)
+    dataSource.add(colorsDataSource)
     
     tableView.ds_useDataSource(dataSource)
     

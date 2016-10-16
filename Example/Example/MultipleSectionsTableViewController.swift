@@ -23,8 +23,8 @@ class MultipleSectionsTableViewController: UICollectionViewController {
         colorsDataSource.itemSize = CGSize(width: 70, height: 70)
         contactsDataSource.itemSize = CGSize(width: 150, height: 50)
 
-        dataSource.addDataSource(contactsDataSource)
-        dataSource.addDataSource(colorsDataSource)
+        dataSource.add(contactsDataSource)
+        dataSource.add(colorsDataSource)
         
         colorsDataSource.items = Service.getFewColors()
         contactsDataSource.items = Service.getContacts()
@@ -35,9 +35,9 @@ class MultipleSectionsTableViewController: UICollectionViewController {
 
     @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
-        let firstDataSource = dataSource.dataSourceAtIndex(0)
-        dataSource.removeDataSource(firstDataSource)
-        dataSource.addDataSource(firstDataSource)
+        let firstDataSource = dataSource.dataSource(at: 0)
+        dataSource.remove(firstDataSource)
+        dataSource.add(firstDataSource)
 
         // update the table view
         dataSource.ds_reusableViewDelegate?.ds_performBatchUpdates({ [weak self] in

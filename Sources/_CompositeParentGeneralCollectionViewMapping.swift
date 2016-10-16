@@ -1,5 +1,5 @@
 //
-//  CompositeParentGeneralCollectionViewMapping.swift
+//  _CompositeParentGeneralCollectionViewMapping.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/21/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompositeParentGeneralCollectionViewMapping: GeneralCollectionViewMapping {
+class _CompositeParentGeneralCollectionViewMapping: _GeneralCollectionViewMapping {
 
     unowned var parentDataSource: CompositeDataSource
     

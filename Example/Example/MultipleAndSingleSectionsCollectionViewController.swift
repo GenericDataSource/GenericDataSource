@@ -19,8 +19,8 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         let firstSection = createFirstSection()
         let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
         
-        dataSource.addDataSource(firstSection)
-        dataSource.addDataSource(colorsDataSource)
+        dataSource.add(firstSection)
+        dataSource.add(colorsDataSource)
 
         colorsDataSource.items = Service.getFewColors()
         colorsDataSource.itemSize = CGSize(width: 70, height: 70)
@@ -36,8 +36,8 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 
         let firstSection = CompositeDataSource(sectionType: .single)
-        firstSection.addDataSource(titleDataSource)
-        firstSection.addDataSource(contactsDataSource)
+        firstSection.add(titleDataSource)
+        firstSection.add(contactsDataSource)
 
         contactsDataSource.itemSize = CGSize(width: 150, height: 50)
         contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
@@ -48,9 +48,9 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
 
     @IBAction func exchangeButtonTapped(_ sender: AnyObject) {
         // update the data source
-        let firstDataSource = dataSource.dataSourceAtIndex(0)
-        dataSource.removeDataSource(firstDataSource)
-        dataSource.addDataSource(firstDataSource)
+        let firstDataSource = dataSource.dataSource(at: 0)
+        dataSource.remove(firstDataSource)
+        dataSource.add(firstDataSource)
         
         // update the table view
         dataSource.ds_reusableViewDelegate?.ds_performBatchUpdates({ [weak self] in

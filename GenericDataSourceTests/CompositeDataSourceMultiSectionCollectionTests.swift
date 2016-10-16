@@ -17,11 +17,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let size1 = CGSize(width: 10, height: 20)
         let size2 = CGSize(width: 70, height: 1200)
@@ -40,11 +40,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         // register the cell
         pdfReportsDataSource.registerReusableViewsInCollectionView(collectionView)
@@ -60,7 +60,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         var cell = dataSource.collectionView(collectionView, cellForItemAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
@@ -69,7 +69,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         cell = dataSource.collectionView(collectionView, cellForItemAt: index)
         XCTAssertTrue(selector1.configureCellCalled)
         XCTAssertEqual(cell, selector1.cell)
-        XCTAssertEqual(pdfReportsDataSource.items[(index as NSIndexPath).item], selector1.item)
+        XCTAssertEqual(pdfReportsDataSource.items[index.item], selector1.item)
         XCTAssertEqual(index, selector1.indexPath)
         XCTAssertFalse(selector2.configureCellCalled)
         selector1.configureCellCalled = false
@@ -78,8 +78,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         cell = dataSource.collectionView(collectionView, cellForItemAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        var localIndex = IndexPath(item: (index as NSIndexPath).item, section: (index as NSIndexPath).section - 1)
-        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
+        var localIndex = IndexPath(item: index.item, section: index.section - 1)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
@@ -88,8 +88,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         cell = dataSource.collectionView(collectionView, cellForItemAt: index)
         XCTAssertTrue(selector2.configureCellCalled)
         XCTAssertEqual(cell, selector2.cell)
-        localIndex = IndexPath(item: (index as NSIndexPath).item, section: (index as NSIndexPath).section - 1)
-        XCTAssertEqual(textReportsDataSource.items[(localIndex as NSIndexPath).item], selector2.item)
+        localIndex = IndexPath(item: index.item, section: index.section - 1)
+        XCTAssertEqual(textReportsDataSource.items[localIndex.item], selector2.item)
         XCTAssertEqual(localIndex, selector2.indexPath)
         XCTAssertFalse(selector1.configureCellCalled)
         selector2.configureCellCalled = false
@@ -101,11 +101,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -144,11 +144,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -187,11 +187,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -230,11 +230,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -273,11 +273,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -316,11 +316,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -359,11 +359,11 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         let selector1 = MockSelectionController<Report, PDFReportCollectionViewCell>()
         let selector2 = MockSelectionController<Report, TextReportCollectionViewCell>()
@@ -407,7 +407,7 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         reportsDataSource.items = reports
         
         let dataSource  = CompositeDataSource(sectionType: .multi)
-        dataSource.addDataSource(reportsDataSource)
+        dataSource.add(reportsDataSource)
         
         // assign as data source
         collectionView.dataSource = dataSource
@@ -446,8 +446,8 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
         
         let dataSource  = CompositeDataSource(sectionType: .multi)
-        dataSource.addDataSource(pdfReportsDataSource)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         // assign as data source
         collectionView.dataSource = dataSource
@@ -502,15 +502,15 @@ class CompositeDataSourceMultiSectionCollectionTests: XCTestCase {
         textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
         
         let singleSectionDataSource  = CompositeDataSource(sectionType: .single)
-        singleSectionDataSource.addDataSource(pdfReportsDataSource)
-        singleSectionDataSource.addDataSource(textReportsDataSource)
+        singleSectionDataSource.add(pdfReportsDataSource)
+        singleSectionDataSource.add(textReportsDataSource)
         
         let textReportsDataSource2 = ReportBasicDataSource<TextReportCollectionViewCell>()
         textReportsDataSource2.items = Report.generate(numberOfReports: total, name: "another report")
         
         let dataSource  = CompositeDataSource(sectionType: .multi)
-        dataSource.addDataSource(singleSectionDataSource)
-        dataSource.addDataSource(textReportsDataSource2)
+        dataSource.add(singleSectionDataSource)
+        dataSource.add(textReportsDataSource2)
         
         // assign as data source
         collectionView.dataSource = dataSource

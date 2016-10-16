@@ -1,5 +1,5 @@
 //
-//  SingleSectionDataSourcesCollection.swift
+//  _SingleSectionDataSourcesCollection.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 2/21/16.
@@ -8,25 +8,33 @@
 
 import Foundation
 
-class SingleSectionDataSourcesCollection: DataSourcesCollection {
+class _SingleSectionDataSourcesCollection: _DataSourcesCollection {
 
     fileprivate var itemsCount: Int = 0
 
-    fileprivate var globalItemToMappings: [Int: SingleSectionMapping] = [:]
+    fileprivate var globalItemToMappings: [Int: _SingleSectionMapping] = [:]
 
-    override func createMappingForDataSource(_ dataSource: DataSource) -> Mapping {
-        return SingleSectionMapping(dataSource: dataSource)
+    var mappings: _MappingCollection = _MappingCollection()
+
+    unowned let parentDataSource: CompositeDataSource
+
+    init(parentDataSource: CompositeDataSource) {
+        self.parentDataSource = parentDataSource
     }
 
-    override func updateMappings() {
+    func createMapping(for dataSource: DataSource) -> _DataSourcesCollectionMapping {
+        return _SingleSectionMapping(dataSource: dataSource)
+    }
+
+    func updateMappings() {
 
         // reset
         var count = 0
         globalItemToMappings.removeAll()
 
         for mapping in mappings {
-            guard let mapping = mapping as? SingleSectionMapping else {
-                fatalError("Mappings for \(type(of: self)) should be of type \(SingleSectionMapping.self)")
+            guard let mapping = mapping as? _SingleSectionMapping else {
+                fatalError("Mappings for \(type(of: self)) should be of type \(_SingleSectionMapping.self)")
             }
 
             let newItemCount = mapping.updateMappings(startingWithGlobalItem: count) + count
@@ -38,35 +46,32 @@ class SingleSectionDataSourcesCollection: DataSourcesCollection {
         itemsCount = count
     }
 
-    override func mappingForIndexPath(_ indexPath: IndexPath) -> Mapping {
-        return mappingForGlobalItem((indexPath as NSIndexPath).item)
+    func mapping(for indexPath: IndexPath) -> _DataSourcesCollectionMapping? {
+        return mappingForGlobalItem(indexPath.item)
     }
 
-    func mappingForGlobalItem(_ item: Int) -> SingleSectionMapping {
-        guard let mapping = globalItemToMappings[item] else {
-            fatalError("Couldn't find mapping for item: \(item)")
-        }
-        return mapping
+    func mappingForGlobalItem(_ item: Int) -> _SingleSectionMapping? {
+        return globalItemToMappings[item]
     }
 
     // MARK:- Data Source
 
-    override func numberOfSections() -> Int {
+    func numberOfSections() -> Int {
         updateMappings()
 
         return 1
     }
 
-    override func numberOfItems(inSection section: Int) -> Int {
+    func numberOfItems(inSection section: Int) -> Int {
         updateMappings()
 
         return itemsCount
     }
 }
 
-extension SingleSectionDataSourcesCollection {
+extension _SingleSectionDataSourcesCollection {
 
-    internal class SingleSectionMapping : Mapping {
+    class _SingleSectionMapping : _DataSourcesCollectionMapping {
 
         fileprivate var globalItemStartIndex: Int = 0
 

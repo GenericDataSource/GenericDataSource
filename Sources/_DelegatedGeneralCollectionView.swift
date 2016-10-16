@@ -1,5 +1,5 @@
 //
-//  DelegatedGeneralCollectionView.swift
+//  _DelegatedGeneralCollectionView.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 3/20/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GeneralCollectionViewMapping {
+protocol _GeneralCollectionViewMapping {
     
     func globalSectionForLocalSection(_ localSection: Int) -> Int
 
@@ -18,9 +18,9 @@ protocol GeneralCollectionViewMapping {
     var delegate: GeneralCollectionView? { get }
 }
 
-@objc class DelegatedGeneralCollectionView: NSObject, GeneralCollectionView {
+@objc class _DelegatedGeneralCollectionView: NSObject, GeneralCollectionView {
 
-    let mapping: GeneralCollectionViewMapping
+    let mapping: _GeneralCollectionViewMapping
     
     var delegate: GeneralCollectionView {
         guard let delegate = mapping.delegate else {
@@ -29,7 +29,7 @@ protocol GeneralCollectionViewMapping {
         return delegate
     }
 
-    init(mapping: GeneralCollectionViewMapping) {
+    init(mapping: _GeneralCollectionViewMapping) {
         self.mapping = mapping
     }
     

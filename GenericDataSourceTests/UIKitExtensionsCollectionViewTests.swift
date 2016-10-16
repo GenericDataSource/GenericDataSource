@@ -63,12 +63,12 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     
     func testInsertSections() {
         let sectionsDataSource = CompositeDataSource(sectionType: .multi)
-        sectionsDataSource.addDataSource(dataSource)
+        sectionsDataSource.add(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
         
         XCTAssertEqual(1, instance.ds_numberOfSections())
         
-        sectionsDataSource.addDataSource(ReportBasicDataSource<TextReportCollectionViewCell>())
+        sectionsDataSource.add(ReportBasicDataSource<TextReportCollectionViewCell>())
         
         instance.ds_insertSections(IndexSet(integer: 1), with: .none)
         XCTAssertEqual(2, instance.ds_numberOfSections())
@@ -76,12 +76,12 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     
     func testDeleteSections() {
         let sectionsDataSource = CompositeDataSource(sectionType: .multi)
-        sectionsDataSource.addDataSource(dataSource)
+        sectionsDataSource.add(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
         
         XCTAssertEqual(1, instance.ds_numberOfSections())
         
-        sectionsDataSource.removeDataSource(dataSource)
+        sectionsDataSource.remove(dataSource)
         
         instance.ds_deleteSections(IndexSet(integer: 0), with: .none)
         XCTAssertEqual(0, instance.ds_numberOfSections())
@@ -98,21 +98,21 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
     
     func testMoveSection() {
         let sectionsDataSource = CompositeDataSource(sectionType: .multi)
-        sectionsDataSource.addDataSource(dataSource)
+        sectionsDataSource.add(dataSource)
         instance.ds_useDataSource(sectionsDataSource)
-        sectionsDataSource.addDataSource(ReportBasicDataSource<TextReportCollectionViewCell>())
+        sectionsDataSource.add(ReportBasicDataSource<TextReportCollectionViewCell>())
         
         XCTAssertEqual(2, instance.ds_numberOfSections())
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
+        XCTAssertEqual(sectionsDataSource.dataSource(at: 0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
+        XCTAssertEqual(sectionsDataSource.dataSource(at: 1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
         
-        sectionsDataSource.removeDataSource(dataSource)
-        sectionsDataSource.addDataSource(dataSource)
+        sectionsDataSource.remove(dataSource)
+        sectionsDataSource.add(dataSource)
         
         instance.ds_moveSection(0, toSection: 1)
         XCTAssertEqual(2, instance.ds_numberOfSections())
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
-        XCTAssertEqual(sectionsDataSource.dataSourceAtIndex(1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
+        XCTAssertEqual(sectionsDataSource.dataSource(at: 0).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 0))
+        XCTAssertEqual(sectionsDataSource.dataSource(at: 1).ds_numberOfItems(inSection: 0), instance.ds_numberOfItems(inSection: 1))
     }
     
     func testInsertItems() {

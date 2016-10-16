@@ -32,11 +32,11 @@ class DelegatedGeneralCollectionViewMultiSectionTestCases: XCTestCase {
         
         let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
         pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
-        dataSource.addDataSource(pdfReportsDataSource)
+        dataSource.add(pdfReportsDataSource)
         
         textReportsDataSource = ClosureDataSource()
         textReportsDataSource.items = Report.generate(numberOfReports: 200)
-        dataSource.addDataSource(textReportsDataSource)
+        dataSource.add(textReportsDataSource)
         
         tableView = TableView()
         tableView.reset()

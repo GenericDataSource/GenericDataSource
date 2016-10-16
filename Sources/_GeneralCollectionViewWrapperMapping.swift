@@ -1,5 +1,5 @@
 //
-//  GeneralCollectionViewWrapperMapping.swift
+//  _GeneralCollectionViewWrapperMapping.swift
 //  GenericDataSource
 //
 //  Created by Mohamed Afifi on 9/16/15.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class GeneralCollectionViewWrapperMapping: GeneralCollectionViewMapping {
+class _GeneralCollectionViewWrapperMapping: _GeneralCollectionViewMapping {
     
-    let mapping: DataSourcesCollection.Mapping
+    let mapping: _DataSourcesCollectionMapping
     let delegate : GeneralCollectionView?
 
-    init(mapping: DataSourcesCollection.Mapping, view: GeneralCollectionView) {
+    init(mapping: _DataSourcesCollectionMapping, view: GeneralCollectionView) {
         self.mapping = mapping
         self.delegate = view
     }
