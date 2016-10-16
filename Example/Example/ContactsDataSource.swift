@@ -16,11 +16,6 @@ protocol ContactCell: ReusableCell {
 
 class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, CellType> {
 
-    // This is needed as of swift 2.2, because if you subclassed a generic class, initializers are not inherited.
-    override init(reuseIdentifier: String) {
-        super.init(reuseIdentifier: reuseIdentifier)
-    }
-
     override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: CellType, with item: Contact, at indexPath: IndexPath) {
         cell.configureForContact(item)
     }

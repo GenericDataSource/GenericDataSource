@@ -8,22 +8,28 @@
 
 import Foundation
 
-open class BasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementaryView>: SupplementaryViewCreator {
+open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSupplementaryView>: SupplementaryViewCreator {
 
     open var size: CGSize?
     open let identifier: String
-    open let kind: String
+    open var items: [[ItemType]] = []
 
-    init(identifier: String, kind: String, size: CGSize) {
+    init(identifier: String, size: CGSize) {
         self.identifier = identifier
-        self.kind = kind
         self.size = size
     }
 
-    init(identifier: String, kind: String) {
+    init(identifier: String) {
         self.identifier = identifier
-        self.kind = kind
         self.size = nil
+    }
+
+    open func setSectionedItems(sectionedItems: [ItemType]) {
+        items = sectionedItems.map { [$0] }
+    }
+
+    open func item(at indexPath: IndexPath) -> ItemType {
+        return items[indexPath.section][indexPath.item]
     }
 
     open func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
@@ -32,7 +38,7 @@ open class BasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementar
         guard let supplementaryView = view as? SupplementaryView else {
             fatalError("[BasicSupplementaryViewCreator]: Cannot cast view '\(view)' to type '\(SupplementaryView.self)'")
         }
-        self.collectionView(collectionView, configure: supplementaryView, at: indexPath)
+        self.collectionView(collectionView, configure: supplementaryView, with: item(at: indexPath), at: indexPath)
         return supplementaryView
     }
 
@@ -43,8 +49,7 @@ open class BasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementar
         return size
     }
 
-
-    open func collectionView(_ collectionView: GeneralCollectionView, configure view: SupplementaryView, at indexPath: IndexPath) {
-        // does nothing
+    func collectionView(_ collectionView: GeneralCollectionView, configure view: SupplementaryView, with item: ItemType, at indexPath: IndexPath) {
+        // does nothing, shall be overriden by subclasses
     }
 }

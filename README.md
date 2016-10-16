@@ -160,22 +160,12 @@ We need to show 2 different types of cells in the same section (color cells and 
 // We can use BasicDataSource by subclassing it or use BasicBlockDataSource as in the previous example.
 class ColorsDataSource: BasicDataSource<Color, UITableViewCell> {
 
-    // This is needed as of swift 2.2, because if you subclassed a generic class, initializers are not inherited.
-    override init(reuseIdentifier: String) {
-        super.init(reuseIdentifier: reuseIdentifier)
-    }
-
     override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: CellType, with item: Color, at indexPath: IndexPath) {
         cell.backgroundColor = item.color
     }
 }
 
 class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, ContactCell> {
-
-    // This is needed as of swift 2.2, because if you subclassed a generic class, initializers are not inherited.
-    override init(reuseIdentifier: String) {
-        super.init(reuseIdentifier: reuseIdentifier)
-    }
 
     override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: IndexPath) {
         cell.configureForContact(item)

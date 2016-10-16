@@ -10,12 +10,7 @@ import Foundation
 import GenericDataSource
 
 class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
-    
-    // This is needed as of swift 2.2, because if you subclassed a generic class, initializers are not inherited.
-    override init(reuseIdentifier: String) {
-        super.init(reuseIdentifier: reuseIdentifier)
-    }
-    
+
     override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: TitleCollectionViewCell, with item: String, at indexPath: IndexPath) {
         cell.textLabel?.text = item
     }

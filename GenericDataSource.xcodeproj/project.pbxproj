@@ -159,8 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				54433C0A1DB231A50032AF9C /* SupplementaryViewCreator.swift */,
-				54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */,
 				54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */,
+				54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */,
 			);
 			name = Supplementary;
 			sourceTree = "<group>";
