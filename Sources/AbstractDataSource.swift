@@ -26,6 +26,18 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     open var supplementaryViewCreator: SupplementaryViewCreator?
 
+    open func set(headerCreator: SupplementaryViewCreator) {
+        supplementaryViewCreator = CompositeSupplementaryViewCreator(headerCreator: headerCreator)
+    }
+
+    open func set(footerCreator: SupplementaryViewCreator) {
+        supplementaryViewCreator = CompositeSupplementaryViewCreator(footerCreator: footerCreator)
+    }
+
+    open func set(headerCreator: SupplementaryViewCreator, footerCreator: SupplementaryViewCreator) {
+        supplementaryViewCreator = CompositeSupplementaryViewCreator(headerCreator: headerCreator, footerCreator: footerCreator)
+    }
+
     /**
      Represents the scroll view delegate property. Delegate calls of functions in UIScrollViewDelegate protocol are forwarded to this object.
      **Note that:** this object is retained.

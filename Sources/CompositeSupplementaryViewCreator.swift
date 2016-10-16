@@ -16,6 +16,18 @@ open class CompositeSupplementaryViewCreator: SupplementaryViewCreator {
         self.creators = creators
     }
 
+    public convenience init(headerCreator: SupplementaryViewCreator) {
+        self.init(creators: [UICollectionElementKindSectionHeader: headerCreator])
+    }
+
+    public convenience init(footerCreator: SupplementaryViewCreator) {
+        self.init(creators: [UICollectionElementKindSectionFooter: footerCreator])
+    }
+
+    public convenience init(headerCreator: SupplementaryViewCreator, footerCreator: SupplementaryViewCreator) {
+        self.init(creators: [UICollectionElementKindSectionHeader: headerCreator, UICollectionElementKindSectionFooter: footerCreator])
+    }
+
     open func add(creator: SupplementaryViewCreator, forKind kind: String) {
         creators[kind] = creator
     }
