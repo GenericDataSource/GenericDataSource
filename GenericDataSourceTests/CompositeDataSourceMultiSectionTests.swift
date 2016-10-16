@@ -32,7 +32,7 @@ class CompositeDataSourceMultiSectionTests: XCTestCase {
         XCTAssertEqual(0, dataSource.dataSources.count)
     }
 
-    func testadd() {
+    func testAdd() {
         
         let dataSource  = CompositeDataSource(sectionType: .multi)
         

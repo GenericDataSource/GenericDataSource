@@ -474,7 +474,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willDeselectRowAt: indexPath))
         XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldDeselectItemAt: indexPath))
     }
-    
+
     func testSelectionDidDeselectNoSelector() {
         
         let tableView = MockTableView()

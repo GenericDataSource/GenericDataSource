@@ -63,7 +63,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
         XCTAssertEqual(0, dataSource.dataSources.count)
     }
 
-    func testadd() {
+    func testAdd() {
         
         let dataSource  = CompositeDataSource(sectionType: .single)
         
@@ -103,7 +103,7 @@ class CompositeDataSourceSingleSectionTests : XCTestCase {
         XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[1])
     }
     
-    func testremove() {
+    func testRemove() {
         
         let dataSource  = CompositeDataSource(sectionType: .single)
         
