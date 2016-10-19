@@ -36,7 +36,6 @@ class SelectionConfigureTester<CellType>: DataSourceTester where CellType: Repor
         XCTAssertEqual(result as? CellType, selector.cell)
         XCTAssertEqual(dataSource.items[indexPath.item], selector.item)
         XCTAssertEqual(indexPath, selector.indexPath)
-        selector.configureCellCalled = false
     }
 
     func assertNotCalled(collectionView: GeneralCollectionView) {
