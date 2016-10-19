@@ -24,6 +24,9 @@
 		54433C0D1DB2325D0032AF9C /* ReusableSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */; };
 		54433C0F1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */; };
 		54433C111DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */; };
+		54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */; };
+		54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */; };
+		54433C211DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C201DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
@@ -79,6 +82,9 @@
 		54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableSupplementaryView.swift; sourceTree = "<group>"; };
 		54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSupplementaryViewCreator.swift; sourceTree = "<group>"; };
 		54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSupplementaryViewCreator.swift; sourceTree = "<group>"; };
+		54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTester.swift; sourceTree = "<group>"; };
+		54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionConfigureTester.swift; sourceTree = "<group>"; };
+		54433C201DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTableCollectionTests.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
@@ -165,6 +171,14 @@
 			name = Supplementary;
 			sourceTree = "<group>";
 		};
+		54433C1D1DB6B88C0032AF9C /* Testers */ = {
+			isa = PBXGroup;
+			children = (
+				54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */,
+			);
+			name = Testers;
+			sourceTree = "<group>";
+		};
 		546B1CC51C8244990009DD26 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +189,7 @@
 				54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */,
 				54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */,
 				547446FE1CA7F82C00F3597E /* TableView.swift */,
+				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -219,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				546B1CC51C8244990009DD26 /* Helper */,
+				54433C1D1DB6B88C0032AF9C /* Testers */,
 				549576311C6FBBB200E9C26C /* Tests */,
 				549576151C6FBA9400E9C26C /* Info.plist */,
 			);
@@ -267,6 +283,7 @@
 				54E0D2BD1C831007001202BE /* CompositeDataSourceSingleSectionCollectionTests.swift */,
 				54E0D2BF1C831018001202BE /* CompositeDataSourceMultiSectionTableTests.swift */,
 				54E0D2C11C83102C001202BE /* CompositeDataSourceMultiSectionCollectionTests.swift */,
+				54433C201DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift */,
 			);
 			name = Compsite;
 			sourceTree = "<group>";
@@ -537,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54433BDD1DAC0C270032AF9C /* CompositeDataSourceMultiSectionTests.swift in Sources */,
+				54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */,
 				54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */,
 				54433BE21DAC0C940032AF9C /* CompositeDataSourceSingleSectionTests.swift in Sources */,
 				54433BDE1DAC0C4C0032AF9C /* CompositeDataSourceSingleSectionTableTests.swift in Sources */,
@@ -544,6 +562,7 @@
 				546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */,
 				54433BDF1DAC0C4C0032AF9C /* CompositeDataSourceSingleSectionCollectionTests.swift in Sources */,
 				547447041CA88B2C00F3597E /* AbstractDataSourceTests.swift in Sources */,
+				54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */,
 				547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */,
 				5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */,
 				54433BE11DAC0C4C0032AF9C /* CompositeDataSourceMultiSectionCollectionTests.swift in Sources */,
@@ -553,6 +572,7 @@
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,
 				549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */,
+				54433C211DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift in Sources */,
 				54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */,
 				54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */,
 				54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */,
