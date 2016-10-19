@@ -15,7 +15,7 @@ protocol DataSourceTester {
     associatedtype Result
     var dataSource: DataSourceType { get }
 
-    init(numberOfReports: Int, collectionView: GeneralCollectionView)
+    init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView)
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> Result
 

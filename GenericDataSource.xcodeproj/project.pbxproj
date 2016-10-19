@@ -176,6 +176,7 @@
 		54433C1D1DB6B88C0032AF9C /* Testers */ = {
 			isa = PBXGroup;
 			children = (
+				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
 				54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */,
 				54433C221DB7399D0032AF9C /* ItemSizeTester.swift */,
 			);
@@ -192,7 +193,6 @@
 				54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */,
 				54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */,
 				547446FE1CA7F82C00F3597E /* TableView.swift */,
-				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";

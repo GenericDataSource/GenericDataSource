@@ -103,6 +103,18 @@ class MockCollectionView : UICollectionView {
     var itemsCountPerSection : [Int] = []
     var cells : [[UICollectionViewCell]] = []
 
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+    }
+
+    convenience init() {
+        self.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override func register(_ cellClass: AnyClass?, forCellWithReuseIdentifier identifier: String) {
         guard reusableCells[identifier] == nil else {
             assertionFailure("A cell with the same identifier '\(identifier)' already registered before.")

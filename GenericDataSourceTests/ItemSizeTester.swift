@@ -15,14 +15,13 @@ class ItemSizeTester<CellType>: DataSourceTester where CellType: ReportCell, Cel
 
     var size: CGSize = .zero
 
-    required init(numberOfReports: Int, collectionView: GeneralCollectionView) {
+    required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
 
         size = CGSize(width: CGFloat(arc4random()), height: CGFloat(arc4random()))
         dataSource.itemSize = size
     }
-
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> CGSize {
 

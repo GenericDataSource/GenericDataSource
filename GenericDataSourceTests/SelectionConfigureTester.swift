@@ -14,7 +14,7 @@ class SelectionConfigureTester<CellType>: DataSourceTester where CellType: Repor
     let dataSource: ReportBasicDataSource<CellType> = ReportBasicDataSource<CellType>()
     let selector = MockSelectionController<Report, CellType>()
 
-    required init(numberOfReports: Int, collectionView: GeneralCollectionView) {
+    required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
         dataSource.setSelectionHandler(selector)
