@@ -11,7 +11,33 @@ import GenericDataSource
 
 class CompositeSingleSectionTests: XCTestCase {
 
-    private func executeTestTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester>(
+    func testItemSize() {
+        // test table view
+        executeTestTemplate(collectionView: MockTableView(),
+                            type1: ItemSizeTester<PDFReportTableViewCell>.self,
+                            type2: ItemSizeTester<TextReportTableViewCell>.self)
+
+        // test collection view
+        executeTestTemplate(collectionView: MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout()),
+                            type1: ItemSizeTester<PDFReportCollectionViewCell>.self,
+                            type2: ItemSizeTester<TextReportCollectionViewCell>.self)
+    }
+
+    func testSelectorConfigureCell() {
+        // test table view
+        executeTestTemplate(collectionView: MockTableView(),
+                            type1: SelectionConfigureTester<PDFReportTableViewCell>.self,
+                            type2: SelectionConfigureTester<TextReportTableViewCell>.self)
+
+        // test collection view
+        executeTestTemplate(collectionView: MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout()),
+                            type1: SelectionConfigureTester<PDFReportCollectionViewCell>.self,
+                            type2: SelectionConfigureTester<TextReportCollectionViewCell>.self)
+    }
+}
+
+extension CompositeSingleSectionTests {
+    fileprivate func executeTestTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester>(
         collectionView collectionCreator: @autoclosure () -> GeneralCollectionView,
         type1: Tester1.Type,
         type2: Tester2.Type)
@@ -19,9 +45,9 @@ class CompositeSingleSectionTests: XCTestCase {
 
             // single section tests
             let singleSectionIndexPathes = [IndexPath(item: 0, section: 0),
-                               IndexPath(item: 49, section: 15),
-                               IndexPath(item: 50, section: 15),
-                               IndexPath(item: 150, section: 1)]
+                                            IndexPath(item: 49, section: 15),
+                                            IndexPath(item: 50, section: 15),
+                                            IndexPath(item: 150, section: 1)]
 
             for indexPath in singleSectionIndexPathes {
                 let dataSource  = CompositeDataSource(sectionType: .single)
@@ -50,9 +76,9 @@ class CompositeSingleSectionTests: XCTestCase {
 
             // multi section tests
             let multiSectionIndexPathes = [IndexPath(item: 0, section: 0),
-                                            IndexPath(item: 49, section: 0),
-                                            IndexPath(item: 50, section: 1),
-                                            IndexPath(item: 150, section: 1)]
+                                           IndexPath(item: 49, section: 0),
+                                           IndexPath(item: 50, section: 1),
+                                           IndexPath(item: 150, section: 1)]
 
             for indexPath in multiSectionIndexPathes {
                 let dataSource  = CompositeDataSource(sectionType: .multi)
@@ -77,17 +103,5 @@ class CompositeSingleSectionTests: XCTestCase {
                 tester1.cleanUp()
                 tester2.cleanUp()
             }
-    }
-
-    func testSelectorConfigureCell() {
-        // test table view
-        executeTestTemplate(collectionView: MockTableView(),
-                            type1: SelectionConfigureTester<PDFReportTableViewCell>.self,
-                            type2: SelectionConfigureTester<TextReportTableViewCell>.self)
-
-        // test collection view
-        executeTestTemplate(collectionView: MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout()),
-                            type1: SelectionConfigureTester<PDFReportCollectionViewCell>.self,
-                            type2: SelectionConfigureTester<TextReportCollectionViewCell>.self)
     }
 }

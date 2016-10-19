@@ -21,15 +21,14 @@ class SelectionConfigureTester<CellType>: DataSourceTester where CellType: Repor
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> ReusableCell? {
-        var cell: ReusableCell?
-        test(with: collectionView,
+
+        return test(with: collectionView,
              whenTableView: {
-                cell = dataSource.tableView($0, cellForRowAt: indexPath)
+                dataSource.tableView($0, cellForRowAt: indexPath)
             },
              whenCollectionView: {
-                cell = dataSource.collectionView($0, cellForItemAt: indexPath)
+                dataSource.collectionView($0, cellForItemAt: indexPath)
         })
-        return cell
     }
 
     func assert(result: ReusableCell?, indexPath: IndexPath, collectionView: GeneralCollectionView) {

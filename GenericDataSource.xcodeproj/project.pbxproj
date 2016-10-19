@@ -27,6 +27,7 @@
 		54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */; };
 		54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */; };
 		54433C211DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C201DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift */; };
+		54433C231DB7399D0032AF9C /* ItemSizeTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C221DB7399D0032AF9C /* ItemSizeTester.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
@@ -85,6 +86,7 @@
 		54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTester.swift; sourceTree = "<group>"; };
 		54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionConfigureTester.swift; sourceTree = "<group>"; };
 		54433C201DB6B92E0032AF9C /* CompositeDataSourceTableCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTableCollectionTests.swift; sourceTree = "<group>"; };
+		54433C221DB7399D0032AF9C /* ItemSizeTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSizeTester.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */,
+				54433C221DB7399D0032AF9C /* ItemSizeTester.swift */,
 			);
 			name = Testers;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54433C231DB7399D0032AF9C /* ItemSizeTester.swift in Sources */,
 				54433BDD1DAC0C270032AF9C /* CompositeDataSourceMultiSectionTests.swift in Sources */,
 				54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */,
 				54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */,

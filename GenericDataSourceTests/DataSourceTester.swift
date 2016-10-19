@@ -26,14 +26,16 @@ protocol DataSourceTester {
 }
 
 extension DataSourceTester {
-    func test(with collectionView: GeneralCollectionView, whenTableView: (UITableView) -> Void, whenCollectionView: (UICollectionView) -> Void) {
+    func test<T>(with collectionView: GeneralCollectionView, whenTableView: (UITableView) -> T, whenCollectionView: (UICollectionView) -> T) -> T {
+        var result: T
         if let tableView = collectionView as? UITableView {
-            whenTableView(tableView)
+            result = whenTableView(tableView)
         } else if let collectionView = collectionView as? UICollectionView {
-            whenCollectionView(collectionView)
+            result = whenCollectionView(collectionView)
         } else {
             fatalError("Test scenario error: collectionView: '\(collectionView)' should be either UITableView or UICollectionView.")
         }
+        return result
     }
 }
 
