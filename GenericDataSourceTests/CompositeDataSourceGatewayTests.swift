@@ -85,7 +85,7 @@ class CompositeDataSourceGatewayTests: XCTestCase {
 
 }
 
-extension CompositeSingleSectionTests {
+extension CompositeDataSourceGatewayTests {
 
     fileprivate func executeTestTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester, Tester3: DataSourceTester, Tester4: DataSourceTester>(
         tableType1: Tester1.Type,
