@@ -159,240 +159,7 @@ class BasicDataSourceTests: XCTestCase {
             
         }
     }
-    
-    func testSelectionItemsModified() {
 
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-
-        tableDataSource.items = Report.generate(numberOfReports: 10)
-        XCTAssertTrue(tableSelector.itemsModifiedCalled)
-        
-        collectionDataSource.items = Report.generate(numberOfReports: 10)
-        XCTAssertTrue(collectionSelector.itemsModifiedCalled)
-    }
-    
-    func testConfigureCellBySelectorCollectionView() {
-        
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.numberOfReuseCells = 10
-        
-        let selection = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        dataSource.setSelectionHandler(selection.anyDataSourceSelectionHandler())
-        
-        let reports = Report.generate(numberOfReports: 200)
-        dataSource.items = reports
-        
-        // assign as data source
-        collectionView.dataSource = dataSource
-        
-        // register the cell
-        dataSource.registerReusableViewsInCollectionView(collectionView)
-        
-        // execute the test
-        let indexPath = IndexPath(item: 10, section: 0)
-        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath)
-        
-        XCTAssertTrue(selection.configureCellCalled)
-        XCTAssertEqual(cell, selection.cell)
-        XCTAssertEqual(indexPath, selection.indexPath)
-        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
-    }
-    
-    func testConfigureCellBySelectorTableView() {
-        
-        let tableView = MockTableView()
-        tableView.numberOfReuseCells = 10
-        
-        let selection = MockSelectionController<Report, TextReportTableViewCell>()
-        let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        dataSource.setSelectionHandler(selection)
-
-        let reports = Report.generate(numberOfReports: 200)
-        dataSource.items = reports
-        
-        // assign as data source
-        tableView.dataSource = dataSource
-        
-        // register the cell
-        dataSource.registerReusableViewsInCollectionView(tableView)
-        
-        // execute the test
-        let indexPath = IndexPath(item: 10, section: 0)
-        let cell = dataSource.tableView(tableView, cellForRowAt: indexPath)
-        
-        XCTAssertTrue(selection.configureCellCalled)
-        XCTAssertEqual(cell, selection.cell)
-        XCTAssertEqual(indexPath, selection.indexPath)
-        XCTAssertEqual(dataSource.items[indexPath.item], selection.item)
-    }
-    
-    func testSelectionShouldHighlight() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-
-        XCTAssertTrue(tableDataSource.tableView(tableView, shouldHighlightRowAt: indexPath))
-        XCTAssertTrue(tableSelector.shouldHighlightCalled)
-        
-        XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldHighlightItemAt: indexPath))
-        XCTAssertTrue(collectionSelector.shouldHighlightCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
-    func testSelectionDidHighlight() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        tableDataSource.tableView(tableView, didHighlightRowAt: indexPath)
-        XCTAssertTrue(tableSelector.didHighlightCalled)
-        
-        collectionDataSource.collectionView(collectionView, didHighlightItemAt: indexPath)
-        XCTAssertTrue(collectionSelector.didHighlightCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
-    func testSelectionDidUnhighlight() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        tableDataSource.tableView(tableView, didUnhighlightRowAt: indexPath)
-        XCTAssertTrue(tableSelector.didUnhighlightCalled)
-        
-        collectionDataSource.collectionView(collectionView, didUnhighlightItemAt: indexPath)
-        XCTAssertTrue(collectionSelector.didUnhighlightCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
-    func testSelectionShouldSelect() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willSelectRowAt: indexPath))
-        XCTAssertTrue(tableSelector.shouldSelectCalled)
-        
-        XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldSelectItemAt: indexPath))
-        XCTAssertTrue(collectionSelector.shouldSelectCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-
-    func testSelectionDidSelect() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        tableDataSource.tableView(tableView, didSelectRowAt: indexPath)
-        XCTAssertTrue(tableSelector.didSelectCalled)
-        
-        collectionDataSource.collectionView(collectionView, didSelectItemAt: indexPath)
-        XCTAssertTrue(collectionSelector.didSelectCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
-    func testSelectionShouldDeselect() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-
-        XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willDeselectRowAt: indexPath))
-        XCTAssertTrue(tableSelector.shouldDeselectCalled)
-        
-        XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldDeselectItemAt: indexPath))
-        XCTAssertTrue(collectionSelector.shouldDeselectCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
-    func testSelectionDidDeselect() {
-        
-        let tableSelector = MockSelectionController<Report, TextReportTableViewCell>()
-        let collectionSelector = MockSelectionController<Report, TextReportCollectionViewCell>()
-        let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        tableDataSource.setSelectionHandler(tableSelector)
-        collectionDataSource.setSelectionHandler(collectionSelector)
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        tableDataSource.tableView(tableView, didDeselectRowAt: indexPath)
-        XCTAssertTrue(tableSelector.didDeselectCalled)
-        
-        collectionDataSource.collectionView(collectionView, didDeselectItemAt: indexPath)
-        XCTAssertTrue(collectionSelector.didDeselectCalled)
-        
-        XCTAssertEqual(indexPath, tableSelector.indexPath)
-        XCTAssertEqual(indexPath, collectionSelector.indexPath)
-    }
-    
     func testSelectionShouldHighlightNoSelector() {
         
         let tableView = MockTableView()
@@ -411,10 +178,10 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
-        
+
         let indexPath = IndexPath(item: 20, section: 10)
         
         tableDataSource.tableView(tableView, didHighlightRowAt: indexPath)
@@ -425,13 +192,13 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let indexPath = IndexPath(item: 20, section: 10)
         
         tableDataSource.tableView(tableView, didUnhighlightRowAt: indexPath)
-        
         collectionDataSource.collectionView(collectionView, didUnhighlightItemAt: indexPath)
     }
     
@@ -439,13 +206,13 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         
         let indexPath = IndexPath(item: 20, section: 10)
         
         XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willSelectRowAt: indexPath))
-
         XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldSelectItemAt: indexPath))
     }
     
@@ -453,6 +220,7 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
@@ -466,6 +234,7 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         
@@ -479,13 +248,13 @@ class BasicDataSourceTests: XCTestCase {
         
         let tableView = MockTableView()
         let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
-        let indexPath = IndexPath(item: 20, section: 10)
-        
-        tableDataSource.tableView(tableView, didDeselectRowAt: indexPath)
 
+        let indexPath = IndexPath(item: 20, section: 10)
+
+        tableDataSource.tableView(tableView, didDeselectRowAt: indexPath)
         collectionDataSource.collectionView(collectionView, didDeselectItemAt: indexPath)
     }
 }

@@ -30,6 +30,7 @@
 		54433C2D1DB7AA470032AF9C /* SelectionDidSelectTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C2C1DB7AA470032AF9C /* SelectionDidSelectTester.swift */; };
 		54433C2F1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C2E1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift */; };
 		54433C311DB7AC630032AF9C /* SelectionDidDeselectTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C301DB7AC630032AF9C /* SelectionDidDeselectTester.swift */; };
+		54433C351DB9356F0032AF9C /* SelectionItemsModifiedTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C341DB9356F0032AF9C /* SelectionItemsModifiedTester.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
@@ -96,6 +97,7 @@
 		54433C2C1DB7AA470032AF9C /* SelectionDidSelectTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionDidSelectTester.swift; sourceTree = "<group>"; };
 		54433C2E1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionShouldDeselectTester.swift; sourceTree = "<group>"; };
 		54433C301DB7AC630032AF9C /* SelectionDidDeselectTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionDidDeselectTester.swift; sourceTree = "<group>"; };
+		54433C341DB9356F0032AF9C /* SelectionItemsModifiedTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionItemsModifiedTester.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				54433C2C1DB7AA470032AF9C /* SelectionDidSelectTester.swift */,
 				54433C2E1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift */,
 				54433C301DB7AC630032AF9C /* SelectionDidDeselectTester.swift */,
+				54433C341DB9356F0032AF9C /* SelectionItemsModifiedTester.swift */,
 			);
 			name = Testers;
 			sourceTree = "<group>";
@@ -280,9 +283,9 @@
 		54E0D2B91C830FC0001202BE /* Basic */ = {
 			isa = PBXGroup;
 			children = (
+				54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */,
 				546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */,
 				549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */,
-				54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */,
 				54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */,
 				54433C291DB7A26D0032AF9C /* SelectionDidUnhighlightTester.swift in Sources */,
+				54433C351DB9356F0032AF9C /* SelectionItemsModifiedTester.swift in Sources */,
 				54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */,
 				54433C2F1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift in Sources */,
 			);

@@ -11,7 +11,7 @@ import GenericDataSource
 import XCTest
 
 protocol DataSourceTester {
-    associatedtype DataSourceType: DataSource
+    associatedtype DataSourceType: AbstractDataSource
     associatedtype Result
     var dataSource: DataSourceType { get }
 

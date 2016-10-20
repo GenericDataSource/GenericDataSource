@@ -83,6 +83,13 @@ class CompositeDataSourceGatewayTests: XCTestCase {
                             collectionType2: SelectionDidDeselectTester<TextReportCollectionViewCell>.self)
     }
 
+    func testItemsModified() {
+        // execute the test
+        executeTestTemplate(tableType1: SelectionItemsModifiedTester<PDFReportTableViewCell>.self,
+                            tableType2: SelectionItemsModifiedTester<TextReportTableViewCell>.self,
+                            collectionType1: SelectionItemsModifiedTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: SelectionItemsModifiedTester<TextReportCollectionViewCell>.self)
+    }
 }
 
 extension CompositeDataSourceGatewayTests {
@@ -97,11 +104,33 @@ extension CompositeDataSourceGatewayTests {
         Tester1.Result == Tester3.Result,
         Tester1.Result == Tester4.Result {
 
+            // execute basic UITableView
+            executeBasicTemplate(type: tableType1, collectionCreator: { MockTableView() })
+
+            // execute basic UICollectionView
+            executeBasicTemplate(type: collectionType1, collectionCreator: { MockCollectionView() })
+
             // execute UITableView
             executeTemplate(type1: tableType1, type2: tableType2, collectionCreator: { MockTableView() })
 
-            // execute for UICollectionView
+            // execute basic UICollectionView
             executeTemplate(type1: collectionType1, type2: collectionType2, collectionCreator: { MockCollectionView() })
+    }
+
+    private func executeBasicTemplate<Tester: DataSourceTester>(type: Tester.Type, collectionCreator: () -> GeneralCollectionView) {
+
+        let indexPathes = [IndexPath(item: 0, section: 0),
+                           IndexPath(item: 10, section: 2),
+                           IndexPath(item: 20, section: 15)]
+
+        for indexPath in indexPathes {
+            let collectionView = collectionCreator()
+
+            let tester = Tester(id: 1, numberOfReports: 50, collectionView: collectionView)
+            let result = tester.test(indexPath: indexPath, dataSource: tester.dataSource, collectionView: collectionView)
+            tester.assert(result: result, indexPath: indexPath, collectionView: collectionView)
+            tester.cleanUp()
+        }
     }
 
     private func executeTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester>(
