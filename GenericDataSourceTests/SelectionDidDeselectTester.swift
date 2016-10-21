@@ -20,15 +20,12 @@ class SelectionDidDeselectTester<CellType>: DataSourceTester where CellType: Rep
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) {
+        return dataSource.tableView(tableView, didDeselectRowAt: indexPath)
+    }
 
-        return test(with: collectionView,
-                    whenTableView: {
-                        dataSource.tableView($0, didDeselectRowAt: indexPath)
-            },
-                    whenCollectionView: {
-                        dataSource.collectionView($0, didDeselectItemAt: indexPath)
-        })
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) {
+        return dataSource.collectionView(collectionView, didDeselectItemAt: indexPath)
     }
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {

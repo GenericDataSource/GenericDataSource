@@ -17,7 +17,9 @@ protocol DataSourceTester {
 
     init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView)
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> Result
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, generalCollectionView: GeneralCollectionView) -> Result
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Result
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> Result
 
     func assert(result: Result, indexPath: IndexPath, collectionView: GeneralCollectionView)
     func assertNotCalled(collectionView: GeneralCollectionView)
@@ -26,16 +28,21 @@ protocol DataSourceTester {
 }
 
 extension DataSourceTester {
-    func test<T>(with collectionView: GeneralCollectionView, whenTableView: (UITableView) -> T, whenCollectionView: (UICollectionView) -> T) -> T {
-        var result: T
-        if let tableView = collectionView as? UITableView {
-            result = whenTableView(tableView)
-        } else if let collectionView = collectionView as? UICollectionView {
-            result = whenCollectionView(collectionView)
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, generalCollectionView: GeneralCollectionView) -> Result {
+        if let tableView = generalCollectionView as? UITableView {
+            return test(indexPath: indexPath, dataSource: dataSource, tableView: tableView)
+        } else if let collectionView = generalCollectionView as? UICollectionView {
+            return test(indexPath: indexPath, dataSource: dataSource, collectionView: collectionView)
         } else {
-            fatalError("Test scenario error: collectionView: '\(collectionView)' should be either UITableView or UICollectionView.")
+            fatalError("Test scenario error: collectionView: '\(generalCollectionView)' should be either UITableView or UICollectionView.")
         }
-        return result
+    }
+
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Result {
+        fatalError("Should be overriden")
+    }
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> Result {
+        fatalError("Should be overriden")
     }
 }
 

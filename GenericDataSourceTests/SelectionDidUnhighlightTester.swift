@@ -20,15 +20,12 @@ class SelectionDidUnhighlightTester<CellType>: DataSourceTester where CellType: 
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) {
+        return dataSource.tableView(tableView, didUnhighlightRowAt: indexPath)
+    }
 
-        return test(with: collectionView,
-                    whenTableView: {
-                        dataSource.tableView($0, didUnhighlightRowAt: indexPath)
-            },
-                    whenCollectionView: {
-                        dataSource.collectionView($0, didUnhighlightItemAt: indexPath)
-        })
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) {
+        return dataSource.collectionView(collectionView, didUnhighlightItemAt: indexPath)
     }
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {

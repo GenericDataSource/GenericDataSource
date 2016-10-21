@@ -20,15 +20,12 @@ class SelectionDidHighlightTester<CellType>: DataSourceTester where CellType: Re
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) {
+        return dataSource.tableView(tableView, didHighlightRowAt: indexPath)
+    }
 
-        return test(with: collectionView,
-                    whenTableView: {
-                        dataSource.tableView($0, didHighlightRowAt: indexPath)
-            },
-                    whenCollectionView: {
-                        dataSource.collectionView($0, didHighlightItemAt: indexPath)
-        })
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) {
+        return dataSource.collectionView(collectionView, didHighlightItemAt: indexPath)
     }
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {

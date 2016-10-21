@@ -20,15 +20,12 @@ class SelectionShouldSelectTester<CellType>: DataSourceTester where CellType: Re
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> Bool {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Bool {
+        return dataSource.tableView(tableView, willSelectRowAt: indexPath) == indexPath
+    }
 
-        return test(with: collectionView,
-                    whenTableView: {
-                        dataSource.tableView($0, willSelectRowAt: indexPath) == indexPath
-            },
-                    whenCollectionView: {
-                        dataSource.collectionView($0, shouldSelectItemAt: indexPath)
-        })
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> Bool {
+        return dataSource.collectionView(collectionView, shouldSelectItemAt: indexPath)
     }
 
     func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {

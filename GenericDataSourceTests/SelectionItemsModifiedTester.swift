@@ -22,7 +22,7 @@ class SelectionItemsModifiedTester<CellType>: DataSourceTester where CellType: R
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, generalCollectionView: GeneralCollectionView) {
         tested = true
         self.dataSource.items = Report.generate(numberOfReports: self.dataSource.items.count)
     }

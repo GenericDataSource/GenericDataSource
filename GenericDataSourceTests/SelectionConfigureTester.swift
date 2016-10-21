@@ -20,15 +20,12 @@ class SelectionConfigureTester<CellType>: DataSourceTester where CellType: Repor
         dataSource.setSelectionHandler(selector)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: GeneralCollectionView) -> ReusableCell? {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> ReusableCell? {
+        return dataSource.tableView(tableView, cellForRowAt: indexPath)
+    }
 
-        return test(with: collectionView,
-             whenTableView: {
-                dataSource.tableView($0, cellForRowAt: indexPath)
-            },
-             whenCollectionView: {
-                dataSource.collectionView($0, cellForItemAt: indexPath)
-        })
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> ReusableCell? {
+        return dataSource.collectionView(collectionView, cellForItemAt: indexPath)
     }
 
     func assert(result: ReusableCell?, indexPath: IndexPath, collectionView: GeneralCollectionView) {

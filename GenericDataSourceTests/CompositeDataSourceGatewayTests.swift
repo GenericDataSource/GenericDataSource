@@ -90,7 +90,17 @@ class CompositeDataSourceGatewayTests: XCTestCase {
                             collectionType1: SelectionItemsModifiedTester<PDFReportCollectionViewCell>.self,
                             collectionType2: SelectionItemsModifiedTester<TextReportCollectionViewCell>.self)
     }
+
+    func DISABLED_testSupplementaryViewOfKind() {
+        // execute the test
+        executeTestTemplate(tableType1: SupplementaryViewOfKindTester<PDFReportTableViewCell>.self,
+                            tableType2: SupplementaryViewOfKindTester<TextReportTableViewCell>.self,
+                            collectionType1: SupplementaryViewOfKindTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: SupplementaryViewOfKindTester<TextReportCollectionViewCell>.self)
+    }
 }
+
+
 
 extension CompositeDataSourceGatewayTests {
 
@@ -127,16 +137,20 @@ extension CompositeDataSourceGatewayTests {
             let collectionView = collectionCreator()
 
             let tester = Tester(id: 1, numberOfReports: 50, collectionView: collectionView)
-            let result = tester.test(indexPath: indexPath, dataSource: tester.dataSource, collectionView: collectionView)
+            let result = tester.test(indexPath: indexPath, dataSource: tester.dataSource, generalCollectionView: collectionView)
             tester.assert(result: result, indexPath: indexPath, collectionView: collectionView)
             tester.cleanUp()
         }
     }
 
+
+
     private func executeTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester>(
         type1: Tester1.Type,
         type2: Tester2.Type,
         collectionCreator: () -> GeneralCollectionView) where Tester1.Result == Tester2.Result {
+
+        let executor = DefaultCompositeDataSourceTestExecuter()
 
         // single section tests
         let singleSectionIndexPathes = [IndexPath(item: 0, section: 0),
@@ -155,17 +169,7 @@ extension CompositeDataSourceGatewayTests {
             dataSource.add(tester1.dataSource)
             dataSource.add(tester2.dataSource)
 
-            var indexPath2 = IndexPath(item: indexPath.item - tester1.dataSource.ds_numberOfItems(inSection: 0), section: indexPath.section)
-            let result = tester1.test(indexPath: indexPath, dataSource: dataSource, collectionView: collectionView)
-            if indexPath2.item < 0 {
-                tester2.assertNotCalled(collectionView: collectionView)
-                tester1.assert(result: result, indexPath: indexPath, collectionView: collectionView)
-            } else {
-                tester1.assertNotCalled(collectionView: collectionView)
-                tester2.assert(result: result, indexPath: indexPath2, collectionView: collectionView)
-            }
-            tester1.cleanUp()
-            tester2.cleanUp()
+            executor.execute(tester1: tester1, tester2: tester2, indexPath: indexPath, collectionView: collectionView, dataSource: dataSource)
         }
 
 
@@ -186,17 +190,7 @@ extension CompositeDataSourceGatewayTests {
             dataSource.add(tester1.dataSource)
             dataSource.add(tester2.dataSource)
 
-            var indexPath2 = IndexPath(item: indexPath.item, section: indexPath.section - 1)
-            let result = tester1.test(indexPath: indexPath, dataSource: dataSource, collectionView: collectionView)
-            if indexPath2.section < 0 {
-                tester2.assertNotCalled(collectionView: collectionView)
-                tester1.assert(result: result, indexPath: indexPath, collectionView: collectionView)
-            } else {
-                tester1.assertNotCalled(collectionView: collectionView)
-                tester2.assert(result: result, indexPath: indexPath2, collectionView: collectionView)
-            }
-            tester1.cleanUp()
-            tester2.cleanUp()
+            executor.execute(tester1: tester1, tester2: tester2, indexPath: indexPath, collectionView: collectionView, dataSource: dataSource)
         }
     }
 }
