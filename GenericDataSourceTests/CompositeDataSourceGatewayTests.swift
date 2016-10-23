@@ -91,16 +91,15 @@ class CompositeDataSourceGatewayTests: XCTestCase {
                             collectionType2: SelectionItemsModifiedTester<TextReportCollectionViewCell>.self)
     }
 
-    func DISABLED_testSupplementaryViewOfKind() {
+    func testSupplementaryViewOfKind() {
         // execute the test
         executeTestTemplate(tableType1: SupplementaryViewOfKindTester<PDFReportTableViewCell>.self,
                             tableType2: SupplementaryViewOfKindTester<TextReportTableViewCell>.self,
                             collectionType1: SupplementaryViewOfKindTester<PDFReportCollectionViewCell>.self,
-                            collectionType2: SupplementaryViewOfKindTester<TextReportCollectionViewCell>.self)
+                            collectionType2: SupplementaryViewOfKindTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
     }
 }
-
-
 
 extension CompositeDataSourceGatewayTests {
 
@@ -108,30 +107,49 @@ extension CompositeDataSourceGatewayTests {
         tableType1: Tester1.Type,
         tableType2: Tester2.Type,
         collectionType1: Tester3.Type,
-        collectionType2: Tester4.Type)
+        collectionType2: Tester4.Type,
+        singleTableExecutor: CompositeDataSourceTestExecutor = DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()),
+        multiTableExecutor: CompositeDataSourceTestExecutor = DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()),
+        singleCollectionExecutor: CompositeDataSourceTestExecutor = DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()),
+        multiCollectionExecutor: CompositeDataSourceTestExecutor = DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
         where
         Tester1.Result == Tester2.Result,
         Tester1.Result == Tester3.Result,
         Tester1.Result == Tester4.Result {
 
+            let basicIndexPathes = [IndexPath(item: 0, section: 0),
+                                    IndexPath(item: 10, section: 2),
+                                    IndexPath(item: 20, section: 15)]
+
+            let singleSectionIndexPathes = [IndexPath(item: 0, section: 0),
+                                            IndexPath(item: 49, section: 15),
+                                            IndexPath(item: 50, section: 15),
+                                            IndexPath(item: 150, section: 1)]
+            let multiSectionIndexPathes = [IndexPath(item: 0, section: 0),
+                                           IndexPath(item: 49, section: 0),
+                                           IndexPath(item: 50, section: 1),
+                                           IndexPath(item: 150, section: 1)]
+
             // execute basic UITableView
-            executeBasicTemplate(type: tableType1, collectionCreator: { MockTableView() })
+            executeBasicTemplate(type: tableType1, indexPathes: basicIndexPathes, collectionCreator: { MockTableView() })
 
             // execute basic UICollectionView
-            executeBasicTemplate(type: collectionType1, collectionCreator: { MockCollectionView() })
+            executeBasicTemplate(type: collectionType1, indexPathes: basicIndexPathes, collectionCreator: { MockCollectionView() })
 
-            // execute UITableView
-            executeTemplate(type1: tableType1, type2: tableType2, collectionCreator: { MockTableView() })
+            // execute UITableView - single section
+            executeTemplate(type1: tableType1, type2: tableType2, indexPathes: singleSectionIndexPathes, sectionType: .single, executor: singleTableExecutor, collectionCreator: { MockTableView() })
 
-            // execute basic UICollectionView
-            executeTemplate(type1: collectionType1, type2: collectionType2, collectionCreator: { MockCollectionView() })
+            // execute UITableView - mult section
+            executeTemplate(type1: tableType1, type2: tableType2, indexPathes: multiSectionIndexPathes, sectionType: .multi, executor: multiTableExecutor, collectionCreator: { MockTableView() })
+
+            // execute basic UICollectionView - single section
+            executeTemplate(type1: collectionType1, type2: collectionType2, indexPathes: singleSectionIndexPathes, sectionType: .single, executor: singleCollectionExecutor, collectionCreator: { MockCollectionView() })
+
+            // execute basic UICollectionView - mult section
+            executeTemplate(type1: collectionType1, type2: collectionType2, indexPathes: multiSectionIndexPathes, sectionType: .multi, executor: multiCollectionExecutor, collectionCreator: { MockCollectionView() })
     }
 
-    private func executeBasicTemplate<Tester: DataSourceTester>(type: Tester.Type, collectionCreator: () -> GeneralCollectionView) {
-
-        let indexPathes = [IndexPath(item: 0, section: 0),
-                           IndexPath(item: 10, section: 2),
-                           IndexPath(item: 20, section: 15)]
+    private func executeBasicTemplate<Tester: DataSourceTester>(type: Tester.Type, indexPathes: [IndexPath], collectionCreator: () -> GeneralCollectionView) {
 
         for indexPath in indexPathes {
             let collectionView = collectionCreator()
@@ -143,44 +161,16 @@ extension CompositeDataSourceGatewayTests {
         }
     }
 
-
-
     private func executeTemplate<Tester1: DataSourceTester, Tester2: DataSourceTester>(
         type1: Tester1.Type,
         type2: Tester2.Type,
+        indexPathes: [IndexPath],
+        sectionType: CompositeDataSource.SectionType,
+        executor: CompositeDataSourceTestExecutor,
         collectionCreator: () -> GeneralCollectionView) where Tester1.Result == Tester2.Result {
 
-        let executor = DefaultCompositeDataSourceTestExecuter()
-
-        // single section tests
-        let singleSectionIndexPathes = [IndexPath(item: 0, section: 0),
-                                        IndexPath(item: 49, section: 15),
-                                        IndexPath(item: 50, section: 15),
-                                        IndexPath(item: 150, section: 1)]
-
-        for indexPath in singleSectionIndexPathes {
-            let dataSource  = CompositeDataSource(sectionType: .single)
-
-            let collectionView = collectionCreator()
-
-            let tester1 = Tester1(id: 1, numberOfReports: 50, collectionView: collectionView)
-            let tester2 = Tester2(id: 2, numberOfReports: 200, collectionView: collectionView)
-
-            dataSource.add(tester1.dataSource)
-            dataSource.add(tester2.dataSource)
-
-            executor.execute(tester1: tester1, tester2: tester2, indexPath: indexPath, collectionView: collectionView, dataSource: dataSource)
-        }
-
-
-        // multi section tests
-        let multiSectionIndexPathes = [IndexPath(item: 0, section: 0),
-                                       IndexPath(item: 49, section: 0),
-                                       IndexPath(item: 50, section: 1),
-                                       IndexPath(item: 150, section: 1)]
-
-        for indexPath in multiSectionIndexPathes {
-            let dataSource  = CompositeDataSource(sectionType: .multi)
+        for indexPath in indexPathes {
+            let dataSource  = CompositeDataSource(sectionType: sectionType)
 
             let collectionView = collectionCreator()
 

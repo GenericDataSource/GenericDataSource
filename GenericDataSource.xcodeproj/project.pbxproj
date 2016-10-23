@@ -34,7 +34,8 @@
 		54433C371DB9549F0032AF9C /* MockSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C361DB9549F0032AF9C /* MockSupplementaryViewCreator.swift */; };
 		54433C391DB955440032AF9C /* SupplementaryViewOfKindTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C381DB955440032AF9C /* SupplementaryViewOfKindTester.swift */; };
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
-		54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecuter.swift */; };
+		54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */; };
+		54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF11DBCC12E004F4854 /* TesterChooser.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
 		547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */; };
@@ -105,7 +106,8 @@
 		54433C381DB955440032AF9C /* SupplementaryViewOfKindTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewOfKindTester.swift; sourceTree = "<group>"; };
 		546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSourceTests.swift; sourceTree = "<group>"; };
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
-		54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTestExecuter.swift; sourceTree = "<group>"; };
+		54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTestExecutor.swift; sourceTree = "<group>"; };
+		54735EF11DBCC12E004F4854 /* TesterChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TesterChooser.swift; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
 		547446FE1CA7F82C00F3597E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewMultiSectionTestCases.swift; sourceTree = "<group>"; };
@@ -215,7 +217,8 @@
 				547446FE1CA7F82C00F3597E /* TableView.swift */,
 				54433C361DB9549F0032AF9C /* MockSupplementaryViewCreator.swift */,
 				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
-				54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecuter.swift */,
+				54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */,
+				54735EF11DBCC12E004F4854 /* TesterChooser.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -597,7 +600,8 @@
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,
 				549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */,
 				54433C211DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift in Sources */,
-				54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecuter.swift in Sources */,
+				54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */,
+				54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */,
 				54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */,
 				54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */,
 				54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */,

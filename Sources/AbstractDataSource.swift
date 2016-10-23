@@ -440,7 +440,6 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     // MARK: UITableView
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard supplementaryViewCreator != nil else { return nil }
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
         return cast(view)
     }
@@ -460,7 +459,6 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     }
 
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard supplementaryViewCreator != nil else { return nil }
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
         return cast(view)
     }
