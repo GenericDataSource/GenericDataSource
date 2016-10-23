@@ -10,13 +10,13 @@ import Foundation
 import GenericDataSource
 import XCTest
 
-class SupplementaryViewOfKindTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
+class BaseSupplementaryViewOfKindTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = ReportBasicDataSource<CellType>()
     let creator = MockSupplementaryViewCreator()
 
     var view: ReusableSupplementaryView?
 
-    let kind = UICollectionElementKindSectionHeader
+    var kind: String { fatalError("Abstract") }
 
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
@@ -25,9 +25,7 @@ class SupplementaryViewOfKindTester<CellType>: DataSourceTester where CellType: 
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> ReusableSupplementaryView? {
-        view = UITableViewHeaderFooterView()
-        creator.view = view
-        return dataSource.tableView(tableView, viewForHeaderInSection: indexPath.section) as? ReusableSupplementaryView
+        fatalError("Abstract")
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> ReusableSupplementaryView? {
@@ -44,5 +42,28 @@ class SupplementaryViewOfKindTester<CellType>: DataSourceTester where CellType: 
             XCTAssertEqual(indexPath, creator.indexPath)
         }
         XCTAssertEqual(kind, kind)
+    }
+}
+
+
+class HeaderSupplementaryViewOfKindTester<CellType>: BaseSupplementaryViewOfKindTester<CellType>  where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
+
+    override var kind: String { return UICollectionElementKindSectionHeader }
+
+    override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> ReusableSupplementaryView? {
+        view = UITableViewHeaderFooterView()
+        creator.view = view
+        return dataSource.tableView(tableView, viewForHeaderInSection: indexPath.section) as? ReusableSupplementaryView
+    }
+}
+
+class FooterSupplementaryViewOfKindTester<CellType>: BaseSupplementaryViewOfKindTester<CellType>  where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
+
+    override var kind: String { return UICollectionElementKindSectionFooter }
+
+    override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> ReusableSupplementaryView? {
+        view = UITableViewHeaderFooterView()
+        creator.view = view
+        return dataSource.tableView(tableView, viewForFooterInSection: indexPath.section) as? ReusableSupplementaryView
     }
 }

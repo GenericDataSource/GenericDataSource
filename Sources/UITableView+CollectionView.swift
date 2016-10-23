@@ -147,10 +147,9 @@ extension UITableView: GeneralCollectionView {
     }
 
     open func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
-        guard let view = dequeueReusableHeaderFooterView(withIdentifier: identifier) else {
-            fatalError("UITableView doesn't have a UIHeaderFooterView for reuse identifier '\(identifier)'")
-        }
-        return view
+        let view = dequeueReusableHeaderFooterView(withIdentifier: identifier)
+        let castedView: UITableViewHeaderFooterView = cast(view, message: "UITableView doesn't have a UIHeaderFooterView for reuse identifier '\(identifier)'")
+        return castedView
     }
 
     /**
@@ -171,12 +170,10 @@ extension UITableView: GeneralCollectionView {
      Just calls the corresponding method `return indexPathForCell(cell)`.
      */
     open func ds_indexPath(for reusableCell: ReusableCell) -> IndexPath? {
-        guard let cell = reusableCell as? UITableViewCell else {
-            fatalError("Cell '\(reusableCell)' should be of type UITableViewCell.")
-        }
+        let cell: UITableViewCell = cast(reusableCell, message: "Cell '\(reusableCell)' should be of type UITableViewCell.")
         return indexPath(for: cell)
     }
-    
+
     /**
      Just calls the corresponding method `return indexPathForRowAtPoint(point)`.
      */

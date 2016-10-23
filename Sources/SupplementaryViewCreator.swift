@@ -22,10 +22,10 @@ public protocol SupplementaryViewCreator {
 extension SupplementaryViewCreator {
 
     public func collectionView(_ collectionView: GeneralCollectionView, willDisplayView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
-        // does nothing
+        // does nothing, making them optional
     }
 
     public func collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
-        // does nothing
+        // does nothing, making them optional
     }
 }

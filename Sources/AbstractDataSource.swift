@@ -67,9 +67,8 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     // MARK: respondsToSelector
 
     fileprivate func scrollViewDelegateCanHandleSelector(_ selector: Selector) -> Bool {
-        if let scrollViewDelegate = scrollViewDelegate
-            , isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) &&
-                scrollViewDelegate.responds(to: selector) {
+        if let scrollViewDelegate = scrollViewDelegate,
+            isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) && scrollViewDelegate.responds(to: selector) {
             return true
         }
         return false
@@ -503,9 +502,8 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     // MARK: DataSource
 
     open func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
-        guard let creator = supplementaryViewCreator else {
-            fatalError("[\(type(of: self))] Calling `supplementaryViewOfKind` method with nil supplementaryViewOfKind property.")
-        }
+
+        let creator: SupplementaryViewCreator = cast(supplementaryViewCreator, message: "Calling `supplementaryViewOfKind` method with nil supplementaryViewOfKind property.")
         return creator.collectionView(collectionView, viewOfKind: kind, at: indexPath)
     }
 
@@ -519,15 +517,6 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         supplementaryViewCreator?.collectionView(collectionView, didEndDisplayingView: view, ofKind: kind, at: indexPath)
-    }
-
-    // MARK:- Private
-
-    private func cast<T, U>(_ value: T) -> U {
-        guard let castedValue = value as? U else {
-            fatalError("[\(type(of: self))] Couldn't cast cell '\(value)' to '\(U.self)'")
-        }
-        return castedValue
     }
 }
 

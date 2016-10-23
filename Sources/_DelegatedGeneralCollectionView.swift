@@ -23,10 +23,7 @@ protocol _GeneralCollectionViewMapping {
     let mapping: _GeneralCollectionViewMapping
     
     var delegate: GeneralCollectionView {
-        guard let delegate = mapping.delegate else {
-            fatalError("Couldn't call \(#function) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
-        }
-        return delegate
+        return cast(mapping.delegate, message: "Couldn't call \(#function) of \(self) with a nil delegate. This is usually because you didn't set your UITableView/UICollection to ds_reusableViewDelegate for the GenericDataSource.")
     }
 
     init(mapping: _GeneralCollectionViewMapping) {

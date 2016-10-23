@@ -8,7 +8,7 @@
 
 import Foundation
 
-class _MultiSectionDataSourcesCollection: _DataSourcesCollection {
+class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
     fileprivate var sectionsCount: Int = 0
 
     fileprivate var globalSectionToMappings: [Int: _MutliSectionMapping] = [:]
@@ -32,10 +32,7 @@ class _MultiSectionDataSourcesCollection: _DataSourcesCollection {
         globalSectionToMappings.removeAll()
 
         for mapping in mappings {
-            guard let mapping = mapping as? _MutliSectionMapping else {
-                fatalError("Mappings for \(type(of: self)) should be of type \(_MutliSectionMapping.self)")
-            }
-
+            let mapping: _MutliSectionMapping = cast(mapping, message: "Mappings for \(type(of: self)) should be of type \(_MutliSectionMapping.self)")
             let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
             while (count < newSectionCount) {
                 globalSectionToMappings[count] = mapping
@@ -64,9 +61,8 @@ class _MultiSectionDataSourcesCollection: _DataSourcesCollection {
     func numberOfItems(inSection section: Int) -> Int {
         updateMappings()
 
-        guard let mapping = mappingForGlobalSection(section) else {
-            fatalError("Cannot find mapping for section '\(section)' in a MultiSection data sources requesting numberOfItems.")
-        }
+        let mapping: _MutliSectionMapping = cast(mappingForGlobalSection(section),
+                                                 message: "Cannot find mapping for section '\(section)' in a MultiSection data sources requesting numberOfItems.")
         return mapping.dataSource.ds_numberOfItems(inSection: 0)
     }
 }

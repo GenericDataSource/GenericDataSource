@@ -989,4 +989,8 @@ class CompositeDataSourceSpecificTests : XCTestCase {
             XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index, section: 0)), "Invalid index path at index: \(index)")
         }
     }
+
+    func testSupplmentaryViews() {
+
+    }
 }

@@ -148,12 +148,10 @@ extension UICollectionView: GeneralCollectionView {
      Just calls the corresponding method `return indexPathForCell(cell)`.
      */
     open func ds_indexPath(for reusableCell: ReusableCell) -> IndexPath? {
-        guard let cell = reusableCell as? UICollectionViewCell else {
-            fatalError("Cell '\(reusableCell)' should be of type UICollectionViewCell.")
-        }
+        let cell: UICollectionViewCell = cast(reusableCell, message: "Cell '\(reusableCell)' should be of type UICollectionViewCell.")
         return indexPath(for: cell)
     }
-    
+
     /**
      Just calls the corresponding method `return indexPathForItemAtPoint(point)`.
      */

@@ -167,9 +167,7 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
     open func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAt indexPath: IndexPath) -> CellType {
 
         let cell = collectionView.ds_dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        guard let castedCell = cell as? CellType else {
-            fatalError("cell: \(cell) with reuse identifier '\(reuseIdentifier)' expected to be of type \(CellType.self).")
-        }
+        let castedCell: CellType = cast(cell, message: "cell: \(cell) with reuse identifier '\(reuseIdentifier)' expected to be of type \(CellType.self).")
         return castedCell
     }
 

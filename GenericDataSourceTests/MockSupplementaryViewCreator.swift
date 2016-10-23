@@ -9,7 +9,7 @@
 import Foundation
 import GenericDataSource
 
-class MockSupplementaryViewCreator: SupplementaryViewCreator {
+class MockSupplementaryViewCreator: NSObject, SupplementaryViewCreator {
 
     var willDisplayCalled   = false
     var didDisplayCalled    = false

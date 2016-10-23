@@ -199,29 +199,17 @@ extension _DataSourcesCollection {
     }
 
     func globalIndexPathForLocalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
-
-        guard let mapping = mapping(of: dataSource) else {
-            fatalError("dataSource is not a child to composite data source")
-        }
-
+        let mapping = unsafeMapping(of: dataSource)
         return mapping.globalIndexPathForLocalIndexPath(indexPath)
     }
 
     func globalSectionForLocalSection(_ localSection: Int, dataSource: DataSource) -> Int {
-
-        guard let mapping = mapping(of: dataSource) else {
-            fatalError("dataSource is not a child to a composite data source")
-        }
-
+        let mapping = unsafeMapping(of: dataSource)
         return mapping.globalSectionForLocalSection(localSection)
     }
 
     func localIndexPathForGlobalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
-
-        guard let mapping = mapping(of: dataSource) else {
-            fatalError("dataSource is not a child to composite data source")
-        }
-
+        let mapping = unsafeMapping(of: dataSource)
         return mapping.localIndexPathForGlobalIndexPath(indexPath)
     }
 
@@ -235,7 +223,7 @@ extension _DataSourcesCollection {
 
     func unsafeTransform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
         guard let mapping = transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView) else {
-            fatalError("")
+            fatalError("unsafeTransform called but there is no mapping possible for the passed index path.")
         }
         return mapping
     }
@@ -250,6 +238,13 @@ extension _DataSourcesCollection {
         let wrapperView = _DelegatedGeneralCollectionView(mapping: wrapperMapping)
 
         return LocalDataSourceCollectionView(dataSource: mapping.dataSource, collectionView: wrapperView, indexPath: localIndexPath)
+    }
+
+    private func unsafeMapping(of dataSource: DataSource) -> _DataSourcesCollectionMapping {
+        guard let mapping = mapping(of: dataSource) else {
+            fatalError("dataSource is not a child to composite data source")
+        }
+        return mapping
     }
 }
 

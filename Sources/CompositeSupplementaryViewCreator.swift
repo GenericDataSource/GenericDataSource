@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class CompositeSupplementaryViewCreator: SupplementaryViewCreator {
+open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator {
 
     open private(set) var creators: [String: SupplementaryViewCreator]
 
@@ -40,10 +40,8 @@ open class CompositeSupplementaryViewCreator: SupplementaryViewCreator {
         creators.removeAll()
     }
 
-    private func creator(ofKind kind: String) -> SupplementaryViewCreator {
-        guard let creator = creators[kind] else {
-            fatalError("[CompositeSupplementaryViewCreator]: Cannot find creator of kind '\(kind)'")
-        }
+    open func creator(ofKind kind: String) -> SupplementaryViewCreator {
+        let creator: SupplementaryViewCreator = cast(creators[kind], message: "Cannot find creator of kind '\(kind)'")
         return creator
     }
 

@@ -91,12 +91,77 @@ class CompositeDataSourceGatewayTests: XCTestCase {
                             collectionType2: SelectionItemsModifiedTester<TextReportCollectionViewCell>.self)
     }
 
-    func testSupplementaryViewOfKind() {
+    func testHeaderSupplementaryViewOfKind() {
         // execute the test
-        executeTestTemplate(tableType1: SupplementaryViewOfKindTester<PDFReportTableViewCell>.self,
-                            tableType2: SupplementaryViewOfKindTester<TextReportTableViewCell>.self,
-                            collectionType1: SupplementaryViewOfKindTester<PDFReportCollectionViewCell>.self,
-                            collectionType2: SupplementaryViewOfKindTester<TextReportCollectionViewCell>.self,
+        executeTestTemplate(tableType1: HeaderSupplementaryViewOfKindTester<PDFReportTableViewCell>.self,
+                            tableType2: HeaderSupplementaryViewOfKindTester<TextReportTableViewCell>.self,
+                            collectionType1: HeaderSupplementaryViewOfKindTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: HeaderSupplementaryViewOfKindTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testFooterSupplementaryViewOfKind() {
+        // execute the test
+        executeTestTemplate(tableType1: FooterSupplementaryViewOfKindTester<PDFReportTableViewCell>.self,
+                            tableType2: FooterSupplementaryViewOfKindTester<TextReportTableViewCell>.self,
+                            collectionType1: FooterSupplementaryViewOfKindTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: FooterSupplementaryViewOfKindTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testHeaderSupplementaryViewSize() {
+        // execute the test
+        executeTestTemplate(tableType1:HeaderSupplementaryViewSizeTester<PDFReportTableViewCell>.self,
+                            tableType2: HeaderSupplementaryViewSizeTester<TextReportTableViewCell>.self,
+                            collectionType1: HeaderSupplementaryViewSizeTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: HeaderSupplementaryViewSizeTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()),
+                            singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testFooterSupplementaryViewSize() {
+        // execute the test
+        executeTestTemplate(tableType1: FooterSupplementaryViewSizeTester<PDFReportTableViewCell>.self,
+                            tableType2: FooterSupplementaryViewSizeTester<TextReportTableViewCell>.self,
+                            collectionType1: FooterSupplementaryViewSizeTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: FooterSupplementaryViewSizeTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()),
+                            singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testHeaderSupplementaryViewWillDisplay() {
+        // execute the test
+        executeTestTemplate(tableType1: HeaderSupplementaryViewWillDisplayTester<PDFReportTableViewCell>.self,
+                            tableType2: HeaderSupplementaryViewWillDisplayTester<TextReportTableViewCell>.self,
+                            collectionType1: HeaderSupplementaryViewWillDisplayTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: HeaderSupplementaryViewWillDisplayTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testFooterSupplementaryViewWillDisplay() {
+        // execute the test
+        executeTestTemplate(tableType1: FooterSupplementaryViewWillDisplayTester<PDFReportTableViewCell>.self,
+                            tableType2: FooterSupplementaryViewWillDisplayTester<TextReportTableViewCell>.self,
+                            collectionType1: FooterSupplementaryViewWillDisplayTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: FooterSupplementaryViewWillDisplayTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testHeaderSupplementaryViewDidDisplay() {
+        // execute the test
+        executeTestTemplate(tableType1: HeaderSupplementaryViewDidDisplayTester<PDFReportTableViewCell>.self,
+                            tableType2: HeaderSupplementaryViewDidDisplayTester<TextReportTableViewCell>.self,
+                            collectionType1: HeaderSupplementaryViewDidDisplayTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: HeaderSupplementaryViewDidDisplayTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testFooterSupplementaryViewDidDisplay() {
+        // execute the test
+        executeTestTemplate(tableType1: FooterSupplementaryViewDidDisplayTester<PDFReportTableViewCell>.self,
+                            tableType2: FooterSupplementaryViewDidDisplayTester<TextReportTableViewCell>.self,
+                            collectionType1: FooterSupplementaryViewDidDisplayTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: FooterSupplementaryViewDidDisplayTester<TextReportCollectionViewCell>.self,
                             singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
     }
 }

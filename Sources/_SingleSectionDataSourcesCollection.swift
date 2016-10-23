@@ -8,7 +8,7 @@
 
 import Foundation
 
-class _SingleSectionDataSourcesCollection: _DataSourcesCollection {
+class _SingleSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
 
     fileprivate var itemsCount: Int = 0
 
@@ -33,9 +33,7 @@ class _SingleSectionDataSourcesCollection: _DataSourcesCollection {
         globalItemToMappings.removeAll()
 
         for mapping in mappings {
-            guard let mapping = mapping as? _SingleSectionMapping else {
-                fatalError("Mappings for \(type(of: self)) should be of type \(_SingleSectionMapping.self)")
-            }
+            let mapping: _SingleSectionMapping = cast(mapping, message: "Mappings for \(type(of: self)) should be of type \(_SingleSectionMapping.self)")
 
             let newItemCount = mapping.updateMappings(startingWithGlobalItem: count) + count
             while (count < newItemCount) {

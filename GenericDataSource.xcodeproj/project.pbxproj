@@ -36,6 +36,11 @@
 		546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */; };
 		54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */; };
 		54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF11DBCC12E004F4854 /* TesterChooser.swift */; };
+		54735EF41DBCCA87004F4854 /* SupplementaryViewSizeTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF31DBCCA87004F4854 /* SupplementaryViewSizeTester.swift */; };
+		54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF51DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift */; };
+		54735EF81DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */; };
+		54735EFB1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */; };
+		54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EFC1DBCF16B004F4854 /* _Utilities.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
 		547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */; };
@@ -108,6 +113,11 @@
 		546B1CC61C82E55E0009DD26 /* XCTest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTestExecutor.swift; sourceTree = "<group>"; };
 		54735EF11DBCC12E004F4854 /* TesterChooser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TesterChooser.swift; sourceTree = "<group>"; };
+		54735EF31DBCCA87004F4854 /* SupplementaryViewSizeTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewSizeTester.swift; sourceTree = "<group>"; };
+		54735EF51DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewWillDisplayTester.swift; sourceTree = "<group>"; };
+		54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSupplementaryViewDidDisplayTester.swift; sourceTree = "<group>"; };
+		54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSupplementaryViewCreatorTests.swift; sourceTree = "<group>"; };
+		54735EFC1DBCF16B004F4854 /* _Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Utilities.swift; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
 		547446FE1CA7F82C00F3597E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewMultiSectionTestCases.swift; sourceTree = "<group>"; };
@@ -201,6 +211,9 @@
 				54433C301DB7AC630032AF9C /* SelectionDidDeselectTester.swift */,
 				54433C341DB9356F0032AF9C /* SelectionItemsModifiedTester.swift */,
 				54433C381DB955440032AF9C /* SupplementaryViewOfKindTester.swift */,
+				54735EF31DBCCA87004F4854 /* SupplementaryViewSizeTester.swift */,
+				54735EF51DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift */,
+				54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */,
 			);
 			name = Testers;
 			sourceTree = "<group>";
@@ -221,6 +234,14 @@
 				54735EF11DBCC12E004F4854 /* TesterChooser.swift */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		54735EF91DBCDD2C004F4854 /* Supplementary */ = {
+			isa = PBXGroup;
+			children = (
+				54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */,
+			);
+			name = Supplementary;
 			sourceTree = "<group>";
 		};
 		547446FB1CA7F78D00F3597E /* internal */ = {
@@ -244,9 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				5CE64F131DA77B9D002456E1 /* Sources */,
-				5495761F1C6FBB2400E9C26C /* ... */,
 				549576121C6FBA9400E9C26C /* GenericDataSourceTests */,
 				549576051C6FBA9400E9C26C /* Products */,
+				5495761F1C6FBB2400E9C26C /* ... */,
 			);
 			sourceTree = "<group>";
 		};
@@ -283,6 +304,7 @@
 		549576311C6FBBB200E9C26C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				54735EF91DBCDD2C004F4854 /* Supplementary */,
 				54E0D2B91C830FC0001202BE /* Basic */,
 				54E0D2BA1C830FC6001202BE /* Compsite */,
 				547447021CA88B0700F3597E /* DataSource */,
@@ -414,6 +436,7 @@
 			children = (
 				5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */,
 				5CE64F1C1DA77B9D002456E1 /* DataSource.swift */,
+				54735EFC1DBCF16B004F4854 /* _Utilities.swift */,
 			);
 			name = "Base DataSource";
 			sourceTree = "<group>";
@@ -556,6 +579,7 @@
 				5CE64F2E1DA77B9D002456E1 /* BasicDataSource.swift in Sources */,
 				5CE64F411DA77B9D002456E1 /* UnselectableSelectionHandler.swift in Sources */,
 				54433BE51DAF53070032AF9C /* LocalDataSourceCollectionView.swift in Sources */,
+				54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */,
 				5CE64F361DA77B9D002456E1 /* _DelegatedGeneralCollectionView.swift in Sources */,
 				5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */,
 				5CE64F381DA77B9D002456E1 /* _GeneralCollectionViewWrapperMapping.swift in Sources */,
@@ -578,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54433C271DB7A18E0032AF9C /* SelectionDidHighlightTester.swift in Sources */,
+				54735EFB1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift in Sources */,
 				54433C371DB9549F0032AF9C /* MockSupplementaryViewCreator.swift in Sources */,
 				54433C231DB7399D0032AF9C /* ItemSizeTester.swift in Sources */,
 				54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */,
@@ -590,11 +615,13 @@
 				546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */,
 				547447041CA88B2C00F3597E /* AbstractDataSourceTests.swift in Sources */,
 				54433C391DB955440032AF9C /* SupplementaryViewOfKindTester.swift in Sources */,
+				54735EF81DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift in Sources */,
 				54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */,
 				547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */,
 				5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */,
 				54433C251DB7791D0032AF9C /* SelectionShouldHighlightTester.swift in Sources */,
 				54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */,
+				54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */,
 				547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */,
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,
@@ -606,6 +633,7 @@
 				54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */,
 				54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */,
 				54433C291DB7A26D0032AF9C /* SelectionDidUnhighlightTester.swift in Sources */,
+				54735EF41DBCCA87004F4854 /* SupplementaryViewSizeTester.swift in Sources */,
 				54433C351DB9356F0032AF9C /* SelectionItemsModifiedTester.swift in Sources */,
 				54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */,
 				54433C2F1DB7AB020032AF9C /* SelectionShouldDeselectTester.swift in Sources */,

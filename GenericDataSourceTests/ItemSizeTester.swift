@@ -28,7 +28,7 @@ class ItemSizeTester<CellType>: DataSourceTester where CellType: ReportCell, Cel
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> CGSize {
-        return dataSource.ds_collectionView(collectionView, sizeForItemAt: indexPath)
+        return dataSource.collectionView(collectionView, layout: UICollectionViewFlowLayout(), sizeForItemAt: indexPath)
     }
 
     func assert(result: CGSize, indexPath: IndexPath, collectionView: GeneralCollectionView) {

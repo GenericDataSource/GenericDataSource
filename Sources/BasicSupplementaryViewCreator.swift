@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSupplementaryView>: SupplementaryViewCreator {
+open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSupplementaryView>: NSObject, SupplementaryViewCreator {
 
     open var size: CGSize?
     open let identifier: String
@@ -35,17 +35,13 @@ open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSu
     open func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
         let view = collectionView.ds_dequeueReusableSupplementaryView(ofKind: kind, withIdentifier: identifier, for: indexPath)
 
-        guard let supplementaryView = view as? SupplementaryView else {
-            fatalError("[BasicSupplementaryViewCreator]: Cannot cast view '\(view)' to type '\(SupplementaryView.self)'")
-        }
+        let supplementaryView: SupplementaryView = cast(view, message: "Cannot cast view '\(view)' to type '\(SupplementaryView.self)'")
         self.collectionView(collectionView, configure: supplementaryView, with: item(at: indexPath), at: indexPath)
         return supplementaryView
     }
 
     open func collectionView(_ collectionView: GeneralCollectionView, sizeForViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
-        guard let size = size else {
-            fatalError("[BasicSupplementaryViewCreator]: sizeForViewOfKind called and `size` property is nil. Need to set it to non-nil value or override `sizeForViewOfKind` method and return a custom size.")
-        }
+        let size: CGSize = cast(self.size, message: "sizeForViewOfKind called and `size` property is nil. Need to set it to non-nil value or override `sizeForViewOfKind` method and return a custom size.")
         return size
     }
 
