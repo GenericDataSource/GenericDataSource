@@ -13,7 +13,7 @@ class UnselectableSelectionHandlerTests: XCTestCase {
 
     func testShouldHighlight() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let instance = UnselectableSelectionHandler<Report, TextReportCollectionViewCell>()
@@ -23,7 +23,7 @@ class UnselectableSelectionHandlerTests: XCTestCase {
 
     func testShouldSelect() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let instance = UnselectableSelectionHandler<Report, TextReportCollectionViewCell>()
@@ -33,7 +33,7 @@ class UnselectableSelectionHandlerTests: XCTestCase {
 
     func testShouldDeselect() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let instance = UnselectableSelectionHandler<Report, TextReportCollectionViewCell>()

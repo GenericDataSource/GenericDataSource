@@ -11,6 +11,17 @@ import XCTest
 
 class BasicDataSourceTests: XCTestCase {
 
+    func testIndexPathForItem() {
+        let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
+        dataSource.items = [Report(id: 1, name: "name1"),
+                            Report(id: 2, name: "name2"),
+                            Report(id: 3, name: "name3"),
+                            Report(id: 4, name: "name4")]
+
+        XCTAssertEqual(IndexPath(item: 2, section: 0), dataSource.indexPath(for: Report(id: 3, name: "name3")))
+        XCTAssertNil(dataSource.indexPath(for: Report(id: 222, name: "name222")))
+    }
+
     func testItemSizeFunctionOverriden() {
         class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
             fileprivate override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -22,7 +33,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let actualSize = dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: IndexPath(item: 0, section: 0))
         XCTAssertEqual(CGSize(width: 100, height: 100), actualSize)
@@ -41,7 +52,7 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
         
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let actualSize = dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: IndexPath(item: 0, section: 0))
         XCTAssertEqual(size, actualSize)
@@ -131,7 +142,7 @@ class BasicDataSourceTests: XCTestCase {
 
     func testQueryForCellsWithCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -163,7 +174,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionShouldHighlightNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         
@@ -177,7 +188,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionDidHighlightNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -191,7 +202,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionDidUnhighlightNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -205,7 +216,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionShouldSelectNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -219,7 +230,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionDidSelectNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -233,7 +244,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionWillDeselectNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -247,7 +258,7 @@ class BasicDataSourceTests: XCTestCase {
     func testSelectionDidDeselectNoSelector() {
         
         let tableView = MockTableView()
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()

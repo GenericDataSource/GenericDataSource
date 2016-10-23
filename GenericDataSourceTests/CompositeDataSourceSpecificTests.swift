@@ -215,6 +215,56 @@ class CompositeDataSourceSpecificTests : XCTestCase {
         XCTAssertEqual(0, dataSource.dataSources.count)
     }
 
+    func testRemoveAtSingle() {
+
+        let dataSource  = CompositeDataSource(sectionType: .single)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        dataSource.add(pdfReportsDataSource)
+
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+        dataSource.add(textReportsDataSource)
+
+        XCTAssertEqual(2, dataSource.dataSources.count)
+        XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
+        XCTAssertTrue(textReportsDataSource === dataSource.dataSources[1])
+
+        dataSource.remove(at: 0)
+
+        XCTAssertEqual(1, dataSource.dataSources.count)
+        XCTAssertTrue(textReportsDataSource === dataSource.dataSources[0])
+
+        dataSource.remove(at: 0)
+        XCTAssertEqual(0, dataSource.dataSources.count)
+    }
+
+    func testRemoveAtMulti() {
+
+        let dataSource  = CompositeDataSource(sectionType: .multi)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        dataSource.add(pdfReportsDataSource)
+
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+        dataSource.add(textReportsDataSource)
+
+        XCTAssertEqual(2, dataSource.dataSources.count)
+        XCTAssertTrue(pdfReportsDataSource === dataSource.dataSources[0])
+        XCTAssertTrue(textReportsDataSource === dataSource.dataSources[1])
+
+        dataSource.remove(at: 0)
+
+        XCTAssertEqual(1, dataSource.dataSources.count)
+        XCTAssertTrue(textReportsDataSource === dataSource.dataSources[0])
+
+        dataSource.remove(at: 0)
+        XCTAssertEqual(0, dataSource.dataSources.count)
+    }
+
     func testDataSourceAtIndexSingle() {
         
         let dataSource  = CompositeDataSource(sectionType: .single)
@@ -557,7 +607,7 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testOneDataSourceSingleSectionCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let reportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -593,7 +643,7 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testOneDataSourceMultiSectionCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let reportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
@@ -682,7 +732,7 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testMultipleDataSourcesSingleSectionCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let total = 55
@@ -792,7 +842,7 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testMultipleDataSourcesMultiSectionCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let total = 55
@@ -920,7 +970,7 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testMultipleDataSourcesSingleAndMultiCollectionView() {
 
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
 
         let total = 55
@@ -992,5 +1042,51 @@ class CompositeDataSourceSpecificTests : XCTestCase {
 
     func testSupplmentaryViews() {
 
+        let collectionView = MockCollectionView()
+        let total = 55
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportCollectionViewCell>()
+        pdfReportsDataSource.items = Report.generate(numberOfReports: total / 2, name: "pdf report")
+        let textReportsDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
+        textReportsDataSource.items = Report.generate(from: total / 2 + 1, numberOfReports: total, name: "text report")
+
+        let dataSource  = CompositeDataSource(sectionType: .multi)
+        dataSource.add(pdfReportsDataSource)
+        dataSource.add(textReportsDataSource)
+
+
+        let creator = MockSupplementaryViewCreator()
+        let creator1 = MockSupplementaryViewCreator()
+        let creator2 = MockSupplementaryViewCreator()
+
+        dataSource.supplementaryViewCreator = creator
+        pdfReportsDataSource.supplementaryViewCreator = creator1
+        textReportsDataSource.supplementaryViewCreator = creator2
+
+        creator.view = UICollectionReusableView()
+        creator.size = CGSize(width: 19, height: 45)
+
+
+        let indexPath = IndexPath(item: 10, section: 10)
+
+        // view
+        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
+        XCTAssertEqual(creator.view as? UIView, view)
+        XCTAssertEqual(indexPath, creator.indexPath)
+        XCTAssertEqual(UICollectionElementKindSectionHeader, creator.kind)
+
+
+        // size
+        let size = dataSource.collectionView(collectionView, layout: UICollectionViewFlowLayout(), referenceSizeForFooterInSection: indexPath.section)
+        XCTAssertEqual(creator.size, size)
+        XCTAssertEqual(indexPath.section, creator.indexPath?.section)
+
+        // will display
+        dataSource.collectionView(collectionView, willDisplaySupplementaryView: UICollectionReusableView(), forElementKind: UICollectionElementKindSectionFooter, at: indexPath)
+        XCTAssertTrue(creator.willDisplayCalled)
+
+        // did display
+        dataSource.collectionView(collectionView, didEndDisplayingSupplementaryView: UICollectionReusableView(), forElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
+        XCTAssertTrue(creator.didDisplayCalled)
     }
 }

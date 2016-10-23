@@ -11,7 +11,7 @@ import XCTest
 
 class BlockSelectionHandlerTests: XCTestCase {
 
-    let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let collectionView = MockCollectionView()
     let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
     func testInit() {

@@ -12,7 +12,7 @@ class BasicBlockDataSourceTests: XCTestCase {
 
     func testBlockBasicDataSource() {
         
-        let collectionView = MockCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = MockCollectionView()
         collectionView.numberOfReuseCells = 10
         
         let total = 200
