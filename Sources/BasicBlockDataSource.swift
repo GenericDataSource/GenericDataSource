@@ -17,7 +17,7 @@ open class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSou
     public typealias ConfigureBlock = (ItemType, CellType, IndexPath) -> Void
 
     /// The configure block instance.
-    fileprivate let configureBlock: ConfigureBlock
+    private let configureBlock: ConfigureBlock
     
     /**
      Creates new instance of the basic block data source.

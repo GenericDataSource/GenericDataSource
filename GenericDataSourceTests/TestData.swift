@@ -79,6 +79,28 @@ class PDFReportCollectionViewCell: UICollectionViewCell, ReportCell {
     }
 }
 
+class ReportTableHeaderFooterView: UITableViewHeaderFooterView, ReportCell {
+
+    var reports: [Report] = []
+    var indexPaths: [IndexPath] = []
+
+    func configureForReport(_ report: Report, indexPath: IndexPath) {
+        reports.append(report)
+        indexPaths.append(indexPath)
+    }
+}
+
+class ReportCollectionReusableView: UICollectionReusableView, ReportCell {
+
+    var reports: [Report] = []
+    var indexPaths: [IndexPath] = []
+
+    func configureForReport(_ report: Report, indexPath: IndexPath) {
+        reports.append(report)
+        indexPaths.append(indexPath)
+    }
+}
+
 class ReportBasicDataSource<CellType>: BasicDataSource<Report, CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     init() {
@@ -119,3 +141,26 @@ class ReportBasicBlockDataSource<CellType>: BasicBlockDataSource<Report, CellTyp
         collectionView.ds_register(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
     }
 }
+
+class ReportBasicSupplementaryViewCreator<SupplementaryView>: BasicSupplementaryViewCreator<Report, SupplementaryView>
+    where SupplementaryView: ReusableSupplementaryView, SupplementaryView: NSObject, SupplementaryView: ReportCell {
+
+    var kind: String?
+
+    init() {
+        super.init(identifier: NSStringFromClass(SupplementaryView.self))
+    }
+
+    func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
+        if let tableView = collectionView as? UITableView {
+            tableView.register(SupplementaryView.self, forHeaderFooterViewReuseIdentifier: NSStringFromClass(SupplementaryView.self))
+        } else if let collectionView = collectionView as? UICollectionView {
+            collectionView.register(SupplementaryView.self, forSupplementaryViewOfKind: kind!, withReuseIdentifier: NSStringFromClass(SupplementaryView.self))
+        }
+    }
+
+    override func collectionView(_ collectionView: GeneralCollectionView, configure view: SupplementaryView, with item: Report, at indexPath: IndexPath) {
+        view.configureForReport(item, indexPath: indexPath)
+    }
+}
+

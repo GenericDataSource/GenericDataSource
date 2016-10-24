@@ -8,12 +8,9 @@
 
 import Foundation
 
-extension NSObject {
+extension NSObjectProtocol {
     func cast<T, U>(_ value: T) -> U {
-        guard let castedValue = value as? U else {
-            fatalError("[\(type(of: self))]: Couldn't cast object '\(value)' to '\(U.self)'")
-        }
-        return castedValue
+        return cast(value, message: "Couldn't cast object '\(value)' to '\(U.self)'")
     }
 
     func cast<T, U>(_ value: T, message: String) -> U {

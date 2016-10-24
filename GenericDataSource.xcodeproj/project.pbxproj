@@ -41,6 +41,9 @@
 		54735EF81DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */; };
 		54735EFB1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */; };
 		54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EFC1DBCF16B004F4854 /* _Utilities.swift */; };
+		54735F011DBD3B8D004F4854 /* BasicBlockSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735EFF1DBD3AFA004F4854 /* BasicBlockSupplementaryViewCreator.swift */; };
+		54735F031DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735F021DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift */; };
+		54735F051DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54735F041DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift */; };
 		547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */; };
 		547446FF1CA7F82C00F3597E /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547446FE1CA7F82C00F3597E /* TableView.swift */; };
 		547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */; };
@@ -118,6 +121,9 @@
 		54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSupplementaryViewDidDisplayTester.swift; sourceTree = "<group>"; };
 		54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeSupplementaryViewCreatorTests.swift; sourceTree = "<group>"; };
 		54735EFC1DBCF16B004F4854 /* _Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Utilities.swift; sourceTree = "<group>"; };
+		54735EFF1DBD3AFA004F4854 /* BasicBlockSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockSupplementaryViewCreator.swift; sourceTree = "<group>"; };
+		54735F021DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSupplementaryViewCreatorTests.swift; sourceTree = "<group>"; };
+		54735F041DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockSupplementaryViewCreatorTests.swift; sourceTree = "<group>"; };
 		547446FC1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewSingleSectionTestCases.swift; sourceTree = "<group>"; };
 		547446FE1CA7F82C00F3597E /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		547447001CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegatedGeneralCollectionViewMultiSectionTestCases.swift; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 			children = (
 				54433C0A1DB231A50032AF9C /* SupplementaryViewCreator.swift */,
 				54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */,
+				54735EFF1DBD3AFA004F4854 /* BasicBlockSupplementaryViewCreator.swift */,
 				54433C0E1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift */,
 			);
 			name = Supplementary;
@@ -240,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				54735EFA1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift */,
+				54735F021DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift */,
+				54735F041DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift */,
 			);
 			name = Supplementary;
 			sourceTree = "<group>";
@@ -579,6 +588,7 @@
 				5CE64F2E1DA77B9D002456E1 /* BasicDataSource.swift in Sources */,
 				5CE64F411DA77B9D002456E1 /* UnselectableSelectionHandler.swift in Sources */,
 				54433BE51DAF53070032AF9C /* LocalDataSourceCollectionView.swift in Sources */,
+				54735F011DBD3B8D004F4854 /* BasicBlockSupplementaryViewCreator.swift in Sources */,
 				54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */,
 				5CE64F361DA77B9D002456E1 /* _DelegatedGeneralCollectionView.swift in Sources */,
 				5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */,
@@ -610,6 +620,7 @@
 				54433C2D1DB7AA470032AF9C /* SelectionDidSelectTester.swift in Sources */,
 				54433C2B1DB7A2C40032AF9C /* SelectionShouldSelectTester.swift in Sources */,
 				54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */,
+				54735F031DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift in Sources */,
 				54433BE21DAC0C940032AF9C /* CompositeDataSourceSpecificTests.swift in Sources */,
 				54F984791C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift in Sources */,
 				546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */,
@@ -622,6 +633,7 @@
 				54433C251DB7791D0032AF9C /* SelectionShouldHighlightTester.swift in Sources */,
 				54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */,
 				54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */,
+				54735F051DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift in Sources */,
 				547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */,
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,

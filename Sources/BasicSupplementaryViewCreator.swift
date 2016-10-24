@@ -14,17 +14,17 @@ open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSu
     open let identifier: String
     open var items: [[ItemType]] = []
 
-    init(identifier: String, size: CGSize) {
+    public init(identifier: String, size: CGSize) {
         self.identifier = identifier
         self.size = size
     }
 
-    init(identifier: String) {
+    public init(identifier: String) {
         self.identifier = identifier
         self.size = nil
     }
 
-    open func setSectionedItems(sectionedItems: [ItemType]) {
+    open func setSectionedItems(_ sectionedItems: [ItemType]) {
         items = sectionedItems.map { [$0] }
     }
 

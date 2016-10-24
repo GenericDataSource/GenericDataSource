@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCTest
 @testable import GenericDataSource
 
 protocol MockReusableView : GeneralCollectionView {
@@ -24,6 +25,7 @@ class MockTableView : UITableView {
     var sectionsCount : Int = 0
     var itemsCountPerSection : [Int] = []
     var cells : [[UITableViewCell]] = []
+    var reusableHeaders: [String: UITableViewHeaderFooterView.Type] = [:]
 
     override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
         guard reusableCells[identifier] == nil else {
@@ -36,6 +38,10 @@ class MockTableView : UITableView {
         }
 
         reusableCells[identifier] = (theCellClass, [:])
+    }
+
+    override func register(_ aClass: AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) {
+        reusableHeaders[identifier] = aClass as? UITableViewHeaderFooterView.Type
     }
 
     override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
@@ -55,6 +61,11 @@ class MockTableView : UITableView {
             reusableCells[identifier] = mutableCellData
             return cell
         }
+    }
+
+    override func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView? {
+        let viewClass = reusableHeaders[identifier]
+        return viewClass?.init()
     }
 
     func queryDataSource() {
@@ -102,6 +113,7 @@ class MockCollectionView : UICollectionView {
     var sectionsCount : Int = 0
     var itemsCountPerSection : [Int] = []
     var cells : [[UICollectionViewCell]] = []
+    var reusableHeaders: [String: (kind: String, view: UICollectionReusableView.Type)] = [:]
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -128,6 +140,10 @@ class MockCollectionView : UICollectionView {
         reusableCells[identifier] = (theCellClass, [:])
     }
 
+    override func register(_ viewClass: AnyClass?, forSupplementaryViewOfKind elementKind: String, withReuseIdentifier identifier: String) {
+        reusableHeaders[identifier] = (elementKind, viewClass as! UICollectionReusableView.Type)
+    }
+
     override func dequeueReusableCell(withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellData = reusableCells[identifier] else {
             assertionFailure("No cell registered with identifier '\(identifier)'.")
@@ -145,6 +161,13 @@ class MockCollectionView : UICollectionView {
             reusableCells[identifier] = mutableCellData
             return cell
         }
+    }
+
+    override func dequeueReusableSupplementaryView(ofKind elementKind: String, withReuseIdentifier identifier: String, for indexPath: IndexPath) -> UICollectionReusableView {
+        let reusableView = reusableHeaders[identifier]
+        XCTAssertNotNil(reusableView)
+        XCTAssertEqual(elementKind, reusableView?.kind)
+        return reusableView!.view.init()
     }
 
     func queryDataSource() {

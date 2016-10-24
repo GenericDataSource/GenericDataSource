@@ -55,7 +55,7 @@ struct _MappingCollection: MutableCollection, RangeReplaceableCollection {
     }
 }
 
-protocol _DataSourcesCollection: class {
+protocol _DataSourcesCollection: NSObjectProtocol {
     unowned var parentDataSource: CompositeDataSource { get }
     var mappings: _MappingCollection { get set }
 
@@ -144,12 +144,8 @@ extension _DataSourcesCollection {
     func remove(_ dataSource: DataSource) {
 
         let wrapper = _DataSourceWrapper(dataSource: dataSource)
-        guard let exsitingMapping = mappings.dataSourceToMappings[wrapper] else {
-            fatalError("Tried to remove a data source that doesn't exist: \(dataSource)")
-        }
-        guard let index = mappings.index(of: exsitingMapping) else {
-            fatalError("Tried to remove a data source that doesn't exist: \(dataSource)")
-        }
+        let exsitingMapping: _DataSourcesCollectionMapping = cast(mappings.dataSourceToMappings[wrapper], message: "Tried to remove a data source that doesn't exist: \(dataSource)")
+        let index: Int = cast(mappings.index(of: exsitingMapping), message: "Tried to remove a data source that doesn't exist: \(dataSource)")
 
         mappings.dataSourceToMappings[wrapper] = nil
         mappings.remove(at: index)
@@ -214,17 +210,13 @@ extension _DataSourcesCollection {
     }
 
     func localSectionForGlobalSection(_ section: Int, dataSource: DataSource) -> Int {
-        guard let mapping = mapping(of: dataSource) else {
-            fatalError("dataSource is not a child to composite data source")
-        }
-
+        let mapping: _DataSourcesCollectionMapping = cast(self.mapping(of: dataSource), message: "dataSource is not a child to composite data source")
         return mapping.localSectionForGlobalSection(section)
     }
 
     func unsafeTransform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView {
-        guard let mapping = transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView) else {
-            fatalError("unsafeTransform called but there is no mapping possible for the passed index path.")
-        }
+        let mapping: LocalDataSourceCollectionView = cast(transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView),
+                                                          message: "unsafeTransform called but there is no mapping possible for the passed index path.")
         return mapping
     }
 
@@ -241,9 +233,7 @@ extension _DataSourcesCollection {
     }
 
     private func unsafeMapping(of dataSource: DataSource) -> _DataSourcesCollectionMapping {
-        guard let mapping = mapping(of: dataSource) else {
-            fatalError("dataSource is not a child to composite data source")
-        }
+        let mapping: _DataSourcesCollectionMapping = cast(self.mapping(of: dataSource), message: "dataSource is not a child to composite data source")
         return mapping
     }
 }
