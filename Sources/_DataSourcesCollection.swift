@@ -23,36 +23,10 @@ private func ==(lhs: _DataSourceWrapper, rhs: _DataSourceWrapper) -> Bool {
     return lhs.dataSource === rhs.dataSource
 }
 
-struct _MappingCollection: MutableCollection, RangeReplaceableCollection {
+struct _MappingCollection {
 
-    typealias Element = _DataSourcesCollectionMapping
-    typealias Index = Int
-    typealias SubSequence = ArraySlice<Element>
-
-    private var array: [Element] = []
-    fileprivate var dataSourceToMappings: [_DataSourceWrapper: Element] = [:]
-
-    /// Always zero, just like `endIndex`.
-    var startIndex: Index { return array.startIndex }
-
-    /// Always zero, just like `startIndex`.
-    var endIndex: Index { return array.endIndex }
-
-    subscript(position: Index) -> Element {
-        get { return array[position] }
-        set { array[position] = newValue }
-    }
-
-    subscript(bounds: Range<Index>) -> SubSequence {
-        get { return array[bounds] }
-        set { array[bounds] = newValue }
-    }
-
-    func index(after i: Int) -> Int { return array.index(after: i) }
-
-    mutating func replaceSubrange<C>(_ subrange: Range<Index>, with newElements: C) where C : Collection, C.Iterator.Element == Element {
-        array.replaceSubrange(subrange, with: newElements)
-    }
+    var array: [_DataSourcesCollectionMapping] = []
+    fileprivate var dataSourceToMappings: [_DataSourceWrapper: _DataSourcesCollectionMapping] = [:]
 }
 
 protocol _DataSourcesCollection: NSObjectProtocol {
@@ -94,7 +68,7 @@ protocol _DataSourcesCollection: NSObjectProtocol {
 extension _DataSourcesCollection {
 
     var dataSources: [DataSource] {
-        return mappings.map { $0.dataSource }
+        return mappings.array.map { $0.dataSource }
     }
 
     private func createAndPrepareMapping(for dataSource: DataSource) -> _DataSourcesCollectionMapping {
@@ -124,7 +98,7 @@ extension _DataSourcesCollection {
     func add(_ dataSource: DataSource) {
 
         let mapping = createAndPrepareMapping(for: dataSource)
-        mappings.append(mapping)
+        mappings.array.append(mapping)
 
         // update the mapping
         updateMappings()
@@ -132,10 +106,10 @@ extension _DataSourcesCollection {
 
     func insert(_ dataSource: DataSource, at index: Int) {
 
-        assert(index >= 0 && index <= mappings.count, "Invalid index \(index) should be between [0..\(mappings.count)")
+        assert(index >= 0 && index <= mappings.array.count, "Invalid index \(index) should be between [0..\(mappings.array.count)")
 
         let mapping = createAndPrepareMapping(for: dataSource)
-        mappings.insert(mapping, at: index)
+        mappings.array.insert(mapping, at: index)
 
         // update the mapping
         updateMappings()
@@ -145,10 +119,10 @@ extension _DataSourcesCollection {
 
         let wrapper = _DataSourceWrapper(dataSource: dataSource)
         let exsitingMapping: _DataSourcesCollectionMapping = cast(mappings.dataSourceToMappings[wrapper], message: "Tried to remove a data source that doesn't exist: \(dataSource)")
-        let index: Int = cast(mappings.index(of: exsitingMapping), message: "Tried to remove a data source that doesn't exist: \(dataSource)")
+        let index: Int = cast(mappings.array.index(of: exsitingMapping), message: "Tried to remove a data source that doesn't exist: \(dataSource)")
 
         mappings.dataSourceToMappings[wrapper] = nil
-        mappings.remove(at: index)
+        mappings.array.remove(at: index)
 
         // update the mapping
         updateMappings()
@@ -156,9 +130,9 @@ extension _DataSourcesCollection {
 
     func remove(at index: Int) -> DataSource {
 
-        let dataSource = mappings[index].dataSource
+        let dataSource = mappings.array[index].dataSource
         mappings.dataSourceToMappings[_DataSourceWrapper(dataSource: dataSource)] = nil
-        mappings.remove(at: index)
+        mappings.array.remove(at: index)
 
         // update the mapping
         updateMappings()
@@ -167,14 +141,14 @@ extension _DataSourcesCollection {
 
     func removeAllDataSources() {
         mappings.dataSourceToMappings.removeAll()
-        mappings.removeAll()
+        mappings.array.removeAll()
 
         // update the mapping
         updateMappings()
     }
 
     func dataSource(at index: Int) -> DataSource {
-        return mappings[index].dataSource
+        return mappings.array[index].dataSource
     }
 
     func contains(_ dataSource: DataSource) -> Bool {
@@ -185,7 +159,7 @@ extension _DataSourcesCollection {
         guard let mapping = mapping(of: dataSource) else {
             return nil
         }
-        return mappings.index(of: mapping)
+        return mappings.array.index(of: mapping)
     }
 
     func mapping(of dataSource: DataSource) -> _DataSourcesCollectionMapping? {

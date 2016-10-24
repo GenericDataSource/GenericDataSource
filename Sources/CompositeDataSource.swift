@@ -316,7 +316,7 @@ open class CompositeDataSource: AbstractDataSource {
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
-        return transformed.dataSource.ds_collectionView?(transformed.collectionView, sizeForItemAt: transformed.indexPath) ?? CGSize.zero
+        return transformed.dataSource.ds_collectionView!(transformed.collectionView, sizeForItemAt: transformed.indexPath)
     }
 
     // MARK: Selection

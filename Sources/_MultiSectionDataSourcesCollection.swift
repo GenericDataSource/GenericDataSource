@@ -31,7 +31,7 @@ class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
         var count = 0
         globalSectionToMappings.removeAll()
 
-        for mapping in mappings {
+        for mapping in mappings.array {
             let mapping: _MutliSectionMapping = cast(mapping, message: "Mappings for \(type(of: self)) should be of type \(_MutliSectionMapping.self)")
             let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
             while (count < newSectionCount) {

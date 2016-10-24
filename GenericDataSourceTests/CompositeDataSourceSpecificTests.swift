@@ -1089,4 +1089,11 @@ class CompositeDataSourceSpecificTests : XCTestCase {
         dataSource.collectionView(collectionView, didEndDisplayingSupplementaryView: UICollectionReusableView(), forElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
         XCTAssertTrue(creator.didDisplayCalled)
     }
+
+    func testSupplementaryOutsideRange() {
+        let dataSource = CompositeDataSource(sectionType: .multi)
+
+        let size = dataSource.collectionView(MockCollectionView(), layout: UICollectionViewFlowLayout(), referenceSizeForHeaderInSection: 2)
+        XCTAssertEqual(CGSize.zero, size)
+    }
 }
