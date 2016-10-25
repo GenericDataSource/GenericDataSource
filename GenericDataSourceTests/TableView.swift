@@ -73,7 +73,6 @@ class TableView: UITableView {
         return items
     }
 
-
     override func reloadData() {
         called = true
     }

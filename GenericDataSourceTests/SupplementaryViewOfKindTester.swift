@@ -45,7 +45,6 @@ class BaseSupplementaryViewOfKindTester<CellType>: DataSourceTester where CellTy
     }
 }
 
-
 class HeaderSupplementaryViewOfKindTester<CellType>: BaseSupplementaryViewOfKindTester<CellType>  where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override var kind: String { return UICollectionElementKindSectionHeader }

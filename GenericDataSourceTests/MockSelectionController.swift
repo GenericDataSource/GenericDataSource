@@ -41,7 +41,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
     }
 
-    // MARK:- Highlighting
+    // MARK: - Highlighting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -67,7 +67,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
     }
 
-    // MARK:- Selecting
+    // MARK: - Selecting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -85,7 +85,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
     }
 
-    // MARK:- Deselecting
+    // MARK: - Deselecting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,

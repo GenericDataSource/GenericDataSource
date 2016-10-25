@@ -84,7 +84,6 @@ class CompositeDataSourceSpecificTests: XCTestCase {
         XCTAssertEqual(0, dataSource.dataSources.count)
     }
 
-
     func testAddSingle() {
 
         let dataSource  = CompositeDataSource(sectionType: .single)
@@ -533,7 +532,7 @@ class CompositeDataSourceSpecificTests: XCTestCase {
                        dataSource.localIndexPathForGlobalIndexPath(IndexPath(item: 55, section: 1), dataSource: textReportsDataSource))
     }
 
-    // MARK:- Cells, Number of Items, Number of sections
+    // MARK: - Cells, Number of Items, Number of sections
 
     func testOneDataSourceSingleSectionTableView() {
 
@@ -1054,7 +1053,6 @@ class CompositeDataSourceSpecificTests: XCTestCase {
         dataSource.add(pdfReportsDataSource)
         dataSource.add(textReportsDataSource)
 
-
         let creator = MockSupplementaryViewCreator()
         let creator1 = MockSupplementaryViewCreator()
         let creator2 = MockSupplementaryViewCreator()
@@ -1066,7 +1064,6 @@ class CompositeDataSourceSpecificTests: XCTestCase {
         creator.view = UICollectionReusableView()
         creator.size = CGSize(width: 19, height: 45)
 
-
         let indexPath = IndexPath(item: 10, section: 10)
 
         // view
@@ -1074,7 +1071,6 @@ class CompositeDataSourceSpecificTests: XCTestCase {
         XCTAssertEqual(creator.view as? UIView, view)
         XCTAssertEqual(indexPath, creator.indexPath)
         XCTAssertEqual(UICollectionElementKindSectionHeader, creator.kind)
-
 
         // size
         let size = dataSource.collectionView(collectionView, layout: UICollectionViewFlowLayout(), referenceSizeForFooterInSection: indexPath.section)

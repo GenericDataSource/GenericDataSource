@@ -8,7 +8,6 @@
 
 import XCTest
 
-
 public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> T?, _ expression2: @autoclosure () -> T?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
 
     let object1 = expression1()
@@ -17,7 +16,6 @@ public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> T
 
     XCTAssertTrue(object1 === object2, errorMessage, file: file, line: line)
 }
-
 
 public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> [T]?, _ expression2: @autoclosure () -> [T]?, _ message: String = "", file: StaticString = #file, line: UInt = #line) {
 

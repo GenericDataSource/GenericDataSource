@@ -15,7 +15,6 @@ protocol MockReusableView: GeneralCollectionView {
     func ueryDataSource()
 }
 
-
 class MockTableView: UITableView {
 
     var reusableCells: [String: (type: UITableViewCell.Type, cells: [Int: UITableViewCell])] = [:]

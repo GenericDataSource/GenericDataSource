@@ -24,7 +24,7 @@ public struct Report: Equatable {
     }
 }
 
-public func ==(lhs: Report, rhs: Report) -> Bool {
+public func == (lhs: Report, rhs: Report) -> Bool {
     return lhs.id == rhs.id && lhs.name == rhs.name
 }
 

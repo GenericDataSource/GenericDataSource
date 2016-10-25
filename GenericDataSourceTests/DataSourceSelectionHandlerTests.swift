@@ -32,7 +32,6 @@ class DataSourceSelectionHandlerTests: XCTestCase {
         instance.dataSource(dataSource, collectionView: tableView, didHighlightItemAt: index)
         instance.dataSource(dataSource, collectionView: tableView, didUnhighlightItemAt: index)
 
-
         XCTAssertTrue(instance.dataSource(dataSource, collectionView: tableView, shouldSelectItemAt: index))
         instance.dataSource(dataSource, collectionView: tableView, didSelectItemAt: index)
 
