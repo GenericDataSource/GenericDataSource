@@ -14,7 +14,7 @@ class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
     override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: TitleCollectionViewCell, with item: String, at indexPath: IndexPath) {
         cell.textLabel?.text = item
     }
-    
+
     override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
         return true
     }

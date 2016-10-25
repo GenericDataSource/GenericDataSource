@@ -10,7 +10,7 @@ import XCTest
 import GenericDataSource
 
 class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
-    
+
     func testBasic() {
 
         let dataSource = CompositeDataSource(sectionType: .multi)

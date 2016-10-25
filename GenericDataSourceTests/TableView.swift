@@ -10,7 +10,7 @@ import UIKit
 import GenericDataSource
 
 class TableView: UITableView {
-    
+
     func reset() {
         indexPath = nil
         identifier = nil
@@ -47,13 +47,13 @@ class TableView: UITableView {
         self.cellClass = cellClass
         self.identifier = identifier
     }
-    
+
     var nib: UINib?
     override func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
         self.nib = nib
         self.identifier = identifier
     }
-    
+
     var dequeCell = UITableViewCell()
     override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
         self.identifier = identifier
@@ -61,23 +61,23 @@ class TableView: UITableView {
 
         return dequeCell
     }
-    
+
     var sections: Int = 0
     override var numberOfSections: Int {
         return sections
     }
-    
+
     var items: Int = 0
     override func numberOfRows(inSection section: Int) -> Int {
         self.section = section
         return items
     }
-    
-    
+
+
     override func reloadData() {
         called = true
     }
-    
+
     override func ds_performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
         called = true
     }
@@ -86,23 +86,23 @@ class TableView: UITableView {
         sectionsSet = sections
         self.animation = animation
     }
-    
+
     override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         sectionsSet = sections
         self.animation = animation
     }
-    
+
     override func reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
         sectionsSet = sections
         self.animation = animation
     }
-    
+
     var toSection: Int?
     override func moveSection(_ section: Int, toSection newSection: Int) {
         self.section = section
         toSection = newSection
     }
-    
+
     override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
         self.indexPaths = indexPaths
         self.animation = animation
@@ -123,13 +123,13 @@ class TableView: UITableView {
         self.indexPath = indexPath
         self.toIndexPath = newIndexPath
     }
-    
+
     override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
         self.indexPath = indexPath
         self.scrollPosition = scrollPosition
         self.animated = animated
     }
-    
+
     override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
         self.indexPath = indexPath
         self.animated = animated
@@ -151,11 +151,11 @@ class TableView: UITableView {
         self.point = point
         return indexPath
     }
-    
+
     override var indexPathsForVisibleRows: [IndexPath]? {
         return indexPaths ?? []
     }
-    
+
     override var indexPathsForSelectedRows: [IndexPath]? {
         return indexPaths ?? []
     }

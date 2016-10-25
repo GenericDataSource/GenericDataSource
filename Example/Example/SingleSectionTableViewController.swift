@@ -12,16 +12,16 @@ import GenericDataSource
 extension UITableViewCell: ContactCell { }
 
 class SingleSectionTableViewController: UITableViewController {
-    
+
     let dataSource = CompositeDataSource(sectionType: .single)
     let colorsDataSource = ColorsDataSource<UITableViewCell>(reuseIdentifier: "color")
     let contactsDataSource = ContactsDataSource<UITableViewCell>(reuseIdentifier: "contact")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.ds_useDataSource(dataSource)
-        
+
         colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))
         contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
 

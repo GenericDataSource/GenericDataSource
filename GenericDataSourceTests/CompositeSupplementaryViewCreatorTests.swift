@@ -10,7 +10,7 @@ import XCTest
 import GenericDataSource
 
 class CompositeSupplementaryViewCreatorTests: XCTestCase {
-    
+
     func testHeaderInit() {
         let creator1 = MockSupplementaryViewCreator()
 
@@ -123,7 +123,7 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
                 fatalError()
             }
 
-            func collectionView(_ collectionView: GeneralCollectionView, sizeForViewOfKind kind: String, at indexPath: IndexPath) -> CGSize{
+            func collectionView(_ collectionView: GeneralCollectionView, sizeForViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
                 fatalError()
             }
         }

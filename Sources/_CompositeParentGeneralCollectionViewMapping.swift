@@ -11,9 +11,9 @@ import Foundation
 class _CompositeParentGeneralCollectionViewMapping: _GeneralCollectionViewMapping {
 
     unowned var parentDataSource: CompositeDataSource
-    
+
     unowned var dataSource: DataSource
-    
+
     var delegate: GeneralCollectionView? {
         return parentDataSource.ds_reusableViewDelegate
     }
@@ -26,7 +26,7 @@ class _CompositeParentGeneralCollectionViewMapping: _GeneralCollectionViewMappin
     func globalSectionForLocalSection(_ localSection: Int) -> Int {
         return parentDataSource.globalSectionForLocalSection(localSection, dataSource: dataSource)
     }
-    
+
     func localIndexPathForGlobalIndexPath(_ globalIndexPath: IndexPath) -> IndexPath {
         return parentDataSource.localIndexPathForGlobalIndexPath(globalIndexPath, dataSource: dataSource)
     }

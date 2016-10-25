@@ -10,15 +10,15 @@ import UIKit
 import GenericDataSource
 
 class MultipleAndSingleSectionsCollectionViewController: UICollectionViewController {
-    
+
     let dataSource = CompositeDataSource(sectionType: .multi)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let firstSection = createFirstSection()
         let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
-        
+
         dataSource.add(firstSection)
         dataSource.add(colorsDataSource)
 
@@ -32,7 +32,7 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
     fileprivate func createFirstSection() -> DataSource {
         let titleDataSource = TitleDataSource(reuseIdentifier: "title")
         titleDataSource.items = ["Mix of Multiple and Single Sectioned DataSources"]
-        
+
         let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
 
         let firstSection = CompositeDataSource(sectionType: .single)
@@ -51,11 +51,11 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         let firstDataSource = dataSource.dataSource(at: 0)
         dataSource.remove(firstDataSource)
         dataSource.add(firstDataSource)
-        
+
         // update the table view
         dataSource.ds_reusableViewDelegate?.ds_performBatchUpdates({ [weak self] in
             self?.dataSource.ds_reusableViewDelegate?.ds_moveSection(0, toSection: 1)
             }, completion: nil)
     }
-    
+
 }

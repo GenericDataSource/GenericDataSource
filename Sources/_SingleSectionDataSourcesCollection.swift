@@ -36,7 +36,7 @@ class _SingleSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
             let mapping: _SingleSectionMapping = cast(mapping, message: "Mappings for \(type(of: self)) should be of type \(_SingleSectionMapping.self)")
 
             let newItemCount = mapping.updateMappings(startingWithGlobalItem: count) + count
-            while (count < newItemCount) {
+            while count < newItemCount {
                 globalItemToMappings[count] = mapping
                 count += 1
             }
@@ -52,7 +52,7 @@ class _SingleSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
         return globalItemToMappings[item]
     }
 
-    // MARK:- Data Source
+    // MARK: - Data Source
 
     func numberOfSections() -> Int {
         updateMappings()
@@ -69,7 +69,7 @@ class _SingleSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
 
 extension _SingleSectionDataSourcesCollection {
 
-    class _SingleSectionMapping : _DataSourcesCollectionMapping {
+    class _SingleSectionMapping: _DataSourcesCollectionMapping {
 
         fileprivate var globalItemStartIndex: Int = 0
 
@@ -81,7 +81,7 @@ extension _SingleSectionDataSourcesCollection {
             return localItem + globalItemStartIndex
         }
 
-        func updateMappings(startingWithGlobalItem globalItem:Int) -> Int {
+        func updateMappings(startingWithGlobalItem globalItem: Int) -> Int {
 
             globalItemStartIndex = globalItem
             let itemCount = self.dataSource.ds_numberOfItems(inSection: 0)

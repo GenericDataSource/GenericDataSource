@@ -264,5 +264,5 @@ class BlockSelectionHandlerTests: XCTestCase {
         // assert called
         XCTAssertTrue(called)
     }
-    
+
 }

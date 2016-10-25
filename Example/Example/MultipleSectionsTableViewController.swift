@@ -25,10 +25,10 @@ class MultipleSectionsTableViewController: UICollectionViewController {
 
         dataSource.add(contactsDataSource)
         dataSource.add(colorsDataSource)
-        
+
         colorsDataSource.items = Service.getFewColors()
         contactsDataSource.items = Service.getContacts()
-        
+
         colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))
         contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
     }
@@ -44,5 +44,5 @@ class MultipleSectionsTableViewController: UICollectionViewController {
             self?.dataSource.ds_reusableViewDelegate?.ds_moveSection(0, toSection: 1)
             }, completion: nil)
     }
-    
+
 }

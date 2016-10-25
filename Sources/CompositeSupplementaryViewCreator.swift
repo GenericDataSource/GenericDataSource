@@ -60,7 +60,7 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
         viewCreator.collectionView(collectionView, willDisplayView: view, ofKind: kind, at: indexPath)
     }
 
-    open func collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath){
+    open func collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         let viewCreator = creator(ofKind: kind)
         viewCreator.collectionView(collectionView, didEndDisplayingView: view, ofKind: kind, at: indexPath)
     }

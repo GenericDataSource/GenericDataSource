@@ -38,10 +38,10 @@ class BasicDataSourceTests: XCTestCase {
         let actualSize = dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: IndexPath(item: 0, section: 0))
         XCTAssertEqual(CGSize(width: 100, height: 100), actualSize)
     }
-    
+
     func testItemSize() {
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
+
         XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
 
@@ -51,58 +51,58 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertEqual(size, dataSource.itemSize)
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
-        
+
         let collectionView = MockCollectionView()
 
         let actualSize = dataSource.collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: IndexPath(item: 0, section: 0))
         XCTAssertEqual(size, actualSize)
     }
-    
+
     func testCellHeight() {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
-        
+
         XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
-        
+
         let height: CGFloat = 150
         dataSource.itemHeight = height
-        
+
         XCTAssertEqual(height, dataSource.itemHeight)
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
         XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
-        
+
         let tableView = MockTableView()
-        
+
         let actualHeight = dataSource.tableView(tableView, heightForRowAt: IndexPath(item: 0, section: 0))
         XCTAssertEqual(height, actualHeight)
     }
-    
+
     func testItems() {
-        
+
         // test items
         let reports = Report.generate(numberOfReports: 20)
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = reports
-        
+
         XCTAssertEqual(dataSource.items, reports)
     }
-    
+
     func testItemAtIndexPath() {
-    
+
         let reports = Report.generate(numberOfReports: 20)
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = reports
-    
+
         let fifth = dataSource.item(at: IndexPath(item: 4, section: 0))
         XCTAssertEqual(reports[4], fifth)
     }
-    
+
     func testReplaceItemAtIndexPath() {
-        
+
         let reports = Report.generate(numberOfReports: 20)
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = reports
-    
+
         let test = Report(id: 1945, name: "mohamed")
         dataSource.replaceItem(at: IndexPath(item: 15, section: 0), with: test)
         var mutableReports = reports
@@ -167,26 +167,26 @@ class BasicDataSourceTests: XCTestCase {
         for (index, cell) in cells.enumerated() {
             XCTAssertTrue(cell.reports.contains(Report(id: index + 1, name: "report-\(index + 1)")), "Invalid report at index: \(index)")
             XCTAssertTrue(cell.indexPaths.contains(IndexPath(item: index, section: 0)), "Invalid index path at index: \(index)")
-            
+
         }
     }
 
     func testSelectionShouldHighlightNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
+
         let indexPath = IndexPath(item: 20, section: 10)
-        
+
         XCTAssertTrue(tableDataSource.tableView(tableView, shouldHighlightRowAt: indexPath))
-        
+
         XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldHighlightItemAt: indexPath))
     }
-    
+
     func testSelectionDidHighlightNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 
@@ -194,13 +194,13 @@ class BasicDataSourceTests: XCTestCase {
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let indexPath = IndexPath(item: 20, section: 10)
-        
+
         tableDataSource.tableView(tableView, didHighlightRowAt: indexPath)
         collectionDataSource.collectionView(collectionView, didHighlightItemAt: indexPath)
     }
-    
+
     func testSelectionDidUnhighlightNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 
@@ -208,27 +208,27 @@ class BasicDataSourceTests: XCTestCase {
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         let indexPath = IndexPath(item: 20, section: 10)
-        
+
         tableDataSource.tableView(tableView, didUnhighlightRowAt: indexPath)
         collectionDataSource.collectionView(collectionView, didUnhighlightItemAt: indexPath)
     }
-    
+
     func testSelectionShouldSelectNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
+
         let indexPath = IndexPath(item: 20, section: 10)
-        
+
         XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willSelectRowAt: indexPath))
         XCTAssertTrue(collectionDataSource.collectionView(collectionView, shouldSelectItemAt: indexPath))
     }
-    
+
     func testSelectionDidSelectNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 
@@ -240,15 +240,15 @@ class BasicDataSourceTests: XCTestCase {
         tableDataSource.tableView(tableView, didSelectRowAt: indexPath)
         collectionDataSource.collectionView(collectionView, didSelectItemAt: indexPath)
     }
-    
+
     func testSelectionWillDeselectNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 
         let tableDataSource = ReportBasicDataSource<TextReportTableViewCell>()
         let collectionDataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
-        
+
         let indexPath = IndexPath(item: 20, section: 10)
 
         XCTAssertEqual(indexPath, tableDataSource.tableView(tableView, willDeselectRowAt: indexPath))
@@ -256,7 +256,7 @@ class BasicDataSourceTests: XCTestCase {
     }
 
     func testSelectionDidDeselectNoSelector() {
-        
+
         let tableView = MockTableView()
         let collectionView = MockCollectionView()
 

@@ -25,7 +25,7 @@ class RootViewController: UITableViewController {
 
         tableView.ds_useDataSource(dataSource)
         dataSource.items = Service.getExamples()
-        
+
         // optionally adding a selection handler
         let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
         selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
@@ -34,10 +34,10 @@ class RootViewController: UITableViewController {
         }
         dataSource.setSelectionHandler(selectionHandler)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
+
         if let indexPath = dataSource?.ds_reusableViewDelegate?.ds_indexPathsForSelectedItems().first {
             let item = dataSource?.item(at: indexPath)
             segue.destination.title = item?.title

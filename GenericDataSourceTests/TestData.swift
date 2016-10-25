@@ -10,11 +10,11 @@ import UIKit
 
 @testable import GenericDataSource
 
-public struct Report : Equatable {
+public struct Report: Equatable {
 
     var id: Int
     var name: String
-    
+
     public static func generate(from: Int = 1, numberOfReports: Int, name: String = "report") -> [Report] {
         var reports: [Report] = []
         for i in from...numberOfReports {
@@ -125,7 +125,7 @@ class ReportNoReuseBasicDataSource<CellType>: BasicDataSource<Report, CellType> 
     init() {
         super.init(reuseIdentifier: "")
     }
-    
+
     override func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAt indexPath: IndexPath) -> CellType {
         return CellType.init()
     }
@@ -163,4 +163,3 @@ class ReportBasicSupplementaryViewCreator<SupplementaryView>: BasicSupplementary
         view.configureForReport(item, indexPath: indexPath)
     }
 }
-

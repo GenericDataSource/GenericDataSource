@@ -8,18 +8,18 @@
 
 import Foundation
 
-private class _DataSourceWrapper : Hashable {
+private class _DataSourceWrapper: Hashable {
     let dataSource: DataSource
     init(dataSource: DataSource) {
         self.dataSource = dataSource
     }
-    
+
     var hashValue: Int {
         return Unmanaged.passUnretained(dataSource).toOpaque().hashValue
     }
 }
 
-private func ==(lhs: _DataSourceWrapper, rhs: _DataSourceWrapper) -> Bool {
+private func == (lhs: _DataSourceWrapper, rhs: _DataSourceWrapper) -> Bool {
     return lhs.dataSource === rhs.dataSource
 }
 
@@ -52,7 +52,7 @@ protocol _DataSourcesCollection: NSObjectProtocol {
     func unsafeTransform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView
     func transform(globalIndexPath: IndexPath, globalCollectionView: GeneralCollectionView) -> LocalDataSourceCollectionView?
 
-    // MARK:- Subclassing
+    // MARK: - Subclassing
 
     func createMapping(for dataSource: DataSource) -> _DataSourcesCollectionMapping
 
@@ -212,7 +212,7 @@ extension _DataSourcesCollection {
     }
 }
 
-class _DataSourcesCollectionMapping : Equatable {
+class _DataSourcesCollectionMapping: Equatable {
 
     /// retained
     var reusableDelegate: _DelegatedGeneralCollectionView?
@@ -252,6 +252,6 @@ class _DataSourcesCollectionMapping : Equatable {
     }
 }
 
-func ==(lhs: _DataSourcesCollectionMapping, rhs: _DataSourcesCollectionMapping) -> Bool {
+func == (lhs: _DataSourcesCollectionMapping, rhs: _DataSourcesCollectionMapping) -> Bool {
     return lhs === rhs
 }

@@ -33,14 +33,14 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
 
      */
     public init<C: DataSourceSelectionHandler>(_ selectionHandler: C) where C.ItemType == ItemType, C.CellType == CellType {
-        
+
         itemsChanged = selectionHandler.dataSourceItemsModified
         configureCell = selectionHandler.dataSource(_:collectionView:configure:with:at:)
 
         shouldHighlight = selectionHandler.dataSource(_:collectionView:shouldHighlightItemAt:)
         didHighlight = selectionHandler.dataSource(_:collectionView:didHighlightItemAt:)
         didUnhighlight = selectionHandler.dataSource(_:collectionView:didUnhighlightItemAt:)
-        
+
         shouldSelect = selectionHandler.dataSource(_:collectionView:shouldSelectItemAt:)
         didSelect = selectionHandler.dataSource(_:collectionView:didSelectItemAt:)
 
@@ -96,8 +96,8 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
         didUnhighlightItemAt indexPath: IndexPath) {
             return didUnhighlight(dataSource, collectionView, indexPath)
     }
-    
-    // MARK:- Selecting
+
+    // MARK: - Selecting
 
     /**
      Delegating to the unerlying selection handler.
@@ -118,8 +118,8 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
         didSelectItemAt indexPath: IndexPath) {
             return didSelect(dataSource, collectionView, indexPath)
     }
-    
-    // MARK:- Deselecting
+
+    // MARK: - Deselecting
 
     /**
      Delegating to the unerlying selection handler.
@@ -141,7 +141,6 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
             return didDeselect(dataSource, collectionView, indexPath)
     }
 }
-
 
 extension DataSourceSelectionHandler {
 

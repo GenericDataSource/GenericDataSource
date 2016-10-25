@@ -22,4 +22,3 @@ struct Color: NameableEntity {
     let color: UIColor
     let name: String
 }
-

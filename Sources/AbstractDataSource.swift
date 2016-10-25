@@ -17,12 +17,12 @@ let sizeSelectors: [Selector] = [
 
 /**
  The Base class for all data source implementations this class is responsible for concrete implementation of UITableViewDataSource/UITableViewDelegate and UICollectionViewDataSource/UICollectionViewDelegate/UICollectionViewDelegateFlowLayout by forwarding the calls to a coressponding DataSource implementation (e.g. implementation of both `tableView:cellForRowAtIndexPath:` and `collectionView:cellForItemAt:` will delegate the call to `ds_collectionView:cellForItemAt:`).
- 
+
  On the other side, implementation of DataSource methods just `fatalError`. Subclasses are responsible for providing the implementation of the DataSource calls.
- 
+
  Since this class is will be the delegate of the UITableView and UICollectionView. You can catch UIScrollViewDelegate methods by either subclass and implement the required method or provide use the property `scrollViewDelegate`. **Note that** this property is retained.
  */
-open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
+open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
     open var supplementaryViewCreator: SupplementaryViewCreator?
 
@@ -77,9 +77,9 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     /**
      Returns a Boolean value that indicates whether the receiver implements or inherits a method that can respond to a specified message.
      true if the receiver implements or inherits a method that can respond to aSelector, otherwise false.
-     
+
      - parameter selector: A selector that identifies a message.
-     
+
      - returns: `true` if the receiver implements or inherits a method that can respond to aSelector, otherwise `false`.
      */
     open override func responds(to selector: Selector) -> Bool {
@@ -94,13 +94,13 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
         return super.responds(to: selector)
     }
-    
+
     /**
      Returns the object to which unrecognized messages should first be directed.
      The object to which unrecognized messages should first be directed.
 
      - parameter selector: A selector for a method that the receiver does not implement.
-     
+
      - returns: The object to which unrecognized messages should first be directed.
      */
     open override func forwardingTarget(for selector: Selector) -> Any? {
@@ -110,7 +110,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         return super.forwardingTarget(for: selector)
     }
 
-    // MARK:- DataSource
+    // MARK: - DataSource
 
     // MARK: UITableViewDataSource
 
@@ -139,9 +139,8 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         return cast(cell)
     }
 
-    // MARK:- UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
-    
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
@@ -164,8 +163,8 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         return cast(cell)
     }
 
-    // MARK:- UITableViewDelegate
-    
+    // MARK: - UITableViewDelegate
+
     // MARK: Selection
 
     /**
@@ -181,7 +180,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didHighlightItemAt: indexPath)
     }
-    
+
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
@@ -195,14 +194,14 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didSelectItemAt: indexPath)
     }
-    
+
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
     open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldSelectItemAt: indexPath) ? indexPath : nil
     }
-    
+
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
@@ -216,9 +215,9 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldDeselectItemAt: indexPath) ? indexPath : nil
     }
-    
+
     // MARK: Size
-    
+
     /**
      `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
      */
@@ -226,8 +225,8 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         return ds_collectionView(tableView, sizeForItemAt: indexPath).height
     }
 
-    // MARK:- UICollectionViewDelegate
-    
+    // MARK: - UICollectionViewDelegate
+
     // MARK: Selection
 
     /**
@@ -257,14 +256,14 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didSelectItemAt: indexPath)
     }
-    
+
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
     open func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldSelectItemAt: indexPath)
     }
-    
+
     /**
      `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
      */
@@ -292,7 +291,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     /**
      Whether the data source provides the item size/height delegate calls for `tableView:heightForRowAtIndexPath:`
      or `collectionView:layout:sizeForItemAt:` or not.
-     
+
      - returns: `true`, if the data source object will consume the delegate calls.
      `false` if the size/height information is provided to the `UITableView` using `rowHeight` and/or `estimatedRowHeight`
      or to the `UICollectionViewFlowLayout` using `itemSize` and/or `estimatedItemSize`.
@@ -301,13 +300,13 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         return false
     }
 
-    // MARK:- Data Source
+    // MARK: - Data Source
 
     /**
      Asks the data source to return the number of sections.
-     
+
      **IMPORTANT**: Should be implemented by subclasses.
-     
+
      - returns: The number of sections.
      */
     open func ds_numberOfSections() -> Int {
@@ -316,11 +315,11 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     /**
      Asks the data source to return the number of items in a given section.
-     
+
      **IMPORTANT**: Should be implemented by subclasses.
-     
+
      - parameter section: An index number identifying a section.
-     
+
      - returns: The number of items in a given section
      */
     open func ds_numberOfItems(inSection section: Int) -> Int {
@@ -329,12 +328,12 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     /**
      Asks the data source for a cell to insert in a particular location of the general collection view.
-     
+
      **IMPORTANT**: Should be implemented by subclasses.
-     
+
      - parameter collectionView: A general collection view object requesting the cell.
      - parameter indexPath:      An index path locating an item in the view.
-     
+
      - returns: An object conforming to ReusableCell that the view can use for the specified item.
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, cellForItemAt indexPath: IndexPath) -> ReusableCell {
@@ -343,34 +342,34 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     /**
      Asks the data source for the size of a cell in a particular location of the general collection view.
-     
+
      **IMPORTANT**: Should be implemented by subclasses.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
-     
+
      - returns: The size of the cell in a given location. For `UITableView`, the width is ignored.
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
-    
+
     /**
      Asks the delegate if the specified item should be highlighted.
      `true` if the item should be highlighted or `false` if it should not.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
-     
+
      - returns: `true` if the item should be highlighted or `false` if it should not.
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     /**
      Tells the delegate that the specified item was highlighted.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
@@ -380,7 +379,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     /**
      Tells the delegate that the highlight was removed from the item at the specified index path.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
@@ -391,10 +390,10 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     /**
      Asks the delegate if the specified item should be selected.
      `true` if the item should be selected or `false` if it should not.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
-     
+
      - returns: `true` if the item should be selected or `false` if it should not.
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
@@ -403,7 +402,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
 
     /**
      Tells the delegate that the specified item was selected.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
@@ -414,19 +413,19 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
     /**
      Asks the delegate if the specified item should be deselected.
      `true` if the item should be deselected or `false` if it should not.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
-     
+
      - returns: `true` if the item should be deselected or `false` if it should not.
      */
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     /**
      Tells the delegate that the specified item was deselected.
-     
+
      - parameter collectionView: A general collection view object initiating the operation.
      - parameter indexPath:      An index path locating an item in the view.
      */
@@ -434,7 +433,7 @@ open class AbstractDataSource : NSObject, DataSource, UITableViewDataSource, UIC
         // does nothing
     }
 
-    // MARK:- Header/Footer
+    // MARK: - Header/Footer
 
     // MARK: UITableView
 

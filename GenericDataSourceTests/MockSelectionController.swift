@@ -10,7 +10,7 @@ import Foundation
 @testable import GenericDataSource
 
 class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
-    
+
     var shouldHighlightCalled = false
     var didHighlightCalled = false
     var didUnhighlightCalled = false
@@ -20,7 +20,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     var didDeselectCalled = false
     var itemsModifiedCalled = false
     var configureCellCalled = false
-    
+
     var cell: CellType?
     var item: ItemType?
     var indexPath: IndexPath?
@@ -28,7 +28,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     func dataSourceItemsModified(_ dataSource: BasicDataSource<ItemType, CellType>) {
         itemsModifiedCalled = true
     }
-    
+
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -40,7 +40,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.item = item
             self.indexPath = indexPath
     }
-    
+
     // MARK:- Highlighting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
@@ -50,7 +50,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
             return true
     }
-    
+
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -58,7 +58,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             didHighlightCalled = true
             self.indexPath = indexPath
     }
-    
+
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -66,7 +66,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             didUnhighlightCalled = true
             self.indexPath = indexPath
     }
-    
+
     // MARK:- Selecting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
@@ -76,7 +76,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
             return true
     }
-    
+
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,
@@ -84,7 +84,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             didSelectCalled = true
             self.indexPath = indexPath
     }
-    
+
     // MARK:- Deselecting
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
@@ -94,7 +94,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
             self.indexPath = indexPath
             return true
     }
-    
+
     func dataSource(
         _ dataSource: BasicDataSource<ItemType, CellType>,
         collectionView: GeneralCollectionView,

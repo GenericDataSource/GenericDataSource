@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// Represents the transformed collection view and index path.
 /// Usually you get values of this struct by calling `transform(globalIndexPath:, globalCollectionView:)` on `CompositeDataSource`.
 public struct LocalDataSourceCollectionView {

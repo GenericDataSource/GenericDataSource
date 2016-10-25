@@ -157,7 +157,7 @@ open class CompositeDataSource: AbstractDataSource {
         return collection.index(of: dataSource)
     }
 
-    // MARK:- IndexPath and Section translations
+    // MARK: - IndexPath and Section translations
 
     /**
      Converts a section value relative to a specific data source to a section value relative to the composite data source.
@@ -207,17 +207,16 @@ open class CompositeDataSource: AbstractDataSource {
         return collection.localIndexPathForGlobalIndexPath(indexPath, dataSource: dataSource)
     }
 
-
     /// Transform the passed index path and collection view to a local/child data source, index path and collection view. **Crashes if mapping doesn't exist.**
-    /// 
+    ///
     /// This method should only be used to add new capabilities to the `CompositeDataSource`.
     /// It shouldn't be used for regular usage of the data sources in app.
-    /// 
+    ///
     /// If you want to extend `CompositeDataSource`, you might have a local at one of the implementation of `DataSource` that uses this method.
     /// Usually, you do it in 2 steps:
     /// 1. Transform using this method the passed collection view and datasource.
     /// 2. Use the transformed value to call the new data source with a new collection view and new index path.
-    /// 
+    ///
     /// **You shouldn't by any case combine global and local data.** Like calling a local data source with global collection view.
     ///
     /// - parameter globalIndexPath:      The global index path, it's local for the `CompositeDataSource`. But global for child data sources.
@@ -248,7 +247,7 @@ open class CompositeDataSource: AbstractDataSource {
         return collection.transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView)
     }
 
-    // MARK:- Data Source
+    // MARK: - Data Source
 
     /**
      Gets whether the data source will handle size delegate calls.
@@ -408,7 +407,7 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didDeselectItemAt: transformed.indexPath)
     }
 
-    // MARK:- Header/Footer
+    // MARK: - Header/Footer
 
     private func delegateSupplementaryViewCalls(collectionView: GeneralCollectionView, indexPath: IndexPath) -> LocalDataSourceCollectionView? {
         guard supplementaryViewCreator == nil else { return nil }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol BatchUpdater: class {
-    
+
     func actualPerformBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?)
 }
 
@@ -39,7 +39,7 @@ private struct AssociatedKeys {
 }
 
 extension GeneralCollectionView where Self : BatchUpdater {
-    
+
     fileprivate var performingBatchUpdates: Bool {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.performingBatchUpdates) as? NSNumber
@@ -49,7 +49,7 @@ extension GeneralCollectionView where Self : BatchUpdater {
             objc_setAssociatedObject(self, &AssociatedKeys.performingBatchUpdates, NSNumber(value: newValue as Bool), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     fileprivate var completionBlocks: [CompletionBlock] {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.completionBlocks) as? [CompletionBlock]
@@ -59,7 +59,7 @@ extension GeneralCollectionView where Self : BatchUpdater {
             objc_setAssociatedObject(self, &AssociatedKeys.completionBlocks, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     func internal_performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?) {
         guard !performingBatchUpdates else {
             if let completion = completion {
@@ -70,7 +70,7 @@ extension GeneralCollectionView where Self : BatchUpdater {
             updates?()
             return
         }
-        
+
         performingBatchUpdates = true
         actualPerformBatchUpdates(updates) { [weak self] completed in
             self?.performingBatchUpdates = false

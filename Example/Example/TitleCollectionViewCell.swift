@@ -11,7 +11,7 @@ import UIKit
 class TitleCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var textLabel: UILabel?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.layer.borderColor = UIColor.lightGray.cgColor

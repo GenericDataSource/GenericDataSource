@@ -1,0 +1,14 @@
+disabled_rules:
+    - line_length
+    - variable_name
+    - type_name
+    - force_cast
+    - file_length
+
+opt_in_rules:
+#    - missing_docs
+    - vertical_whitespace
+
+included:
+    - Sources
+    

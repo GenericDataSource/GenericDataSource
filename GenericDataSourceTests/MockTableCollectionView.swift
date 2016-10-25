@@ -10,21 +10,21 @@ import UIKit
 import XCTest
 @testable import GenericDataSource
 
-protocol MockReusableView : GeneralCollectionView {
+protocol MockReusableView: GeneralCollectionView {
 
     func ueryDataSource()
 }
 
 
-class MockTableView : UITableView {
+class MockTableView: UITableView {
 
     var reusableCells: [String: (type: UITableViewCell.Type, cells: [Int: UITableViewCell])] = [:]
 
     var numberOfReuseCells: Int = 10
 
-    var sectionsCount : Int = 0
-    var itemsCountPerSection : [Int] = []
-    var cells : [[UITableViewCell]] = []
+    var sectionsCount: Int = 0
+    var itemsCountPerSection: [Int] = []
+    var cells: [[UITableViewCell]] = []
     var reusableHeaders: [String: UITableViewHeaderFooterView.Type] = [:]
 
     override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
@@ -104,15 +104,15 @@ class MockTableView : UITableView {
     }
 }
 
-class MockCollectionView : UICollectionView {
+class MockCollectionView: UICollectionView {
 
     var reusableCells: [String: (type: UICollectionViewCell.Type, cells: [Int: UICollectionViewCell])] = [:]
 
     var numberOfReuseCells: Int = 10
 
-    var sectionsCount : Int = 0
-    var itemsCountPerSection : [Int] = []
-    var cells : [[UICollectionViewCell]] = []
+    var sectionsCount: Int = 0
+    var itemsCountPerSection: [Int] = []
+    var cells: [[UICollectionViewCell]] = []
     var reusableHeaders: [String: (kind: String, view: UICollectionReusableView.Type)] = [:]
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {

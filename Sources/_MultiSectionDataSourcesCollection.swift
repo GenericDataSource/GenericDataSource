@@ -34,7 +34,7 @@ class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
         for mapping in mappings.array {
             let mapping: _MutliSectionMapping = cast(mapping, message: "Mappings for \(type(of: self)) should be of type \(_MutliSectionMapping.self)")
             let newSectionCount = mapping.updateMappings(startingWithGlobalSection: count) + count
-            while (count < newSectionCount) {
+            while count < newSectionCount {
                 globalSectionToMappings[count] = mapping
                 count += 1
             }
@@ -50,7 +50,7 @@ class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
         return globalSectionToMappings[section]
     }
 
-    // MARK:- Data Source
+    // MARK: - Data Source
 
     func numberOfSections() -> Int {
         updateMappings()
@@ -69,7 +69,7 @@ class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
 
 extension _MultiSectionDataSourcesCollection {
 
-    class _MutliSectionMapping : _DataSourcesCollectionMapping {
+    class _MutliSectionMapping: _DataSourcesCollectionMapping {
 
         fileprivate var globalSectionStartIndex: Int = 0
 
@@ -81,7 +81,7 @@ extension _MultiSectionDataSourcesCollection {
             return localSection + globalSectionStartIndex
         }
 
-        func updateMappings(startingWithGlobalSection globalSection:Int) -> Int {
+        func updateMappings(startingWithGlobalSection globalSection: Int) -> Int {
 
             globalSectionStartIndex = globalSection
             let sectionCount = self.dataSource.ds_numberOfSections()
