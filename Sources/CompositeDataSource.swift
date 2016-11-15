@@ -497,4 +497,47 @@ open class CompositeDataSource: AbstractDataSource {
         }
         return transformed.dataSource.ds_collectionView(transformed.collectionView, didEndDisplayingSupplementaryView: view, ofKind: kind, at: transformed.indexPath)
     }
+
+    // MARK: - Reordering
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, canMoveItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let transformedSource = unsafeTransform(globalIndexPath: sourceIndexPath, globalCollectionView: collectionView)
+        let transformedDestination = unsafeTransform(globalIndexPath: destinationIndexPath, globalCollectionView: collectionView)
+        precondition(transformedSource.dataSource === transformedDestination.dataSource, "Moving items between data sources is not supported yet. You can do it manually by overriding ds_collectionView(_:moveItemAt:to:) in your \(type(of: self))")
+        return transformedSource.dataSource.ds_collectionView(collectionView, moveItemAt: transformedSource.indexPath, to: transformedDestination.indexPath)
+    }
+
+    // MARK: - Cell displaying
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplay cell: ReusableCell, forItemAt indexPath: IndexPath) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, willDisplay: cell, forItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplaying cell: ReusableCell, forItemAt indexPath: IndexPath) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, didEndDisplaying: cell, forItemAt: transformed.indexPath)
+    }
+
+    // MARK: - Copy/Paste
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, shouldShowMenuForItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, canPerformAction: action, forItemAt: transformed.indexPath, withSender: sender)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, performAction: action, forItemAt: transformed.indexPath, withSender: sender)
+    }
 }

@@ -52,6 +52,7 @@
 		5495760F1C6FBA9400E9C26C /* GenericDataSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549576041C6FBA9400E9C26C /* GenericDataSource.framework */; };
 		549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */; };
 		549576391C6FBBC600E9C26C /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576351C6FBBC600E9C26C /* TestData.swift */; };
+		54F2C3D11DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */; };
 		54F984791C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F984781C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift */; };
 		54F9847B1C95B1580024FE99 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */; };
 		54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */; };
@@ -137,6 +138,7 @@
 		549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTableCollectionView.swift; sourceTree = "<group>"; };
 		549576341C6FBBC600E9C26C /* CompositeDataSourceSpecificTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSpecificTests.swift; sourceTree = "<group>"; };
 		549576351C6FBBC600E9C26C /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewFocusUpdateContext.swift; sourceTree = "<group>"; };
 		54F984781C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsTableViewTests.swift; sourceTree = "<group>"; };
 		54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
 		54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsCollectionViewTests.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */,
 				5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */,
 				5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */,
+				54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */,
 			);
 			name = UIKit;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				54735F011DBD3B8D004F4854 /* BasicBlockSupplementaryViewCreator.swift in Sources */,
 				54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */,
 				5CE64F361DA77B9D002456E1 /* _DelegatedGeneralCollectionView.swift in Sources */,
+				54F2C3D11DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift in Sources */,
 				5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */,
 				5CE64F381DA77B9D002456E1 /* _GeneralCollectionViewWrapperMapping.swift in Sources */,
 				5CE64F3B1DA77B9D002456E1 /* _MultiSectionDataSourcesCollection.swift in Sources */,

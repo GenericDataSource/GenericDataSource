@@ -22,7 +22,7 @@ let sizeSelectors: [Selector] = [
 
  Since this class is will be the delegate of the UITableView and UICollectionView. You can catch UIScrollViewDelegate methods by either subclass and implement the required method or provide use the property `scrollViewDelegate`. **Note that** this property is retained.
  */
-open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
+open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout { // swiftlint:disable:this type_body_length
 
     /// Represents the object responsible for creating and managing suppelmentary views (e.g. headers and footers).
     open var supplementaryViewCreator: SupplementaryViewCreator?
@@ -606,6 +606,182 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     /// - parameter indexPath:      The index path at which the supplementary view is.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         supplementaryViewCreator?.collectionView(collectionView, didEndDisplayingView: view, ofKind: kind, at: indexPath)
+    }
+
+    // MARK: - Reordering
+
+    // MARK: UITableView
+
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(tableView, canMoveItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        return ds_collectionView(tableView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
+    }
+
+    // MARK: UICollectionView
+
+    open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(collectionView, canMoveItemAt: indexPath)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        return ds_collectionView(collectionView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
+    }
+
+    // MARK: DataSource
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // does nothing
+    }
+
+    // MARK: - Cell displaying
+
+    // MARK: UITableView
+
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        return ds_collectionView(tableView, willDisplay: cell, forItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        return ds_collectionView(tableView, didEndDisplaying: cell, forItemAt: indexPath)
+    }
+
+    // MARK: UICollectionView
+
+    open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        return ds_collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        return ds_collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
+    }
+
+    // MARK: DataSource
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplay cell: ReusableCell, forItemAt indexPath: IndexPath) {
+        // does nothing
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplaying cell: ReusableCell, forItemAt indexPath: IndexPath) {
+        // does nothing
+    }
+
+    // MARK: - Copy/Paste
+
+    // MARK: UITableView
+
+    open func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(tableView, shouldShowMenuForItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return ds_collectionView(tableView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
+    }
+
+    open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        return ds_collectionView(tableView, performAction: action, forItemAt: indexPath, withSender: sender)
+    }
+
+    // MARK: UICollectionView
+
+    open func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(collectionView, shouldShowMenuForItemAt: indexPath)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return ds_collectionView(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        return ds_collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
+    }
+
+    // MARK: DataSource
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return false
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        // does nothing
+    }
+
+    // MARK: - Focus
+
+    // MARK: UITableView
+
+    @available(iOS 9.0, *)
+    open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(tableView, canFocusItemAt: indexPath)
+    }
+
+    @available(iOS 9.0, *)
+    open func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
+        return ds_collectionView(tableView, shouldUpdateFocusIn: context)
+    }
+
+    @available(iOS 9.0, *)
+    open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        return ds_collectionView(tableView, didUpdateFocusIn: context, with: coordinator)
+    }
+
+    @available(iOS 9.0, *)
+    open func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
+        return ds_indexPathForPreferredFocusedView(in: tableView)
+    }
+
+    // MARK: UICollectionView
+
+    @available(iOS 9.0, *)
+    open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(collectionView, canFocusItemAt: indexPath)
+    }
+
+    @available(iOS 9.0, *)
+    open func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
+        return ds_collectionView(collectionView, shouldUpdateFocusIn: context)
+    }
+
+    @available(iOS 9.0, *)
+    open func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        return ds_collectionView(collectionView, didUpdateFocusIn: context, with: coordinator)
+    }
+
+    @available(iOS 9.0, *)
+    open func indexPathForPreferredFocusedView(in collectionView: UICollectionView) -> IndexPath? {
+        return ds_indexPathForPreferredFocusedView(in: collectionView)
+    }
+
+    // MARK: DataSource
+
+    @available(iOS 9.0, *)
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    @available(iOS 9.0, *)
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext) -> Bool {
+        return false
+    }
+
+    @available(iOS 9.0, *)
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        // does nothing
+    }
+
+    @available(iOS 9.0, *)
+    open func ds_indexPathForPreferredFocusedView(in collectionView: GeneralCollectionView) -> IndexPath? {
+        return nil
     }
 }
 
