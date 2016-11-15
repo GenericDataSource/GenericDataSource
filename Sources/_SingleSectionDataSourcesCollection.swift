@@ -10,9 +10,9 @@ import Foundation
 
 class _SingleSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
 
-    fileprivate var itemsCount: Int = 0
+    private var itemsCount: Int = 0
 
-    fileprivate var globalItemToMappings: [Int: _SingleSectionMapping] = [:]
+    private var globalItemToMappings: [Int: _SingleSectionMapping] = [:]
 
     var mappings: _MappingCollection = _MappingCollection()
 
@@ -71,7 +71,7 @@ extension _SingleSectionDataSourcesCollection {
 
     class _SingleSectionMapping: _DataSourcesCollectionMapping {
 
-        fileprivate var globalItemStartIndex: Int = 0
+        private var globalItemStartIndex: Int = 0
 
         override func localItemForGlobalItem(_ globalItem: Int) -> Int {
             return globalItem - globalItemStartIndex

@@ -24,16 +24,28 @@ let sizeSelectors: [Selector] = [
  */
 open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    /// Represents the object responsible for creating and managing suppelmentary views (e.g. headers and footers).
     open var supplementaryViewCreator: SupplementaryViewCreator?
 
+    /// Sets a header creator.
+    ///
+    /// - Parameter headerCreator: The header creator to set.
     open func set(headerCreator: SupplementaryViewCreator) {
         supplementaryViewCreator = CompositeSupplementaryViewCreator(headerCreator: headerCreator)
     }
 
+    /// Sets a footer creator.
+    ///
+    /// - Parameter footerCreator: The footer creator to set.
     open func set(footerCreator: SupplementaryViewCreator) {
         supplementaryViewCreator = CompositeSupplementaryViewCreator(footerCreator: footerCreator)
     }
 
+    /// Sets both header and footer creators.
+    ///
+    /// - Parameters:
+    ///   - headerCreator: The header creator to set.
+    ///   - footerCreator: The footer creator to set.
     open func set(headerCreator: SupplementaryViewCreator, footerCreator: SupplementaryViewCreator) {
         supplementaryViewCreator = CompositeSupplementaryViewCreator(headerCreator: headerCreator, footerCreator: footerCreator)
     }
@@ -66,7 +78,7 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: respondsToSelector
 
-    fileprivate func scrollViewDelegateCanHandleSelector(_ selector: Selector) -> Bool {
+    private func scrollViewDelegateCanHandleSelector(_ selector: Selector) -> Bool {
         if let scrollViewDelegate = scrollViewDelegate,
             isSelector(selector, belongsToProtocol: UIScrollViewDelegate.self) && scrollViewDelegate.responds(to: selector) {
             return true
@@ -437,39 +449,63 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
         return cast(view)
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section)).height
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
         return cast(view)
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section)).height
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
     }
 
+    /**
+     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
@@ -477,43 +513,97 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UICollectionView
 
+    /**
+     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)
         return cast(view)
     }
 
+    /**
+     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
+    /**
+     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         ds_collectionView(collectionView, willDisplaySupplementaryView: view, ofKind: elementKind, at: indexPath)
     }
 
+    /**
+     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         ds_collectionView(collectionView, didEndDisplayingSupplementaryView: view, ofKind: elementKind, at: indexPath)
     }
 
+    /**
+     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
+     */
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
     }
 
     // MARK: DataSource
 
+    /// Retrieves the supplementary view for the passed kind at the passed index path.
+    ///
+    /// Note: You don't need to subclass this method, usually, you just specifiy a `supplementaryViewCreator` that will be responsible for this operation.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The supplementary view for the passed index path.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
 
         let creator: SupplementaryViewCreator = cast(supplementaryViewCreator, message: "Calling `supplementaryViewOfKind` method with nil supplementaryViewOfKind property.")
         return creator.collectionView(collectionView, viewOfKind: kind, at: indexPath)
     }
 
+    /// Gets the size of supplementary view for the passed kind at the passed index path.
+    ///
+    /// Note: You don't need to subclass this method, usually, you just specifiy a `supplementaryViewCreator` that will be responsible for this operation.
+    ///
+    /// * For `UITableView` just supply the height width is don't care.
+    /// * For `UICollectionViewFlowLayout` supply the height if it's vertical scrolling, or width if it's horizontal scrolling.
+    /// * Specifying `CGSize.zero`, means don't display a supplementary view and `viewOfKind` will not be called.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The size of the supplementary view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
         return supplementaryViewCreator?.collectionView(collectionView, sizeForViewOfKind: kind, at: indexPath) ?? .zero
     }
 
+    /// Supplementary view is about to be displayed. Called exactly before the supplementary view is displayed.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         supplementaryViewCreator?.collectionView(collectionView, willDisplayView: view, ofKind: kind, at: indexPath)
     }
 
+    /// Supplementary view has been displayed and user scrolled it out of the screen.
+    /// Called exactly after the supplementary view is scrolled out of the screen.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         supplementaryViewCreator?.collectionView(collectionView, didEndDisplayingView: view, ofKind: kind, at: indexPath)
     }

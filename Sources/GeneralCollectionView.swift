@@ -53,6 +53,9 @@ import Foundation
      */
     func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell
 
+    /**
+     Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
+     */
     func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView
 
     // MARK: - Numbers
@@ -124,6 +127,9 @@ import Foundation
      Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
      */
     func ds_selectItem(at indexPath: IndexPath?, animated: Bool, scrollPosition: UICollectionViewScrollPosition)
+    /**
+     Check documentation of the corresponding methods from `UICollectionView` and `UITableView`.
+     */
     func ds_deselectItem(at indexPath: IndexPath, animated: Bool)
 
     // MARK: - IndexPaths, Cells
@@ -187,15 +193,27 @@ import Foundation
 
 extension GeneralCollectionView {
 
-    func ds_localIndexPathsForGlobalIndexPaths(_ globalIndexPaths: [IndexPath]) -> [IndexPath] {
+    /// Converts global index paths to local index paths.
+    ///
+    /// - Parameter globalIndexPaths: The array of global index paths.
+    /// - Returns: The converted global index paths.
+    public func ds_localIndexPathsForGlobalIndexPaths(_ globalIndexPaths: [IndexPath]) -> [IndexPath] {
         return globalIndexPaths.map { ds_localIndexPathForGlobalIndexPath($0) }
     }
 
-    func ds_globalIndexPathsForLocalIndexPaths(_ localIndexPaths: [IndexPath]) -> [IndexPath] {
+    /// Converts local index paths to global index paths.
+    ///
+    /// - Parameter localIndexPaths: The array of local index paths.
+    /// - Returns: The converted local index paths.
+    public func ds_globalIndexPathsForLocalIndexPaths(_ localIndexPaths: [IndexPath]) -> [IndexPath] {
         return localIndexPaths.map {  ds_globalIndexPathForLocalIndexPath($0) }
     }
 
-    func ds_globalSectionSetForLocalSectionSet(_ localSections: IndexSet) -> IndexSet {
+    /// Converts a set of local sections to global sections
+    ///
+    /// - Parameter localSections: The local sections.
+    /// - Returns: The converted global sections.
+    public func ds_globalSectionSetForLocalSectionSet(_ localSections: IndexSet) -> IndexSet {
         let globalSections = NSMutableIndexSet()
         for section in localSections {
             let globalSection = ds_globalSectionForLocalSection(section)

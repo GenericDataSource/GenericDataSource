@@ -134,11 +134,46 @@ import Foundation
 
     // MARK: - SupplementaryView
 
+    /// Retrieves the supplementary view for the passed kind at the passed index path.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The supplementary view for the passed index path.
     func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView
 
+    /// Gets the size of supplementary view for the passed kind at the passed index path.
+    ///
+    /// * For `UITableView` just supply the height width is don't care.
+    /// * For `UICollectionViewFlowLayout` supply the height if it's vertical scrolling, or width if it's horizontal scrolling.
+    /// * Specifying `CGSize.zero`, means don't display a supplementary view and `viewOfKind` will not be called.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The size of the supplementary view.
     func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize
 
+    /// Supplementary view is about to be displayed. Called exactly before the supplementary view is displayed.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath)
 
+    /// Supplementary view has been displayed and user scrolled it out of the screen.
+    /// Called exactly after the supplementary view is scrolled out of the screen.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath)
 }

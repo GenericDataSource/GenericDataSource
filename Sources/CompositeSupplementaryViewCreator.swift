@@ -8,10 +8,9 @@
 
 import Foundation
 
-
 /// Represents a supplementary view creator that manages other creators depending on the kind.
 ///
-/// Usually this is used if you have multiple supplementary views (e.g. headers and footers) 
+/// Usually this is used if you have multiple supplementary views (e.g. headers and footers)
 /// and you need to have different views or different logic of configuration for the header than the footer.
 /// Then you should use `CompositeSupplementaryViewCreator`.
 ///
@@ -34,7 +33,6 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
 
     /// The list of child creators and their kind.
     open private(set) var creators: [String: SupplementaryViewCreator]
-
 
     /// Creates new instance with the passed creators.
     ///
@@ -72,7 +70,6 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
     open func add(creator: SupplementaryViewCreator, forKind kind: String) {
         creators[kind] = creator
     }
-
 
     /// Removes a creator for the passed kind.
     ///
@@ -123,6 +120,7 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
     ///
     /// * For `UITableView` just supply the height width is don't care.
     /// * For `UICollectionViewFlowLayout` supply the height if it's vertical scrolling, or width if it's horizontal scrolling.
+    /// * Specifying `CGSize.zero`, means don't display a supplementary view and `viewOfKind` will not be called.
     ///
     /// - parameter collectionView: The general collection view requesting the index path.
     /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
