@@ -40,7 +40,7 @@ private struct AssociatedKeys {
 
 extension GeneralCollectionView where Self : BatchUpdater {
 
-    fileprivate var performingBatchUpdates: Bool {
+    private var performingBatchUpdates: Bool {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.performingBatchUpdates) as? NSNumber
             return value?.boolValue ?? false
@@ -50,7 +50,7 @@ extension GeneralCollectionView where Self : BatchUpdater {
         }
     }
 
-    fileprivate var completionBlocks: [CompletionBlock] {
+    private var completionBlocks: [CompletionBlock] {
         get {
             let value = objc_getAssociatedObject(self, &AssociatedKeys.completionBlocks) as? [CompletionBlock]
             return value ?? []

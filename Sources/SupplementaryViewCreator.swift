@@ -35,6 +35,7 @@ public protocol SupplementaryViewCreator {
     ///
     /// * For `UITableView` just supply the height width is don't care.
     /// * For `UICollectionViewFlowLayout` supply the height if it's vertical scrolling, or width if it's horizontal scrolling.
+    /// * Specifying `CGSize.zero`, means don't display a supplementary view and `viewOfKind` will not be called.
     ///
     /// - parameter collectionView: The general collection view requesting the index path.
     /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either

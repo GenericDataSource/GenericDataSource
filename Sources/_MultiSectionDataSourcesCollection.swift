@@ -9,9 +9,9 @@
 import Foundation
 
 class _MultiSectionDataSourcesCollection: NSObject, _DataSourcesCollection {
-    fileprivate var sectionsCount: Int = 0
+    private var sectionsCount: Int = 0
 
-    fileprivate var globalSectionToMappings: [Int: _MutliSectionMapping] = [:]
+    private var globalSectionToMappings: [Int: _MutliSectionMapping] = [:]
 
     var mappings: _MappingCollection = _MappingCollection()
 
@@ -71,7 +71,7 @@ extension _MultiSectionDataSourcesCollection {
 
     class _MutliSectionMapping: _DataSourcesCollectionMapping {
 
-        fileprivate var globalSectionStartIndex: Int = 0
+        private var globalSectionStartIndex: Int = 0
 
         override func localSectionForGlobalSection(_ globalSection: Int) -> Int {
             return globalSection - globalSectionStartIndex

@@ -13,18 +13,18 @@ import Foundation
  */
 public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
-    fileprivate let itemsChanged: (BasicDataSource<ItemType, CellType>) -> Void
-    fileprivate let configureCell: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, CellType, ItemType, IndexPath) -> Void
+    private let itemsChanged: (BasicDataSource<ItemType, CellType>) -> Void
+    private let configureCell: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, CellType, ItemType, IndexPath) -> Void
 
-    fileprivate let shouldHighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
-    fileprivate let didHighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
-    fileprivate let didUnhighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
+    private let shouldHighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
+    private let didHighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
+    private let didUnhighlight: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
 
-    fileprivate let shouldSelect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
-    fileprivate let didSelect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
+    private let shouldSelect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
+    private let didSelect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
 
-    fileprivate let shouldDeselect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
-    fileprivate let didDeselect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
+    private let shouldDeselect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Bool
+    private let didDeselect: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, IndexPath) -> Void
 
     /**
      Create new type-erasure that wraps the passed handler.
@@ -144,6 +144,9 @@ public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : 
 
 extension DataSourceSelectionHandler {
 
+    /// Converts the selection handler to a type-erased selection handler.
+    ///
+    /// - Returns: The type-erased selection handler.
     public func anyDataSourceSelectionHandler() -> AnyDataSourceSelectionHandler<ItemType, CellType> {
         return AnyDataSourceSelectionHandler(self)
     }

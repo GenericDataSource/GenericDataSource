@@ -114,6 +114,10 @@ open class CompositeDataSource: AbstractDataSource {
         collection.remove(dataSource)
     }
 
+    /// Removes data source at the specified index.
+    ///
+    /// - Parameter index: The index of the data source to remove.
+    /// - Returns: The removed data source.
     @discardableResult
     open func remove(at index: Int) -> DataSource {
         return collection.remove(at: index)
@@ -413,6 +417,16 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed
     }
 
+    /// Retrieves the supplementary view for the passed kind at the passed index path.
+    ///
+    /// This method first checks if there is `supplementaryViewCreator` set to this data source and use it.
+    /// Otherwise, it delegates this method to the approperiate child data source.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The supplementary view for the passed index path.
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
         // if, supplementaryViewCreator is not configured use it, otherwise delegate to one of the child data sources
         guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
@@ -421,6 +435,20 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView(transformed.collectionView, supplementaryViewOfKind: kind, at: transformed.indexPath)
     }
 
+    /// Gets the size of supplementary view for the passed kind at the passed index path.
+    ///
+    /// This method first checks if there is `supplementaryViewCreator` set to this data source and use it.
+    /// Otherwise, it delegates this method to the approperiate child data source.
+    ///
+    /// * For `UITableView` just supply the height width is don't care.
+    /// * For `UICollectionViewFlowLayout` supply the height if it's vertical scrolling, or width if it's horizontal scrolling.
+    /// * Specifying `CGSize.zero`, means don't display a supplementary view and `viewOfKind` will not be called.
+    ///
+    /// - Parameters:
+    ///   - collectionView: The collectionView requesting the supplementary view.
+    ///   - kind: The kind of the supplementary view.
+    ///   - indexPath: The indexPath at which the supplementary view is requested.
+    /// - Returns: The size of the supplementary view.
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForSupplementaryViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
         // if, it's configured use it, otherwise delegate to one of the child data sources
         guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
@@ -429,6 +457,17 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView(transformed.collectionView, sizeForSupplementaryViewOfKind: kind, at: transformed.indexPath)
     }
 
+    /// Supplementary view is about to be displayed. Called exactly before the supplementary view is displayed.
+    ///
+    /// This method first checks if there is `supplementaryViewCreator` set to this data source and use it.
+    /// Otherwise, it delegates this method to the approperiate child data source.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplaySupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         // if, it's configured use it, otherwise delegate to one of the child data sources
         guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
@@ -437,6 +476,18 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView(transformed.collectionView, willDisplaySupplementaryView: view, ofKind: kind, at: transformed.indexPath)
     }
 
+    /// Supplementary view has been displayed and user scrolled it out of the screen.
+    /// Called exactly after the supplementary view is scrolled out of the screen.
+    ///
+    /// This method first checks if there is `supplementaryViewCreator` set to this data source and use it.
+    /// Otherwise, it delegates this method to the approperiate child data source.
+    ///
+    /// - parameter collectionView: The general collection view requesting the index path.
+    /// - parameter view:           The supplementary view that will  be displayed.
+    /// - parameter kind:           The kind of the supplementary view. For `UITableView`, it can be either
+    ///                             `UICollectionElementKindSectionHeader` or `UICollectionElementKindSectionFooter` for
+    ///                             header and footer views respectively.
+    /// - parameter indexPath:      The index path at which the supplementary view is.
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplayingSupplementaryView view: ReusableSupplementaryView, ofKind kind: String, at indexPath: IndexPath) {
         // if, it's configured use it, otherwise delegate to one of the child data sources
         guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {

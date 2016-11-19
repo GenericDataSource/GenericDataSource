@@ -140,12 +140,13 @@ extension UITableView: GeneralCollectionView {
     }
 
     /**
-     Just calls the corresponding method `return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)`.
+     Just calls the corresponding method `dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)`.
      */
     open func ds_dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableCell {
         return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
+    /// Just calls the corresponding method `dequeueReusableHeaderFooterView(withIdentifier: identifier)`.
     open func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
         let view = dequeueReusableHeaderFooterView(withIdentifier: identifier)
         let castedView: UITableViewHeaderFooterView = cast(view, message: "UITableView doesn't have a UIHeaderFooterView for reuse identifier '\(identifier)'")

@@ -8,11 +8,16 @@
 
 import Foundation
 
+/// Represents the protocol for reusable supplementary view.
+/// Subclasses can be used as return type for supplementary view of kind methods.
+/// Currently we support `UITableViewHeaderFooterView` and `UICollectionReusableView`.
 @objc public protocol ReusableSupplementaryView {
 }
 
+/// Make `UITableViewHeaderFooterView` reusable supplementary view.
 extension UITableViewHeaderFooterView : ReusableSupplementaryView {
 }
 
+/// Make `UICollectionReusableView` reusable supplementary view.
 extension UICollectionReusableView : ReusableSupplementaryView {
 }

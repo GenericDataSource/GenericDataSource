@@ -140,6 +140,9 @@ extension UICollectionView: GeneralCollectionView {
         return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
+    /**
+     Just calls the corresponding method `dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)`.
+     */
     open func ds_dequeueReusableSupplementaryView(ofKind kind: String, withIdentifier identifier: String, for indexPath: IndexPath) -> ReusableSupplementaryView {
         return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
     }

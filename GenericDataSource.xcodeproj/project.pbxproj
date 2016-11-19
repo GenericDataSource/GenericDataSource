@@ -467,8 +467,8 @@
 		5CE64F4B1DA77C41002456E1 /* Base DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */,
 				5CE64F1C1DA77B9D002456E1 /* DataSource.swift */,
+				5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */,
 				54735EFC1DBCF16B004F4854 /* _Utilities.swift */,
 			);
 			name = "Base DataSource";
@@ -482,8 +482,8 @@
 				5CE64F251DA77B9D002456E1 /* ReusableCell.swift */,
 				54433C0C1DB2325D0032AF9C /* ReusableSupplementaryView.swift */,
 				5CE64F271DA77B9D002456E1 /* UICollectionView+CollectionView.swift */,
-				5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */,
 				5CE64F291DA77B9D002456E1 /* UITableView+CollectionView.swift */,
+				5CE64F281DA77B9D002456E1 /* UIKitExtensions.swift */,
 				54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */,
 			);
 			name = UIKit;
