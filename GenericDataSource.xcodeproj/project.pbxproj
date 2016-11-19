@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5402DF871C8309D80032BF9A /* MockSelectionController.swift */; };
+		54395EFF1DD8F2740069433C /* SegmentedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */; };
 		54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */; };
 		54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
 		54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */; };
@@ -53,6 +54,7 @@
 		549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */; };
 		549576391C6FBBC600E9C26C /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576351C6FBBC600E9C26C /* TestData.swift */; };
 		54F2C3D11DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */; };
+		54F2D3151DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2D3141DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift */; };
 		54F984791C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F984781C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift */; };
 		54F9847B1C95B1580024FE99 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */; };
 		54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */; };
@@ -92,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		5402DF871C8309D80032BF9A /* MockSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSelectionController.swift; sourceTree = "<group>"; };
+		54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedDataSource.swift; sourceTree = "<group>"; };
 		54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataSourceCollectionView.swift; sourceTree = "<group>"; };
 		54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandlerTests.swift; sourceTree = "<group>"; };
 		54433BE91DB0A6850032AF9C /* BlockSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockSelectionHandlerTests.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 		549576341C6FBBC600E9C26C /* CompositeDataSourceSpecificTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSpecificTests.swift; sourceTree = "<group>"; };
 		549576351C6FBBC600E9C26C /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewFocusUpdateContext.swift; sourceTree = "<group>"; };
+		54F2D3141DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SegmentedGeneralCollectionViewMapping.swift; sourceTree = "<group>"; };
 		54F984781C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsTableViewTests.swift; sourceTree = "<group>"; };
 		54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
 		54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsCollectionViewTests.swift; sourceTree = "<group>"; };
@@ -186,6 +190,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54395EFD1DD8F26C0069433C /* Segmented */ = {
+			isa = PBXGroup;
+			children = (
+				54F2D3131DD8F97400A7F403 /* Mapping */,
+				54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */,
+			);
+			name = Segmented;
+			sourceTree = "<group>";
+		};
 		54433BE61DB0A54E0032AF9C /* Selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +358,14 @@
 			name = Compsite;
 			sourceTree = "<group>";
 		};
+		54F2D3131DD8F97400A7F403 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				54F2D3141DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
 		54F984771C95AE5F0024FE99 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +403,7 @@
 			children = (
 				5CE64F451DA77BEC002456E1 /* Basic */,
 				5CE64F461DA77BF0002456E1 /* Composite */,
+				54395EFD1DD8F26C0069433C /* Segmented */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -598,6 +620,7 @@
 			files = (
 				5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */,
 				5CE64F301DA77B9D002456E1 /* BlockSelectionHandler.swift in Sources */,
+				54F2D3151DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift in Sources */,
 				5CE64F3D1DA77B9D002456E1 /* _SingleSectionDataSourcesCollection.swift in Sources */,
 				5CE64F321DA77B9D002456E1 /* _CompositeParentGeneralCollectionViewMapping.swift in Sources */,
 				5CE64F311DA77B9D002456E1 /* CompositeDataSource.swift in Sources */,
@@ -611,6 +634,7 @@
 				54735F011DBD3B8D004F4854 /* BasicBlockSupplementaryViewCreator.swift in Sources */,
 				54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */,
 				5CE64F361DA77B9D002456E1 /* _DelegatedGeneralCollectionView.swift in Sources */,
+				54395EFF1DD8F2740069433C /* SegmentedDataSource.swift in Sources */,
 				54F2C3D11DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift in Sources */,
 				5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */,
 				5CE64F381DA77B9D002456E1 /* _GeneralCollectionViewWrapperMapping.swift in Sources */,

@@ -62,11 +62,6 @@ open class CompositeDataSource: AbstractDataSource {
         }
     }
 
-    /// Returns the list of children data sources.
-    open var dataSources: [DataSource] {
-        return collection.dataSources
-    }
-
     /**
      Returns a Boolean value that indicates whether the receiver implements or inherits a method that can respond to a specified message.
      true if the receiver implements or inherits a method that can respond to aSelector, otherwise false.
@@ -84,7 +79,12 @@ open class CompositeDataSource: AbstractDataSource {
         return super.responds(to: selector)
     }
 
-    // MARK: Children DataSources
+    // MARK: - Children DataSources
+
+    /// Returns the list of children data sources.
+    open var dataSources: [DataSource] {
+        return collection.dataSources
+    }
 
     /**
      Adds a new data source to the list of children data sources.
@@ -247,23 +247,7 @@ open class CompositeDataSource: AbstractDataSource {
         return collection.transform(globalIndexPath: globalIndexPath, globalCollectionView: globalCollectionView)
     }
 
-    // MARK: - Data Source
-
-    /**
-     Gets whether the data source will handle size delegate calls.
-     It only handle delegate calls if there is at least 1 data source and all the data sources can handle the size delegate calls.
-
-     - returns: `false` if there is no data sources or any of the data sources cannot handle size delegate calls.
-     */
-    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        if dataSources.isEmpty {
-            return false
-        }
-        // if all data sources should consume item size delegates
-        return dataSources.filter { $0.ds_shouldConsumeItemSizeDelegateCalls() }.count == dataSources.count
-    }
-
-    // MARK: Cell
+    // MARK: - Cell
 
     /**
      Asks the data source to return the number of sections.
@@ -302,7 +286,21 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView(transformed.collectionView, cellForItemAt: transformed.indexPath)
     }
 
-    // MARK: Size
+    // MARK: - Size
+
+    /**
+     Gets whether the data source will handle size delegate calls.
+     It only handle delegate calls if there is at least 1 data source and all the data sources can handle the size delegate calls.
+
+     - returns: `false` if there is no data sources or any of the data sources cannot handle size delegate calls.
+     */
+    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
+        if dataSources.isEmpty {
+            return false
+        }
+        // if all data sources should consume item size delegates
+        return dataSources.filter { $0.ds_shouldConsumeItemSizeDelegateCalls() }.count == dataSources.count
+    }
 
     /**
      Asks the data source for the size of a cell in a particular location of the general collection view.
@@ -318,7 +316,7 @@ open class CompositeDataSource: AbstractDataSource {
         return transformed.dataSource.ds_collectionView!(transformed.collectionView, sizeForItemAt: transformed.indexPath)
     }
 
-    // MARK: Selection
+    // MARK: - Selection
 
     /**
      Asks the delegate if the specified item should be highlighted.
