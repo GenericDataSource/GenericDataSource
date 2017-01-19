@@ -12,3 +12,9 @@
 ## 2.1.0
 
 * Renaming methods to match Swift 3.0 conventions.
+
+## 2.2.0
+
+* UITableView Header/Footer support.
+* UICollectionView Supplmentary view support.
+
