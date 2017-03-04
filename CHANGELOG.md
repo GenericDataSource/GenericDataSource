@@ -15,6 +15,9 @@
 
 ## 2.2.0
 
-* UITableView Header/Footer support.
-* UICollectionView Supplmentary view support.
+* `UITableView` Header/Footer support.
+* `UICollectionView` Supplmentary view support.
 
+## 2.2.1
+
+* Making Supplementary view optional as a workaround for the `UITableView` with .grouped style as it asks for the header/footer view even if the size is set as 0
