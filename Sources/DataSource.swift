@@ -141,7 +141,7 @@ import Foundation
     ///   - kind: The kind of the supplementary view.
     ///   - indexPath: The indexPath at which the supplementary view is requested.
     /// - Returns: The supplementary view for the passed index path.
-    func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView
+    func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView?
 
     /// Gets the size of supplementary view for the passed kind at the passed index path.
     ///

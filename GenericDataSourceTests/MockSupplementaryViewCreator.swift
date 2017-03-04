@@ -19,10 +19,10 @@ class MockSupplementaryViewCreator: NSObject, SupplementaryViewCreator {
     var view: ReusableSupplementaryView?
     var size: CGSize?
 
-    func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
+    func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView? {
         self.kind = kind
         self.indexPath = indexPath
-        return view!
+        return view
     }
 
     func collectionView(_ collectionView: GeneralCollectionView, sizeForViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {

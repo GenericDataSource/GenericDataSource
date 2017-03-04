@@ -119,7 +119,7 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
 
     func testDefaultSupplementaryViewCreator() {
         struct Default: SupplementaryViewCreator {
-            func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
+            func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView? {
                 fatalError()
             }
 

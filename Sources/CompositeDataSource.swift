@@ -427,7 +427,7 @@ open class CompositeDataSource: AbstractDataSource {
     ///   - kind: The kind of the supplementary view.
     ///   - indexPath: The indexPath at which the supplementary view is requested.
     /// - Returns: The supplementary view for the passed index path.
-    open override func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView? {
         // if, supplementaryViewCreator is not configured use it, otherwise delegate to one of the child data sources
         guard let transformed = delegateSupplementaryViewCalls(collectionView: collectionView, indexPath: indexPath) else {
             return super.ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)

@@ -109,9 +109,9 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
     /// - parameter indexPath:      The index path at which the supplementary view is requested.
     ///
     /// - returns: The supplementary view dequeued and configured appropriately.
-    open func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
-        let viewCreator = creator(ofKind: kind)
-        return viewCreator.collectionView(collectionView, viewOfKind: kind, at: indexPath)
+    open func collectionView(_ collectionView: GeneralCollectionView, viewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView? {
+        let viewCreator = creators[kind]
+        return viewCreator?.collectionView(collectionView, viewOfKind: kind, at: indexPath)
     }
 
     /// Gets the size of the supplementary view for the passed kind at the specified index path.
@@ -130,8 +130,8 @@ open class CompositeSupplementaryViewCreator: NSObject, SupplementaryViewCreator
     ///
     /// - returns: The size of the supplementary view.
     open func collectionView(_ collectionView: GeneralCollectionView, sizeForViewOfKind kind: String, at indexPath: IndexPath) -> CGSize {
-        let viewCreator = creator(ofKind: kind)
-        return viewCreator.collectionView(collectionView, sizeForViewOfKind: kind, at: indexPath)
+        let viewCreator = creators[kind]
+        return viewCreator?.collectionView(collectionView, sizeForViewOfKind: kind, at: indexPath) ?? .zero
     }
 
     /// Supplementary view is about to be displayed. Called exactly before the supplementary view is displayed.

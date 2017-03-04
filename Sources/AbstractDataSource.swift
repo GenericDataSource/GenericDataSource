@@ -454,7 +454,7 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
      */
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
-        return cast(view)
+        return optionalCast(view)
     }
 
     /**
@@ -485,7 +485,7 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
      */
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
-        return cast(view)
+        return optionalCast(view)
     }
 
     /**
@@ -560,10 +560,8 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     ///   - kind: The kind of the supplementary view.
     ///   - indexPath: The indexPath at which the supplementary view is requested.
     /// - Returns: The supplementary view for the passed index path.
-    open func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView {
-
-        let creator: SupplementaryViewCreator = cast(supplementaryViewCreator, message: "Calling `supplementaryViewOfKind` method with nil supplementaryViewOfKind property.")
-        return creator.collectionView(collectionView, viewOfKind: kind, at: indexPath)
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, supplementaryViewOfKind kind: String, at indexPath: IndexPath) -> ReusableSupplementaryView? {
+        return supplementaryViewCreator?.collectionView(collectionView, viewOfKind: kind, at: indexPath)
     }
 
     /// Gets the size of supplementary view for the passed kind at the passed index path.
