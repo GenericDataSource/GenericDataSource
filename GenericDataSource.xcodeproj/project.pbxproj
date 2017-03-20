@@ -77,6 +77,7 @@
 		5C0B2B2A1E7FDB14008D238F /* BasicDataSourceRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B281E7FDAF4008D238F /* BasicDataSourceRepresentable.swift */; };
 		5C0B2B2D1E7FDB30008D238F /* AnyBasicDataSourceRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B2B1E7FDB1C008D238F /* AnyBasicDataSourceRepresentable.swift */; };
 		5C0B2B2F1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B2E1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift */; };
+		5C0B2B321E7FEBA3008D238F /* SegmentedDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B311E7FEBA3008D238F /* SegmentedDataSourceTests.swift */; };
 		5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */; };
 		5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */; };
 		5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */; };
@@ -187,6 +188,7 @@
 		5C0B2B281E7FDAF4008D238F /* BasicDataSourceRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSourceRepresentable.swift; sourceTree = "<group>"; };
 		5C0B2B2B1E7FDB1C008D238F /* AnyBasicDataSourceRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyBasicDataSourceRepresentable.swift; sourceTree = "<group>"; };
 		5C0B2B2E1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyBasicDataSourceRepresentableTests.swift; sourceTree = "<group>"; };
+		5C0B2B311E7FEBA3008D238F /* SegmentedDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedDataSourceTests.swift; sourceTree = "<group>"; };
 		5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanEditItemTester.swift; sourceTree = "<group>"; };
 		5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitEditingTester.swift; sourceTree = "<group>"; };
 		5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingStyleForItemTester.swift; sourceTree = "<group>"; };
@@ -388,12 +390,13 @@
 		549576311C6FBBB200E9C26C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				54735EF91DBCDD2C004F4854 /* Supplementary */,
 				54E0D2B91C830FC0001202BE /* Basic */,
 				54E0D2BA1C830FC6001202BE /* Compsite */,
 				547447021CA88B0700F3597E /* DataSource */,
-				54F984771C95AE5F0024FE99 /* UIKit */,
+				5C0B2B301E7FEB6B008D238F /* Segmented */,
 				54433BE61DB0A54E0032AF9C /* Selection */,
+				54735EF91DBCDD2C004F4854 /* Supplementary */,
+				54F984771C95AE5F0024FE99 /* UIKit */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -434,6 +437,14 @@
 				54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */,
 			);
 			name = UIKit;
+			sourceTree = "<group>";
+		};
+		5C0B2B301E7FEB6B008D238F /* Segmented */ = {
+			isa = PBXGroup;
+			children = (
+				5C0B2B311E7FEBA3008D238F /* SegmentedDataSourceTests.swift */,
+			);
+			name = Segmented;
 			sourceTree = "<group>";
 		};
 		5CE64F131DA77B9D002456E1 /* Sources */ = {
@@ -766,6 +777,7 @@
 				54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */,
 				54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */,
 				5C0B2AF11E77F378008D238F /* WillBeginEditingTester.swift in Sources */,
+				5C0B2B321E7FEBA3008D238F /* SegmentedDataSourceTests.swift in Sources */,
 				5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */,
 				54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */,
 				5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */,

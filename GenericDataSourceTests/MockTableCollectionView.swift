@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-@testable import GenericDataSource
+import GenericDataSource
 
 protocol MockReusableView: GeneralCollectionView {
 

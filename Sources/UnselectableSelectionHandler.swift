@@ -13,6 +13,9 @@ import Foundation
  */
 public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
+    public init() {
+    }
+
     /**
      Called to see if the cell can be highlighted. It always returns `false`.
 

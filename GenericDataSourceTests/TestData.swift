@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-@testable import GenericDataSource
+import GenericDataSource
 
 public struct Report: Equatable {
 

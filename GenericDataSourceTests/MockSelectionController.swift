@@ -7,7 +7,7 @@
 //
 
 import Foundation
-@testable import GenericDataSource
+import GenericDataSource
 
 class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 

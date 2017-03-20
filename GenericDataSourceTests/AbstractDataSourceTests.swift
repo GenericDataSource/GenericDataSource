@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import GenericDataSource
+import GenericDataSource
 
 private class ScrollViewDelegate: NSObject, UIScrollViewDelegate {
 

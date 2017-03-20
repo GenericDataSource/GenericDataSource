@@ -27,7 +27,7 @@ extension BasicDataSourceRepresentable {
 
      - returns: The item at a certain index path.
      */
-    func item(at indexPath: IndexPath) -> Item {
+    public func item(at indexPath: IndexPath) -> Item {
         return items[indexPath.item]
     }
 

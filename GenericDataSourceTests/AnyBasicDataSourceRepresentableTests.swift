@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import GenericDataSource
+import GenericDataSource
 
 class AnyBasicDataSourceRepresentableTests: XCTestCase {
 
