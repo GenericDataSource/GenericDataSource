@@ -781,6 +781,76 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     open func ds_indexPathForPreferredFocusedView(in collectionView: GeneralCollectionView) -> IndexPath? {
         return nil
     }
+
+    // MARK: - Editing
+
+    // MARK: UITableView
+
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(tableView, canEditItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        return ds_collectionView(tableView, commit: editingStyle, forItemAt: indexPath)
+    }
+
+    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return ds_collectionView(tableView, editingStyleForItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return ds_collectionView(tableView, titleForDeleteConfirmationButtonForItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return ds_collectionView(tableView, editActionsForItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return ds_collectionView(tableView, shouldIndentWhileEditingItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        return ds_collectionView(tableView, willBeginEditingItemAt: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            ds_collectionView(tableView, didEndEditingItemAt: indexPath)
+        }
+    }
+
+    // MARK: DataSource
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCellEditingStyle, forItemAt indexPath: IndexPath) {
+        fatalError("\(self): \(#function) Should be implemented by subclasses")
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return ds_collectionView(collectionView, canEditItemAt: indexPath) ? .delete : .none
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, titleForDeleteConfirmationButtonForItemAt indexPath: IndexPath) -> String? {
+        return nil
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, editActionsForItemAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return nil
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldIndentWhileEditingItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, willBeginEditingItemAt indexPath: IndexPath) {
+    }
+
+    open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndEditingItemAt indexPath: IndexPath) {
+    }
 }
 
 private func isSelector(_ selector: Selector, belongsToProtocol aProtocol: Protocol) -> Bool {

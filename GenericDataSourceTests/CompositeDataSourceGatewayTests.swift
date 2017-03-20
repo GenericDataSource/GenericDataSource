@@ -54,9 +54,9 @@ class CompositeDataSourceGatewayTests: XCTestCase {
     func testShouldSelect() {
         // execute the test
         executeTestTemplate(tableType1: SelectionShouldSelectTester<PDFReportTableViewCell>.self,
-                            tableType2: SelectionShouldSelectTester<TextReportTableViewCell>.self,
+                            tableType2: SelectionShouldSelectTester2<TextReportTableViewCell>.self,
                             collectionType1: SelectionShouldSelectTester<PDFReportCollectionViewCell>.self,
-                            collectionType2: SelectionShouldSelectTester<TextReportCollectionViewCell>.self)
+                            collectionType2: SelectionShouldSelectTester2<TextReportCollectionViewCell>.self)
     }
 
     func testDidSelect() {
@@ -70,9 +70,9 @@ class CompositeDataSourceGatewayTests: XCTestCase {
     func testShouldDeselect() {
         // execute the test
         executeTestTemplate(tableType1: SelectionShouldDeselectTester<PDFReportTableViewCell>.self,
-                            tableType2: SelectionShouldDeselectTester<TextReportTableViewCell>.self,
+                            tableType2: SelectionShouldDeselectTester2<TextReportTableViewCell>.self,
                             collectionType1: SelectionShouldDeselectTester<PDFReportCollectionViewCell>.self,
-                            collectionType2: SelectionShouldDeselectTester<TextReportCollectionViewCell>.self)
+                            collectionType2: SelectionShouldDeselectTester2<TextReportCollectionViewCell>.self)
     }
 
     func testDidDeselect() {
@@ -163,6 +163,174 @@ class CompositeDataSourceGatewayTests: XCTestCase {
                             collectionType1: FooterSupplementaryViewDidDisplayTester<PDFReportCollectionViewCell>.self,
                             collectionType2: FooterSupplementaryViewDidDisplayTester<TextReportCollectionViewCell>.self,
                             singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: FirstSingleSectionTesterChooser()))
+    }
+
+    func testCanEditItem() {
+        // execute the test
+        executeTestTemplate(tableType1: CanEditItemTester<PDFReportTableViewCell>.self,
+                            tableType2: CanEditItemTester2<TextReportTableViewCell>.self,
+                            collectionType1: CanEditItemTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: CanEditItemTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testCommitEditing() {
+        // execute the test
+        executeTestTemplate(tableType1: CommitEditingTester<PDFReportTableViewCell>.self,
+                            tableType2: CommitEditingTester<TextReportTableViewCell>.self,
+                            collectionType1: CommitEditingTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: CommitEditingTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testEdigingStyleForItem() {
+        // execute the test
+        executeTestTemplate(tableType1: EditingStyleForItemTester<PDFReportTableViewCell>.self,
+                            tableType2: EditingStyleForItemTester2<TextReportTableViewCell>.self,
+                            collectionType1: EditingStyleForItemTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: EditingStyleForItemTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testTitleForDeleteConfirmationButton() {
+        // execute the test
+        executeTestTemplate(tableType1: TitleForDeleteConfirmationButtonTester<PDFReportTableViewCell>.self,
+                            tableType2: TitleForDeleteConfirmationButtonTester2<TextReportTableViewCell>.self,
+                            collectionType1: TitleForDeleteConfirmationButtonTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: TitleForDeleteConfirmationButtonTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testEditingActions() {
+        // execute the test
+        executeTestTemplate(tableType1: EditingActionsTester<PDFReportTableViewCell>.self,
+                            tableType2: EditingActionsTester2<TextReportTableViewCell>.self,
+                            collectionType1: EditingActionsTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: EditingActionsTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testShouldIndentWhileEditing() {
+        // execute the test
+        executeTestTemplate(tableType1: ShouldIndentWhileEditingTester<PDFReportTableViewCell>.self,
+                            tableType2: ShouldIndentWhileEditingTester2<TextReportTableViewCell>.self,
+                            collectionType1: ShouldIndentWhileEditingTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: ShouldIndentWhileEditingTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testWillBeginEditing() {
+        // execute the test
+        executeTestTemplate(tableType1: WillBeginEditingTester<PDFReportTableViewCell>.self,
+                            tableType2: WillBeginEditingTester<TextReportTableViewCell>.self,
+                            collectionType1: WillBeginEditingTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: WillBeginEditingTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testDidEndEditing() {
+        // execute the test
+        executeTestTemplate(tableType1: EndBeginEditingTester<PDFReportTableViewCell>.self,
+                            tableType2: EndBeginEditingTester<TextReportTableViewCell>.self,
+                            collectionType1: EndBeginEditingTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: EndBeginEditingTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testCanMoveItem() {
+        // execute the test
+        executeTestTemplate(tableType1: CanMoveCellTester<PDFReportTableViewCell>.self,
+                            tableType2: CanMoveCellTester2<TextReportTableViewCell>.self,
+                            collectionType1: CanMoveCellTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: CanMoveCellTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testMoveItem() {
+        // execute the test
+        executeTestTemplate(tableType1: MoveItemTester<PDFReportTableViewCell>.self,
+                            tableType2: MoveItemTester<TextReportTableViewCell>.self,
+                            collectionType1: MoveItemTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: MoveItemTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testWillDisplayCell() {
+        // execute the test
+        executeTestTemplate(tableType1: WillDisplayCellTester<PDFReportTableViewCell>.self,
+                            tableType2: WillDisplayCellTester<TextReportTableViewCell>.self,
+                            collectionType1: WillDisplayCellTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: WillDisplayCellTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testDidEndDisplayCell() {
+        // execute the test
+        executeTestTemplate(tableType1: DidEndDisplayCellTester<PDFReportTableViewCell>.self,
+                            tableType2: DidEndDisplayCellTester<TextReportTableViewCell>.self,
+                            collectionType1: DidEndDisplayCellTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: DidEndDisplayCellTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testShouldShowMenu() {
+        // execute the test
+        executeTestTemplate(tableType1: ShouldShowMenuForItemTester<PDFReportTableViewCell>.self,
+                            tableType2: ShouldShowMenuForItemTester2<TextReportTableViewCell>.self,
+                            collectionType1: ShouldShowMenuForItemTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: ShouldShowMenuForItemTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testCanPerformAction() {
+        // execute the test
+        executeTestTemplate(tableType1: CanPerformActionTester<PDFReportTableViewCell>.self,
+                            tableType2: CanPerformActionTester2<TextReportTableViewCell>.self,
+                            collectionType1: CanPerformActionTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: CanPerformActionTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testPerformAction() {
+        // execute the test
+        executeTestTemplate(tableType1: PerformActionTester<PDFReportTableViewCell>.self,
+                            tableType2: PerformActionTester<TextReportTableViewCell>.self,
+                            collectionType1: PerformActionTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: PerformActionTester<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testCanFocus() {
+        // execute the test
+        executeTestTemplate(tableType1: CanFocusTester<PDFReportTableViewCell>.self,
+                            tableType2: CanFocusTester2<TextReportTableViewCell>.self,
+                            collectionType1: CanFocusTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: CanFocusTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
+    }
+
+    func testShouldUpdateFocus() {
+        // execute the test
+        executeTestTemplate(tableType1: ShouldUpdateFocusTester<PDFReportTableViewCell>.self,
+                            tableType2: ShouldUpdateFocusTester2<TextReportTableViewCell>.self,
+                            collectionType1: ShouldUpdateFocusTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: ShouldUpdateFocusTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
+    }
+
+    func testDidUpdateFocus() {
+        // execute the test
+        executeTestTemplate(tableType1: DidUpdateFocusTester<PDFReportTableViewCell>.self,
+                            tableType2: DidUpdateFocusTester2<TextReportTableViewCell>.self,
+                            collectionType1: DidUpdateFocusTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: DidUpdateFocusTester2<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
     }
 }
 

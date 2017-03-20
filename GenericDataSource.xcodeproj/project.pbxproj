@@ -59,6 +59,24 @@
 		54F9847B1C95B1580024FE99 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54F9847A1C95B1580024FE99 /* TestTableViewCell.xib */; };
 		54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */; };
 		54F9847F1C95D4E40024FE99 /* TestCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */; };
+		5C0B2AEB1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AEA1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift */; };
+		5C0B2AED1E77EFB2008D238F /* EditingActionsTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AEC1E77EFB2008D238F /* EditingActionsTester.swift */; };
+		5C0B2AEF1E77F170008D238F /* ShouldIndentWhileEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AEE1E77F170008D238F /* ShouldIndentWhileEditingTester.swift */; };
+		5C0B2AF11E77F378008D238F /* WillBeginEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AF01E77F378008D238F /* WillBeginEditingTester.swift */; };
+		5C0B2AF31E77F380008D238F /* EndBeginEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AF21E77F380008D238F /* EndBeginEditingTester.swift */; };
+		5C0B2AF51E77F4C9008D238F /* CanMoveCellTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AF41E77F4C9008D238F /* CanMoveCellTester.swift */; };
+		5C0B2AF71E78157D008D238F /* MoveItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AF61E78157D008D238F /* MoveItemTester.swift */; };
+		5C0B2AF91E7818F7008D238F /* WillDisplayCellTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AF81E7818F7008D238F /* WillDisplayCellTester.swift */; };
+		5C0B2AFB1E781905008D238F /* DidEndDisplayCellTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AFA1E781905008D238F /* DidEndDisplayCellTester.swift */; };
+		5C0B2AFD1E78191A008D238F /* ShouldShowMenuForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AFC1E78191A008D238F /* ShouldShowMenuForItemTester.swift */; };
+		5C0B2AFF1E781928008D238F /* CanPerformActionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2AFE1E781928008D238F /* CanPerformActionTester.swift */; };
+		5C0B2B011E781933008D238F /* PerformActionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B001E781933008D238F /* PerformActionTester.swift */; };
+		5C0B2B031E792F45008D238F /* CanFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B021E792F45008D238F /* CanFocusTester.swift */; };
+		5C0B2B051E792FBE008D238F /* ShouldUpdateFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */; };
+		5C0B2B071E792FCB008D238F /* DidUpdateFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */; };
+		5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */; };
+		5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */; };
+		5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */; };
 		5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */; };
 		5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */; };
 		5CE64F2D1DA77B9D002456E1 /* BasicBlockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */; };
@@ -148,6 +166,24 @@
 		54F9847C1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsCollectionViewTests.swift; sourceTree = "<group>"; };
 		54F9847E1C95D4E40024FE99 /* TestCollectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCollectionView.xib; sourceTree = "<group>"; };
 		54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceSelectionHandlerTests.swift; sourceTree = "<group>"; };
+		5C0B2AEA1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleForDeleteConfirmationButtonTester.swift; sourceTree = "<group>"; };
+		5C0B2AEC1E77EFB2008D238F /* EditingActionsTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingActionsTester.swift; sourceTree = "<group>"; };
+		5C0B2AEE1E77F170008D238F /* ShouldIndentWhileEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldIndentWhileEditingTester.swift; sourceTree = "<group>"; };
+		5C0B2AF01E77F378008D238F /* WillBeginEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WillBeginEditingTester.swift; sourceTree = "<group>"; };
+		5C0B2AF21E77F380008D238F /* EndBeginEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndBeginEditingTester.swift; sourceTree = "<group>"; };
+		5C0B2AF41E77F4C9008D238F /* CanMoveCellTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanMoveCellTester.swift; sourceTree = "<group>"; };
+		5C0B2AF61E78157D008D238F /* MoveItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveItemTester.swift; sourceTree = "<group>"; };
+		5C0B2AF81E7818F7008D238F /* WillDisplayCellTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WillDisplayCellTester.swift; sourceTree = "<group>"; };
+		5C0B2AFA1E781905008D238F /* DidEndDisplayCellTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidEndDisplayCellTester.swift; sourceTree = "<group>"; };
+		5C0B2AFC1E78191A008D238F /* ShouldShowMenuForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldShowMenuForItemTester.swift; sourceTree = "<group>"; };
+		5C0B2AFE1E781928008D238F /* CanPerformActionTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanPerformActionTester.swift; sourceTree = "<group>"; };
+		5C0B2B001E781933008D238F /* PerformActionTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerformActionTester.swift; sourceTree = "<group>"; };
+		5C0B2B021E792F45008D238F /* CanFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanFocusTester.swift; sourceTree = "<group>"; };
+		5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldUpdateFocusTester.swift; sourceTree = "<group>"; };
+		5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidUpdateFocusTester.swift; sourceTree = "<group>"; };
+		5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanEditItemTester.swift; sourceTree = "<group>"; };
+		5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitEditingTester.swift; sourceTree = "<group>"; };
+		5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingStyleForItemTester.swift; sourceTree = "<group>"; };
 		5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSource.swift; sourceTree = "<group>"; };
 		5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; };
 		5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSource.swift; sourceTree = "<group>"; };
@@ -236,6 +272,24 @@
 				54735EF31DBCCA87004F4854 /* SupplementaryViewSizeTester.swift */,
 				54735EF51DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift */,
 				54735EF71DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift */,
+				5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */,
+				5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */,
+				5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */,
+				5C0B2AEA1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift */,
+				5C0B2AEC1E77EFB2008D238F /* EditingActionsTester.swift */,
+				5C0B2AEE1E77F170008D238F /* ShouldIndentWhileEditingTester.swift */,
+				5C0B2AF01E77F378008D238F /* WillBeginEditingTester.swift */,
+				5C0B2AF21E77F380008D238F /* EndBeginEditingTester.swift */,
+				5C0B2AF41E77F4C9008D238F /* CanMoveCellTester.swift */,
+				5C0B2AF61E78157D008D238F /* MoveItemTester.swift */,
+				5C0B2AF81E7818F7008D238F /* WillDisplayCellTester.swift */,
+				5C0B2AFA1E781905008D238F /* DidEndDisplayCellTester.swift */,
+				5C0B2AFC1E78191A008D238F /* ShouldShowMenuForItemTester.swift */,
+				5C0B2AFE1E781928008D238F /* CanPerformActionTester.swift */,
+				5C0B2B001E781933008D238F /* PerformActionTester.swift */,
+				5C0B2B021E792F45008D238F /* CanFocusTester.swift */,
+				5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */,
+				5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */,
 			);
 			name = Testers;
 			sourceTree = "<group>";
@@ -656,40 +710,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */,
 				54433C271DB7A18E0032AF9C /* SelectionDidHighlightTester.swift in Sources */,
 				54735EFB1DBCDD3E004F4854 /* CompositeSupplementaryViewCreatorTests.swift in Sources */,
 				54433C371DB9549F0032AF9C /* MockSupplementaryViewCreator.swift in Sources */,
 				54433C231DB7399D0032AF9C /* ItemSizeTester.swift in Sources */,
+				5C0B2AED1E77EFB2008D238F /* EditingActionsTester.swift in Sources */,
 				54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */,
 				54433C311DB7AC630032AF9C /* SelectionDidDeselectTester.swift in Sources */,
 				54433C2D1DB7AA470032AF9C /* SelectionDidSelectTester.swift in Sources */,
 				54433C2B1DB7A2C40032AF9C /* SelectionShouldSelectTester.swift in Sources */,
 				54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */,
 				54735F031DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift in Sources */,
+				5C0B2AF71E78157D008D238F /* MoveItemTester.swift in Sources */,
+				5C0B2AFF1E781928008D238F /* CanPerformActionTester.swift in Sources */,
 				54433BE21DAC0C940032AF9C /* CompositeDataSourceSpecificTests.swift in Sources */,
 				54F984791C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift in Sources */,
 				546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */,
 				547447041CA88B2C00F3597E /* AbstractDataSourceTests.swift in Sources */,
 				54433C391DB955440032AF9C /* SupplementaryViewOfKindTester.swift in Sources */,
+				5C0B2B071E792FCB008D238F /* DidUpdateFocusTester.swift in Sources */,
+				5C0B2AF91E7818F7008D238F /* WillDisplayCellTester.swift in Sources */,
+				5C0B2AF51E77F4C9008D238F /* CanMoveCellTester.swift in Sources */,
 				54735EF81DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift in Sources */,
 				54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */,
 				547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */,
+				5C0B2B011E781933008D238F /* PerformActionTester.swift in Sources */,
 				5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */,
 				54433C251DB7791D0032AF9C /* SelectionShouldHighlightTester.swift in Sources */,
 				54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */,
 				54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */,
+				5C0B2AEF1E77F170008D238F /* ShouldIndentWhileEditingTester.swift in Sources */,
 				54735F051DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift in Sources */,
+				5C0B2AFB1E781905008D238F /* DidEndDisplayCellTester.swift in Sources */,
 				547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */,
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,
+				5C0B2AEB1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift in Sources */,
 				549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */,
 				54433C211DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift in Sources */,
+				5C0B2B051E792FBE008D238F /* ShouldUpdateFocusTester.swift in Sources */,
+				5C0B2B031E792F45008D238F /* CanFocusTester.swift in Sources */,
 				54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */,
 				54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */,
+				5C0B2AF11E77F378008D238F /* WillBeginEditingTester.swift in Sources */,
+				5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */,
 				54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */,
+				5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */,
 				54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */,
+				5C0B2AFD1E78191A008D238F /* ShouldShowMenuForItemTester.swift in Sources */,
 				54F9847D1C95D44F0024FE99 /* UIKitExtensionsCollectionViewTests.swift in Sources */,
 				54433C291DB7A26D0032AF9C /* SelectionDidUnhighlightTester.swift in Sources */,
+				5C0B2AF31E77F380008D238F /* EndBeginEditingTester.swift in Sources */,
 				54735EF41DBCCA87004F4854 /* SupplementaryViewSizeTester.swift in Sources */,
 				54433C351DB9356F0032AF9C /* SelectionItemsModifiedTester.swift in Sources */,
 				54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */,

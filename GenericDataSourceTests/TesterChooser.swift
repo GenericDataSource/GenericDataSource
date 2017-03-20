@@ -42,3 +42,9 @@ struct FirstSingleSectionTesterChooser: TesterChooser {
         }
     }
 }
+
+struct AlwaysFirstTesterChooser: TesterChooser {
+    func choose(tester1: AbstractDataSource, tester2: AbstractDataSource, dataSource: CompositeDataSource, indexPath: IndexPath, collectionView: GeneralCollectionView) -> ChosenTester {
+        return ChosenTester(useFirst: true, localIndexPath: indexPath)
+    }
+}

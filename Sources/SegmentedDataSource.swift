@@ -376,4 +376,38 @@ open class SegmentedDataSource: AbstractDataSource {
     open override func ds_indexPathForPreferredFocusedView(in collectionView: GeneralCollectionView) -> IndexPath? {
         return unsafeSelectedDataSource.ds_indexPathForPreferredFocusedView(in: collectionView)
     }
+
+    // MARK: - Editing
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, canEditItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCellEditingStyle, forItemAt indexPath: IndexPath) {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, commit: editingStyle, forItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, editingStyleForItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, titleForDeleteConfirmationButtonForItemAt indexPath: IndexPath) -> String? {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, titleForDeleteConfirmationButtonForItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, editActionsForItemAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, editActionsForItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldIndentWhileEditingItemAt indexPath: IndexPath) -> Bool {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, shouldIndentWhileEditingItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, willBeginEditingItemAt indexPath: IndexPath) {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, willBeginEditingItemAt: indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndEditingItemAt indexPath: IndexPath) {
+        return unsafeSelectedDataSource.ds_collectionView(collectionView, didEndEditingItemAt: indexPath)
+    }
 }

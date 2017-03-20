@@ -538,4 +538,52 @@ open class CompositeDataSource: AbstractDataSource {
         let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
         return transformed.dataSource.ds_collectionView(collectionView, performAction: action, forItemAt: transformed.indexPath, withSender: sender)
     }
+
+    @available(iOS 9.0, *)
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, canFocusItemAt: transformed.indexPath)
+    }
+
+    // MARK: - Editing
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, canEditItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCellEditingStyle, forItemAt indexPath: IndexPath) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, commit: editingStyle, forItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, editingStyleForItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, titleForDeleteConfirmationButtonForItemAt indexPath: IndexPath) -> String? {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, titleForDeleteConfirmationButtonForItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, editActionsForItemAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, editActionsForItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldIndentWhileEditingItemAt indexPath: IndexPath) -> Bool {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, shouldIndentWhileEditingItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, willBeginEditingItemAt indexPath: IndexPath) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, willBeginEditingItemAt: transformed.indexPath)
+    }
+
+    open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndEditingItemAt indexPath: IndexPath) {
+        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        return transformed.dataSource.ds_collectionView(collectionView, didEndEditingItemAt: transformed.indexPath)
+    }
 }

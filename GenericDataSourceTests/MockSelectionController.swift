@@ -21,6 +21,9 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
     var itemsModifiedCalled = false
     var configureCellCalled = false
 
+    var shouldSelectResult = true
+    var shouldDeselectResult = true
+
     var cell: CellType?
     var item: ItemType?
     var indexPath: IndexPath?
@@ -74,7 +77,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
         shouldSelectItemAt indexPath: IndexPath) -> Bool {
             shouldSelectCalled = true
             self.indexPath = indexPath
-            return true
+            return shouldSelectResult
     }
 
     func dataSource(
@@ -92,7 +95,7 @@ class MockSelectionController<ItemType, CellType: ReusableCell> : DataSourceSele
         shouldDeselectItemAt indexPath: IndexPath) -> Bool {
             shouldDeselectCalled = true
             self.indexPath = indexPath
-            return true
+            return shouldDeselectResult
     }
 
     func dataSource(
