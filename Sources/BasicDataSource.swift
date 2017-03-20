@@ -18,7 +18,7 @@ import UIKit
 
  For sizing cells, you can use `itemSize` for `UICollectionView` and `itemHeight` for `UITableView`. Or if you want to specify a custom size, you can override `ds_collectionView(_:sizeForItemAt:)`, **but needs** to set `useDelegateForItemSize` to `true` otherwise the overriden method will not be called.
  */
-open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource {
+open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource, BasicDataSourceRepresentable {
 
     private var itemSizeSet: Bool = false
 
@@ -49,6 +49,8 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
      */
     @available(*, unavailable, message: "Now, we can detect if you implemented sizeForItemAt or not")
     open var useDelegateForItemSize: Bool = false
+
+    open var dataSource: AbstractDataSource { return self }
 
     /**
      Represents the list of items managed by this basic data source.
@@ -82,33 +84,6 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
      */
     public init(reuseIdentifier: String) {
         self.reuseIdentifier = reuseIdentifier
-    }
-
-    // MARK: - Items
-
-    /**
-     Gets the item at the specified index path.
-
-     **IMPORTANT* This method assumes that the `indexPath` is a local value. In other words, value of (0 0) returns first one. Value of (1 0) returns the second one even if the `BasicDataSource` is part of a `CompositeDataSource`.
-
-     - parameter indexPath: The index path parameter, the section value is ignored.
-
-     - returns: The item at a certain index path.
-     */
-    open func item(at indexPath: IndexPath) -> ItemType {
-        return items[indexPath.item]
-    }
-
-    /**
-     Replaces an item at a certain index path.
-
-     **IMPORTANT* This method assumes that the `indexPath` is a local value. In other words, value of (0 0) replaces the first one. Value of (1 0) replaces the second one even if the `BasicDataSource` is part of a `CompositeDataSource`.
-
-     - parameter indexPath:  The index path parameter, the section value is ignored.
-     - parameter item:      The new item that will be saved in the `items` array.
-     */
-    open func replaceItem(at indexPath: IndexPath, with item: ItemType) {
-        items[indexPath.item] = item
     }
 
     // MARK: - DataSource
@@ -335,19 +310,5 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
             return super.ds_collectionView(collectionView, didDeselectItemAt: indexPath)
         }
         selectionHandler.dataSource(self, collectionView: collectionView, didDeselectItemAt: indexPath)
-    }
-}
-
-extension BasicDataSource where ItemType : Equatable {
-
-    /**
-     Gets the index path for a certain item.
-
-     - parameter item: The item that is being checked.
-
-     - returns: The index path for a certain item, or `nil` if there is no such item.
-     */
-    open func indexPath(for item: ItemType) -> IndexPath? {
-        return items.index(of: item).flatMap { IndexPath(item: $0, section: 0) }
     }
 }

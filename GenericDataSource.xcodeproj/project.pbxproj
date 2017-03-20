@@ -74,6 +74,9 @@
 		5C0B2B031E792F45008D238F /* CanFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B021E792F45008D238F /* CanFocusTester.swift */; };
 		5C0B2B051E792FBE008D238F /* ShouldUpdateFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */; };
 		5C0B2B071E792FCB008D238F /* DidUpdateFocusTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */; };
+		5C0B2B2A1E7FDB14008D238F /* BasicDataSourceRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B281E7FDAF4008D238F /* BasicDataSourceRepresentable.swift */; };
+		5C0B2B2D1E7FDB30008D238F /* AnyBasicDataSourceRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B2B1E7FDB1C008D238F /* AnyBasicDataSourceRepresentable.swift */; };
+		5C0B2B2F1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0B2B2E1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift */; };
 		5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */; };
 		5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */; };
 		5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */; };
@@ -181,6 +184,9 @@
 		5C0B2B021E792F45008D238F /* CanFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanFocusTester.swift; sourceTree = "<group>"; };
 		5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShouldUpdateFocusTester.swift; sourceTree = "<group>"; };
 		5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidUpdateFocusTester.swift; sourceTree = "<group>"; };
+		5C0B2B281E7FDAF4008D238F /* BasicDataSourceRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicDataSourceRepresentable.swift; sourceTree = "<group>"; };
+		5C0B2B2B1E7FDB1C008D238F /* AnyBasicDataSourceRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyBasicDataSourceRepresentable.swift; sourceTree = "<group>"; };
+		5C0B2B2E1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyBasicDataSourceRepresentableTests.swift; sourceTree = "<group>"; };
 		5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanEditItemTester.swift; sourceTree = "<group>"; };
 		5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitEditingTester.swift; sourceTree = "<group>"; };
 		5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingStyleForItemTester.swift; sourceTree = "<group>"; };
@@ -398,6 +404,7 @@
 				54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */,
 				546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */,
 				549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */,
+				5C0B2B2E1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -467,6 +474,8 @@
 			children = (
 				5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */,
 				5CE64F171DA77B9D002456E1 /* BasicDataSource.swift */,
+				5C0B2B281E7FDAF4008D238F /* BasicDataSourceRepresentable.swift */,
+				5C0B2B2B1E7FDB1C008D238F /* AnyBasicDataSourceRepresentable.swift */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -686,6 +695,7 @@
 				5CE64F411DA77B9D002456E1 /* UnselectableSelectionHandler.swift in Sources */,
 				54433BE51DAF53070032AF9C /* LocalDataSourceCollectionView.swift in Sources */,
 				54735F011DBD3B8D004F4854 /* BasicBlockSupplementaryViewCreator.swift in Sources */,
+				5C0B2B2A1E7FDB14008D238F /* BasicDataSourceRepresentable.swift in Sources */,
 				54735EFE1DBCF1C5004F4854 /* _Utilities.swift in Sources */,
 				5CE64F361DA77B9D002456E1 /* _DelegatedGeneralCollectionView.swift in Sources */,
 				54395EFF1DD8F2740069433C /* SegmentedDataSource.swift in Sources */,
@@ -697,6 +707,7 @@
 				54433C0F1DB235190032AF9C /* CompositeSupplementaryViewCreator.swift in Sources */,
 				54433C0D1DB2325D0032AF9C /* ReusableSupplementaryView.swift in Sources */,
 				5CE64F3F1DA77B9D002456E1 /* UIKitExtensions.swift in Sources */,
+				5C0B2B2D1E7FDB30008D238F /* AnyBasicDataSourceRepresentable.swift in Sources */,
 				54433C0B1DB231A50032AF9C /* SupplementaryViewCreator.swift in Sources */,
 				5CE64F331DA77B9D002456E1 /* DataSource.swift in Sources */,
 				54433C111DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift in Sources */,
@@ -750,6 +761,7 @@
 				549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */,
 				54433C211DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift in Sources */,
 				5C0B2B051E792FBE008D238F /* ShouldUpdateFocusTester.swift in Sources */,
+				5C0B2B2F1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift in Sources */,
 				5C0B2B031E792F45008D238F /* CanFocusTester.swift in Sources */,
 				54735EEF1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift in Sources */,
 				54735EF21DBCC12E004F4854 /* TesterChooser.swift in Sources */,
