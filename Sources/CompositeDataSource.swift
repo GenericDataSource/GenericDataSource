@@ -26,7 +26,7 @@ import UIKit
  `ds_collectionView(_:sizeForItemAt:)` and return the desired size for all
  the cells regardless of the children data sources.)
  */
-open class CompositeDataSource: AbstractDataSource {
+open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
 
     /**
      The type of the composite data source.

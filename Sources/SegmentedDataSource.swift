@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class SegmentedDataSource: AbstractDataSource {
+open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
 
     private var childrenReusableDelegate: _DelegatedGeneralCollectionView!
 
@@ -40,16 +40,13 @@ open class SegmentedDataSource: AbstractDataSource {
 
     // MARK: - Children DataSources
 
-    open var selectedDataSourceIndex: Int? {
+    open var selectedDataSourceIndex: Int {
         set {
-            if let selectedDataSourceIndex = selectedDataSourceIndex {
-                selectedDataSource = dataSources[selectedDataSourceIndex]
-            } else {
-                selectedDataSource = nil
-            }
+            precondition(newValue < dataSources.count, "[GenericDataSource] invalid selectedDataSourceIndex, should be less than \(dataSources.count)")
+            selectedDataSource = dataSources[newValue]
         }
         get {
-            return dataSources.index { $0 === selectedDataSource } ?? -1
+            return dataSources.index { $0 === selectedDataSource } ?? NSNotFound
         }
     }
 
@@ -57,7 +54,7 @@ open class SegmentedDataSource: AbstractDataSource {
 
     private var unsafeSelectedDataSource: DataSource {
         guard let selectedDataSource = selectedDataSource else {
-            fatalError("[\(type(of: self))]: Calling DataSource methods with nil selectedDataSource")
+            fatalError("[\(type(of: self))]: Calling SegmentedDataSource methods with nil selectedDataSource")
         }
         return selectedDataSource
     }
@@ -73,6 +70,9 @@ open class SegmentedDataSource: AbstractDataSource {
     open func add(_ dataSource: DataSource) {
         dataSource.ds_reusableViewDelegate = childrenReusableDelegate
         dataSources.append(dataSource)
+        if selectedDataSource == nil {
+            selectedDataSource = dataSource
+        }
     }
 
     /**
@@ -84,6 +84,9 @@ open class SegmentedDataSource: AbstractDataSource {
     open func insert(_ dataSource: DataSource, at index: Int) {
         dataSource.ds_reusableViewDelegate = childrenReusableDelegate
         dataSources.insert(dataSource, at: index)
+        if selectedDataSource == nil {
+            selectedDataSource = dataSource
+        }
     }
 
     /**
@@ -142,6 +145,56 @@ open class SegmentedDataSource: AbstractDataSource {
      */
     open func index(of dataSource: DataSource) -> Int? {
         return dataSources.index { $0 === dataSource }
+    }
+
+    // MARK: - IndexPath and Section translations
+
+    /**
+     Converts a section value relative to a specific data source to a section value relative to the composite data source.
+
+     - parameter section:       The local section relative to the passed data source.
+     - parameter dataSource:    The data source that is the local section is relative to it. Should be a child data source.
+
+     - returns: The global section relative to the composite data source.
+     */
+    open func globalSectionForLocalSection(_ section: Int, dataSource: DataSource) -> Int {
+        return section
+    }
+
+    /**
+     Converts a section value relative to the composite data source to a section value relative to a specific data source.
+
+     - parameter section:    The section relative to the compsite data source.
+     - parameter dataSource: The data source that is the returned local section is relative to it. Should be a child data source.
+
+     - returns: The global section relative to the composite data source.
+     */
+    open func localSectionForGlobalSection(_ section: Int, dataSource: DataSource) -> Int {
+        return section
+    }
+
+    /**
+     Converts an index path value relative to a specific data source to an index path value relative to the composite data source.
+
+     - parameter indexPath:     The local index path relative to the passed data source.
+     - parameter dataSource:    The data source that is the local index path is relative to it. Should be a child data source.
+
+     - returns: The global index path relative to the composite data source.
+     */
+    open func globalIndexPathForLocalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
+        return indexPath
+    }
+
+    /**
+     Converts an index path value relative to the composite data source to an index path value relative to a specific data source.
+
+     - parameter indexPath:    The index path relative to the compsite data source.
+     - parameter dataSource: The data source that is the returned local index path is relative to it. Should be a child data source.
+
+     - returns: The global index path relative to the composite data source.
+     */
+    open func localIndexPathForGlobalIndexPath(_ indexPath: IndexPath, dataSource: DataSource) -> IndexPath {
+        return indexPath
     }
 
     // MARK: - Cell
