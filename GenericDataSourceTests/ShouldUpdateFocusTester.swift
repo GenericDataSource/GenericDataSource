@@ -13,8 +13,10 @@ import XCTest
 private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     var result: Bool = false
+    var called: Bool = false
 
     override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext) -> Bool {
+        called = true
         return result
     }
 }
@@ -57,5 +59,16 @@ class ShouldUpdateFocusTester2<CellType>: ShouldUpdateFocusTester<CellType> wher
 
     override func assertNotCalled(collectionView: GeneralCollectionView) {
         // should be called
+    }
+}
+
+class ShouldUpdateFocusTester3<CellType>: ShouldUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
+
+    override func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {
+        XCTAssertEqual(true, (dataSource as! _ReportBasicDataSource<CellType>).called)
+    }
+
+    override func assertNotCalled(collectionView: GeneralCollectionView) {
+        XCTAssertEqual(false, (dataSource as! _ReportBasicDataSource<CellType>).called)
     }
 }

@@ -12,7 +12,7 @@
 		54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */; };
 		54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
 		54433BDB1DAC0BED0032AF9C /* DataSourceSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F984801C9621D70024FE99 /* DataSourceSelectionHandlerTests.swift */; };
-		54433BE21DAC0C940032AF9C /* CompositeDataSourceSpecificTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576341C6FBBC600E9C26C /* CompositeDataSourceSpecificTests.swift */; };
+		54433BE21DAC0C940032AF9C /* CompositeDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576341C6FBBC600E9C26C /* CompositeDataSourceTests.swift */; };
 		54433BE51DAF53070032AF9C /* LocalDataSourceCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */; };
 		54433BE81DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */; };
 		54433BEA1DB0A6850032AF9C /* BlockSelectionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433BE91DB0A6850032AF9C /* BlockSelectionHandlerTests.swift */; };
@@ -22,7 +22,7 @@
 		54433C111DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */; };
 		54433C1C1DB6B8460032AF9C /* DataSourceTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */; };
 		54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */; };
-		54433C211DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C201DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift */; };
+		54433C211DB6B92E0032AF9C /* CollectionDataSourceGatewayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C201DB6B92E0032AF9C /* CollectionDataSourceGatewayTests.swift */; };
 		54433C231DB7399D0032AF9C /* ItemSizeTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C221DB7399D0032AF9C /* ItemSizeTester.swift */; };
 		54433C251DB7791D0032AF9C /* SelectionShouldHighlightTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C241DB7791D0032AF9C /* SelectionShouldHighlightTester.swift */; };
 		54433C271DB7A18E0032AF9C /* SelectionDidHighlightTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54433C261DB7A18E0032AF9C /* SelectionDidHighlightTester.swift */; };
@@ -82,6 +82,7 @@
 		5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */; };
 		5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */; };
 		5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */; };
+		5CB62C3F1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB62C3E1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift */; };
 		5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */; };
 		5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */; };
 		5CE64F2D1DA77B9D002456E1 /* BasicBlockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */; };
@@ -127,7 +128,7 @@
 		54433C101DB2399D0032AF9C /* BasicSupplementaryViewCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicSupplementaryViewCreator.swift; sourceTree = "<group>"; };
 		54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTester.swift; sourceTree = "<group>"; };
 		54433C1E1DB6B8940032AF9C /* SelectionConfigureTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionConfigureTester.swift; sourceTree = "<group>"; };
-		54433C201DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceGatewayTests.swift; sourceTree = "<group>"; };
+		54433C201DB6B92E0032AF9C /* CollectionDataSourceGatewayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDataSourceGatewayTests.swift; sourceTree = "<group>"; };
 		54433C221DB7399D0032AF9C /* ItemSizeTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSizeTester.swift; sourceTree = "<group>"; };
 		54433C241DB7791D0032AF9C /* SelectionShouldHighlightTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionShouldHighlightTester.swift; sourceTree = "<group>"; };
 		54433C261DB7A18E0032AF9C /* SelectionDidHighlightTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionDidHighlightTester.swift; sourceTree = "<group>"; };
@@ -162,7 +163,7 @@
 		549576151C6FBA9400E9C26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BasicDataSourceTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		549576331C6FBBC600E9C26C /* MockTableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTableCollectionView.swift; sourceTree = "<group>"; };
-		549576341C6FBBC600E9C26C /* CompositeDataSourceSpecificTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceSpecificTests.swift; sourceTree = "<group>"; };
+		549576341C6FBBC600E9C26C /* CompositeDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeDataSourceTests.swift; sourceTree = "<group>"; };
 		549576351C6FBBC600E9C26C /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		54F2C3D01DD8911E00306A1D /* GeneralCollectionViewFocusUpdateContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralCollectionViewFocusUpdateContext.swift; sourceTree = "<group>"; };
 		54F2D3141DD9024200A7F403 /* _SegmentedGeneralCollectionViewMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SegmentedGeneralCollectionViewMapping.swift; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanEditItemTester.swift; sourceTree = "<group>"; };
 		5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitEditingTester.swift; sourceTree = "<group>"; };
 		5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingStyleForItemTester.swift; sourceTree = "<group>"; };
+		5CB62C3E1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SegmentedGeneralCollectionViewMappingTests.swift; sourceTree = "<group>"; };
 		5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSource.swift; sourceTree = "<group>"; };
 		5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; };
 		5CE64F161DA77B9D002456E1 /* BasicBlockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlockDataSource.swift; sourceTree = "<group>"; };
@@ -393,9 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				54E0D2B91C830FC0001202BE /* Basic */,
-				54E0D2BA1C830FC6001202BE /* Compsite */,
+				5C0B2B371E8176AB008D238F /* Collection */,
 				547447021CA88B0700F3597E /* DataSource */,
-				5C0B2B301E7FEB6B008D238F /* Segmented */,
 				54433BE61DB0A54E0032AF9C /* Selection */,
 				54735EF91DBCDD2C004F4854 /* Supplementary */,
 				54F984771C95AE5F0024FE99 /* UIKit */,
@@ -418,8 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				547446FB1CA7F78D00F3597E /* internal */,
-				549576341C6FBBC600E9C26C /* CompositeDataSourceSpecificTests.swift */,
-				54433C201DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift */,
+				549576341C6FBBC600E9C26C /* CompositeDataSourceTests.swift */,
 			);
 			name = Compsite;
 			sourceTree = "<group>";
@@ -444,6 +444,7 @@
 		5C0B2B301E7FEB6B008D238F /* Segmented */ = {
 			isa = PBXGroup;
 			children = (
+				5CB62C3D1E82761A00B8B89B /* internal */,
 				5C0B2B311E7FEBA3008D238F /* SegmentedDataSourceTests.swift */,
 			);
 			name = Segmented;
@@ -457,6 +458,24 @@
 				54395EFD1DD8F26C0069433C /* Segmented */,
 			);
 			name = Collection;
+			sourceTree = "<group>";
+		};
+		5C0B2B371E8176AB008D238F /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				54433C201DB6B92E0032AF9C /* CollectionDataSourceGatewayTests.swift */,
+				54E0D2BA1C830FC6001202BE /* Compsite */,
+				5C0B2B301E7FEB6B008D238F /* Segmented */,
+			);
+			name = Collection;
+			sourceTree = "<group>";
+		};
+		5CB62C3D1E82761A00B8B89B /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				5CB62C3E1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift */,
+			);
+			name = internal;
 			sourceTree = "<group>";
 		};
 		5CE64F131DA77B9D002456E1 /* Sources */ = {
@@ -758,7 +777,7 @@
 				54735F031DBD3C33004F4854 /* BasicSupplementaryViewCreatorTests.swift in Sources */,
 				5C0B2AF71E78157D008D238F /* MoveItemTester.swift in Sources */,
 				5C0B2AFF1E781928008D238F /* CanPerformActionTester.swift in Sources */,
-				54433BE21DAC0C940032AF9C /* CompositeDataSourceSpecificTests.swift in Sources */,
+				54433BE21DAC0C940032AF9C /* CompositeDataSourceTests.swift in Sources */,
 				54F984791C95AE780024FE99 /* UIKitExtensionsTableViewTests.swift in Sources */,
 				546B1CC71C82E55E0009DD26 /* XCTest+Extension.swift in Sources */,
 				547447041CA88B2C00F3597E /* AbstractDataSourceTests.swift in Sources */,
@@ -782,7 +801,8 @@
 				549576391C6FBBC600E9C26C /* TestData.swift in Sources */,
 				5C0B2AEB1E77EA6E008D238F /* TitleForDeleteConfirmationButtonTester.swift in Sources */,
 				549576371C6FBBC600E9C26C /* MockTableCollectionView.swift in Sources */,
-				54433C211DB6B92E0032AF9C /* CompositeDataSourceGatewayTests.swift in Sources */,
+				5CB62C3F1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift in Sources */,
+				54433C211DB6B92E0032AF9C /* CollectionDataSourceGatewayTests.swift in Sources */,
 				5C0B2B051E792FBE008D238F /* ShouldUpdateFocusTester.swift in Sources */,
 				5C0B2B2F1E7FE2F2008D238F /* AnyBasicDataSourceRepresentableTests.swift in Sources */,
 				5C0B2B031E792F45008D238F /* CanFocusTester.swift in Sources */,
