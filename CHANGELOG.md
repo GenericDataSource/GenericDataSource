@@ -21,3 +21,7 @@
 ## 2.2.1
 
 * Making Supplementary view optional as a workaround for the `UITableView` with .grouped style as it asks for the header/footer view even if the size is set as 0
+
+## 2.3.0
+
+* Adding `SegmentedDataSource`.
