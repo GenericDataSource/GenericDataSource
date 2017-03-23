@@ -5,6 +5,18 @@
       location = "group:"
       name = "...">
       <FileRef
+         location = "group:.gitignore">
+      </FileRef>
+      <FileRef
+         location = "group:.swift-version">
+      </FileRef>
+      <FileRef
+         location = "group:.swiftlint.yml">
+      </FileRef>
+      <FileRef
+         location = "group:.travis.yml">
+      </FileRef>
+      <FileRef
          location = "group:CHANGELOG.md">
       </FileRef>
       <FileRef
