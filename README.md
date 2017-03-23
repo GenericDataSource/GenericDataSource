@@ -72,13 +72,16 @@ Suppose we want to implement the following screen as `UICollectionView`.
 2. Now we need to think about DataSources.
 3. It's simple, one data source for each cell type (`BasicDataSource`).
 4. We can then create composite data sources that holds those basics. like that
-    * `CompositeDataSource(sectionType: .SingleSection)` for the Top, quick links, add payment, etc. data sources.
-    * `CompositeDataSource(sectionType: .MultiSection)` for the first composite and the last part (Redeem, Gifts).
+    * `CompositeDataSource(sectionType: .single)` for the Top, quick links, add payment, etc. data sources.
+    * `CompositeDataSource(sectionType: .multi)` for the first composite and the last part (Redeem, Gifts).
 5. Bind the multi section compsite data source to the collection view and that's it.
 6. See how we think structurely about our UI and data sources instaed of one big cell.
 
 See how we can do it in the following code
 ```Swift
+let collectionView = UICollectionView() // or UITableView()
+struct FeaturedModel {}
+
 // 1. Cells
 class FeaturedTopCell: UICollectionViewCell {}
 class QuickLinksCell: UICollectionViewCell {}
@@ -86,32 +89,33 @@ class ActionBlueCell: UICollectionViewCell {}
 class ActionRoundedRectCell: UICollectionViewCell {}
 
 // 2. Basic Data Sources
-class FeaturedTopDataSource: BasicDataSource<FeaturedModel, FeaturedTopCell>  { }
-class QuickLinksDataSource: BasicDataSource<String, QuickLinksCell>  { }
-class ActionBlueDataSource: BasicDataSource<String, ActionBlueCell>  { }
-class ActionRoundedRectDataSource: BasicDataSource<String, ActionRoundedRectCell>  { }
+class FeaturedTopDataSource: BasicDataSource<FeaturedModel, FeaturedTopCell> { }
+class QuickLinksDataSource: BasicDataSource<String, QuickLinksCell> { }
+class ActionBlueDataSource: BasicDataSource<String, ActionBlueCell> { }
+class ActionRoundedRectDataSource: BasicDataSource<String, ActionRoundedRectCell> { }
 
 // 3. Create data source instances once.
-let featuredDS = FeaturedTopDataSource()
-let quickLinksDS = QuickLinksDataSource()
-let actionBlueDS = ActionBlueDataSource()
-let actionRoundedRectDS = ActionRoundedRectDataSource()
+let featuredDS = FeaturedTopDataSource(reuseIdentifier: "cellReuse1")
+let quickLinksDS = QuickLinksDataSource(reuseIdentifier: "cellReuse2")
+let actionBlueDS = ActionBlueDataSource(reuseIdentifier: "cellReuse3")
+let actionRoundedRectDS = ActionRoundedRectDataSource(reuseIdentifier: "cellReuse4")
 
 // 4. Create first section hierarchy.
-let firstSection = CompsiteDataSource(type: .SingleSection)
+let firstSection = CompositeDataSource(sectionType: .single)
 firstSection.add(featuredDS)
 firstSection.add(quickLinksDS)
 firstSection.add(actionBlueDS)
 
 // 5. Complete the hierarchy.
-let outerDS = CompsiteDataSource(type: .MultiSection)
+let outerDS = CompositeDataSource(sectionType: .multi)
 outerDS.add(firstSection)
 outerDS.add(actionRoundedRectDS)
 
 // 6. set data sources to the collection view.
 collectionView.ds_useDataSource(outerDS)
 
-// 7. You can set the data later or earlier.
+// 7. You can set the data/items later or earlier or at any point of time.
+// For example wait until a web service returns its data.
 featuredDS.items = [FeaturedModel()]
 quickLinksDS.items = ["Quick Links"]
 actionBlueDS.items = ["Add Payment Method", "New to the App Store", "About in-App Purchases", "Parents' Guide to iTunes", "App Collections"]
@@ -141,13 +145,13 @@ let dataSource = BasicBlockDataSource<Example, UITableViewCell>(reuseIdentifier:
 self.dataSource = dataSource
 
 tableView.ds_useDataSource(dataSource)
-dataSource.items = <<retrieve items>> // Can be called later no need to set them immediately.
+dataSource.items =  /* <<retrieve items>> Can be called later no need to set them immediately. */Service.getExamples()
 
-// Optionally adding a selection handler
+// optionally adding a selection handler
 let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
 selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
-    let item = dataSource.itemAtIndexPath(indexPath)
-    self?.performSegueWithIdentifier(item.segue, sender: self)
+    let item = dataSource.item(at: indexPath)
+    self?.performSegue(withIdentifier: item.segue, sender: self)
 }
 dataSource.setSelectionHandler(selectionHandler)
 ```
@@ -160,20 +164,20 @@ We need to show 2 different types of cells in the same section (color cells and 
 // We can use BasicDataSource by subclassing it or use BasicBlockDataSource as in the previous example.
 class ColorsDataSource: BasicDataSource<Color, UITableViewCell> {
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: CellType, with item: Color, at indexPath: IndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: UITableViewCell, with item: Color, at indexPath: IndexPath) {
         cell.backgroundColor = item.color
     }
 }
 
-class ContactsDataSource<CellType: ContactCell>: BasicDataSource<Contact, ContactCell> {
+class ContactsDataSource: BasicDataSource<Contact, ContactCell> {
 
-    override func ds_collectionView(collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: IndexPath) {
-        cell.configureForContact(item)
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, configure cell: ContactCell, with item: Contact, at indexPath: IndexPath) {
+        cell.configure(forContact: item)
     }
 }
 
 extension ContactCell {
-    private func configureForContact(contact: Contact) {
+    func configure(forContact contact: Contact) {
         textLabel?.text = contact.name
         detailTextLabel?.text = contact.email
     }
@@ -181,50 +185,84 @@ extension ContactCell {
 
 // ....
 // Then in the view controller.
-override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    let dataSource = CompositeDataSource(sectionType: .SingleSection)
-    // strong refernce
-    self.dataSource = dataSource
-    let colorsDataSource = ColorsDataSource(reuseIdentifier: "color")
-    let contactsDataSource = ContactsDataSource(reuseIdentifier: "contact")
-    
-    // add the data sources
-    dataSource.add(contactsDataSource)
-    dataSource.add(colorsDataSource)
-    
-    tableView.ds_useDataSource(dataSource)
-    
-    // optionally selection handler
-    colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))
-    contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
+class ViewController: UITableViewController {
+    var dataSource: CompositeDataSource!
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    // specify different heights
-    colorsDataSource.itemHeight = 30
-    contactsDataSource.itemHeight = 50
+        let dataSource = CompositeDataSource(sectionType: .single)
+        // strong refernce
+        self.dataSource = dataSource
+        let colorsDataSource = ColorsDataSource(reuseIdentifier: "color")
+        let contactsDataSource = ContactsDataSource(reuseIdentifier: "contact")
 
-    colorsDataSource.items = << Retrieve Colors >>
-    contactsDataSource.items = << Retrieve Contacts >>
+        // add the data sources
+        dataSource.add(contactsDataSource)
+        dataSource.add(colorsDataSource)
+
+        tableView.ds_useDataSource(dataSource)
+
+        // optionally selection handler
+        colorsDataSource.setSelectionHandler(AlertNameSelectionHandler<Color, UITableViewCell>(typeName: "color"))
+        contactsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "contact"))
+
+        // specify different heights
+        colorsDataSource.itemHeight = 30
+        contactsDataSource.itemHeight = 50
+
+        colorsDataSource.items = /* << Retrieve Colors >> */ []
+        contactsDataSource.items = /* << Retrieve Contacts >> */ []
+    }
 }
 
+// FOR COMPLETENESS: we added the non-essential classes below.
+class ContactCell: UITableViewCell { }
+
+struct Contact: NameableEntity {
+    let name: String
+    let email: String
+}
+
+struct Color: NameableEntity {
+    let color: UIColor
+    let name: String
+}
+
+protocol NameableEntity {
+    var name: String { get }
+}
+
+class AlertNameSelectionHandler<ItemType: NameableEntity, CellType: ReusableCell>: DataSourceSelectionHandler {
+
+    let typeName: String
+    init(typeName: String) {
+        self.typeName = typeName
+    }
+
+    func dataSource(
+        _ dataSource: BasicDataSource<ItemType, CellType>,
+        collectionView: GeneralCollectionView,
+        didSelectItemAt indexPath: IndexPath) {
+        UIAlertView(title: "", message: dataSource.item(at: indexPath).name + " " + typeName + " tapped!", delegate: nil, cancelButtonTitle: "Ok").show()
+    }
+}
 ```
 Benefits:
 
 1. Code will allow you to reuse the data sources since they are now independent of the view controller.
-2. There are no `if` `else` now to check which item is it and dequeue the cell accordingly, it's all done for us by the amazing `CompositeDataSource`.
+2. There are no `if` `else` to check which item is it and dequeue the cell accordingly, it's all done for us by the amazing `CompositeDataSource`.
 3. It's also possible to change the ordering by just add the colors data source first.
-4. To have the cells into multiple sections all you need to do is just change `CompositeDataSource(sectionType: .SingleSection)` to `CompositeDataSource(sectionType: .MultiSection)`.
+4. To have the cells into multiple sections all you need to do is just change `CompositeDataSource(sectionType: .single)` to `CompositeDataSource(sectionType: .multi)`.
 
 ### Multiple Section Example
 
-Just use the same example above and change `CompositeDataSource(sectionType: .SingleSection)` to `CompositeDataSource(sectionType: .MultiSection)`!
+Just use the same example above and change `CompositeDataSource(sectionType: .single)` to `CompositeDataSource(sectionType: .multi)`!
 
 ### More Complex Examples
 
-Will involove creating one `MultiSection` composite data source with children `SingleSection` composite data sources that manages a section each will have multiple data sources. It's possible to have basic and single section data sources children of the multi section composite data source.
+Will involove creating one `.multi` composite data source with children `.single` composite data sources that manages a section each will have multiple data sources. It's possible to have basic and single section data sources children of the multi section composite data source.
 
-Check the Examples application for complete implementation.
+Check the Examples application for complete implementations.
 
 --
 ## Attribution

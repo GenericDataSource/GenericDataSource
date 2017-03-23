@@ -8,11 +8,23 @@
 
 import Foundation
 
+/// Represents a protocol for basic data sources that manages list of items.
+/// Sometimes we need to work with BasicDataSource regardless of the cell type.
+/// For example:
+///
+///     let dataSource1 = BasicDataSource<String, TextCollectionViewCell>(reuseIdentifier: "cell1")
+///     let dataSource2 = BasicDataSource<String, DifferentCollectionViewCell>(reuseIdentifier: "cell2")
+///     let dsRepresentable1: AnyBasicDataSourceRepresentable<String> = dataSource1.asBasicDataSourceRepresentable()
+///     let dsRepresentable2: AnyBasicDataSourceRepresentable<String> = dataSource2.asBasicDataSourceRepresentable()
+///     let representables = [dsRepresentable1, dsRepresentable2]
+///     // representables is an array that doesn't care about the cell only the items.
 public protocol BasicDataSourceRepresentable: class {
     associatedtype Item
 
+    /// Represents the underlying data source.
     var dataSource: AbstractDataSource { get }
 
+    /// Represents the list of items that is managed by this data source.
     var items: [Item] { get set }
 }
 

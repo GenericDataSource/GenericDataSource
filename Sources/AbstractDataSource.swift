@@ -126,16 +126,12 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableViewDataSource
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func numberOfSections(in tableView: UITableView) -> Int {
         return ds_numberOfSections()
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ds_numberOfSections() <= section {
             return 0
@@ -143,9 +139,7 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
         return ds_numberOfItems(inSection: section)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ds_collectionView(tableView, cellForItemAt: indexPath)
         return cast(cell)
@@ -153,23 +147,17 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: - UICollectionViewDataSource
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ds_numberOfItems(inSection: section)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return ds_numberOfSections()
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = ds_collectionView(collectionView, cellForItemAt: indexPath)
         return cast(cell)
@@ -179,60 +167,44 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: Selection
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, shouldHighlightItemAt: indexPath)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didHighlightItemAt: indexPath)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didUnhighlightItemAt: indexPath)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didSelectItemAt: indexPath)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldSelectItemAt: indexPath) ? indexPath : nil
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didDeselectItemAt: indexPath)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         return ds_collectionView(tableView, shouldDeselectItemAt: indexPath) ? indexPath : nil
     }
 
     // MARK: Size
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ds_collectionView(tableView, sizeForItemAt: indexPath).height
     }
@@ -241,60 +213,44 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: Selection
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldHighlightItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didHighlightItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didUnhighlightItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didSelectItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldSelectItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didDeselectItemAt: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldDeselectItemAt: indexPath)
     }
 
     // MARK: Size
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return ds_collectionView(collectionView, sizeForItemAt: indexPath)
@@ -449,63 +405,47 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
         return optionalCast(view)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section)).height
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = ds_collectionView(tableView, supplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
         return optionalCast(view)
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return ds_collectionView(tableView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section)).height
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, willDisplaySupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
     }
 
-    /**
-     `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         let castedView: UITableViewHeaderFooterView = cast(view)
         ds_collectionView(tableView, didEndDisplayingSupplementaryView: castedView, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
@@ -513,38 +453,28 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UICollectionView
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = ds_collectionView(collectionView, supplementaryViewOfKind: kind, at: indexPath)
         return cast(view)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: section))
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         ds_collectionView(collectionView, willDisplaySupplementaryView: view, ofKind: elementKind, at: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         ds_collectionView(collectionView, didEndDisplayingSupplementaryView: view, ofKind: elementKind, at: indexPath)
     }
 
-    /**
-     `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
-     */
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return ds_collectionView(collectionView, sizeForSupplementaryViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: section))
     }
@@ -610,30 +540,46 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, canMoveItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         return ds_collectionView(tableView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
     }
 
     // MARK: UICollectionView
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, canMoveItemAt: indexPath)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         return ds_collectionView(collectionView, moveItemAt: sourceIndexPath, to: destinationIndexPath)
     }
 
     // MARK: DataSource
 
+    /// Asks the delegate if the item can be moved for a reoder operation.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: `true` if the item can be moved, otherwise `false`.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 
+    /// Performs the move operation of an item from `sourceIndexPath` to `destinationIndexPath`.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - sourceIndexPath: An index path locating the start position of the item in the view.
+    ///   - destinationIndexPath: An index path locating the end position of the item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // does nothing
     }
@@ -642,30 +588,46 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, willDisplay: cell, forItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, didEndDisplaying: cell, forItemAt: indexPath)
     }
 
     // MARK: UICollectionView
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         return ds_collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
     }
 
     // MARK: DataSource
 
+    /// The cell will is about to be displayed or moving into the visible area of the screen.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - cell: The cell that will be displayed
+    ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, willDisplay cell: ReusableCell, forItemAt indexPath: IndexPath) {
         // does nothing
     }
 
+    /// The cell will is already displayed and will be moving out of the screen.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - cell: The cell that will be displayed
+    ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplaying cell: ReusableCell, forItemAt indexPath: IndexPath) {
         // does nothing
     }
@@ -674,42 +636,68 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, shouldShowMenuForItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return ds_collectionView(tableView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         return ds_collectionView(tableView, performAction: action, forItemAt: indexPath, withSender: sender)
     }
 
     // MARK: UICollectionView
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, shouldShowMenuForItemAt: indexPath)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return ds_collectionView(collectionView, canPerformAction: action, forItemAt: indexPath, withSender: sender)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     open func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         return ds_collectionView(collectionView, performAction: action, forItemAt: indexPath, withSender: sender)
     }
 
     // MARK: DataSource
 
+    /// Whether the copy/paste/etc. menu should be shown for the item or not.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: `true` if the item should show the copy/paste/etc. menu, otherwise `false`.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 
+    /// Check whether an action/selector can be performed for a specific item or not.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - action: The action that is requested to check if it can be performed or not.
+    ///   - indexPath: An index path locating an item in the view.
+    ///   - sender: The sender of the action.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return false
     }
 
+    /// Executes an action for a specific item with the passed sender.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - action: The action that is requested to be executed.
+    ///   - indexPath: An index path locating an item in the view.
+    ///   - sender: The sender of the action.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         // does nothing
     }
@@ -718,21 +706,25 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, canFocusItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func tableView(_ tableView: UITableView, shouldUpdateFocusIn context: UITableViewFocusUpdateContext) -> Bool {
         return ds_collectionView(tableView, shouldUpdateFocusIn: context)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         return ds_collectionView(tableView, didUpdateFocusIn: context, with: coordinator)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func indexPathForPreferredFocusedView(in tableView: UITableView) -> IndexPath? {
         return ds_indexPathForPreferredFocusedView(in: tableView)
@@ -740,21 +732,25 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UICollectionView
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(collectionView, canFocusItemAt: indexPath)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
         return ds_collectionView(collectionView, shouldUpdateFocusIn: context)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         return ds_collectionView(collectionView, didUpdateFocusIn: context, with: coordinator)
     }
 
+    /// `UICollectionViewDataSource`/`UICollectionViewDelegateFlowLayout` implementations forwards calls to the corresponding `DataSource` methods.
     @available(iOS 9.0, *)
     open func indexPathForPreferredFocusedView(in collectionView: UICollectionView) -> IndexPath? {
         return ds_indexPathForPreferredFocusedView(in: collectionView)
@@ -762,21 +758,42 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: DataSource
 
+    /// Whether or not the item can have focus.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: `true` if the item can have focus, otherwise `false`.
     @available(iOS 9.0, *)
     open func ds_collectionView(_ collectionView: GeneralCollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 
+    /// Whether or not should we update the focus.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - context: The focus context.
+    /// - Returns: `true` if the item can be moved, otherwise `false`.
     @available(iOS 9.0, *)
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext) -> Bool {
         return false
     }
 
+    /// The focus is has been updated.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - context: The focus context.
+    ///   - coordinator: The focus animation coordinator.
     @available(iOS 9.0, *)
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         // does nothing
     }
 
+    /// Gets the index path of the preferred focused view.
+    ///
+    /// - Parameter collectionView: A general collection view object initiating the operation.
     @available(iOS 9.0, *)
     open func ds_indexPathForPreferredFocusedView(in collectionView: GeneralCollectionView) -> IndexPath? {
         return nil
@@ -786,34 +803,42 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: UITableView
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, canEditItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, commit: editingStyle, forItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return ds_collectionView(tableView, editingStyleForItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return ds_collectionView(tableView, titleForDeleteConfirmationButtonForItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return ds_collectionView(tableView, editActionsForItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return ds_collectionView(tableView, shouldIndentWhileEditingItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         return ds_collectionView(tableView, willBeginEditingItemAt: indexPath)
     }
 
+    /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
     open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         if let indexPath = indexPath {
             ds_collectionView(tableView, didEndEditingItemAt: indexPath)
@@ -822,33 +847,79 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
 
     // MARK: DataSource
 
+    /// Check whether the item can be edited or not.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: `true` if the item can be moved, otherwise `false`.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
         return true
     }
 
+    /// Executes the editing operation for the item at the specified index pass.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - editingStyle: The
+    ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCellEditingStyle, forItemAt indexPath: IndexPath) {
         fatalError("\(self): \(#function) Should be implemented by subclasses")
     }
 
+    /// Gets the editing style for an item.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: The editing style.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return ds_collectionView(collectionView, canEditItemAt: indexPath) ? .delete : .none
     }
 
+    /// Gets the localized title for the delete button to show for editing an item (e.g. swipe to delete).
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: The localized title string.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, titleForDeleteConfirmationButtonForItemAt indexPath: IndexPath) -> String? {
         return nil
     }
 
+    /// Gets the list of editing actions to use for editing an item.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: The list of editing actions.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, editActionsForItemAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return nil
     }
 
+    /// Check whether to indent the item while editing or not.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
+    /// - Returns: `true` if the item can be indented while editing, otherwise `false`.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, shouldIndentWhileEditingItemAt indexPath: IndexPath) -> Bool {
         return true
     }
 
+    /// The item is about to enter into the editing mode.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, willBeginEditingItemAt indexPath: IndexPath) {
     }
 
+    /// The item did leave the editing mode.
+    ///
+    /// - Parameters:
+    ///   - collectionView: A general collection view object initiating the operation.
+    ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndEditingItemAt indexPath: IndexPath) {
     }
 }

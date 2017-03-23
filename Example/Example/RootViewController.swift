@@ -20,6 +20,7 @@ class RootViewController: UITableViewController {
             cell.textLabel?.text = item.title
             cell.contentView.backgroundColor = nil
         }
+
         // Need to keep a strong reference to our data source.
         self.dataSource = dataSource
 

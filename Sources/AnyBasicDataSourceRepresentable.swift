@@ -33,22 +33,33 @@ private class _AnyBasicDataSourceRepresentableBox<DS: BasicDataSourceRepresentab
     override var dataSource: AbstractDataSource { return ds.dataSource }
 }
 
-public class AnyBasicDataSourceRepresentable<Item>: BasicDataSourceRepresentable {
+/// Represents a type-erased `BasicDataSourceRepresentable` type.
+public final class AnyBasicDataSourceRepresentable<Item>: BasicDataSourceRepresentable {
 
     private let box: _AnyBasicDataSourceRepresentableBoxBase<Item>
+
+    /// Creates new instance with the passed `BasicDataSourceRepresentable` to erase its type.
+    ///
+    /// - Parameter ds: The instance that will have its type erased.
     public init<DS: BasicDataSourceRepresentable>(_ ds: DS) where DS.Item == Item {
         box = _AnyBasicDataSourceRepresentableBox(ds: ds)
     }
 
+    /// Represents the underlying data source.
+    open var dataSource: AbstractDataSource { return box.dataSource }
+
+    /// Represents the list of items that is managed by this data source.
     open var items: [Item] {
         get { return box.items }
         set { box.items = newValue }
     }
-
-    open var dataSource: AbstractDataSource { return box.dataSource }
 }
 
 extension BasicDataSourceRepresentable {
+
+    /// Convert the instance into a `AnyBasicDataSourceRepresentable`.
+    ///
+    /// - Returns: The converted `AnyBasicDataSourceRepresentable`.
     public func asBasicDataSourceRepresentable() -> AnyBasicDataSourceRepresentable<Item> {
         return AnyBasicDataSourceRepresentable(self)
     }

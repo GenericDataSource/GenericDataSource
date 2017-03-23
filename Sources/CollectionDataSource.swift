@@ -6,6 +6,7 @@
 //  Copyright © 2017 mohamede1945. All rights reserved.
 //
 
+/// Represents the collection data source used as
 public protocol CollectionDataSource: DataSource {
 
     /// The list of the children datasources.

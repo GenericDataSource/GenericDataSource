@@ -8,11 +8,10 @@
 
 import Foundation
 
-/**
- A selection handler that always disallow selection and highlighting.
- */
+/// A selection handler that always disallow selection and highlighting.
 public struct UnselectableSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
 
+    /// Creates new instance.
     public init() {
     }
 

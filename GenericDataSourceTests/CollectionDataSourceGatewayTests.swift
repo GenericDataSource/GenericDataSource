@@ -476,6 +476,22 @@ class CollectionDataSourceGatewayTests: XCTestCase {
                             singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
                             multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
     }
+
+    func testIndexPathForPreferredFocused() {
+        // execute the test
+        executeTestTemplate(tableType1: IndexPathForPreferredFocusedViewTester<PDFReportTableViewCell>.self,
+                            tableType2: IndexPathForPreferredFocusedViewTester2<TextReportTableViewCell>.self,
+                            collectionType1: IndexPathForPreferredFocusedViewTester<PDFReportCollectionViewCell>.self,
+                            collectionType2: IndexPathForPreferredFocusedViewTester2<TextReportCollectionViewCell>.self,
+                            segmentedTableType1: IndexPathForPreferredFocusedViewTester3<PDFReportTableViewCell>.self,
+                            segmentedTableType2: IndexPathForPreferredFocusedViewTester3<TextReportTableViewCell>.self,
+                            segmentedCollectionType1: IndexPathForPreferredFocusedViewTester3<PDFReportCollectionViewCell>.self,
+                            segmentedCollectionType2: IndexPathForPreferredFocusedViewTester3<TextReportCollectionViewCell>.self,
+                            singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            singleCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()),
+                            multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
+    }
 }
 
 extension CollectionDataSourceGatewayTests {

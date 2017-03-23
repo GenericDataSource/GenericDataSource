@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents the basic supplementary view creator subclass that does the configuration using a closure.
-// For more information see `BasicSupplementaryViewCreator`
+/// For more information see `BasicSupplementaryViewCreator`
 open class BasicBlockSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSupplementaryView>: BasicSupplementaryViewCreator<ItemType, SupplementaryView> {
 
     /// The configure closure type.

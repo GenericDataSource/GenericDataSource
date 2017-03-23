@@ -82,6 +82,7 @@
 		5C5FC23D1E77DF6E00BA61F3 /* CanEditItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */; };
 		5C5FC23F1E77E1F900BA61F3 /* CommitEditingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */; };
 		5C5FC2411E77E35A00BA61F3 /* EditingStyleForItemTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */; };
+		5C9046F41E83CAA10060254B /* IndexPathForPreferredFocusedViewTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9046F31E83CAA10060254B /* IndexPathForPreferredFocusedViewTester.swift */; };
 		5CB62C3F1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB62C3E1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift */; };
 		5CE64F2B1DA77B9D002456E1 /* AbstractDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */; };
 		5CE64F2C1DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */; };
@@ -195,6 +196,7 @@
 		5C5FC23C1E77DF6E00BA61F3 /* CanEditItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanEditItemTester.swift; sourceTree = "<group>"; };
 		5C5FC23E1E77E1F900BA61F3 /* CommitEditingTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitEditingTester.swift; sourceTree = "<group>"; };
 		5C5FC2401E77E35A00BA61F3 /* EditingStyleForItemTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingStyleForItemTester.swift; sourceTree = "<group>"; };
+		5C9046F31E83CAA10060254B /* IndexPathForPreferredFocusedViewTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexPathForPreferredFocusedViewTester.swift; sourceTree = "<group>"; };
 		5CB62C3E1E82802300B8B89B /* _SegmentedGeneralCollectionViewMappingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SegmentedGeneralCollectionViewMappingTests.swift; sourceTree = "<group>"; };
 		5CE64F141DA77B9D002456E1 /* AbstractDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractDataSource.swift; sourceTree = "<group>"; };
 		5CE64F151DA77B9D002456E1 /* AnyDataSourceSelectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDataSourceSelectionHandler.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				5C0B2B021E792F45008D238F /* CanFocusTester.swift */,
 				5C0B2B041E792FBE008D238F /* ShouldUpdateFocusTester.swift */,
 				5C0B2B061E792FCB008D238F /* DidUpdateFocusTester.swift */,
+				5C9046F31E83CAA10060254B /* IndexPathForPreferredFocusedViewTester.swift */,
 			);
 			name = Testers;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				54735EF81DBCD587004F4854 /* BaseSupplementaryViewDidDisplayTester.swift in Sources */,
 				54433C1F1DB6B8940032AF9C /* SelectionConfigureTester.swift in Sources */,
 				547447011CA8537200F3597E /* DelegatedGeneralCollectionViewMultiSectionTestCases.swift in Sources */,
+				5C9046F41E83CAA10060254B /* IndexPathForPreferredFocusedViewTester.swift in Sources */,
 				5C0B2B011E781933008D238F /* PerformActionTester.swift in Sources */,
 				5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */,
 				54433C251DB7791D0032AF9C /* SelectionShouldHighlightTester.swift in Sources */,
