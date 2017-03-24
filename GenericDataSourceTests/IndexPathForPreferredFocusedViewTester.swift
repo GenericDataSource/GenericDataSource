@@ -14,12 +14,14 @@ private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> 
     var result: IndexPath? = nil
     var called: Bool = false
 
+    @available(iOS 9.0, *)
     override func ds_indexPathForPreferredFocusedView(in collectionView: GeneralCollectionView) -> IndexPath? {
         called = true
         return result
     }
 }
 
+@available(iOS 9.0, *)
 class IndexPathForPreferredFocusedViewTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = _ReportBasicDataSource<CellType>()
 
@@ -50,6 +52,7 @@ class IndexPathForPreferredFocusedViewTester<CellType>: DataSourceTester where C
     }
 }
 
+@available(iOS 9.0, *)
 class IndexPathForPreferredFocusedViewTester2<CellType>: IndexPathForPreferredFocusedViewTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: IndexPath?, indexPath: IndexPath, collectionView: GeneralCollectionView) {
@@ -61,6 +64,7 @@ class IndexPathForPreferredFocusedViewTester2<CellType>: IndexPathForPreferredFo
     }
 }
 
+@available(iOS 9.0, *)
 class IndexPathForPreferredFocusedViewTester3<CellType>: IndexPathForPreferredFocusedViewTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: IndexPath?, indexPath: IndexPath, collectionView: GeneralCollectionView) {

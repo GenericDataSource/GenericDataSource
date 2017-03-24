@@ -107,6 +107,7 @@ class AbstractDataSourceTests: XCTestCase {
         instance.ds_collectionView(tableView, performAction: selector, forItemAt: indexPath, withSender: self)
     }
 
+    @available(iOS 9.0, *)
     func testCanFocus() {
         let instance = _AbstractDataSource()
         let tableView = MockTableView()
@@ -114,6 +115,7 @@ class AbstractDataSourceTests: XCTestCase {
         XCTAssertFalse(instance.ds_collectionView(tableView, canFocusItemAt: indexPath))
     }
 
+    @available(iOS 9.0, *)
     func testIndexPathForPreferredFocusedView() {
         class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 

@@ -15,12 +15,14 @@ private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> 
     var result: Bool = false
     var called: Bool = false
 
+    @available(iOS 9.0, *)
     override func ds_collectionView(_ collectionView: GeneralCollectionView, shouldUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext) -> Bool {
         called = true
         return result
     }
 }
 
+@available(iOS 9.0, *)
 class ShouldUpdateFocusTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = _ReportBasicDataSource<CellType>()
 
@@ -51,6 +53,7 @@ class ShouldUpdateFocusTester<CellType>: DataSourceTester where CellType: Report
     }
 }
 
+@available(iOS 9.0, *)
 class ShouldUpdateFocusTester2<CellType>: ShouldUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {
@@ -62,6 +65,7 @@ class ShouldUpdateFocusTester2<CellType>: ShouldUpdateFocusTester<CellType> wher
     }
 }
 
+@available(iOS 9.0, *)
 class ShouldUpdateFocusTester3<CellType>: ShouldUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {

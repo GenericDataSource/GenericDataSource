@@ -432,6 +432,7 @@ class CollectionDataSourceGatewayTests: XCTestCase {
                             singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
     }
 
+    @available(iOS 9.0, *)
     func testCanFocus() {
         // execute the test
         executeTestTemplate(tableType1: CanFocusTester<PDFReportTableViewCell>.self,
@@ -445,6 +446,7 @@ class CollectionDataSourceGatewayTests: XCTestCase {
                             singleTableExecutor: DefaultCompositeDataSourceTestExecutor(chooser: DefaulTesterChooser()))
     }
 
+    @available(iOS 9.0, *)
     func testShouldUpdateFocus() {
         // execute the test
         executeTestTemplate(tableType1: ShouldUpdateFocusTester<PDFReportTableViewCell>.self,
@@ -461,6 +463,7 @@ class CollectionDataSourceGatewayTests: XCTestCase {
                             multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
     }
 
+    @available(iOS 9.0, *)
     func testDidUpdateFocus() {
         // execute the test
         executeTestTemplate(tableType1: DidUpdateFocusTester<PDFReportTableViewCell>.self,
@@ -477,6 +480,7 @@ class CollectionDataSourceGatewayTests: XCTestCase {
                             multiCollectionExecutor: DefaultCompositeDataSourceTestExecutor(chooser: AlwaysFirstTesterChooser()))
     }
 
+    @available(iOS 9.0, *)
     func testIndexPathForPreferredFocused() {
         // execute the test
         executeTestTemplate(tableType1: IndexPathForPreferredFocusedViewTester<PDFReportTableViewCell>.self,

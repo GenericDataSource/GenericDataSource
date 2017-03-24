@@ -15,12 +15,14 @@ private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> 
     var result: Bool = false
     var indexPath: IndexPath?
 
+    @available(iOS 9.0, *)
     override func ds_collectionView(_ collectionView: GeneralCollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         self.indexPath =  indexPath
         return result
     }
 }
 
+@available(iOS 9.0, *)
 class CanFocusTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = _ReportBasicDataSource<CellType>()
 
@@ -48,6 +50,7 @@ class CanFocusTester<CellType>: DataSourceTester where CellType: ReportCell, Cel
     }
 }
 
+@available(iOS 9.0, *)
 class CanFocusTester2<CellType>: CanEditItemTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     override var result: Bool {
         return false

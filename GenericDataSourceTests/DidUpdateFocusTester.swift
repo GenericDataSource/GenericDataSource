@@ -10,16 +10,17 @@ import Foundation
 import GenericDataSource
 import XCTest
 
+@available(iOS 9.0, *)
 private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     var called = false
 
-    @available(iOS 9.0, *)
     override func ds_collectionView(_ collectionView: GeneralCollectionView, didUpdateFocusIn context: GeneralCollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         called = true
     }
 }
 
+@available(iOS 9.0, *)
 class DidUpdateFocusTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = _ReportBasicDataSource<CellType>()
 
@@ -44,6 +45,7 @@ class DidUpdateFocusTester<CellType>: DataSourceTester where CellType: ReportCel
     }
 }
 
+@available(iOS 9.0, *)
 class DidUpdateFocusTester2<CellType>: DidUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
@@ -55,6 +57,7 @@ class DidUpdateFocusTester2<CellType>: DidUpdateFocusTester<CellType> where Cell
     }
 }
 
+@available(iOS 9.0, *)
 class DidUpdateFocusTester3<CellType>: DidUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
