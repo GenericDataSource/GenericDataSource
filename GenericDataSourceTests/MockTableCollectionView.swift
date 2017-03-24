@@ -64,7 +64,7 @@ class MockTableView: UITableView {
 
     override func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView? {
         let viewClass = reusableHeaders[identifier]
-        return viewClass?.init()
+        return viewClass?.init(reuseIdentifier: identifier)
     }
 
     func queryDataSource() {
