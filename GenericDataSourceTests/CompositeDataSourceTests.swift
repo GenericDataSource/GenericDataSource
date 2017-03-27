@@ -11,6 +11,55 @@ import GenericDataSource
 
 class CompositeDataSourceTests: XCTestCase {
 
+    func testDidEndDisplayCellWhenItemsRemoved() {
+        let dataSource  = CompositeDataSource(sectionType: .single)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
+
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+
+        dataSource.add(pdfReportsDataSource)
+        dataSource.add(textReportsDataSource)
+
+        let tableView = MockTableView()
+
+        // should handle it gracefully.
+        dataSource.tableView(tableView, didEndDisplaying: TextReportTableViewCell(), forRowAt: IndexPath(row: 150, section: 0))
+
+        // now remove all the items
+        dataSource.removeAllDataSources()
+
+        // should handle it gracefully too.
+        dataSource.tableView(tableView, didEndDisplaying: TextReportTableViewCell(), forRowAt: IndexPath(row: 150, section: 0))
+    }
+
+    func testDidEndDisplaySupplementaryViewWhenItemsRemoved() {
+        let dataSource  = CompositeDataSource(sectionType: .multi)
+
+        let pdfReportsDataSource = ReportBasicDataSource<PDFReportTableViewCell>()
+        let textReportsDataSource = ReportBasicDataSource<TextReportTableViewCell>()
+
+        pdfReportsDataSource.items = Report.generate(numberOfReports: 50)
+        textReportsDataSource.items = Report.generate(numberOfReports: 200)
+
+        dataSource.add(pdfReportsDataSource)
+        dataSource.add(textReportsDataSource)
+
+        let tableView = MockTableView()
+
+        // should handle it gracefully.
+        dataSource.tableView(tableView, didEndDisplayingHeaderView: UITableViewHeaderFooterView(), forSection: 1)
+
+        // now remove all the items
+        dataSource.removeAllDataSources()
+
+        // should handle it gracefully too.
+        dataSource.tableView(tableView, didEndDisplayingHeaderView: UITableViewHeaderFooterView(), forSection: 1)
+    }
+
+
     func testRespondsToForSizeForItemAtIndexPath() {
 
         let dataSource  = CompositeDataSource(sectionType: .single)

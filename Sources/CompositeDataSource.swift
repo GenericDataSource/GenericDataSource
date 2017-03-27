@@ -539,7 +539,9 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
     ///   - cell: The cell that will be displayed
     ///   - indexPath: An index path locating an item in the view.
     open override func ds_collectionView(_ collectionView: GeneralCollectionView, didEndDisplaying cell: ReusableCell, forItemAt indexPath: IndexPath) {
-        let transformed = unsafeTransform(globalIndexPath: indexPath, globalCollectionView: collectionView)
+        guard let transformed = transform(globalIndexPath: indexPath, globalCollectionView: collectionView) else {
+            return super.ds_collectionView(collectionView, didEndDisplaying: cell, forItemAt: indexPath)
+        }
         return transformed.dataSource.ds_collectionView(collectionView, didEndDisplaying: cell, forItemAt: transformed.indexPath)
     }
 
