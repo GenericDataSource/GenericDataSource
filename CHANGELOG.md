@@ -25,3 +25,7 @@
 ## 2.3.0
 
 * Adding `SegmentedDataSource`.
+
+## 2.3.1
+
+* Fixed a critical crash for `ds_collectionView(_:didEndDisplaying:forItemAt:)` in `CompositeDataSource`.
