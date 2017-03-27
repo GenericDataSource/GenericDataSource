@@ -1,8 +1,10 @@
 # GenericDataSource
 
 [![Build Status](https://travis-ci.org/GenericDataSource/GenericDataSource.svg?branch=master)](https://travis-ci.org/GenericDataSource/GenericDataSource)
+[![Coverage Status](https://codecov.io/gh/GenericDataSource/GenericDataSource/branch/master/graphs/badge.svg)](https://codecov.io/gh/GenericDataSource/GenericDataSource/branch/master)
 [![Version](https://img.shields.io/cocoapods/v/GenericDataSources.svg?style=flat)](http://cocoapods.org/pods/GenericDataSources)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/GenericDataSources.svg)](http://cocoadocs.org/docsets/GenericDataSources)
+[![Swift Version](https://img.shields.io/badge/Swift-3.0-orange.svg)](https://swift.org)
 
 A generic small composable components for data source implementation for `UITableView` and `UICollectionView` written in Swift.
 
