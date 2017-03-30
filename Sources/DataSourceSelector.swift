@@ -8,7 +8,11 @@
 
 import Foundation
 
+/// Represents the data source selectors that can be optional.
+/// Each case corresponds to a selector in the DataSource.
 @objc public enum DataSourceSelector: Int {
+
+    /// Represents the size selector.
     case size
     /*case shouldHighlight
     case didHighlight
@@ -31,18 +35,38 @@ import Foundation
     case canFocusItemAt
     case shouldUpdateFocusIn
     case didUpdateFocusIn*/
+
+    /// Represents the can edit selector.
     case canEdit
+
+    /// Represents the commit editing selector.
     case commitEditingStyle
+
+    /// Represents the editing style selector.
     case editingStyle
+
+    /// Represents the title for delete confirmation button selector.
     case titleForDeleteConfirmationButton
+
+    /// Represents the edit actions selector.
     case editActions
+
+    /// Represents the should indent while editing selector.
     case shouldIndentWhileEditing
+
+    /// Represents the will begin selector.
     case willBeginEditing
+
+    /// Represents the did end editing selector.
     case didEndEditing
 }
 
 extension DataSourceSelector {
 
+    /// Whether or not the selector requires all data sources to respond to it.
+    /// Current implementation only `.size` requires all selectors and may change in the future.
+    /// It's always recommended if you want to implement a selector in your `BasicDataSource` subclass.
+    /// To do it in all classes that will be children of a `CompositeDataSource` or `SegmentedDataSource`.
     public var mustAllRespondsToIt: Bool {
         switch self {
         case .size: return true

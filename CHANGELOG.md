@@ -29,3 +29,9 @@
 ## 2.3.1
 
 * Fixed a critical crash for `ds_collectionView(_:didEndDisplaying:forItemAt:)` in `CompositeDataSource`.
+
+## 2.4.0
+
+* `ds_shouldConsumeItemSizeDelegateCalls` is unavailable, instead use `ds_responds(to selector: DataSourceSelector) -> Bool`, It takes an enum, with `.size` it act the same as `ds_shouldConsumeItemSizeDelegateCalls`.
+* Fixes a bug that makes all table view cells editable by default.
+* New `ds_responds(to selector: DataSourceSelector) -> Bool` to make it so easy to make some implementations of `DataSource` methods optional (e.g. we used it to fix the editable table view cells bug). 
