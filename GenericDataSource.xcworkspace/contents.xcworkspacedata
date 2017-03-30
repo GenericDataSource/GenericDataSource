@@ -5,6 +5,9 @@
       location = "group:"
       name = "...">
       <FileRef
+         location = "group:codecov">
+      </FileRef>
+      <FileRef
          location = "group:.gitignore">
       </FileRef>
       <FileRef
