@@ -11,6 +11,23 @@ import GenericDataSource
 
 class CompositeDataSourceTests: XCTestCase {
 
+    func testDescription() {
+        class __ScrollViewDelegate: NSObject, UIScrollViewDelegate {}
+        var instance = CompositeDataSource(sectionType: .single)
+        instance.scrollViewDelegate = __ScrollViewDelegate()
+        XCTAssertTrue(instance.description.contains("CompositeDataSource"))
+        XCTAssertTrue(instance.description.contains("__ScrollViewDelegate"))
+        XCTAssertTrue(instance.description.contains("scrollViewDelegate"))
+        XCTAssertTrue(instance.description.contains("sectionType"))
+        XCTAssertTrue(instance.description.contains("single"))
+
+        instance = CompositeDataSource(sectionType: .multi)
+        XCTAssertTrue(instance.debugDescription.contains("CompositeDataSource"))
+        XCTAssertTrue(!instance.debugDescription.contains("scrollViewDelegate"))
+        XCTAssertTrue(instance.debugDescription.contains("sectionType"))
+        XCTAssertTrue(instance.debugDescription.contains("multi"))
+    }
+
     func testDidEndDisplayCellWhenItemsRemoved() {
         let dataSource  = CompositeDataSource(sectionType: .single)
 
@@ -59,6 +76,35 @@ class CompositeDataSourceTests: XCTestCase {
         dataSource.tableView(tableView, didEndDisplayingHeaderView: UITableViewHeaderFooterView(), forSection: 1)
     }
 
+    func testCanEditOverriden() {
+        class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
+            override func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+                return true
+            }
+        }
+        class Test2: ReportBasicDataSource<TextReportCollectionViewCell> {
+        }
+        let ds1 = Test()
+        ds1.items = Report.generate(numberOfReports: 1)
+        let ds2 = Test2()
+        ds2.items = Report.generate(numberOfReports: 1)
+
+        let dataSource  = CompositeDataSource(sectionType: .single)
+        dataSource.add(ds1)
+
+        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:canEditItemAt:))))
+        XCTAssertTrue(dataSource.ds_responds(to: .canEdit))
+
+        let tableView = MockTableView()
+        let result = dataSource.tableView(tableView, canEditRowAt: IndexPath(item: 0, section: 0))
+        XCTAssertEqual(true, result)
+
+        dataSource.removeAllDataSources()
+        dataSource.add(ds2)
+
+        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:canEditItemAt:))))
+        XCTAssertFalse(dataSource.ds_responds(to: .canEdit))
+    }
 
     func testRespondsToForSizeForItemAtIndexPath() {
 

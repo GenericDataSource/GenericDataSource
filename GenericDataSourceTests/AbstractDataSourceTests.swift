@@ -59,6 +59,22 @@ class AbstractDataSourceTests: XCTestCase {
         XCTAssertEqual(delegate, instance.forwardingTarget(for: #selector(UIScrollViewDelegate.scrollViewDidScroll(_:))) as? ScrollViewDelegate)
     }
 
+    func testDescription() {
+        class __AbstractDataSource: AbstractDataSource {}
+        class __ScrollViewDelegate: NSObject, UIScrollViewDelegate {}
+        let instance =  __AbstractDataSource()
+        instance.scrollViewDelegate = __ScrollViewDelegate()
+        let description = instance.description
+        XCTAssertTrue(description.contains("__AbstractDataSource"))
+        XCTAssertTrue(description.contains("__ScrollViewDelegate"))
+        XCTAssertTrue(description.contains("scrollViewDelegate"))
+
+        let debugDescription = instance.debugDescription
+        XCTAssertTrue(debugDescription.contains("__AbstractDataSource"))
+        XCTAssertTrue(debugDescription.contains("__ScrollViewDelegate"))
+        XCTAssertTrue(debugDescription.contains("scrollViewDelegate"))
+    }
+
     func testScrollViewDelegateSetViewForZooming() {
 
         XCTAssertFalse(delegate.called)
@@ -66,9 +82,9 @@ class AbstractDataSourceTests: XCTestCase {
         XCTAssertTrue(delegate.called)
     }
 
-    func testShouldConsumeItemSizeDelegate() {
+    func testRespondsTo() {
         let instance = _AbstractDataSource()
-        XCTAssertFalse(instance.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertFalse(instance.ds_responds(to: .size))
     }
 
     func testCanMoveItem() {

@@ -11,6 +11,25 @@ import GenericDataSource
 
 class BasicDataSourceTests: XCTestCase {
 
+    func testDescription() {
+        class __ScrollViewDelegate: NSObject, UIScrollViewDelegate {}
+        let instance = ReportBasicDataSource<TextReportTableViewCell>()
+        instance.scrollViewDelegate = __ScrollViewDelegate()
+        XCTAssertTrue(instance.description.contains("ReportBasicDataSource<TextReportTableViewCell>"))
+        XCTAssertTrue(instance.description.contains("__ScrollViewDelegate"))
+        XCTAssertTrue(instance.description.contains("scrollViewDelegate"))
+        XCTAssertTrue(!instance.description.contains("itemSize"))
+        instance.itemSize = CGSize(width: 1, height: 1)
+        XCTAssertTrue(instance.description.contains("itemSize"))
+        XCTAssertTrue(instance.description.contains(CGSize(width: 1, height: 1).debugDescription))
+
+        XCTAssertTrue(instance.debugDescription.contains("ReportBasicDataSource<TextReportTableViewCell>"))
+        XCTAssertTrue(instance.debugDescription.contains("__ScrollViewDelegate"))
+        XCTAssertTrue(instance.debugDescription.contains("scrollViewDelegate"))
+        XCTAssertTrue(instance.debugDescription.contains("itemSize"))
+        XCTAssertTrue(instance.debugDescription.contains(CGSize(width: 1, height: 1).debugDescription))
+    }
+
     func testIndexPathForItem() {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = [Report(id: 1, name: "name1"),
@@ -22,6 +41,37 @@ class BasicDataSourceTests: XCTestCase {
         XCTAssertNil(dataSource.indexPath(for: Report(id: 222, name: "name222")))
     }
 
+    func testCanEditOverriden() {
+        class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
+            override func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
+                return true
+            }
+        }
+        let dataSource = Test()
+
+        XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:canEditItemAt:))))
+        XCTAssertTrue(dataSource.ds_responds(to: .canEdit))
+
+        let tableView = MockTableView()
+
+        let result = dataSource.tableView(tableView, canEditRowAt: IndexPath(item: 0, section: 0))
+        XCTAssertEqual(true, result)
+    }
+
+    func testCanEditNotOverriden() {
+        class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
+        }
+        let dataSource = Test()
+
+        XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:canEditItemAt:))))
+        XCTAssertFalse(dataSource.ds_responds(to: .canEdit))
+
+        let tableView = MockTableView()
+
+        let result = dataSource.tableView(tableView, canEditRowAt: IndexPath(item: 0, section: 0))
+        XCTAssertEqual(true, result)
+    }
+
     func testItemSizeFunctionOverriden() {
         class Test: ReportBasicDataSource<TextReportCollectionViewCell> {
             fileprivate override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -31,7 +81,7 @@ class BasicDataSourceTests: XCTestCase {
         let dataSource = Test()
 
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
-        XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertTrue(dataSource.ds_responds(to: .size))
 
         let collectionView = MockCollectionView()
 
@@ -43,14 +93,14 @@ class BasicDataSourceTests: XCTestCase {
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
 
         XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
-        XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertFalse(dataSource.ds_responds(to: .size))
 
         let size = CGSize(width: 10, height: 20)
         dataSource.itemSize = size
 
         XCTAssertEqual(size, dataSource.itemSize)
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
-        XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertTrue(dataSource.ds_responds(to: .size))
 
         let collectionView = MockCollectionView()
 
@@ -62,14 +112,14 @@ class BasicDataSourceTests: XCTestCase {
         let dataSource = ReportBasicDataSource<TextReportTableViewCell>()
 
         XCTAssertFalse(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
-        XCTAssertFalse(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertFalse(dataSource.ds_responds(to: .size))
 
         let height: CGFloat = 150
         dataSource.itemHeight = height
 
         XCTAssertEqual(height, dataSource.itemHeight)
         XCTAssertTrue(dataSource.responds(to: #selector(DataSource.ds_collectionView(_:sizeForItemAt:))))
-        XCTAssertTrue(dataSource.ds_shouldConsumeItemSizeDelegateCalls())
+        XCTAssertTrue(dataSource.ds_responds(to: .size))
 
         let tableView = MockTableView()
 

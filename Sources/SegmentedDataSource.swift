@@ -13,6 +13,15 @@ import Foundation
 /// If the `selectedDataSource` is nil, calls to `DataSource` methods will crash.
 open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
 
+    /// Returns a string that describes the contents of the receiver.
+    open override var description: String {
+        let properties: [(String, Any?)] = [
+            ("selectedDataSource", selectedDataSource),
+            ("scrollViewDelegate", scrollViewDelegate),
+            ("supplementaryViewCreator", supplementaryViewCreator)]
+        return describe(self, properties: properties)
+    }
+
     private var childrenReusableDelegate: _DelegatedGeneralCollectionView!
 
     /// Creates new instance.
@@ -20,23 +29,6 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
         super.init()
         let mapping = _SegmentedGeneralCollectionViewMapping(parentDataSource: self)
         childrenReusableDelegate = _DelegatedGeneralCollectionView(mapping: mapping)
-    }
-
-    /**
-     Returns a Boolean value that indicates whether the receiver implements or inherits a method that can respond to a specified message.
-     true if the receiver implements or inherits a method that can respond to aSelector, otherwise false.
-
-     - parameter selector: A selector that identifies a message.
-
-     - returns: `true` if the receiver implements or inherits a method that can respond to aSelector, otherwise `false`.
-     */
-    open override func responds(to selector: Selector) -> Bool {
-
-        if sizeSelectors.contains(selector) {
-            return ds_shouldConsumeItemSizeDelegateCalls()
-        }
-
-        return super.responds(to: selector)
     }
 
     // MARK: - Children DataSources
@@ -151,6 +143,18 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
         return dataSources.index { $0 === dataSource }
     }
 
+    // MARK: - Responds
+
+    /// Asks the data source if it responds to a given selector.
+    ///
+    /// This method returns `true` if the selected data source can respond to the selector.
+    ///
+    /// - Parameter selector: The selector to check if the instance repsonds to.
+    /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
+    open override func ds_responds(to selector: DataSourceSelector) -> Bool {
+        return selectedDataSource?.ds_responds(to: selector) ?? false
+    }
+
     // MARK: - IndexPath and Section translations
 
     /**
@@ -239,16 +243,6 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
     }
 
     // MARK: - Size
-
-    /**
-     Gets whether the data source will handle size delegate calls.
-     It only handle delegate calls if the selected data source can.
-
-     - returns: `false` if there is no data sources or any of the data sources cannot handle size delegate calls.
-     */
-    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        return selectedDataSource?.ds_shouldConsumeItemSizeDelegateCalls() ?? false
-    }
 
     /**
      Asks the data source for the size of a cell in a particular location of the general collection view.

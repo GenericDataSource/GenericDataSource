@@ -22,7 +22,7 @@ import UIKit
  basic data source followed by 4 cells dequeued and configured by the second data source.)
 
  It's recommended to subclass it if you want to have a common behavior.
- (e.g. If all the cells will have a common cell size. Then, implement `ds_shouldConsumeItemSizeDelegateCalls` and return `true`, then implement
+ (e.g. If all the cells will have a common cell size. Then, implement `ds_responds(to:.size)` and return `true`, then implement
  `ds_collectionView(_:sizeForItemAt:)` and return the desired size for all
  the cells regardless of the children data sources.)
  */
@@ -42,6 +42,15 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
     ///  Represents the section type of the composite data source.
     open let sectionType: SectionType
 
+    /// Returns a string that describes the contents of the receiver.
+    open override var description: String {
+        let properties: [(String, Any?)] = [
+            ("sectionType", sectionType),
+            ("scrollViewDelegate", scrollViewDelegate),
+            ("supplementaryViewCreator", supplementaryViewCreator)]
+        return describe(self, properties: properties)
+    }
+
     /**
      Creates new instance with the desired type.
 
@@ -57,23 +66,6 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
         case .multi:
             collection = _MultiSectionDataSourcesCollection(parentDataSource: self)
         }
-    }
-
-    /**
-     Returns a Boolean value that indicates whether the receiver implements or inherits a method that can respond to a specified message.
-     true if the receiver implements or inherits a method that can respond to aSelector, otherwise false.
-
-     - parameter selector: A selector that identifies a message.
-
-     - returns: `true` if the receiver implements or inherits a method that can respond to aSelector, otherwise `false`.
-     */
-    open override func responds(to selector: Selector) -> Bool {
-
-        if sizeSelectors.contains(selector) {
-            return ds_shouldConsumeItemSizeDelegateCalls()
-        }
-
-        return super.responds(to: selector)
     }
 
     // MARK: - Children DataSources
@@ -156,6 +148,25 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
      */
     open func index(of dataSource: DataSource) -> Int? {
         return collection.index(of: dataSource)
+    }
+
+    // MARK: - Responds
+
+    /// Asks the data source if it responds to a given selector.
+    ///
+    /// This method returns `true` if the children data sources can respond to the selector.
+    ///
+    /// - Parameter selector: The selector to check if the instance repsonds to.
+    /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
+    open override func ds_responds(to selector: DataSourceSelector) -> Bool {
+        if dataSources.isEmpty {
+            return false
+        }
+        if selector.mustAllRespondsToIt {
+            return dataSources.filter { $0.ds_responds(to: selector) }.count == dataSources.count
+        } else {
+            return dataSources.contains { $0.ds_responds(to: selector) }
+        }
     }
 
     // MARK: - IndexPath and Section translations
@@ -288,20 +299,6 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
     }
 
     // MARK: - Size
-
-    /**
-     Gets whether the data source will handle size delegate calls.
-     It only handle delegate calls if there is at least 1 data source and all the data sources can handle the size delegate calls.
-
-     - returns: `false` if there is no data sources or any of the data sources cannot handle size delegate calls.
-     */
-    open override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        if dataSources.isEmpty {
-            return false
-        }
-        // if all data sources should consume item size delegates
-        return dataSources.filter { $0.ds_shouldConsumeItemSizeDelegateCalls() }.count == dataSources.count
-    }
 
     /**
      Asks the data source for the size of a cell in a particular location of the general collection view.

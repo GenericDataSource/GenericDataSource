@@ -102,12 +102,12 @@ class ReportCollectionReusableView: UICollectionReusableView, ReportCell {
 
 class ReportBasicDataSource<CellType>: BasicDataSource<Report, CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    init() {
-        super.init(reuseIdentifier: NSStringFromClass(CellType.self))
+    override init() {
+        super.init()
     }
 
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
-        collectionView.ds_register(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_register(cellClass: CellType.self)
     }
 
     override func ds_collectionView(
@@ -121,10 +121,6 @@ class ReportBasicDataSource<CellType>: BasicDataSource<Report, CellType> where C
 
 class ReportNoReuseBasicDataSource<CellType>: BasicDataSource<Report, CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    init() {
-        super.init(reuseIdentifier: "")
-    }
-
     override func ds_collectionView(_ collectionView: GeneralCollectionView, dequeueCellForItemAt indexPath: IndexPath) -> CellType {
         return CellType.init()
     }
@@ -132,29 +128,21 @@ class ReportNoReuseBasicDataSource<CellType>: BasicDataSource<Report, CellType> 
 
 class ReportBasicBlockDataSource<CellType>: BasicBlockDataSource<Report, CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    init(configureBlock: @escaping ConfigureBlock) {
-        super.init(reuseIdentifier: NSStringFromClass(CellType.self), configureBlock: configureBlock)
-    }
-
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
-        collectionView.ds_register(CellType.self, forCellWithReuseIdentifier: NSStringFromClass(CellType.self))
+        collectionView.ds_register(cellClass: CellType.self)
     }
 }
 
-class ReportBasicSupplementaryViewCreator<SupplementaryView>: BasicSupplementaryViewCreator<Report, SupplementaryView>
+class ReportBasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementaryView>: BasicSupplementaryViewCreator<Report, SupplementaryView>
     where SupplementaryView: ReusableSupplementaryView, SupplementaryView: NSObject, SupplementaryView: ReportCell {
 
     var kind: String?
 
-    init() {
-        super.init(identifier: NSStringFromClass(SupplementaryView.self))
-    }
-
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
         if let tableView = collectionView as? UITableView {
-            tableView.register(SupplementaryView.self, forHeaderFooterViewReuseIdentifier: NSStringFromClass(SupplementaryView.self))
+            tableView.ds_register(headerFooterNib: SupplementaryView.self as! UITableViewHeaderFooterView.Type)
         } else if let collectionView = collectionView as? UICollectionView {
-            collectionView.register(SupplementaryView.self, forSupplementaryViewOfKind: kind!, withReuseIdentifier: NSStringFromClass(SupplementaryView.self))
+            collectionView.ds_register(supplementaryViewNib: SupplementaryView.self as! UICollectionViewCell.Type, forKind: kind!)
         }
     }
 

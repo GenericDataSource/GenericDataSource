@@ -88,7 +88,7 @@ class BasicSupplementaryViewCreatorTests: XCTestCase {
     func testDefaultConfigure() {
         let dataSource = ReportBasicDataSource<TextReportCollectionViewCell>()
         let collectionView = MockCollectionView()
-        let creator = BasicSupplementaryViewCreator<Report, ReportCollectionReusableView>(identifier: NSStringFromClass(ReportTableHeaderFooterView.self), size: CGSize(width: 100, height: 100))
+        let creator = BasicSupplementaryViewCreator<Report, ReportCollectionReusableView>(size: CGSize(width: 100, height: 100))
         dataSource.supplementaryViewCreator = creator
 
         let reports = Report.generate(numberOfReports: 200)
@@ -96,7 +96,7 @@ class BasicSupplementaryViewCreatorTests: XCTestCase {
 
         // assign as data source
         collectionView.dataSource = dataSource
-        collectionView.register(ReportCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(ReportTableHeaderFooterView.self))
+        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: UICollectionElementKindSectionHeader)
 
         // test
         let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 0))

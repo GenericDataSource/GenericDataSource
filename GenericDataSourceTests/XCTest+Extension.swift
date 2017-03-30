@@ -12,7 +12,7 @@ public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> T
 
     let object1 = expression1()
     let object2 = expression2()
-    let errorMessage = !message.isEmpty ? message : "Object \(object1) is not identical to \(object2)"
+    let errorMessage = !message.isEmpty ? message : "Object \(String(describing: object1)) is not identical to \(String(describing: object2))"
 
     XCTAssertTrue(object1 === object2, errorMessage, file: file, line: line)
 }
@@ -21,7 +21,7 @@ public func XCTAssertIdentical<T: AnyObject>(_ expression1: @autoclosure () -> [
 
     let object1 = expression1()
     let object2 = expression2()
-    let errorMessage = !message.isEmpty ? message : "Object \(object1) is not identical to \(object2)"
+    let errorMessage = !message.isEmpty ? message : "Object \(String(describing: object1)) is not identical to \(String(describing: object2))"
 
     XCTAssertEqual(object1?.count, object2?.count, errorMessage, file: file, line: line)
 

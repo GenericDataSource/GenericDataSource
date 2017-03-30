@@ -15,10 +15,6 @@ class TitleDataSource: BasicDataSource<String, TitleCollectionViewCell> {
         cell.textLabel?.text = item
     }
 
-    override func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        return true
-    }
-
     override func ds_collectionView(_ collectionView: GeneralCollectionView, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.ds_scrollView.bounds.width - 40, height: 50)
     }

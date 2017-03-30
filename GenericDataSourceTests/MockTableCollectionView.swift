@@ -32,7 +32,7 @@ class MockTableView: UITableView {
             return
         }
         guard let theCellClass = cellClass as? UITableViewCell.Type else {
-            assertionFailure("'\(cellClass)' should be of type UITableViewCell")
+            assertionFailure("'\(String(describing: cellClass))' should be of type UITableViewCell")
             return
         }
 
@@ -132,7 +132,7 @@ class MockCollectionView: UICollectionView {
             return
         }
         guard let theCellClass = cellClass as? UICollectionViewCell.Type else {
-            assertionFailure("'\(cellClass)' should be of type UITableViewCell")
+            assertionFailure("'\(String(describing: cellClass))' should be of type UITableViewCell")
             return
         }
 

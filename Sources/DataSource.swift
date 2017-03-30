@@ -11,6 +11,12 @@ import Foundation
 /// The DataSource protocol is a general data source and delegate protocol for both a UITableViewDataSource/UITableViewDelegate and UICollectionViewDataSource/UICollectionViewDelegate and adopted by an object that mediates the application’s data model for a view object (e.g. `UITableView` or `UICollectionView`.
 @objc public protocol DataSource : class {
 
+    /// Asks the data source if it responds to a given selector.
+    ///
+    /// - Parameter selector: The selector to check if the instance repsonds to.
+    /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
+    func ds_responds(to selector: DataSourceSelector) -> Bool
+
     /**
      Whether the data source provides the item size/height delegate calls for `tableView:heightForRowAtIndexPath:`
      or `collectionView:layout:sizeForItemAt:` or not.
@@ -19,6 +25,7 @@ import Foundation
         `false` if the size/height information is provided to the `UITableView` using `rowHeight` and/or `estimatedRowHeight`
         or to the `UICollectionViewFlowLayout` using `itemSize` and/or `estimatedItemSize`.
      */
+    @available(*, unavailable, renamed: "ds_responds(to:)", message: "with DataSourceSelector.size as parameter")
     func ds_shouldConsumeItemSizeDelegateCalls() -> Bool
 
     /**

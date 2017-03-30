@@ -18,7 +18,7 @@ class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
         let dataSource1 = ReportBasicDataSource<PDFReportCollectionViewCell>()
         dataSource1.items = Report.generate(numberOfReports: 50)
         dataSource.add(dataSource1)
-        let creator1 = BasicBlockSupplementaryViewCreator<Report, ReportCollectionReusableView>(identifier: NSStringFromClass(ReportTableHeaderFooterView.self), size: CGSize(width: 100, height: 100)) { (item, view, indexPath) in
+        let creator1 = BasicBlockSupplementaryViewCreator<Report, ReportCollectionReusableView>(size: CGSize(width: 100, height: 100)) { (item, view, indexPath) in
             view.configureForReport(item, indexPath: indexPath)
         }
         creator1.setSectionedItems([Report(id: 1, name: "name1")])
@@ -27,7 +27,7 @@ class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
         let dataSource2 = ReportBasicDataSource<TextReportCollectionViewCell>()
         dataSource2.items = Report.generate(numberOfReports: 50)
         dataSource.add(dataSource2)
-        let creator2 = BasicBlockSupplementaryViewCreator<Report, ReportCollectionReusableView>(identifier: NSStringFromClass(ReportTableHeaderFooterView.self)) { (item, view, indexPath) in
+        let creator2 = BasicBlockSupplementaryViewCreator<Report, ReportCollectionReusableView> { (item, view, indexPath) in
             view.configureForReport(item, indexPath: indexPath)
         }
         creator2.setSectionedItems([Report(id: 2, name: "name2")])
@@ -37,7 +37,7 @@ class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
 
         // assign as data source
         collectionView.dataSource = dataSource
-        collectionView.register(ReportCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(ReportTableHeaderFooterView.self))
+        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: UICollectionElementKindSectionHeader)
 
         // test
         let view1 = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ReportCollectionReusableView

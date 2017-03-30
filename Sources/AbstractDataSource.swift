@@ -8,13 +8,6 @@
 
 import UIKit
 
-/// Represents the selectors for querying a height/size of a cell.
-let sizeSelectors: [Selector] = [
-    #selector(UITableViewDelegate.tableView(_:heightForRowAt:)),
-    #selector(UICollectionViewDelegateFlowLayout.collectionView(_:layout:sizeForItemAt:)),
-    #selector(DataSource.ds_collectionView(_:sizeForItemAt:))
-]
-
 /**
  The Base class for all data source implementations this class is responsible for concrete implementation of UITableViewDataSource/UITableViewDelegate and UICollectionViewDataSource/UICollectionViewDelegate/UICollectionViewDelegateFlowLayout by forwarding the calls to a coressponding DataSource implementation (e.g. implementation of both `tableView:cellForRowAtIndexPath:` and `collectionView:cellForItemAt:` will delegate the call to `ds_collectionView:cellForItemAt:`).
 
@@ -23,6 +16,19 @@ let sizeSelectors: [Selector] = [
  Since this class is will be the delegate of the UITableView and UICollectionView. You can catch UIScrollViewDelegate methods by either subclass and implement the required method or provide use the property `scrollViewDelegate`. **Note that** this property is retained.
  */
 open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICollectionViewDataSource, UITableViewDelegate, UICollectionViewDelegateFlowLayout { // swiftlint:disable:this type_body_length
+
+    /// Returns a string that describes the contents of the receiver for presentation in the debugger.
+    open override var debugDescription: String {
+        return description
+    }
+
+    /// Returns a string that describes the contents of the receiver.
+    open override var description: String {
+        let properties: [(String, Any?)] = [
+            ("scrollViewDelegate", scrollViewDelegate),
+            ("supplementaryViewCreator", supplementaryViewCreator)]
+        return describe(self, properties: properties)
+    }
 
     /// Represents the object responsible for creating and managing suppelmentary views (e.g. headers and footers).
     open var supplementaryViewCreator: SupplementaryViewCreator?
@@ -96,8 +102,9 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
      */
     open override func responds(to selector: Selector) -> Bool {
 
-        if sizeSelectors.contains(selector) {
-            return ds_shouldConsumeItemSizeDelegateCalls()
+        // if one of our optional data source selectors
+        if let dsSelector = selectorToDataSourceSelectorMapping[selector] {
+            return ds_responds(to: dsSelector)
         }
 
         if scrollViewDelegateCanHandleSelector(selector) {
@@ -105,6 +112,17 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
         }
 
         return super.responds(to: selector)
+    }
+
+    /// Asks the data source if it responds to a given selector.
+    ///
+    /// This method always returns `false`. Subclasses should handle the cases for non-default cases.
+    ///
+    /// - Parameter selector: The selector to check if the instance repsonds to.
+    /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
+    open func ds_responds(to selector: DataSourceSelector) -> Bool {
+        // by default it is false.
+        return false
     }
 
     /**
@@ -254,18 +272,6 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return ds_collectionView(collectionView, sizeForItemAt: indexPath)
-    }
-
-    /**
-     Whether the data source provides the item size/height delegate calls for `tableView:heightForRowAtIndexPath:`
-     or `collectionView:layout:sizeForItemAt:` or not.
-
-     - returns: `true`, if the data source object will consume the delegate calls.
-     `false` if the size/height information is provided to the `UITableView` using `rowHeight` and/or `estimatedRowHeight`
-     or to the `UICollectionViewFlowLayout` using `itemSize` and/or `estimatedItemSize`.
-     */
-    open func ds_shouldConsumeItemSizeDelegateCalls() -> Bool {
-        return false
     }
 
     // MARK: - Data Source
@@ -922,14 +928,4 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     ///   - indexPath: An index path locating an item in the view.
     open func ds_collectionView(_ collectionView: GeneralCollectionView, didEndEditingItemAt indexPath: IndexPath) {
     }
-}
-
-private func isSelector(_ selector: Selector, belongsToProtocol aProtocol: Protocol) -> Bool {
-    return isSelector(selector, belongsToProtocol: aProtocol, isRequired: true, isInstance: true) ||
-        isSelector(selector, belongsToProtocol: aProtocol, isRequired: false, isInstance: true)
-}
-
-private func isSelector(_ selector: Selector, belongsToProtocol aProtocol: Protocol, isRequired: Bool, isInstance: Bool) -> Bool {
-    let method = protocol_getMethodDescription(aProtocol, selector, isRequired, isInstance)
-    return method.types != nil
 }
