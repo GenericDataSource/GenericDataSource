@@ -5,7 +5,7 @@
       location = "group:"
       name = "...">
       <FileRef
-         location = "group:codecov">
+         location = "group:codecov.yml">
       </FileRef>
       <FileRef
          location = "group:.gitignore">
