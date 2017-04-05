@@ -11,24 +11,29 @@ import GenericDataSource
 
 class RootViewController: UITableViewController {
 
-    fileprivate var dataSource: BasicBlockDataSource<Example, UITableViewCell>?
+    private var dataSource: BasicBlockDataSource<Example, BasicTableViewCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let dataSource = BasicBlockDataSource<Example, UITableViewCell>(reuseIdentifier: "cell") { (item: Example, cell: UITableViewCell, _) -> Void in
+        let dataSource = BasicBlockDataSource<Example, BasicTableViewCell>() { (item: Example, cell: BasicTableViewCell, indexPath) -> Void in
             cell.textLabel?.text = item.title
             cell.contentView.backgroundColor = nil
+            cell.accessoryType = .disclosureIndicator
         }
 
         // Need to keep a strong reference to our data source.
         self.dataSource = dataSource
 
+        // register the cell
+        tableView.ds_register(cellClass: BasicTableViewCell.self)
+        // bind the data source to the table view
         tableView.ds_useDataSource(dataSource)
+
         dataSource.items = Service.getExamples()
 
         // optionally adding a selection handler
-        let selectionHandler = BlockSelectionHandler<Example, UITableViewCell>()
+        let selectionHandler = BlockSelectionHandler<Example, BasicTableViewCell>()
         selectionHandler.didSelectBlock = { [weak self] dataSource, _, indexPath in
             let item = dataSource.item(at: indexPath)
             self?.performSegue(withIdentifier: item.segue, sender: self)

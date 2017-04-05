@@ -25,6 +25,26 @@
 		549407231CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407221CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift */; };
 		549407251CB1A94B007C565D /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */; };
 		549407271CB1AB24007C565D /* TitleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549407261CB1AB24007C565D /* TitleDataSource.swift */; };
+		5CA3C9211E926F6500996612 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C9201E926F6500996612 /* ContactCollectionViewCell.xib */; };
+		5CA3C9251E92719200996612 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9241E92719200996612 /* ColorCollectionViewCell.swift */; };
+		5CA3C9271E9271BC00996612 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9261E9271BC00996612 /* BasicTableViewCell.swift */; };
+		5CA3C9291E92722000996612 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9281E92722000996612 /* ContactTableViewCell.swift */; };
+		5CA3C92B1E92726D00996612 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C92A1E92726D00996612 /* ColorTableViewCell.swift */; };
+		5CA3C92D1E92730700996612 /* TitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C92C1E92730700996612 /* TitleCollectionViewCell.xib */; };
+		5CA3C92F1E92752C00996612 /* AppStoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C92E1E92752C00996612 /* AppStoreViewController.swift */; };
+		5CA3C9341E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9321E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift */; };
+		5CA3C9351E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C9331E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.xib */; };
+		5CA3C9381E92770D00996612 /* AppStoreModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9371E92770D00996612 /* AppStoreModels.swift */; };
+		5CA3C93C1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C93A1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.swift */; };
+		5CA3C93D1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C93B1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.xib */; };
+		5CA3C93F1E9278B900996612 /* AppStoreQuickLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C93E1E9278B900996612 /* AppStoreQuickLinkTableViewCell.swift */; };
+		5CA3C9411E9278F100996612 /* AppStoreQuickLinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C9401E9278F100996612 /* AppStoreQuickLinkTableViewCell.xib */; };
+		5CA3C9441E92796200996612 /* AppStoreFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9421E92796200996612 /* AppStoreFooterTableViewCell.swift */; };
+		5CA3C9451E92796200996612 /* AppStoreFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C9431E92796200996612 /* AppStoreFooterTableViewCell.xib */; };
+		5CA3C9481E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C9461E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.swift */; };
+		5CA3C9491E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C9471E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.xib */; };
+		5CA3C94C1E92864700996612 /* AppStoreLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA3C94A1E92864700996612 /* AppStoreLoadingTableViewCell.swift */; };
+		5CA3C94D1E92864700996612 /* AppStoreLoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CA3C94B1E92864700996612 /* AppStoreLoadingTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +85,26 @@
 		549407221CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleAndSingleSectionsCollectionViewController.swift; sourceTree = "<group>"; };
 		549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		549407261CB1AB24007C565D /* TitleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleDataSource.swift; sourceTree = "<group>"; };
+		5CA3C9201E926F6500996612 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
+		5CA3C9241E92719200996612 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9261E9271BC00996612 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9281E92722000996612 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C92A1E92726D00996612 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C92C1E92730700996612 /* TitleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleCollectionViewCell.xib; sourceTree = "<group>"; };
+		5CA3C92E1E92752C00996612 /* AppStoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreViewController.swift; sourceTree = "<group>"; };
+		5CA3C9321E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreFeaturedSectionTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9331E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreFeaturedSectionTableViewCell.xib; sourceTree = "<group>"; };
+		5CA3C9371E92770D00996612 /* AppStoreModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreModels.swift; sourceTree = "<group>"; };
+		5CA3C93A1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreQuickLinkLabelTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C93B1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreQuickLinkLabelTableViewCell.xib; sourceTree = "<group>"; };
+		5CA3C93E1E9278B900996612 /* AppStoreQuickLinkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreQuickLinkTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9401E9278F100996612 /* AppStoreQuickLinkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreQuickLinkTableViewCell.xib; sourceTree = "<group>"; };
+		5CA3C9421E92796200996612 /* AppStoreFooterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreFooterTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9431E92796200996612 /* AppStoreFooterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreFooterTableViewCell.xib; sourceTree = "<group>"; };
+		5CA3C9461E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreFeaturedAppCollectionViewCell.swift; sourceTree = "<group>"; };
+		5CA3C9471E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreFeaturedAppCollectionViewCell.xib; sourceTree = "<group>"; };
+		5CA3C94A1E92864700996612 /* AppStoreLoadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreLoadingTableViewCell.swift; sourceTree = "<group>"; };
+		5CA3C94B1E92864700996612 /* AppStoreLoadingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppStoreLoadingTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +168,7 @@
 		5494070A1CB12B5B007C565D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5CA3C9301E92754900996612 /* AppStore-Example */,
 				5494071F1CB19AD2007C565D /* Cells */,
 				5494071A1CB197AD007C565D /* Controllers */,
 				549407191CB197A1007C565D /* DataSources */,
@@ -172,10 +213,61 @@
 		5494071F1CB19AD2007C565D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5CA3C9261E9271BC00996612 /* BasicTableViewCell.swift */,
+				5CA3C9241E92719200996612 /* ColorCollectionViewCell.swift */,
+				5CA3C92A1E92726D00996612 /* ColorTableViewCell.swift */,
 				5494071D1CB19998007C565D /* ContactCollectionViewCell.swift */,
+				5CA3C9201E926F6500996612 /* ContactCollectionViewCell.xib */,
+				5CA3C9281E92722000996612 /* ContactTableViewCell.swift */,
 				549407241CB1A94B007C565D /* TitleCollectionViewCell.swift */,
+				5CA3C92C1E92730700996612 /* TitleCollectionViewCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		5CA3C9301E92754900996612 /* AppStore-Example */ = {
+			isa = PBXGroup;
+			children = (
+				5CA3C9391E92778E00996612 /* DataSources */,
+				5CA3C9361E92770100996612 /* Model */,
+				5CA3C9311E92764E00996612 /* cells */,
+				5CA3C92E1E92752C00996612 /* AppStoreViewController.swift */,
+			);
+			name = "AppStore-Example";
+			sourceTree = "<group>";
+		};
+		5CA3C9311E92764E00996612 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				5CA3C9321E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift */,
+				5CA3C9331E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.xib */,
+				5CA3C93A1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.swift */,
+				5CA3C93B1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.xib */,
+				5CA3C93E1E9278B900996612 /* AppStoreQuickLinkTableViewCell.swift */,
+				5CA3C9401E9278F100996612 /* AppStoreQuickLinkTableViewCell.xib */,
+				5CA3C9421E92796200996612 /* AppStoreFooterTableViewCell.swift */,
+				5CA3C9431E92796200996612 /* AppStoreFooterTableViewCell.xib */,
+				5CA3C94A1E92864700996612 /* AppStoreLoadingTableViewCell.swift */,
+				5CA3C94B1E92864700996612 /* AppStoreLoadingTableViewCell.xib */,
+				5CA3C9461E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.swift */,
+				5CA3C9471E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.xib */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+		5CA3C9361E92770100996612 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5CA3C9371E92770D00996612 /* AppStoreModels.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5CA3C9391E92778E00996612 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DataSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,8 +352,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA3C92D1E92730700996612 /* TitleCollectionViewCell.xib in Resources */,
 				547447611CA93C1D00F3597E /* LaunchScreen.storyboard in Resources */,
+				5CA3C9491E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.xib in Resources */,
+				5CA3C9211E926F6500996612 /* ContactCollectionViewCell.xib in Resources */,
+				5CA3C9451E92796200996612 /* AppStoreFooterTableViewCell.xib in Resources */,
+				5CA3C9411E9278F100996612 /* AppStoreQuickLinkTableViewCell.xib in Resources */,
+				5CA3C93D1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.xib in Resources */,
 				5474475E1CA93C1D00F3597E /* Assets.xcassets in Resources */,
+				5CA3C9351E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.xib in Resources */,
+				5CA3C94D1E92864700996612 /* AppStoreLoadingTableViewCell.xib in Resources */,
 				5474475C1CA93C1D00F3597E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,20 +373,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA3C9381E92770D00996612 /* AppStoreModels.swift in Sources */,
+				5CA3C9251E92719200996612 /* ColorCollectionViewCell.swift in Sources */,
+				5CA3C93F1E9278B900996612 /* AppStoreQuickLinkTableViewCell.swift in Sources */,
+				5CA3C9481E927B2D00996612 /* AppStoreFeaturedAppCollectionViewCell.swift in Sources */,
 				549407231CB1A8D7007C565D /* MultipleAndSingleSectionsCollectionViewController.swift in Sources */,
 				549407251CB1A94B007C565D /* TitleCollectionViewCell.swift in Sources */,
+				5CA3C94C1E92864700996612 /* AppStoreLoadingTableViewCell.swift in Sources */,
 				547447571CA93C1D00F3597E /* RootViewController.swift in Sources */,
 				549407211CB19BF6007C565D /* AlertNameSelectionHandler.swift in Sources */,
+				5CA3C92B1E92726D00996612 /* ColorTableViewCell.swift in Sources */,
 				5494071E1CB19998007C565D /* ContactCollectionViewCell.swift in Sources */,
 				547447551CA93C1D00F3597E /* AppDelegate.swift in Sources */,
 				549407111CB14C14007C565D /* Service.swift in Sources */,
 				549407151CB14F50007C565D /* SingleSectionTableViewController.swift in Sources */,
+				5CA3C9441E92796200996612 /* AppStoreFooterTableViewCell.swift in Sources */,
+				5CA3C9271E9271BC00996612 /* BasicTableViewCell.swift in Sources */,
 				549407131CB14C85007C565D /* Model.swift in Sources */,
 				549407271CB1AB24007C565D /* TitleDataSource.swift in Sources */,
+				5CA3C9341E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift in Sources */,
+				5CA3C92F1E92752C00996612 /* AppStoreViewController.swift in Sources */,
 				5494071C1CB197D4007C565D /* MultipleSectionsTableViewController.swift in Sources */,
 				549407171CB14F9B007C565D /* ContactsDataSource.swift in Sources */,
 				5494070F1CB14235007C565D /* ColorsDataSource.swift in Sources */,
 				5494070C1CB12D23007C565D /* ColorsCollectionVIewController.swift in Sources */,
+				5CA3C93C1E92785B00996612 /* AppStoreQuickLinkLabelTableViewCell.swift in Sources */,
+				5CA3C9291E92722000996612 /* ContactTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

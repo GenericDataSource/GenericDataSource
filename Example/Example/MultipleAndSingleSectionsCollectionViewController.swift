@@ -17,7 +17,7 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         super.viewDidLoad()
 
         let firstSection = createFirstSection()
-        let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
+        let colorsDataSource = ColorsDataSource<ColorCollectionViewCell>()
 
         dataSource.add(firstSection)
         dataSource.add(colorsDataSource)
@@ -26,14 +26,17 @@ class MultipleAndSingleSectionsCollectionViewController: UICollectionViewControl
         colorsDataSource.itemSize = CGSize(width: 70, height: 70)
         colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))
 
+        collectionView?.ds_register(cellNib: TitleCollectionViewCell.self)
+        collectionView?.ds_register(cellNib: ContactCollectionViewCell.self)
+        collectionView?.ds_register(cellClass: ColorCollectionViewCell.self)
         collectionView?.ds_useDataSource(dataSource)
     }
 
     fileprivate func createFirstSection() -> DataSource {
-        let titleDataSource = TitleDataSource(reuseIdentifier: "title")
+        let titleDataSource = TitleDataSource()
         titleDataSource.items = ["Mix of Multiple and Single Sectioned DataSources"]
 
-        let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
+        let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>()
 
         let firstSection = CompositeDataSource(sectionType: .single)
         firstSection.add(titleDataSource)

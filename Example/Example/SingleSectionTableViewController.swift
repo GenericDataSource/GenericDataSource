@@ -9,17 +9,17 @@
 import UIKit
 import GenericDataSource
 
-extension UITableViewCell: ContactCell { }
-
 class SingleSectionTableViewController: UITableViewController {
 
-    let dataSource = CompositeDataSource(sectionType: .single)
-    let colorsDataSource = ColorsDataSource<UITableViewCell>(reuseIdentifier: "color")
-    let contactsDataSource = ContactsDataSource<UITableViewCell>(reuseIdentifier: "contact")
+    private let dataSource = CompositeDataSource(sectionType: .single)
+    private let colorsDataSource = ColorsDataSource<ColorTableViewCell>()
+    private let contactsDataSource = ContactsDataSource<ContactTableViewCell>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.ds_register(cellClass: ColorTableViewCell.self)
+        tableView.ds_register(cellClass: ContactTableViewCell.self)
         tableView.ds_useDataSource(dataSource)
 
         colorsDataSource.setSelectionHandler(AlertNameSelectionHandler(typeName: "color"))

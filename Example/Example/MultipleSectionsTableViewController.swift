@@ -12,12 +12,14 @@ import GenericDataSource
 class MultipleSectionsTableViewController: UICollectionViewController {
 
     let dataSource = CompositeDataSource(sectionType: .multi)
-    let colorsDataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "color")
-    let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>(reuseIdentifier: "contact")
+    let colorsDataSource = ColorsDataSource<ColorCollectionViewCell>()
+    let contactsDataSource = ContactsDataSource<ContactCollectionViewCell>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView?.ds_register(cellClass: ColorCollectionViewCell.self)
+        collectionView?.ds_register(cellNib: ContactCollectionViewCell.self)
         collectionView?.ds_useDataSource(dataSource)
 
         colorsDataSource.itemSize = CGSize(width: 70, height: 70)

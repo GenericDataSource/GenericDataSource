@@ -11,11 +11,13 @@ import GenericDataSource
 
 class ColorsCollectionVIewController: UICollectionViewController {
 
-    fileprivate let dataSource = ColorsDataSource<UICollectionViewCell>(reuseIdentifier: "cell")
+    fileprivate let dataSource = ColorsDataSource<ColorCollectionViewCell>()
 
     override func viewDidLoad() {
 
         dataSource.items = Service.getColors()
+
+        collectionView?.ds_register(cellClass: ColorCollectionViewCell.self)
         collectionView?.ds_useDataSource(dataSource)
     }
 }

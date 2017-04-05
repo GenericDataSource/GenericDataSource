@@ -223,6 +223,14 @@ extension GeneralCollectionView {
 
 extension GeneralCollectionView {
 
+    /// Gets the size of the underlying `UITableView` or the `UICollectionView`.
+    public var size: CGSize {
+        return ds_scrollView.frame.size
+    }
+}
+
+extension GeneralCollectionView {
+
     /**
      Represents the underlying `UICollectionView` itself. `GeneralCollectionView` is not guarnteed to be `UICollectionView` or
      a `UITableView`, use this property to access the underlying `UICollectionView` or nil if it is `UITableView`.
@@ -236,7 +244,7 @@ extension GeneralCollectionView {
 
      **See also** : `ds_scrollView` and `asTableView()`
      */
-    func asCollectionView() -> UICollectionView? {
+    public func asCollectionView() -> UICollectionView? {
         return ds_scrollView as? UICollectionView
     }
 
@@ -253,7 +261,7 @@ extension GeneralCollectionView {
 
      **See also** : `ds_scrollView` and `asCollectionView()`
      */
-    func asTableView() -> UITableView? {
+    public func asTableView() -> UITableView? {
         return ds_scrollView as? UITableView
     }
 }
