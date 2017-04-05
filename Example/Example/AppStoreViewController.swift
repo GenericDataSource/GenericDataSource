@@ -21,12 +21,12 @@ class AppStoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-tableView.ds_register(cellNib: AppStoreFeaturedSectionTableViewCell.self)
-tableView.ds_register(cellNib: AppStoreQuickLinkLabelTableViewCell.self)
-tableView.ds_register(cellNib: AppStoreQuickLinkTableViewCell.self)
-tableView.ds_register(cellNib: AppStoreFooterTableViewCell.self)
-tableView.ds_register(cellNib: AppStoreLoadingTableViewCell.self)
-tableView.ds_useDataSource(dataSource)
+        tableView.ds_register(cellNib: AppStoreFeaturedSectionTableViewCell.self)
+        tableView.ds_register(cellNib: AppStoreQuickLinkLabelTableViewCell.self)
+        tableView.ds_register(cellNib: AppStoreQuickLinkTableViewCell.self)
+        tableView.ds_register(cellNib: AppStoreFooterTableViewCell.self)
+        tableView.ds_register(cellNib: AppStoreLoadingTableViewCell.self)
+        tableView.ds_useDataSource(dataSource)
 
         loadData()
     }
@@ -36,20 +36,20 @@ tableView.ds_useDataSource(dataSource)
     }
 
     private func loadData() {
-// update the UI
-refreshButton.isEnabled = false
-dataSource.selectedDataSourceIndex = 0
+        // update the UI
+        refreshButton.isEnabled = false
+        dataSource.selectedDataSourceIndex = 0
 
-// get the data from the service
-service.getFeaturedPage { [weak self] page in
+        // get the data from the service
+        service.getFeaturedPage { [weak self] page in
 
-    // update the model
-    self?.dataSource.page.page = page
+            // update the model
+            self?.dataSource.page.page = page
 
-    // update the UI
-    self?.refreshButton.isEnabled = true
-    self?.dataSource.selectedDataSourceIndex = 1
-}
+            // update the UI
+            self?.refreshButton.isEnabled = true
+            self?.dataSource.selectedDataSourceIndex = 1
+        }
     }
 }
 

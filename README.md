@@ -96,7 +96,7 @@ collectionView.ds_useDataSource(dataSource)
 dataSource.items =  <<retrieve items>> // Can be set and altered at anytime
 ```
 
-All you need to update to do is change the cell class and of course the table view to collection view.
+__All you need to do is change the cell class and of course the table view to collection view.__
 
 Actually this opens the door for so much possibilities. You can inherit from `BasicDataSource` and implement your custom generic data source that is based on a protocol implemented by the cell and you don't need to repeat the configuration part. You would create data source like that.
 ```
@@ -110,19 +110,19 @@ Suppose we want to implement the following screen, the App Store featured tab.
 
 ![App Store Example Screenshot](https://cloud.githubusercontent.com/assets/5665498/24696881/6a4e7778-19eb-11e7-9e65-d96eac0dce76.gif)
 
-If you want to have a look at the complete source code, it is under Example project check `AppStoreViewController.swift`.
+__If you want to have a look at the complete source code, it is under Example project -> `AppStoreViewController.swift`.__
 
 1. We will create cells as we do normally.
 2. Now we need to think about DataSources.
 3. It's simple, one data source for each cell type (`BasicDataSource`).
-4. * `CompositeDataSource(sectionType: .single)` for the table view rows. Since these rows are of different cell types.
-5 `SegmentedDataSource` for switching between loading and data views.
-5. Bind the `SegmentedDataSource` data source to the table view and that's it.
-6. See how we think structurally about our UI and data sources instead of one big cell.
+4. `CompositeDataSource(sectionType: .single)` for the table view rows. Since these rows are of different cell types.
+5. `SegmentedDataSource` for switching between loading and data views.
+6. Bind the `SegmentedDataSource` data source to the table view and that's it.
+7. See how we think structurally about our UI and data sources instead of one big cell.
 
-One thing we didn't talk about is the `UICollectionView` of the featured section. It's very simple, just `BasicDataSource`.
+One thing we didn't talk about is the `UICollectionView` of the featured section cells. It's very simple, just `BasicDataSource`.
 
-See how we can do it in the following code
+See how we can implement the screen in the following code:
 
 1. Create the cells.
 ```Swift
@@ -220,7 +220,7 @@ tableView.ds_register(cellNib: AppStoreFooterTableViewCell.self)
 tableView.ds_register(cellNib: AppStoreLoadingTableViewCell.self)
 ```
 
-6. set data sources to the collection view.
+6. Set data sources to the collection view.
 ```Swift
 tableView.ds_useDataSource(dataSource)
 ```
@@ -254,7 +254,6 @@ There are many benefits of doing that:
 
 Check the Examples application for complete implementations.
 
---
 ## Attribution
 
 The main idea comes from [WWDC 2014 Advanced User Interfaces with Collection Views] (https://developer.apple.com/videos/play/wwdc2014/232/)
