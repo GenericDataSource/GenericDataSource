@@ -23,6 +23,19 @@ class UIKitExtensionsTableViewTests: XCTestCase {
         dataSource.registerReusableViewsInCollectionView(instance)
     }
 
+    func testSize() {
+        instance.frame = CGRect(x: 0, y: 0, width: 100, height: 120)
+        XCTAssertEqual(CGSize(width: 100, height: 120), instance.size)
+    }
+
+    func testAsTableView() {
+        XCTAssertEqual(instance, instance.asTableView())
+    }
+
+    func testAsCollectionView() {
+        XCTAssertNil(instance.asCollectionView())
+    }
+
     func testScrollPosition() {
 
         XCTAssertEqual(UITableViewScrollPosition.top, UITableViewScrollPosition(scrollPosition: .top))
