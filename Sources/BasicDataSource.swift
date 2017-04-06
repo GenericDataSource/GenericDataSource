@@ -118,17 +118,14 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
     /// - Parameter selector: The selector to check if the instance repsonds to.
     /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
     open override func ds_responds(to selector: DataSourceSelector) -> Bool {
-        // we always define last one as DataSource selector.
-        let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
-
-        let subclassImp = method_getImplementation(class_getInstanceMethod(type(of: self), theSelector))
-        let superImp = method_getImplementation(class_getInstanceMethod(BasicDataSource.self, theSelector))
-
         if selector == .size && itemSizeSet {
             return true
         }
 
-        return subclassImp != superImp
+        // we always define last one as DataSource selector.
+        let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
+        // check if the subclass implemented the selector, always return true
+        return subclassHasDifferentImplmentation(type: BasicDataSource.self, selector: theSelector)
     }
 
     // MARK: Cell
