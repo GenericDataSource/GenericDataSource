@@ -1,5 +1,9 @@
 # GenericDataSource
 
+## 2.4.3
+
+* Fix registering header/footer class method name to be `func ds_register(headerFooterClass view: UITableViewHeaderFooterView.Type)` instead of incorrect old name `func ds_register(headerFooterNib view: UITableViewHeaderFooterView.Type)`.
+
 ## 2.4.2
 
 * Adding `asCollectionView()` and `asTableView()` methods to `GeneralCollectionView` to convert it to `UICollectionView` and `UITableView` respectively.
