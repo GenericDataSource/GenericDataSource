@@ -140,7 +140,7 @@ class ReportBasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementa
 
     func registerReusableViewsInCollectionView(_ collectionView: GeneralCollectionView) {
         if let tableView = collectionView as? UITableView {
-            tableView.ds_register(headerFooterNib: SupplementaryView.self as! UITableViewHeaderFooterView.Type)
+            tableView.ds_register(headerFooterClass: SupplementaryView.self as! UITableViewHeaderFooterView.Type)
         } else if let collectionView = collectionView as? UICollectionView {
             collectionView.ds_register(supplementaryViewNib: SupplementaryView.self as! UICollectionViewCell.Type, forKind: kind!)
         }

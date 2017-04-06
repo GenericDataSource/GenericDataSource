@@ -4,6 +4,7 @@ disabled_rules:
     - type_name
     - force_cast
     - file_length
+    - large_tuple
 
 opt_in_rules:
 #    - missing_docs # Commented until the rule is fixed. https://github.com/realm/SwiftLint/issues/728
