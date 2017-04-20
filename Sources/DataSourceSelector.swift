@@ -174,7 +174,7 @@ let dataSourceSelectorToSelectorMapping: [DataSourceSelector: [Selector]] = {
         mapping[.didUpdateFocusIn] = [
             #selector(UITableViewDelegate.tableView(_:didUpdateFocusIn:with:)),
             #selector(UICollectionViewDelegateFlowLayout.collectionView(_:didUpdateFocusIn:with:)),
-            #selector(DataSource.ds_collectionView(_:shouldShowMenuForItemAt:))
+            #selector(DataSource.ds_collectionView(_:didUpdateFocusIn:with:))
         ]
         mapping[.indexPathForPreferredFocusedView] = [
             #selector(UITableViewDelegate.indexPathForPreferredFocusedView(in:)),
