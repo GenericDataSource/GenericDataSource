@@ -152,6 +152,12 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
     /// - Parameter selector: The selector to check if the instance repsonds to.
     /// - Returns: `true` if the instance responds to the passed selector, otherwise `false`.
     open override func ds_responds(to selector: DataSourceSelector) -> Bool {
+        // we always define last one as DataSource selector.
+        let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
+        // check if the subclass implemented the selector, always return true
+        if subclassHasDifferentImplmentation(type: SegmentedDataSource.self, selector: theSelector) {
+            return true
+        }
         return selectedDataSource?.ds_responds(to: selector) ?? false
     }
 

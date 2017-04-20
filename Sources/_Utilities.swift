@@ -33,6 +33,13 @@ extension NSObjectProtocol {
         }
         return castedValue
     }
+
+    func subclassHasDifferentImplmentation(type: AnyClass, selector: Selector) -> Bool {
+
+        let subclassImp = method_getImplementation(class_getInstanceMethod(type(of: self), selector))
+        let superImp = method_getImplementation(class_getInstanceMethod(type, selector))
+        return subclassImp != superImp
+    }
 }
 
 func describe(_ object: AnyObject, properties: [(String, Any?)]) -> String {

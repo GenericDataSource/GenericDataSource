@@ -81,7 +81,7 @@ extension UITableView {
     ///
     /// - Parameters:
     ///   - view: The supplementary view class.
-    open func ds_register(headerFooterNib view: UITableViewHeaderFooterView.Type) {
+    open func ds_register(headerFooterClass view: UITableViewHeaderFooterView.Type) {
         register(view, forHeaderFooterViewReuseIdentifier: view.ds_reuseId)
     }
 }
