@@ -1,5 +1,10 @@
 # GenericDataSource
 
+## 2.4.5
+
+* Adding `onItemsUpdated` to basic data sources to monitor changes to `items` property.
+* Adding most non-essential APIs to be `DataSourceSelector` so that, it's delegate methods is not called by default.
+
 ## 2.4.4
 
 * Added the ability for `CompositeDataSource` and `SegmentedDataSource` to automatically `ds_responds(to selector: DataSourceSelector)` if the subclass implemented the selector.
