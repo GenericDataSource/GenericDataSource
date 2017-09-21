@@ -76,9 +76,9 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
      Initialize new instance of the AbstractDataSource `fatalError`. You should use one of its subclasses.
      */
     public override init() {
-        let type = AbstractDataSource.self
-        guard type(of: self) != type else {
-            fatalError("\(type) instances can not be created; create a subclass instance instead.")
+        let typeOf = AbstractDataSource.self
+        guard type(of: self) != typeOf else {
+            fatalError("\(typeOf) instances can not be created; create a subclass instance instead.")
         }
     }
 

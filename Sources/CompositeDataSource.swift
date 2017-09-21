@@ -163,7 +163,7 @@ open class CompositeDataSource: AbstractDataSource, CollectionDataSource {
         // we always define last one as DataSource selector.
         let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
         // check if the subclass implemented the selector, always return true
-        if subclassHasDifferentImplmentation(type: CompositeDataSource.self, selector: theSelector) {
+        if subclassHasDifferentImplmentation(typeOf: CompositeDataSource.self, selector: theSelector) {
             return true
         }
 
