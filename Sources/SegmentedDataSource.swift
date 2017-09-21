@@ -155,7 +155,7 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
         // we always define last one as DataSource selector.
         let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
         // check if the subclass implemented the selector, always return true
-        if subclassHasDifferentImplmentation(typeOf: SegmentedDataSource.self, selector: theSelector) {
+        if subclassHasDifferentImplmentation(type: SegmentedDataSource.self, selector: theSelector) {
             return true
         }
         return selectedDataSource?.ds_responds(to: selector) ?? false

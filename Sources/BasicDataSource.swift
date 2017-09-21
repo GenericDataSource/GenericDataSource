@@ -129,7 +129,7 @@ open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSourc
         // we always define last one as DataSource selector.
         let theSelector = dataSourceSelectorToSelectorMapping[selector]!.last!
         // check if the subclass implemented the selector, always return true
-        return subclassHasDifferentImplmentation(typeOf: BasicDataSource.self, selector: theSelector)
+        return subclassHasDifferentImplmentation(type: BasicDataSource.self, selector: theSelector)
     }
 
     // MARK: Cell
