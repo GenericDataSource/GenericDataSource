@@ -1,11 +1,5 @@
 # GenericDataSource
 
-## 2.5.1
-* Change accessor for editingStyleForRowAt from public to open.
-
-## 2.5.0
-* Update to Swift 4
-
 ## 2.4.5
 
 * Adding `onItemsUpdated` to basic data sources to monitor changes to `items` property.
