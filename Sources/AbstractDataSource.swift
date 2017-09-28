@@ -820,7 +820,7 @@ open class AbstractDataSource: NSObject, DataSource, UITableViewDataSource, UICo
     }
 
     /// `UITableViewDataSource`/`UITableViewDelegate` implementations forwards calls to the corresponding `DataSource` methods.
-    public func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return ds_collectionView(tableView, editingStyleForItemAt: indexPath)
     }
 
