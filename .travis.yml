@@ -6,7 +6,7 @@ env:
   - LANG=en_US.UTF-8
   - WORKSPACE=GenericDataSource.xcworkspace
   - IOS_FRAMEWORK_SCHEME="GenericDataSource"
-  - IOS_SDK=iphonesimulator10.2
+  - IOS_SDK=iphonesimulator11.0
   - EXAMPLE_SCHEME="Example"
   matrix:
     - DESTINATION="OS=10.2,name=iPad Air"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES" COVERAGE="YES"
