@@ -31,7 +31,7 @@ class EditingActionsTester<CellType>: DataSourceTester where CellType: ReportCel
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
-        (dataSource as! _ReportBasicDataSource<CellType>).result = result
+        ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> [UITableViewRowAction]? {
@@ -45,12 +45,12 @@ class EditingActionsTester<CellType>: DataSourceTester where CellType: ReportCel
     func assert(result: [UITableViewRowAction]?, indexPath: IndexPath, collectionView: GeneralCollectionView) {
         if collectionView is UITableView {
             XCTAssertIdentical(result, self.result)
-            XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
+            XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
         }
     }
 }
 
-let actions = [UITableViewRowAction(style: .destructive, title: "Edit", handler: { _ in })]
+let actions = [UITableViewRowAction(style: .destructive, title: "Edit", handler: { (_, _) in })]
 class EditingActionsTester2<CellType>: EditingActionsTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     override var result: [UITableViewRowAction]? {
         return actions

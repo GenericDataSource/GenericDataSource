@@ -36,6 +36,6 @@ class WillDisplayCellTester<CellType>: DataSourceTester where CellType: ReportCe
     }
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
-        XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
+        XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
     }
 }

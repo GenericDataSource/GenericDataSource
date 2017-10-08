@@ -450,6 +450,9 @@ class CollectionDataSourceGatewayTests: XCTestCase {
         guard #available(iOS 9.0, *) else {
             return
         }
+        if #available(iOS 11.0, *) { // because we cannot construct UITableViewFocusUpdateContext nor UICollectionViewFocusUpdateContext in iOS 11.
+            return
+        }
         // execute the test
         executeTestTemplate(tableType1: ShouldUpdateFocusTester<PDFReportTableViewCell>.self,
                             tableType2: ShouldUpdateFocusTester2<TextReportTableViewCell>.self,
@@ -467,6 +470,9 @@ class CollectionDataSourceGatewayTests: XCTestCase {
 
     func testDidUpdateFocus() {
         guard #available(iOS 9.0, *) else {
+            return
+        }
+        if #available(iOS 11.0, *) { // because we cannot construct UITableViewFocusUpdateContext nor UICollectionViewFocusUpdateContext in iOS 11.
             return
         }
         // execute the test

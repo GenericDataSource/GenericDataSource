@@ -134,7 +134,7 @@ class ReportBasicBlockDataSource<CellType>: BasicBlockDataSource<Report, CellTyp
 }
 
 class ReportBasicSupplementaryViewCreator<SupplementaryView: ReusableSupplementaryView>: BasicSupplementaryViewCreator<Report, SupplementaryView>
-    where SupplementaryView: ReusableSupplementaryView, SupplementaryView: NSObject, SupplementaryView: ReportCell {
+    where SupplementaryView: NSObject, SupplementaryView: ReportCell {
 
     var kind: String?
 

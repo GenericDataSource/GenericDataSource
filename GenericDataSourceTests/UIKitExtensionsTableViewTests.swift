@@ -16,7 +16,8 @@ class UIKitExtensionsTableViewTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        instance = UITableView()
+        instance = UITableView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        instance.rowHeight = 44
         dataSource = ReportBasicDataSource<TextReportTableViewCell>()
         dataSource.items = Report.generate(numberOfReports: 10)
         instance.ds_useDataSource(dataSource)
@@ -173,7 +174,8 @@ class UIKitExtensionsTableViewTests: XCTestCase {
     }
 
     func testScrollToItem() {
-        let index = IndexPath(item: 5, section: 0)
+        let index = IndexPath(item: 3, section: 0)
+        XCTAssertEqual(CGPoint.zero, instance.contentOffset)
         instance.ds_scrollToItem(at: index, at: UICollectionViewScrollPosition.top, animated: false)
         XCTAssertEqual(CGPoint(x: 0, y: 44 * CGFloat(index.item)), instance.contentOffset)
     }
@@ -224,7 +226,8 @@ class UIKitExtensionsTableViewTests: XCTestCase {
     func testIndexPathForItemAtPoint() {
         let index = IndexPath(item: 0, section: 0)
         instance.ds_reloadData()
-        XCTAssertEqual(index, instance.ds_indexPathForItem(at: CGPoint.zero))
+        instance.layoutIfNeeded()
+        XCTAssertEqual(index, instance.ds_indexPathForItem(at: .zero))
     }
 
     func testVisibleCells() {
@@ -236,16 +239,22 @@ class UIKitExtensionsTableViewTests: XCTestCase {
             return
         }
         let cells = instance.ds_visibleCells()
-        XCTAssertEqual(1, cells.count)
+        XCTAssertEqual(7, cells.count)
         XCTAssertEqual(cell, cells.first as? UITableViewCell)
     }
 
     func testVisibleIndexPaths() {
         XCTAssertEqual([], instance.ds_indexPathsForVisibleItems())
 
-        let index = IndexPath(item: 0, section: 0)
+        let indexes = [IndexPath(item: 0, section: 0),
+                       IndexPath(item: 1, section: 0),
+                       IndexPath(item: 2, section: 0),
+                       IndexPath(item: 3, section: 0),
+                       IndexPath(item: 4, section: 0),
+                       IndexPath(item: 5, section: 0),
+                       IndexPath(item: 6, section: 0)]
         instance.ds_reloadData()
-        XCTAssertEqual([index], instance.ds_indexPathsForVisibleItems())
+        XCTAssertEqual(indexes, instance.ds_indexPathsForVisibleItems())
     }
 
     func testPerformBatchUpdatesOneLevel() {

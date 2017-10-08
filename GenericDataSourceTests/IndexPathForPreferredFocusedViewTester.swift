@@ -32,7 +32,7 @@ class IndexPathForPreferredFocusedViewTester<CellType>: DataSourceTester where C
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
-        (dataSource as! _ReportBasicDataSource<CellType>).result = result
+        ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> IndexPath? {
@@ -68,10 +68,10 @@ class IndexPathForPreferredFocusedViewTester2<CellType>: IndexPathForPreferredFo
 class IndexPathForPreferredFocusedViewTester3<CellType>: IndexPathForPreferredFocusedViewTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: IndexPath?, indexPath: IndexPath, collectionView: GeneralCollectionView) {
-        XCTAssertEqual(true, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(true, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 
     override func assertNotCalled(collectionView: GeneralCollectionView) {
-        XCTAssertEqual(false, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(false, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 }

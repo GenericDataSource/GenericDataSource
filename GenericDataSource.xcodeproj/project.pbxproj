@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5402DF871C8309D80032BF9A /* MockSelectionController.swift */; };
+		542AF2081F89DCA800B1847C /* FocusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 542AF2071F89DCA800B1847C /* FocusHelper.m */; };
 		54395EFF1DD8F2740069433C /* SegmentedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */; };
 		54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */; };
 		54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
@@ -121,6 +122,9 @@
 
 /* Begin PBXFileReference section */
 		5402DF871C8309D80032BF9A /* MockSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSelectionController.swift; sourceTree = "<group>"; };
+		542AF2051F89DCA700B1847C /* GenericDataSourceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenericDataSourceTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		542AF2061F89DCA800B1847C /* FocusHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FocusHelper.h; sourceTree = "<group>"; };
+		542AF2071F89DCA800B1847C /* FocusHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FocusHelper.m; sourceTree = "<group>"; };
 		54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedDataSource.swift; sourceTree = "<group>"; };
 		54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataSourceCollectionView.swift; sourceTree = "<group>"; };
 		54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandlerTests.swift; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
 				54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */,
 				54735EF11DBCC12E004F4854 /* TesterChooser.swift */,
+				542AF2061F89DCA800B1847C /* FocusHelper.h */,
+				542AF2071F89DCA800B1847C /* FocusHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				546B1CC51C8244990009DD26 /* Helper */,
 				54433C1D1DB6B88C0032AF9C /* Testers */,
 				549576311C6FBBB200E9C26C /* Tests */,
+				542AF2051F89DCA700B1847C /* GenericDataSourceTests-Bridging-Header.h */,
 				549576151C6FBA9400E9C26C /* Info.plist */,
 			);
 			path = GenericDataSourceTests;
@@ -660,7 +667,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = mohamede1945;
 				TargetAttributes = {
 					549576031C6FBA9400E9C26C = {
@@ -669,7 +676,7 @@
 					};
 					5495760D1C6FBA9400E9C26C = {
 						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -807,6 +814,7 @@
 				54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */,
 				5C0B2AEF1E77F170008D238F /* ShouldIndentWhileEditingTester.swift in Sources */,
 				54735F051DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift in Sources */,
+				542AF2081F89DCA800B1847C /* FocusHelper.m in Sources */,
 				5C0B2AFB1E781905008D238F /* DidEndDisplayCellTester.swift in Sources */,
 				547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */,
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
@@ -856,14 +864,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -907,14 +921,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -990,11 +1010,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = GenericDataSourceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mohamede1945.GenericDataSourceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GenericDataSourceTests/GenericDataSourceTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -1003,11 +1026,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = GenericDataSourceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mohamede1945.GenericDataSourceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GenericDataSourceTests/GenericDataSourceTests-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

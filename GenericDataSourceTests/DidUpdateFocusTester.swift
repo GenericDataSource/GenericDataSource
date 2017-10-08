@@ -61,10 +61,10 @@ class DidUpdateFocusTester2<CellType>: DidUpdateFocusTester<CellType> where Cell
 class DidUpdateFocusTester3<CellType>: DidUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
-        XCTAssertEqual(true, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(true, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 
     override func assertNotCalled(collectionView: GeneralCollectionView) {
-        XCTAssertEqual(false, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(false, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 }

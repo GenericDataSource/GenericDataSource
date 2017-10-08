@@ -193,7 +193,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
 
             for collectionView in collectionViews {
-                let indexSet = IndexSet(integersIn: NSRange(location: 0, length: 10).toRange()!)
+                let indexSet = IndexSet(integersIn: 0..<10)
                 let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_insertSections(indexSet, with: animation)
 
@@ -213,7 +213,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
 
             for collectionView in collectionViews {
-                let indexSet = IndexSet(integersIn: NSRange(location: 0, length: 10).toRange()!)
+                let indexSet = IndexSet(integersIn: 0..<10)
                 let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_deleteSections(indexSet, with: animation)
 
@@ -233,7 +233,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
         textReportsDataSource.configure = { collectionViews in
 
             for collectionView in collectionViews {
-                let indexSet = IndexSet(integersIn: NSRange(location: 0, length: 10).toRange()!)
+                let indexSet = IndexSet(integersIn: 0..<10)
                 let animation = UITableViewRowAnimation.bottom
                 collectionView.ds_reloadSections(indexSet, with: animation)
 

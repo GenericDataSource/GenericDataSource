@@ -31,7 +31,7 @@ class CanEditItemTester<CellType>: DataSourceTester where CellType: ReportCell, 
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
-        (dataSource as! _ReportBasicDataSource<CellType>).result = result
+        ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Bool {
@@ -45,7 +45,7 @@ class CanEditItemTester<CellType>: DataSourceTester where CellType: ReportCell, 
     func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {
         if collectionView is UITableView {
             XCTAssertEqual(result, self.result)
-            XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
+            XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
         }
     }
 }

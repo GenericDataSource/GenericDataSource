@@ -33,7 +33,7 @@ class ShouldUpdateFocusTester<CellType>: DataSourceTester where CellType: Report
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
-        (dataSource as! _ReportBasicDataSource<CellType>).result = result
+        ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Bool {
@@ -69,10 +69,10 @@ class ShouldUpdateFocusTester2<CellType>: ShouldUpdateFocusTester<CellType> wher
 class ShouldUpdateFocusTester3<CellType>: ShouldUpdateFocusTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
     override func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {
-        XCTAssertEqual(true, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(true, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 
     override func assertNotCalled(collectionView: GeneralCollectionView) {
-        XCTAssertEqual(false, (dataSource as! _ReportBasicDataSource<CellType>).called)
+        XCTAssertEqual(false, ((dataSource as Any) as! _ReportBasicDataSource<CellType>).called)
     }
 }

@@ -35,7 +35,7 @@ class CanPerformActionTester<CellType>: DataSourceTester where CellType: ReportC
     required init(id: Int, numberOfReports: Int, collectionView: GeneralCollectionView) {
         dataSource.items = Report.generate(numberOfReports: numberOfReports)
         dataSource.registerReusableViewsInCollectionView(collectionView)
-        (dataSource as! _ReportBasicDataSource<CellType>).result = result
+        ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
     func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> Bool {
@@ -48,9 +48,9 @@ class CanPerformActionTester<CellType>: DataSourceTester where CellType: ReportC
 
     func assert(result: Bool, indexPath: IndexPath, collectionView: GeneralCollectionView) {
         XCTAssertEqual(result, self.result)
-        XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
-        XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).action,  #selector(selector))
-        XCTAssertIdentical((dataSource as! _ReportBasicDataSource<CellType>).sender as? GeneralCollectionView, collectionView)
+        XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
+        XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).action,  #selector(selector))
+        XCTAssertIdentical(((dataSource as Any) as! _ReportBasicDataSource<CellType>).sender as? GeneralCollectionView, collectionView)
     }
 
     @objc func selector() {

@@ -36,7 +36,7 @@ class CommitEditingTester<CellType>: DataSourceTester where CellType: ReportCell
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
         if collectionView is UITableView {
-            XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
+            XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
         }
     }
 }

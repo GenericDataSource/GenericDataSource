@@ -38,8 +38,8 @@ class MoveItemTester<CellType>: DataSourceTester where CellType: ReportCell, Cel
     }
 
     func assert(result: Void, indexPath: IndexPath, collectionView: GeneralCollectionView) {
-        XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).sourceIndexPath, indexPath)
-        XCTAssertEqual((dataSource as! _ReportBasicDataSource<CellType>).destinationIndexPath, destination(for: indexPath))
+        XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).sourceIndexPath, indexPath)
+        XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).destinationIndexPath, destination(for: indexPath))
     }
 
     func destination(for indexPath: IndexPath) -> IndexPath {

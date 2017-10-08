@@ -12,7 +12,7 @@ import GenericDataSource
 class BasicBlockDataSourceTests: XCTestCase {
 
     func testBasicBlockDataSourceInitWithIdentifier() {
-        let instance = BasicBlockDataSource<Any, ReusableCell>(reuseIdentifier: "id2") { _ in }
+        let instance = BasicBlockDataSource<Any, ReusableCell>(reuseIdentifier: "id2") { (_, _, _) in }
         XCTAssertEqual("id2", instance.reuseIdentifier)
     }
 
