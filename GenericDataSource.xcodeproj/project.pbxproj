@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5402DF881C8309D80032BF9A /* MockSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5402DF871C8309D80032BF9A /* MockSelectionController.swift */; };
-		542AF2081F89DCA800B1847C /* FocusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 542AF2071F89DCA800B1847C /* FocusHelper.m */; };
 		54395EFF1DD8F2740069433C /* SegmentedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */; };
 		54433BD91DAC0BED0032AF9C /* BasicBlockDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B1CC31C8244950009DD26 /* BasicBlockDataSourceTests.swift */; };
 		54433BDA1DAC0BED0032AF9C /* BasicDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549576321C6FBBC600E9C26C /* BasicDataSourceTests.swift */; };
@@ -123,8 +122,6 @@
 /* Begin PBXFileReference section */
 		5402DF871C8309D80032BF9A /* MockSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSelectionController.swift; sourceTree = "<group>"; };
 		542AF2051F89DCA700B1847C /* GenericDataSourceTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenericDataSourceTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		542AF2061F89DCA800B1847C /* FocusHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FocusHelper.h; sourceTree = "<group>"; };
-		542AF2071F89DCA800B1847C /* FocusHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FocusHelper.m; sourceTree = "<group>"; };
 		54395EFE1DD8F2740069433C /* SegmentedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedDataSource.swift; sourceTree = "<group>"; };
 		54433BE41DAF53070032AF9C /* LocalDataSourceCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataSourceCollectionView.swift; sourceTree = "<group>"; };
 		54433BE71DB0A56B0032AF9C /* UnselectableSelectionHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnselectableSelectionHandlerTests.swift; sourceTree = "<group>"; };
@@ -331,8 +328,6 @@
 				54433C1B1DB6B8460032AF9C /* DataSourceTester.swift */,
 				54735EEE1DBAB438004F4854 /* CompositeDataSourceTestExecutor.swift */,
 				54735EF11DBCC12E004F4854 /* TesterChooser.swift */,
-				542AF2061F89DCA800B1847C /* FocusHelper.h */,
-				542AF2071F89DCA800B1847C /* FocusHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -814,7 +809,6 @@
 				54735EF61DBCCBAD004F4854 /* SupplementaryViewWillDisplayTester.swift in Sources */,
 				5C0B2AEF1E77F170008D238F /* ShouldIndentWhileEditingTester.swift in Sources */,
 				54735F051DBE70A5004F4854 /* BasicBlockSupplementaryViewCreatorTests.swift in Sources */,
-				542AF2081F89DCA800B1847C /* FocusHelper.m in Sources */,
 				5C0B2AFB1E781905008D238F /* DidEndDisplayCellTester.swift in Sources */,
 				547446FD1CA7F7A600F3597E /* DelegatedGeneralCollectionViewSingleSectionTestCases.swift in Sources */,
 				547446FF1CA7F82C00F3597E /* TableView.swift in Sources */,
