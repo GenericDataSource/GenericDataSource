@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		542AF20A1F8A6DF600B1847C /* AppStoreDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542AF2091F8A6DF600B1847C /* AppStoreDataSource.swift */; };
 		547447551CA93C1D00F3597E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447541CA93C1D00F3597E /* AppDelegate.swift */; };
 		547447571CA93C1D00F3597E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547447561CA93C1D00F3597E /* RootViewController.swift */; };
 		5474475C1CA93C1D00F3597E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5474475A1CA93C1D00F3597E /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		542AF2091F8A6DF600B1847C /* AppStoreDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreDataSource.swift; sourceTree = "<group>"; };
 		547447511CA93C1D00F3597E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		547447541CA93C1D00F3597E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		547447561CA93C1D00F3597E /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -266,6 +268,7 @@
 		5CA3C9391E92778E00996612 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				542AF2091F8A6DF600B1847C /* AppStoreDataSource.swift */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				5CA3C9341E92768B00996612 /* AppStoreFeaturedSectionTableViewCell.swift in Sources */,
 				5CA3C92F1E92752C00996612 /* AppStoreViewController.swift in Sources */,
 				5494071C1CB197D4007C565D /* MultipleSectionsTableViewController.swift in Sources */,
+				542AF20A1F8A6DF600B1847C /* AppStoreDataSource.swift in Sources */,
 				549407171CB14F9B007C565D /* ContactsDataSource.swift in Sources */,
 				5494070F1CB14235007C565D /* ColorsDataSource.swift in Sources */,
 				5494070C1CB12D23007C565D /* ColorsCollectionVIewController.swift in Sources */,

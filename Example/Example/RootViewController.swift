@@ -15,6 +15,9 @@ class RootViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .automatic
+        }
 
         let dataSource = BasicBlockDataSource<Example, BasicTableViewCell>() { (item: Example, cell: BasicTableViewCell, indexPath) -> Void in
             cell.textLabel?.text = item.title
