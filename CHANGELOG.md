@@ -1,5 +1,8 @@
 # GenericDataSource
 
+## 3.0.1
+* Fix a crash in `CompositeSupplementaryViewCreator`.
+
 ## 3.0.0
 * Swift 4.0 Support.
 
