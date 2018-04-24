@@ -1,5 +1,8 @@
 # GenericDataSource
 
+## 3.0.2
+* Upgrade to Xcode 9.3.
+
 ## 3.0.1
 * Fix a crash in `CompositeSupplementaryViewCreator`.
 

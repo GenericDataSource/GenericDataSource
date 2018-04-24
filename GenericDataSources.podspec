@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'GenericDataSources'
-  s.version          = '3.0.1'
+  s.version          = '3.0.2'
   s.license          = 'MIT'
   s.summary          = 'A generic small composable components for data source implementation for UITableView and UICollectionView.'
   s.homepage         = 'https://github.com/GenericDataSource/GenericDataSource'
