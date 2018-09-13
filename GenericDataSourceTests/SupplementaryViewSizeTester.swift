@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GenericDataSource
+@testable import GenericDataSource
 import XCTest
 
 class BaseSupplementaryViewSizeTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
@@ -41,7 +41,7 @@ class BaseSupplementaryViewSizeTester<CellType>: DataSourceTester where CellType
 
 class HeaderSupplementaryViewSizeTester<CellType>: BaseSupplementaryViewSizeTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    override var kind: String { return UICollectionElementKindSectionHeader }
+    override var kind: String { return headerKind }
 
     override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> CGSize? {
         size = CGSize(width: 0, height: 100)
@@ -58,7 +58,7 @@ class HeaderSupplementaryViewSizeTester<CellType>: BaseSupplementaryViewSizeTest
 
 class FooterSupplementaryViewSizeTester<CellType>: BaseSupplementaryViewSizeTester<CellType>  where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    override var kind: String { return UICollectionElementKindSectionFooter }
+    override var kind: String { return footerKind }
 
     override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> CGSize? {
         size = CGSize(width: 0, height: 100)

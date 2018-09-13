@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GenericDataSource
+@testable import GenericDataSource
 import XCTest
 
 class BaseSupplementaryViewDidDisplayTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
@@ -49,7 +49,7 @@ class BaseSupplementaryViewDidDisplayTester<CellType>: DataSourceTester where Ce
 
 class HeaderSupplementaryViewDidDisplayTester<CellType>: BaseSupplementaryViewDidDisplayTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    override var kind: String { return UICollectionElementKindSectionHeader }
+    override var kind: String { return headerKind }
 
     override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) {
         dataSource.tableView(tableView, didEndDisplayingHeaderView: UITableViewHeaderFooterView(), forSection: indexPath.section)
@@ -58,7 +58,7 @@ class HeaderSupplementaryViewDidDisplayTester<CellType>: BaseSupplementaryViewDi
 
 class FooterSupplementaryViewDidDisplayTester<CellType>: BaseSupplementaryViewDidDisplayTester<CellType>  where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    override var kind: String { return UICollectionElementKindSectionFooter }
+    override var kind: String { return footerKind }
 
     override func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) {
         dataSource.tableView(tableView, didEndDisplayingFooterView: UITableViewHeaderFooterView(), forSection: indexPath.section)

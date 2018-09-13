@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import GenericDataSource
+@testable import GenericDataSource
 
 class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
 
@@ -37,10 +37,10 @@ class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
 
         // assign as data source
         collectionView.dataSource = dataSource
-        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: UICollectionElementKindSectionHeader)
+        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: headerKind)
 
         // test
-        let view1 = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ReportCollectionReusableView
+        let view1 = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: headerKind, at: IndexPath(item: 0, section: 0)) as? ReportCollectionReusableView
 
         // assert
         XCTAssertEqual(1, view1?.reports.count)
@@ -50,7 +50,7 @@ class BasicBlockSupplementaryViewCreatorTests: XCTestCase {
         XCTAssertEqual(CGSize(width: 100, height: 100), creator1.size)
 
         // test
-        let view2 = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 1)) as? ReportCollectionReusableView
+        let view2 = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: headerKind, at: IndexPath(item: 0, section: 1)) as? ReportCollectionReusableView
 
         // assert
         XCTAssertEqual(1, view2?.reports.count)

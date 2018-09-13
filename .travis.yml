@@ -1,18 +1,20 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode10
 env:
   global:
   - LC_CTYPE=en_US.UTF-8
   - LANG=en_US.UTF-8
   - WORKSPACE=GenericDataSource.xcworkspace
   - IOS_FRAMEWORK_SCHEME="GenericDataSource"
-  - IOS_SDK=iphonesimulator11.0
+  - IOS_SDK=iphonesimulator12.0
   - EXAMPLE_SCHEME="Example"
   matrix:
-    - DESTINATION="OS=10.2,name=iPad Air"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES" COVERAGE="YES"
-    - DESTINATION="OS=10.0,name=iPhone 6s Plus"    SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
-    - DESTINATION="OS=11.0,name=iPhone 7"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
-    - DESTINATION="OS=8.1,name=iPhone 4S"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"     RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
+    - DESTINATION="OS=10.2,name=iPad Air"          SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK" SWFT="4.0"    RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
+    - DESTINATION="OS=10.0,name=iPhone 6s Plus"    SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK" SWFT="4.1"    RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
+    - DESTINATION="OS=11.0.1,name=iPhone 7"        SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK" SWFT="4.2"    RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"  COVERAGE="NO"
+    - DESTINATION="OS=12.0,name=iPhone SE"         SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK" SWFT="4.2"    RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES" COVERAGE="YES"
+before_install:
+  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
 script:
   - set -o pipefail
   - xcodebuild -version
@@ -20,21 +22,21 @@ script:
 
   # Build Framework in Release and Run Tests if specified
   - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH="$COVERAGE" ENABLE_TESTABILITY=YES test;
+      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" SWIFT_VERSION=$SWFT -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH="$COVERAGE" ENABLE_TESTABILITY=YES test | xcpretty;
     else
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
+      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" SWIFT_VERSION=$SWFT -sdk "$SDK" -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=NO build | xcpretty;
     fi
 
   # Build Framework in Debug and Run Tests if specified
   - if [ $RUN_TESTS == "YES" ]; then
-        xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=$COVERAGE ENABLE_TESTABILITY=YES test;
+      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" SWIFT_VERSION=$SWFT -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=$COVERAGE ENABLE_TESTABILITY=YES test | xcpretty;
     else
-      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+      xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" SWIFT_VERSION=$SWFT -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
     fi
 
   # Build Example in Debug if specified
   - if [ $BUILD_EXAMPLE == "YES" ]; then
-      xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+      xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" SWIFT_VERSION=$SWFT -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
     fi
 
   # Run `pod lib lint` if specified

@@ -39,12 +39,12 @@ class UIKitExtensionsTableViewTests: XCTestCase {
 
     func testScrollPosition() {
 
-        XCTAssertEqual(UITableViewScrollPosition.top, UITableViewScrollPosition(scrollPosition: .top))
-        XCTAssertEqual(UITableViewScrollPosition.bottom, UITableViewScrollPosition(scrollPosition: .bottom))
-        XCTAssertEqual(UITableViewScrollPosition.middle, UITableViewScrollPosition(scrollPosition: .centeredVertically))
-        XCTAssertEqual(UITableViewScrollPosition.none, UITableViewScrollPosition(scrollPosition: .left))
-        XCTAssertEqual(UITableViewScrollPosition.none, UITableViewScrollPosition(scrollPosition: .right))
-        XCTAssertEqual(UITableViewScrollPosition.none, UITableViewScrollPosition(scrollPosition: .centeredHorizontally))
+        XCTAssertEqual(UITableView.ScrollPosition.top, UITableView.ScrollPosition(scrollPosition: .top))
+        XCTAssertEqual(UITableView.ScrollPosition.bottom, UITableView.ScrollPosition(scrollPosition: .bottom))
+        XCTAssertEqual(UITableView.ScrollPosition.middle, UITableView.ScrollPosition(scrollPosition: .centeredVertically))
+        XCTAssertEqual(UITableView.ScrollPosition.none, UITableView.ScrollPosition(scrollPosition: .left))
+        XCTAssertEqual(UITableView.ScrollPosition.none, UITableView.ScrollPosition(scrollPosition: .right))
+        XCTAssertEqual(UITableView.ScrollPosition.none, UITableView.ScrollPosition(scrollPosition: .centeredHorizontally))
     }
 
     func testUsesDataSource() {
@@ -176,7 +176,7 @@ class UIKitExtensionsTableViewTests: XCTestCase {
     func testScrollToItem() {
         let index = IndexPath(item: 3, section: 0)
         XCTAssertEqual(CGPoint.zero, instance.contentOffset)
-        instance.ds_scrollToItem(at: index, at: UICollectionViewScrollPosition.top, animated: false)
+        instance.ds_scrollToItem(at: index, at: UICollectionView.ScrollPosition.top, animated: false)
         XCTAssertEqual(CGPoint(x: 0, y: 44 * CGFloat(index.item)), instance.contentOffset)
     }
 

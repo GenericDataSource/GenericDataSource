@@ -163,7 +163,7 @@ class AbstractDataSourceTests: XCTestCase {
         let instance = _AbstractDataSource()
         let tableView = MockTableView()
         let indexPath = IndexPath(item: 10, section: 6)
-        XCTAssertEqual(UITableViewCellEditingStyle.delete, instance.tableView(tableView, editingStyleForRowAt: indexPath))
+        XCTAssertEqual(UITableViewCell.EditingStyle.delete, instance.tableView(tableView, editingStyleForRowAt: indexPath))
 
         class _AbstractDataSource2: AbstractDataSource {
             override func ds_collectionView(_ collectionView: GeneralCollectionView, canEditItemAt indexPath: IndexPath) -> Bool {
@@ -172,7 +172,7 @@ class AbstractDataSourceTests: XCTestCase {
         }
 
         let ds = _AbstractDataSource2()
-        XCTAssertEqual(UITableViewCellEditingStyle.none, ds.tableView(tableView, editingStyleForRowAt: indexPath))
+        XCTAssertEqual(UITableViewCell.EditingStyle.none, ds.tableView(tableView, editingStyleForRowAt: indexPath))
     }
 
     func testTitleForDeleteConfirmation() {

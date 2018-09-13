@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import GenericDataSource
+@testable import GenericDataSource
 
 class BasicSupplementaryViewCreatorTests: XCTestCase {
 
@@ -96,10 +96,10 @@ class BasicSupplementaryViewCreatorTests: XCTestCase {
 
         // assign as data source
         collectionView.dataSource = dataSource
-        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: UICollectionElementKindSectionHeader)
+        collectionView.ds_register(supplementaryViewClass: ReportCollectionReusableView.self, forKind: headerKind)
 
         // test
-        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 0, section: 0))
+        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: headerKind, at: IndexPath(item: 0, section: 0))
 
         // assert
         XCTAssertNotNil(view as? ReportCollectionReusableView)

@@ -169,7 +169,7 @@ class UIKitExtensionsCollectionViewTests: XCTestCase {
 
     func testScrollToItem() {
         let index = IndexPath(item: 5, section: 0)
-        instance.ds_scrollToItem(at: index, at: UICollectionViewScrollPosition.left, animated: false)
+        instance.ds_scrollToItem(at: index, at: UICollectionView.ScrollPosition.left, animated: false)
     }
 
     func testSelection() {

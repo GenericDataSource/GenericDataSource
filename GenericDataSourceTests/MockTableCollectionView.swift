@@ -54,7 +54,7 @@ class MockTableView: UITableView {
         if let cell = cellData.cells[index] {
             return cell
         } else {
-            let cell = cellData.type.init(style: UITableViewCellStyle.default, reuseIdentifier: identifier)
+            let cell = cellData.type.init(style: UITableViewCell.CellStyle.default, reuseIdentifier: identifier)
             var mutableCellData = cellData
             mutableCellData.cells[index] = cell
             reusableCells[identifier] = mutableCellData

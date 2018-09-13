@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import GenericDataSource
+@testable import GenericDataSource
 
 class CompositeDataSourceTests: XCTestCase {
 
@@ -1162,10 +1162,10 @@ class CompositeDataSourceTests: XCTestCase {
         let indexPath = IndexPath(item: 10, section: 10)
 
         // view
-        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
+        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: headerKind, at: indexPath)
         XCTAssertEqual(creator.view as? UIView, view)
         XCTAssertEqual(indexPath, creator.indexPath)
-        XCTAssertEqual(UICollectionElementKindSectionHeader, creator.kind)
+        XCTAssertEqual(headerKind, creator.kind)
 
         // size
         let size = dataSource.collectionView(collectionView, layout: UICollectionViewFlowLayout(), referenceSizeForFooterInSection: indexPath.section)
@@ -1173,11 +1173,11 @@ class CompositeDataSourceTests: XCTestCase {
         XCTAssertEqual(indexPath.section, creator.indexPath?.section)
 
         // will display
-        dataSource.collectionView(collectionView, willDisplaySupplementaryView: UICollectionReusableView(), forElementKind: UICollectionElementKindSectionFooter, at: indexPath)
+        dataSource.collectionView(collectionView, willDisplaySupplementaryView: UICollectionReusableView(), forElementKind: footerKind, at: indexPath)
         XCTAssertTrue(creator.willDisplayCalled)
 
         // did display
-        dataSource.collectionView(collectionView, didEndDisplayingSupplementaryView: UICollectionReusableView(), forElementOfKind: UICollectionElementKindSectionHeader, at: indexPath)
+        dataSource.collectionView(collectionView, didEndDisplayingSupplementaryView: UICollectionReusableView(), forElementOfKind: headerKind, at: indexPath)
         XCTAssertTrue(creator.didDisplayCalled)
     }
 

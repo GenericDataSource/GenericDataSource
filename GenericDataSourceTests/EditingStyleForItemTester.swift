@@ -12,10 +12,10 @@ import XCTest
 
 private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
 
-    var result: UITableViewCellEditingStyle = .none
+    var result: UITableViewCell.EditingStyle = .none
     var indexPath: IndexPath?
 
-    override func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, editingStyleForItemAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         self.indexPath =  indexPath
         return result
     }
@@ -24,7 +24,7 @@ private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> 
 class EditingStyleForItemTester<CellType>: DataSourceTester where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
     let dataSource: ReportBasicDataSource<CellType> = _ReportBasicDataSource<CellType>()
 
-    var result: UITableViewCellEditingStyle {
+    var result: UITableViewCell.EditingStyle {
         return .delete
     }
 
@@ -34,15 +34,15 @@ class EditingStyleForItemTester<CellType>: DataSourceTester where CellType: Repo
         ((dataSource as Any) as! _ReportBasicDataSource<CellType>).result = result
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> UITableViewCellEditingStyle {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, tableView: UITableView) -> UITableViewCell.EditingStyle {
         return dataSource.tableView(tableView, editingStyleForRowAt: indexPath)
     }
 
-    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> UITableViewCellEditingStyle {
+    func test(indexPath: IndexPath, dataSource: AbstractDataSource, collectionView: UICollectionView) -> UITableViewCell.EditingStyle {
         return result
     }
 
-    func assert(result: UITableViewCellEditingStyle, indexPath: IndexPath, collectionView: GeneralCollectionView) {
+    func assert(result: UITableViewCell.EditingStyle, indexPath: IndexPath, collectionView: GeneralCollectionView) {
         if collectionView is UITableView {
             XCTAssertEqual(result, self.result)
             XCTAssertEqual(((dataSource as Any) as! _ReportBasicDataSource<CellType>).indexPath, indexPath)
@@ -51,7 +51,7 @@ class EditingStyleForItemTester<CellType>: DataSourceTester where CellType: Repo
 }
 
 class EditingStyleForItemTester2<CellType>: EditingStyleForItemTester<CellType> where CellType: ReportCell, CellType: ReusableCell, CellType: NSObject {
-    override var result: UITableViewCellEditingStyle {
+    override var result: UITableViewCell.EditingStyle {
         return .insert
     }
 }

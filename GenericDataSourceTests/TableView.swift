@@ -36,9 +36,9 @@ class TableView: UITableView {
     var section: Int?
     var called = false
     var sectionsSet: IndexSet?
-    var animation: UITableViewRowAnimation?
+    var animation: UITableView.RowAnimation?
     var indexPaths: [IndexPath]?
-    var scrollPosition: UITableViewScrollPosition?
+    var scrollPosition: UITableView.ScrollPosition?
     var animated: Bool?
     var cell: UITableViewCell?
 
@@ -81,17 +81,17 @@ class TableView: UITableView {
         called = true
     }
 
-    override func insertSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
+    override func insertSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         sectionsSet = sections
         self.animation = animation
     }
 
-    override func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
+    override func deleteSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         sectionsSet = sections
         self.animation = animation
     }
 
-    override func reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation) {
+    override func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
         sectionsSet = sections
         self.animation = animation
     }
@@ -102,17 +102,17 @@ class TableView: UITableView {
         toSection = newSection
     }
 
-    override func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    override func insertRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.indexPaths = indexPaths
         self.animation = animation
     }
 
-    override func deleteRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    override func deleteRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.indexPaths = indexPaths
         self.animation = animation
     }
 
-    override func reloadRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+    override func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         self.indexPaths = indexPaths
         self.animation = animation
     }
@@ -123,13 +123,13 @@ class TableView: UITableView {
         self.toIndexPath = newIndexPath
     }
 
-    override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
+    override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
         self.indexPath = indexPath
         self.scrollPosition = scrollPosition
         self.animated = animated
     }
 
-    override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition) {
+    override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
         self.indexPath = indexPath
         self.animated = animated
         self.scrollPosition = scrollPosition

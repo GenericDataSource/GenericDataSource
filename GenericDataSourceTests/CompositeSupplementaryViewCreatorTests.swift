@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import GenericDataSource
+@testable import GenericDataSource
 
 class CompositeSupplementaryViewCreatorTests: XCTestCase {
 
@@ -17,7 +17,7 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
         let instance = CompositeSupplementaryViewCreator(headerCreator: creator1)
 
         XCTAssertEqual(1, instance.creators.count)
-        XCTAssertEqual(creator1, instance.creators[UICollectionElementKindSectionHeader] as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator1, instance.creators[headerKind] as? MockSupplementaryViewCreator)
     }
 
     func testFooterInit() {
@@ -26,7 +26,7 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
         let instance = CompositeSupplementaryViewCreator(footerCreator: creator1)
 
         XCTAssertEqual(1, instance.creators.count)
-        XCTAssertEqual(creator1, instance.creators[UICollectionElementKindSectionFooter] as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator1, instance.creators[footerKind] as? MockSupplementaryViewCreator)
     }
 
     func testHeaderFooterInit() {
@@ -36,8 +36,8 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
         let instance = CompositeSupplementaryViewCreator(headerCreator: creator1, footerCreator: creator2)
 
         XCTAssertEqual(2, instance.creators.count)
-        XCTAssertEqual(creator1, instance.creators[UICollectionElementKindSectionHeader] as? MockSupplementaryViewCreator)
-        XCTAssertEqual(creator2, instance.creators[UICollectionElementKindSectionFooter] as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator1, instance.creators[headerKind] as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator2, instance.creators[footerKind] as? MockSupplementaryViewCreator)
     }
 
     func testAdd() {
@@ -60,9 +60,9 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
 
         let instance = CompositeSupplementaryViewCreator(headerCreator: creator1, footerCreator: creator2)
 
-        instance.removeCreator(forKind: UICollectionElementKindSectionHeader)
+        instance.removeCreator(forKind: headerKind)
         XCTAssertEqual(1, instance.creators.count)
-        XCTAssertEqual(creator2, instance.creators[UICollectionElementKindSectionFooter] as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator2, instance.creators[footerKind] as? MockSupplementaryViewCreator)
     }
 
     func testRemoveAll() {
@@ -82,8 +82,8 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
 
         let instance = CompositeSupplementaryViewCreator(headerCreator: creator1, footerCreator: creator2)
 
-        XCTAssertEqual(creator1, instance.creator(ofKind: UICollectionElementKindSectionHeader) as? MockSupplementaryViewCreator)
-        XCTAssertEqual(creator2, instance.creator(ofKind: UICollectionElementKindSectionFooter) as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator1, instance.creator(ofKind: headerKind) as? MockSupplementaryViewCreator)
+        XCTAssertEqual(creator2, instance.creator(ofKind: footerKind) as? MockSupplementaryViewCreator)
     }
 
     func testSupplmentaryViewMethodsDelegations() {
@@ -97,21 +97,21 @@ class CompositeSupplementaryViewCreatorTests: XCTestCase {
         let collectionView = MockCollectionView()
 
         // view
-        XCTAssertEqual(creator1.view as? UICollectionReusableView, instance.collectionView(collectionView, viewOfKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 500, section: 50)) as? UICollectionReusableView)
+        XCTAssertEqual(creator1.view as? UICollectionReusableView, instance.collectionView(collectionView, viewOfKind: headerKind, at: IndexPath(item: 500, section: 50)) as? UICollectionReusableView)
         XCTAssertEqual(IndexPath(item: 500, section: 50), creator1.indexPath)
 
         // size
-        XCTAssertEqual(creator2.size, instance.collectionView(collectionView, sizeForViewOfKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 900, section: 90)))
+        XCTAssertEqual(creator2.size, instance.collectionView(collectionView, sizeForViewOfKind: footerKind, at: IndexPath(item: 900, section: 90)))
         XCTAssertEqual(IndexPath(item: 900, section: 90), creator2.indexPath)
 
         // will display
-        instance.collectionView(collectionView, willDisplayView: creator1.view!, ofKind: UICollectionElementKindSectionHeader, at: IndexPath(item: 999, section: 99))
+        instance.collectionView(collectionView, willDisplayView: creator1.view!, ofKind: headerKind, at: IndexPath(item: 999, section: 99))
         XCTAssertEqual(IndexPath(item: 999, section: 99), creator1.indexPath)
         XCTAssertTrue(creator1.willDisplayCalled)
         XCTAssertFalse(creator1.didDisplayCalled)
 
         // did display
-        instance.collectionView(collectionView, didEndDisplayingView: creator1.view!, ofKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 33, section: 22))
+        instance.collectionView(collectionView, didEndDisplayingView: creator1.view!, ofKind: footerKind, at: IndexPath(item: 33, section: 22))
         XCTAssertEqual(IndexPath(item: 33, section: 22), creator2.indexPath)
         XCTAssertTrue(creator2.didDisplayCalled)
         XCTAssertFalse(creator2.willDisplayCalled)

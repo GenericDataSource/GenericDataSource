@@ -14,7 +14,7 @@ private class _ReportBasicDataSource<CellType>: ReportBasicDataSource<CellType> 
 
     var indexPath: IndexPath?
 
-    override func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCellEditingStyle, forItemAt indexPath: IndexPath) {
+    override func ds_collectionView(_ collectionView: GeneralCollectionView, commit editingStyle: UITableViewCell.EditingStyle, forItemAt indexPath: IndexPath) {
         self.indexPath = indexPath
     }
 }

@@ -194,7 +194,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexSet = IndexSet(integersIn: 0..<10)
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_insertSections(indexSet, with: animation)
 
                 XCTAssertEqual(indexSet, self.tableView.sectionsSet)
@@ -214,7 +214,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexSet = IndexSet(integersIn: 0..<10)
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_deleteSections(indexSet, with: animation)
 
                 XCTAssertEqual(indexSet, self.tableView.sectionsSet)
@@ -234,7 +234,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexSet = IndexSet(integersIn: 0..<10)
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_reloadSections(indexSet, with: animation)
 
                 XCTAssertEqual(indexSet, self.tableView.sectionsSet)
@@ -272,7 +272,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_insertItems(at: indexPaths, with: animation)
 
                 XCTAssertEqual([IndexPath(row: 50, section: 0), IndexPath(row: 60, section: 0)],
@@ -293,7 +293,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_deleteItems(at: indexPaths, with: animation)
 
                 XCTAssertEqual([IndexPath(row: 50, section: 0), IndexPath(row: 60, section: 0)],
@@ -314,7 +314,7 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPaths = [IndexPath(row: 0, section: 0), IndexPath(row: 10, section: 0)]
-                let animation = UITableViewRowAnimation.bottom
+                let animation = UITableView.RowAnimation.bottom
                 collectionView.ds_reloadItems(at: indexPaths, with: animation)
 
                 XCTAssertEqual([IndexPath(row: 50, section: 0), IndexPath(row: 60, section: 0)],
@@ -353,12 +353,12 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPath = IndexPath(row: 145, section: 0)
-                let scroll = UICollectionViewScrollPosition.bottom
+                let scroll = UICollectionView.ScrollPosition.bottom
                 let animated = true
                 collectionView.ds_scrollToItem(at: indexPath, at: scroll, animated: animated)
 
                 XCTAssertEqual(IndexPath(row: 195, section: 0), self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.bottom, self.tableView.scrollPosition)
+                XCTAssertEqual(UITableView.ScrollPosition.bottom, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
 
                 self.tableView.reset()
@@ -375,12 +375,12 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPath = IndexPath(row: 145, section: 0)
-                let scroll = UICollectionViewScrollPosition.top
+                let scroll = UICollectionView.ScrollPosition.top
                 let animated = true
                 collectionView.ds_selectItem(at: indexPath, animated: animated, scrollPosition: scroll)
 
                 XCTAssertEqual(IndexPath(row: 195, section: 0), self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.top, self.tableView.scrollPosition)
+                XCTAssertEqual(UITableView.ScrollPosition.top, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
 
                 self.tableView.reset()
@@ -397,12 +397,12 @@ class DelegatedGeneralCollectionViewSingleSectionTestCases: XCTestCase {
 
             for collectionView in collectionViews {
                 let indexPath: IndexPath? = nil
-                let scroll = UICollectionViewScrollPosition.top
+                let scroll = UICollectionView.ScrollPosition.top
                 let animated = true
                 collectionView.ds_selectItem(at: indexPath, animated: animated, scrollPosition: scroll)
 
                 XCTAssertEqual(indexPath, self.tableView.indexPath)
-                XCTAssertEqual(UITableViewScrollPosition.top, self.tableView.scrollPosition)
+                XCTAssertEqual(UITableView.ScrollPosition.top, self.tableView.scrollPosition)
                 XCTAssertEqual(animated, self.tableView.animated)
 
                 self.tableView.reset()
