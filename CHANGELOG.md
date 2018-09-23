@@ -1,6 +1,10 @@
 # GenericDataSource
 
 ## 3.0.2
+* Support for Swift 4 & 4.2.
+* Upgrade to Xcode 10.
+
+## 3.0.2
 * Upgrade to Xcode 9.3.
 
 ## 3.0.1
