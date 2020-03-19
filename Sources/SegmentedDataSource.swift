@@ -41,7 +41,7 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
             selectedDataSource = dataSources[newValue]
         }
         get {
-            return dataSources.index { $0 === selectedDataSource } ?? NSNotFound
+            return dataSources.firstIndex { $0 === selectedDataSource } ?? NSNotFound
         }
     }
 
@@ -140,7 +140,7 @@ open class SegmentedDataSource: AbstractDataSource, CollectionDataSource {
      - returns: The index of the data source.
      */
     open func index(of dataSource: DataSource) -> Int? {
-        return dataSources.index { $0 === dataSource }
+        return dataSources.firstIndex { $0 === dataSource }
     }
 
     // MARK: - Responds

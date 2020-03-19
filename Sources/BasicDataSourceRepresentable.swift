@@ -67,6 +67,6 @@ extension BasicDataSourceRepresentable where Item: Equatable {
      - returns: The index path for a certain item, or `nil` if there is no such item.
      */
     public func indexPath(for item: Item) -> IndexPath? {
-        return items.index(of: item).flatMap { IndexPath(item: $0, section: 0) }
+        return items.firstIndex(of: item).flatMap { IndexPath(item: $0, section: 0) }
     }
 }

@@ -18,7 +18,7 @@ import UIKit
 
  For sizing cells, you can use `itemSize` for `UICollectionView` and `itemHeight` for `UITableView`. Or if you want to specify a custom size, you can override `ds_collectionView(_:sizeForItemAt:)`, **but needs** to set `useDelegateForItemSize` to `true` otherwise the overriden method will not be called.
  */
-open class BasicDataSource<ItemType, CellType: ReusableCell> : AbstractDataSource, BasicDataSourceRepresentable {
+open class BasicDataSource<ItemType, CellType: ReusableCell>: AbstractDataSource, BasicDataSourceRepresentable {
 
     /// Returns a string that describes the contents of the receiver.
     open override var description: String {

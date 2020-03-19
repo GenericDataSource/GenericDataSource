@@ -12,13 +12,13 @@ private class _AnyBasicDataSourceRepresentableBoxBase<Item>: BasicDataSourceRepr
 
     var items: [Item] {
         get { fatalError() }
-        set { fatalError() }
+        set { fatalError() } // swiftlint:disable:this unused_setter_value
     }
 
     var dataSource: AbstractDataSource { fatalError() }
     var onItemsUpdated: (([Item]) -> Void)? {
         get { fatalError() }
-        set { fatalError() }
+        set { fatalError() } // swiftlint:disable:this unused_setter_value
     }
 }
 

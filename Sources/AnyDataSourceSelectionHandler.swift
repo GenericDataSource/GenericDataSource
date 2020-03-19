@@ -11,7 +11,7 @@ import Foundation
 /**
  *  Type-erasure for `DataSourceSelectionHandler`.
  */
-public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
+public struct AnyDataSourceSelectionHandler<ItemType, CellType: ReusableCell>: DataSourceSelectionHandler {
 
     private let itemsChanged: (BasicDataSource<ItemType, CellType>) -> Void
     private let configureCell: (BasicDataSource<ItemType, CellType>, GeneralCollectionView, CellType, ItemType, IndexPath) -> Void

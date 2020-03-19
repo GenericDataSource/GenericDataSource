@@ -13,7 +13,7 @@ import Foundation
 
  It's mainly used with `BasicDataSource`. It also can work with `BasicDataSource` nested inside multiple `CompositeDataSource`. You can have one handler for each data source.
  */
-open class BlockSelectionHandler<ItemType, CellType: ReusableCell> : DataSourceSelectionHandler {
+open class BlockSelectionHandler<ItemType, CellType: ReusableCell>: DataSourceSelectionHandler {
 
     /// Whether to always allow highlighting or not. This variable used when `shouldHighlightBlock` is nil.
     open var defaultShouldHighlight: Bool = true

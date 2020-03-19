@@ -14,8 +14,8 @@ private class _DataSourceWrapper: Hashable {
         self.dataSource = dataSource
     }
 
-    var hashValue: Int {
-        return Unmanaged.passUnretained(dataSource).toOpaque().hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(Unmanaged.passUnretained(dataSource).toOpaque())
     }
 }
 
@@ -119,7 +119,7 @@ extension _DataSourcesCollection {
 
         let wrapper = _DataSourceWrapper(dataSource: dataSource)
         let exsitingMapping: _DataSourcesCollectionMapping = cast(mappings.dataSourceToMappings[wrapper], message: "Tried to remove a data source that doesn't exist: \(dataSource)")
-        let index: Int = cast(mappings.array.index(of: exsitingMapping), message: "Tried to remove a data source that doesn't exist: \(dataSource)")
+        let index: Int = cast(mappings.array.firstIndex(of: exsitingMapping), message: "Tried to remove a data source that doesn't exist: \(dataSource)")
 
         mappings.dataSourceToMappings[wrapper] = nil
         mappings.array.remove(at: index)
@@ -159,7 +159,7 @@ extension _DataSourcesCollection {
         guard let mapping = mapping(of: dataSource) else {
             return nil
         }
-        return mappings.array.index(of: mapping)
+        return mappings.array.firstIndex(of: mapping)
     }
 
     func mapping(of dataSource: DataSource) -> _DataSourcesCollectionMapping? {

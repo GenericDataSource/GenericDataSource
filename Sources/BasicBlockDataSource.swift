@@ -11,7 +11,7 @@ import Foundation
 /**
  A basic data source class that configures the cells with a closure.
  */
-open class BasicBlockDataSource<ItemType, CellType: ReusableCell> : BasicDataSource <ItemType, CellType> {
+open class BasicBlockDataSource<ItemType, CellType: ReusableCell>: BasicDataSource <ItemType, CellType> {
 
     /// The configure closure type.
     public typealias ConfigureBlock = (ItemType, CellType, IndexPath) -> Void
