@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Represents the protocol for types wanting to handle supplementary view creation and configurations.
 /// Usually using `BasicSupplementaryViewCreator` or `CompsiteSupplentaryViewCreator` is enough.

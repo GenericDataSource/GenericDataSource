@@ -6,7 +6,7 @@
 //  Copyright © 2017 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Represents the data source selectors that can be optional.
 /// Each case corresponds to a selector in the DataSource.

@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UITableView.ScrollPosition {
     init(scrollPosition: UICollectionView.ScrollPosition) {

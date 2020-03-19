@@ -6,6 +6,8 @@
 //  Copyright © 2017 mohamede1945. All rights reserved.
 //
 
+import Foundation
+
 /// Represents the collection data source used as
 public protocol CollectionDataSource: DataSource {
 

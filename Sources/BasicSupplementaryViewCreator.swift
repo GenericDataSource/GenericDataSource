@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Represents the basic supplementary view creator.
 /// It manages supplementary views and items to bind to those views.

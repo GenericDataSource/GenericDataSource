@@ -5,6 +5,9 @@
       location = "group:"
       name = "...">
       <FileRef
+         location = "group:Package.swift">
+      </FileRef>
+      <FileRef
          location = "group:codecov.yml">
       </FileRef>
       <FileRef

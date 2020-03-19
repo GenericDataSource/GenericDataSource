@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension NSObjectProtocol {
     func cast<T, U>(_ value: T, file: StaticString = #file, line: UInt = #line) -> U {

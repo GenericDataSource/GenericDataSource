@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Represents a supplementary view creator that manages other creators depending on the kind.
 ///

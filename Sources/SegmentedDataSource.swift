@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// The composite data source class that is responsible for managing a set of children data sources.
 /// Delegating requests to the selected child data source to respond.

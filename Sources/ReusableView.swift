@@ -6,6 +6,8 @@
 //  Copyright © 2017 mohamede1945. All rights reserved.
 //
 
+import Foundation
+
 /// The base protocol for any reusable view whether it is a cell or a supplementary view.
 /// It is used to give default reuse identifier and nib name.
 @objc public protocol ReusableView {

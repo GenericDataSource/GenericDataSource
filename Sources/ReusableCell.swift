@@ -6,7 +6,7 @@
 //  Copyright © 2016 mohamede1945. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /**
  Represents the reusable cell protocol for all resuable cells mainliy `UITableViewCell` and `UICollectionViewCell`.
