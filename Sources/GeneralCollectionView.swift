@@ -14,7 +14,7 @@ import UIKit
 
  Besides, `CompositeDataSource` has different implementation that allows children data sources to manipulate the `UICollectionView` and/or `UITableView` as if the children data sources are in the same top level first section even if it's in a different section.
  */
-@objc public protocol GeneralCollectionView: class {
+@objc public protocol GeneralCollectionView: AnyObject {
 
     /**
      Represents the underlying scroll view. Use this method if you want to get the

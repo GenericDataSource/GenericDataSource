@@ -9,7 +9,7 @@
 import UIKit
 
 /// The DataSource protocol is a general data source and delegate protocol for both a UITableViewDataSource/UITableViewDelegate and UICollectionViewDataSource/UICollectionViewDelegate and adopted by an object that mediates the application’s data model for a view object (e.g. `UITableView` or `UICollectionView`.
-@objc public protocol DataSource: class {
+@objc public protocol DataSource: AnyObject {
 
     /// Asks the data source if it responds to a given selector.
     ///

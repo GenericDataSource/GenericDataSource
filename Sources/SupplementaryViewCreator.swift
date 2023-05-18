@@ -15,6 +15,7 @@ import UIKit
 /// You need to implement at least the following required functions:
 /// - `collectionView(_, viewOfKind:, at:)`
 /// - `collectionView(_, sizeForViewOfKind:, at:)`
+@MainActor
 public protocol SupplementaryViewCreator {
 
     /// Gets the supplementary view for the passed kind at the specified index path.

@@ -8,8 +8,7 @@
 
 import UIKit
 
-protocol BatchUpdater: class {
-
+protocol BatchUpdater: AnyObject {
     func actualPerformBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)?)
 }
 

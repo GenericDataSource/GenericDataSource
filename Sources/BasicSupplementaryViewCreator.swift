@@ -29,6 +29,7 @@ import UIKit
 /// - `collectionView(_, sizeForViewOfKind:, at:)`
 ///
 /// If you don't want to subclass this class, then you can use `BasicBlockSupplementaryViewCreator` instead.
+@MainActor
 open class BasicSupplementaryViewCreator<ItemType, SupplementaryView: ReusableSupplementaryView>: NSObject, SupplementaryViewCreator {
 
     /// Represents the size of the supplementary views, if you want dynamic size, set this value to nil (which is default).

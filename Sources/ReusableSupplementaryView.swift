@@ -36,7 +36,7 @@ extension UICollectionView {
     ///   - view: The supplementary view class.
     ///   - bundle: An optional bundle parameter. Specify it if the cell is not in the main bundle.
     ///   - kind: The kind of the supplementary view.
-    open func ds_register(supplementaryViewNib view: UICollectionReusableView.Type, in bundle: Bundle? = nil, forKind kind: String) {
+    public func ds_register(supplementaryViewNib view: UICollectionReusableView.Type, in bundle: Bundle? = nil, forKind kind: String) {
         register(UINib(nibName: view.ds_nibName, bundle: bundle), forSupplementaryViewOfKind: kind, withReuseIdentifier: view.ds_reuseId)
     }
 
@@ -50,7 +50,7 @@ extension UICollectionView {
     /// - Parameters:
     ///   - view: The supplementary view class.
     ///   - kind: The kind of the supplementary view.
-    open func ds_register(supplementaryViewClass view: UICollectionReusableView.Type, forKind kind: String) {
+    public func ds_register(supplementaryViewClass view: UICollectionReusableView.Type, forKind kind: String) {
         register(view, forSupplementaryViewOfKind: kind, withReuseIdentifier: view.ds_reuseId)
     }
 }
@@ -68,7 +68,7 @@ extension UITableView {
     /// - Parameters:
     ///   - view: The supplementary view class.
     ///   - bundle: An optional bundle parameter. Specify it if the cell is not in the main bundle.
-    open func ds_register(headerFooterNib view: UITableViewHeaderFooterView.Type, in bundle: Bundle? = nil) {
+    public func ds_register(headerFooterNib view: UITableViewHeaderFooterView.Type, in bundle: Bundle? = nil) {
         register(UINib(nibName: view.ds_nibName, bundle: bundle), forHeaderFooterViewReuseIdentifier: view.ds_reuseId)
     }
 
@@ -81,7 +81,7 @@ extension UITableView {
     ///
     /// - Parameters:
     ///   - view: The supplementary view class.
-    open func ds_register(headerFooterClass view: UITableViewHeaderFooterView.Type) {
+    public func ds_register(headerFooterClass view: UITableViewHeaderFooterView.Type) {
         register(view, forHeaderFooterViewReuseIdentifier: view.ds_reuseId)
     }
 }

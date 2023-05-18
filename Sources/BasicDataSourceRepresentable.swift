@@ -18,7 +18,7 @@ import Foundation
 ///     let dsRepresentable2: AnyBasicDataSourceRepresentable<String> = dataSource2.asBasicDataSourceRepresentable()
 ///     let representables = [dsRepresentable1, dsRepresentable2]
 ///     // representables is an array that doesn't care about the cell only the items.
-public protocol BasicDataSourceRepresentable: class {
+public protocol BasicDataSourceRepresentable: AnyObject {
     associatedtype Item
 
     /// Represents the underlying data source.
