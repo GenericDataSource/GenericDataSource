@@ -57,7 +57,7 @@ open class BasicDataSource<ItemType, CellType: ReusableCell>: AbstractDataSource
      then those properties sets this property to `true`.
      */
     @available(*, unavailable, message: "Now, we can detect if you implemented sizeForItemAt or not")
-    open var useDelegateForItemSize: Bool = false
+    open var useDelegateForItemSize: Bool { return false }
 
     /// Represents the underlying data source which is `self`.
     open var dataSource: AbstractDataSource { return self }
